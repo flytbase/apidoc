@@ -1,6 +1,6 @@
 # Namespace
 
-> Make sure to replace \<namespace\> with your FlytOS namespace.
+> Make sure to replace \<ip\> with your FlytOS running device IP.
 
 ```shell
 ROS-Service Name: /get_global_namespace
@@ -40,11 +40,20 @@ Arguments:
 
 ```
 
-```javascript--REST
+```javascript
+URL: ' <ip>/ros/get_global_namespace'
+
+JSON Response:
+	{
+		success: Boolean
+		param_info:{
+			param_value: String
+		}
+	}
 
 ```
 
-```javascript--Webocket
+```java
 
 ```
 
@@ -52,22 +61,7 @@ Arguments:
 > Example API call
 
 ```shell
-rosservice call /<namespace>/navigation/position_set "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
 
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
 ```
 
 ```python
@@ -86,7 +80,16 @@ body_frame: false"
 
 ```
 
-```javascript--REST
+```javascript
+	$.ajax({
+	    type: "GET",
+	    dataType: "json",
+	    url: "http://<ip>/ros/get_global_namespace",   
+	    success: function(data){
+	        console.log(data);
+	    }
+	});
+
 
 ```
 
@@ -117,23 +120,23 @@ success: true
 
 ```
 
-```javascript--REST
+```javascript
+	data:{
+		success:True,
+		param_info:{
+			param_value:'flytpod'
+		}
+	}
 
 ```
 
-```javascript--Webocket
+```java
 
 ```
 
 
 
 
+This API gets the namespace, the FlytOS running device is using. This is required for making service calls and REST calls for the all other APIs.
 
-----------a brief description of the API will come over here---------
-
-This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
-
--------rest API doc will be here-------------
-
-Over here we will define the REST endpoint API.
+```GET http://< ip >/ros/get_global_namepsace```
