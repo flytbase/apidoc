@@ -33,14 +33,45 @@ Arguments:
 ```
 
 ```python
-
+Class: flyt_python.api.navigation
+Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
+                     body_frame=False):
+Arguments: 
+    :float x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    :float yaw: Yaw Setpoint in radians
+    :bool yaw_valid: Must be set to true, if yaw setpoint is provided
+	:float tolerance: Acceptance radius in meters, default value=1.0m
+	:bool relative: If true, position setpoints relative to current position is sent
+	:bool async: If true, asynchronous mode is set
+	:bool body_frame: If true, position setpoints are relative with respect to body frame
+Response: 
+    :bool success
 ```
 
 ```cpp--ros
-
+Type: Ros Service
+Name: /<namespace>/navigation/position_set()
+call srv:
+    :geometry_msgs/TwistStamped twist
+    :float32 tolerance
+    :bool async
+    :bool relative
+    :bool yaw_valid
+    :bool body_frame
+response srv: bool success
 ```
 
 ```python--ros
+Type: Ros Service
+Name: /<namespace>/navigation/position_set()
+call srv:
+    :geometry_msgs/TwistStamped twist
+    :float32 tolerance
+    :bool async
+    :bool relative
+    :bool yaw_valid
+    :bool body_frame
+response srv: bool success
 
 ```
 
@@ -79,10 +110,16 @@ body_frame: false"
 ```
 
 ```python
+from flyt_python import api
+drone = api.navigation()
+time.sleep(3.0)
+
+drone.position_set(-5, 0, 0, relative=True)
 
 ```
 
 ```cpp--ros
+
 
 ```
 
@@ -110,7 +147,7 @@ success: true
 ```
 
 ```python
-
+True
 ```
 
 ```cpp--ros
@@ -118,7 +155,7 @@ success: true
 ```
 
 ```python--ros
-
+Success: True
 ```
 
 ```shell--curl

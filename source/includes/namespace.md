@@ -1,6 +1,5 @@
 # Namespace
 
-> Make sure to replace \<namespace\> with your FlytOS namespace.
 
 ```shell
 ROS-Service Name: /<namespace>/navigation/position_set
@@ -44,6 +43,9 @@ return: string
 ```
 
 ```python--ros
+Type: Ros Service
+Name: /get_global_namespce()
+response srv: ParamGetGlobalNamespace
 
 ```
 
@@ -63,25 +65,15 @@ return: string
 > Example API call
 
 ```shell
-rosservice call /<namespace>/navigation/position_set "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
+rosservice call /get_global_namespace "{}"
 
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
 ```
 
 ```python
+from flyt_python import api
+drone = api.navigation()
+time.sleep(3.0)
+namespace = drone.get_global_namespace()
 
 ```
 
@@ -90,6 +82,15 @@ body_frame: false"
 ```
 
 ```python--ros
+def get_global_namespace():
+    rospy.wait_for_service('/get_global_namespace')
+    try:
+        res = rospy.ServiceProxy('/get_global_namespace', ParamGetGlobalNamespace)
+        op = res()
+        return str(op.param_info.param_value)
+    except rospy.ServiceException, e:
+        rospy.logerr("global namespace service not available", e)
+        return None
 
 ```
 
@@ -113,15 +114,24 @@ success: true
 ```
 
 ```python
-
+flytpod
 ```
 
 ```cpp--ros
-
+param_info: 
+  param_id: global_namespace
+  param_value: flytpod
+success: True
+message: Parameter Get Global Namespace Successful	flytpod
 ```
 
 ```python--ros
-
+Response object with following structure.
+param_info: 
+  param_id: global_namespace
+  param_value: flytpod
+success: True
+message: Parameter Get Global Namespace Successful	flytpod
 ```
 
 ```shell--curl
@@ -140,11 +150,5 @@ success: true
 
 
 
-----------a brief description of the API will come over here---------
 
-This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
-
--------rest API doc will be here-------------
-
-Over here we will define the REST endpoint API.
+This API returns the namespace under which FlytOS is running. By default, namespace is set to flytpod for FlytOS and flytsim for FlytSim. This API is only available in ROS as CPP/Python APIs do not need this information.
