@@ -33,7 +33,10 @@ Arguments:
 ```
 
 ```python
-
+Class: flyt_python.api.navigation
+Function Definition: get_global_namespace()
+Arguments: None
+return: string
 ```
 
 ```cpp--ros
