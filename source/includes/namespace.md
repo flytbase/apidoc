@@ -1,6 +1,6 @@
 # Namespace
 
-> Make sure to replace \<ip\> with your FlytOS running device IP.
+> API definition
 
 ```shell
 ROS-Service Name: /get_global_namespace
@@ -193,7 +193,6 @@ message: Parameter Get Global Namespace Successful	flytpod
 
 
 
-This API gets the namespace, the FlytOS running device is using. This is required for making service calls and REST calls for the all other APIs.
 
 
 This API returns the namespace under which FlytOS is running. By default, namespace is set to flytpod for FlytOS and flytsim for FlytSim. This API is only available in ROS as CPP/Python APIs do not need this information.

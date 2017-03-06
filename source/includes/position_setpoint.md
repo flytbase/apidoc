@@ -1,6 +1,6 @@
 # Position Setpoint
 
-> Make sure to replace \<namespace\> with your FlytOS namespace.
+> API definition
 
 ```shell
 ROS-Service Name: /<namespace>/navigation/position_set
