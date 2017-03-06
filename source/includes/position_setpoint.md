@@ -109,6 +109,14 @@ body_frame: false"
 #default value of tolerance=1.0m if left at 0    
 ```
 
+```cpp
+#include <core_script_bridge/navigation_bridge.h>
+
+Navigation nav;
+nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
+#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+```
+
 ```python
 from flyt_python import api
 drone = api.navigation()
@@ -119,8 +127,7 @@ drone.position_set(-5, 0, 0, relative=True)
 ```
 
 ```cpp--ros
-
-
+rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}}, tolerance: 0.0, async: false, relative: false, yaw_rate_valid: false, body_frame: false}"
 ```
 
 ```python--ros
@@ -146,12 +153,16 @@ drone.position_set(-5, 0, 0, relative=True)
 success: true
 ```
 
+```cpp
+0
+```
+
 ```python
 True
 ```
 
 ```cpp--ros
-
+success: True
 ```
 
 ```python--ros
@@ -178,6 +189,12 @@ Success: True
 
 This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+
+Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
+
+Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
+
+Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 
 -------rest API doc will be here-------------
 
