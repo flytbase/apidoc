@@ -1,9 +1,10 @@
 # Namespace
 
+> Make sure to replace \<ip\> with your FlytOS running device IP.
 
 ```shell
-ROS-Service Name: /<namespace>/navigation/position_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Service Name: /get_global_namespace
+ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -14,8 +15,12 @@ bool relative
 bool yaw_valid
 bool body_frame
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
+#Response : Paramter info
+core_api/ParamInfo param_info
+#Response : success=true if parameter get was successfull.
 bool success
+#Response : Returns error message/success message if any.
+string message
 ```
 
 ```cpp
@@ -39,7 +44,8 @@ return: string
 ```
 
 ```cpp--ros
-
+Function Definition: void ros::param::get("/global_namespace", string global_namespace)
+Arguments:
 ```
 
 ```python--ros
