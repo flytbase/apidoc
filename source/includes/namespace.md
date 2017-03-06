@@ -3,33 +3,21 @@
 > Make sure to replace \<namespace\> with your FlytOS namespace.
 
 ```shell
-ROS-Service Name: /<namespace>/navigation/position_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Service Name: /get_global_namespace
+ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
-float32 tolerance
-bool async
-bool relative
-bool yaw_valid
-bool body_frame
+#Request : None
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
+#Response : Paramter info
+core_api/ParamInfo param_info
+#Response : success=true if parameter get was successfull.
 bool success
+#Response : Returns error message/success message if any.
+string message
 ```
 
 ```cpp
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
-Arguments:
-	:param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-	:param yaw: Yaw Setpoint in radians
-	:param yaw_valid: Must be set to true, if yaw setpoint is provided
-	:param tolerance: Acceptance radius in meters, default value=1.0m
-	:param relative: If true, position setpoints relative to current position is sent
-	:param async: If true, asynchronous mode is set
-	:param body_frame: If true, position setpoints are relative with respect to body frame
-	:return: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+
 ```
 
 ```python
@@ -40,7 +28,8 @@ return: string
 ```
 
 ```cpp--ros
-
+Function Definition: void ros::param::get("/global_namespace", string global_namespace)
+Arguments:
 ```
 
 ```python--ros
