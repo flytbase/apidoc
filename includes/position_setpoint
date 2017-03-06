@@ -1,17 +1,17 @@
 <h1 id="position-setpoint">Position Setpoint</h1>
 
-<blockquote>
-<p>Make sure to replace &lt;namespace&gt; with your FlytOS namespace.</p>
-</blockquote>
-
-<h2 id="a-brief-description-of-the-api-will-come-over-here">a brief description of the API will come over here</h2>
+<p>&mdash;&mdash;&mdash;-a brief description of the API will come over here&mdash;&mdash;&mdash;</p>
 
 <p>This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
 
-<h2 id="rest-api-doc-will-be-here">rest API doc will be here</h2>
+<p>&mdash;&mdash;-rest API doc will be here&mdash;&mdash;&mdash;&mdash;-</p>
 
 <p>Over here we will define the REST endpoint API.</p>
+
+<blockquote>
+<p>Make sure to replace &lt;namespace&gt; with your FlytOS namespace.</p>
+</blockquote>
 <pre class="highlight shell tab-shell"><code>ROS-Service Name: /&lt;namespace&gt;/navigation/position_set
 ROS-Service Type: core_api/PositionSet, below is its description
 
@@ -36,6 +36,12 @@ bool success
     <span class="o">:</span><span class="n">param</span> <span class="n">async</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">asynchronous</span> <span class="n">mode</span> <span class="n">is</span> <span class="n">set</span>
     <span class="o">:</span><span class="n">param</span> <span class="n">body_frame</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">position</span> <span class="n">setpoints</span> <span class="n">are</span> <span class="n">relative</span> <span class="n">with</span> <span class="n">respect</span> <span class="n">to</span> <span class="n">body</span> <span class="n">frame</span>
     <span class="o">:</span><span class="k">return</span><span class="o">:</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">reaches</span> <span class="n">given</span> <span class="n">setpoint</span> <span class="n">before</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="n">secs</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code>
+</code></pre><pre class="highlight python tab-python--ros"><code>
+</code></pre><pre class="highlight shell tab-shell--curl"><code>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code>
+</code></pre><pre class="highlight javascript tab-javascript--Webocket"><code>
 </code></pre>
 <blockquote>
 <p>Example API call</p>
@@ -56,9 +62,21 @@ body_frame: false"</span>
 
 <span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m if left at 0    </span>
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code>
+</code></pre><pre class="highlight python tab-python--ros"><code>
+</code></pre><pre class="highlight shell tab-shell--curl"><code>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code>
+</code></pre><pre class="highlight javascript tab-javascript--Webocket"><code>
 </code></pre>
 <blockquote>
 <p>Example API Response</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code>
+</code></pre><pre class="highlight python tab-python--ros"><code>
+</code></pre><pre class="highlight shell tab-shell--curl"><code>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code>
+</code></pre><pre class="highlight javascript tab-javascript--Webocket"><code>
 </code></pre>
