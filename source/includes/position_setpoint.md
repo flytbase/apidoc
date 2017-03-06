@@ -167,6 +167,7 @@ rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp
 ```
 
 ```shell--curl
+```
 
 ```javascript
 var  msgdata={};
@@ -272,7 +273,7 @@ URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
 ### Websocket endpoint:
 
 
-
+### API usage information:
 Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
 Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
