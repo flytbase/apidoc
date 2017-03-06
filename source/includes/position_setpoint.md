@@ -1,5 +1,7 @@
 # Position Setpoint
 
+> Make sure to replace \<namespace\> with your FlytOS namespace.
+
 ----------a brief description of the API will come over here---------
 
 This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
@@ -9,7 +11,6 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 Over here we will define the REST endpoint API.
 
-> Make sure to replace \<namespace\> with your FlytOS namespace.
 
 ```shell
 ROS-Service Name: /<namespace>/navigation/position_set
