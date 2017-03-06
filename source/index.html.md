@@ -8,8 +8,8 @@ language_tabs:
   - cpp--ros: roscpp
   - python--ros: roscpy
   - shell--curl: cURL
-  - apib: REST
-  - javascript: WebSocket
+  - javascript--REST: REST
+  - javascript--Webocket: WebSocket
 
 
 includes:
