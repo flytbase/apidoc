@@ -148,6 +148,6 @@ success: true
 
 
 
-This API gets the namespace, the FlytOS running device is using. This is required for making service calls and REST calls for the all other APIs.
+This API gets the namespace, the FlytOS running device is using. This is required for making python, cpp service calls and REST calls for the all other APIs.
 
 ```GET http://< ip >/ros/get_global_namepsace```

@@ -1,6 +1,7 @@
 # Position Setpoint
 
-> Make sure to replace \<namespace\> with your FlytOS namespace.
+> Make sure to replace \<namespace\> with your FlytOS namespace
+> and \<ip\> with ip of FlytOS running system.
 
 ```shell
 ROS-Service Name: /<namespace>/navigation/position_set
@@ -48,11 +49,36 @@ Arguments:
 
 ```
 
-```javascript--REST
+```javascript
+URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
+
+JSON Request:
+{
+	twist:{
+		twist:{
+			linear:{
+				x: Float,
+				y: Float,
+				z: Float
+			},
+			angular:{
+				z: Float
+			}
+		}
+	},
+	tolerance: Float,
+	async: Boolean,
+	relative: Boolean,
+	yaw_valid : Boolean,
+	body_frame : Boolean
+}
+
+JSON Response:
+
 
 ```
 
-```javascript--Webocket
+```java
 
 ```
 
@@ -137,11 +163,8 @@ success: true
 
 
 
-----------a brief description of the API will come over here---------
 
 This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
 
--------rest API doc will be here-------------
-
-Over here we will define the REST endpoint API.
+````POST http://<ip>/ros/<namespace>/navigation/position_set````
