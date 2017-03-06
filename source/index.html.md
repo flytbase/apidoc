@@ -8,8 +8,8 @@ language_tabs:
   - cpp--ros: roscpp
   - python--ros: roscpy
   - shell--curl: cURL
-  - javascript--REST: REST
-  - javascript--Webocket: WebSocket
+  - javascript: JavaScript
+  - java: Java
 
 
 includes:
