@@ -3,15 +3,6 @@
 <blockquote>
 <p>Make sure to replace &lt;namespace&gt; with your FlytOS namespace.</p>
 </blockquote>
-
-<p>&mdash;&mdash;&mdash;-a brief description of the API will come over here&mdash;&mdash;&mdash;</p>
-
-<p>This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
-
-<p>&mdash;&mdash;-rest API doc will be here&mdash;&mdash;&mdash;&mdash;-</p>
-
-<p>Over here we will define the REST endpoint API.</p>
 <pre class="highlight shell tab-shell"><code>ROS-Service Name: /&lt;namespace&gt;/navigation/position_set
 ROS-Service Type: core_api/PositionSet, below is its description
 
@@ -80,3 +71,11 @@ body_frame: false"</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code>
 </code></pre><pre class="highlight javascript tab-javascript--Webocket"><code>
 </code></pre>
+<p>&mdash;&mdash;&mdash;-a brief description of the API will come over here&mdash;&mdash;&mdash;</p>
+
+<p>This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
+This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
+
+<p>&mdash;&mdash;-rest API doc will be here&mdash;&mdash;&mdash;&mdash;-</p>
+
+<p>Over here we will define the REST endpoint API.</p>
