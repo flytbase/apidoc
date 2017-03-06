@@ -55,10 +55,6 @@ response srv: ParamGetGlobalNamespace
 
 ```
 
-```shell--curl
-
-```
-
 ```javascript
 URL: ' <ip>/ros/get_global_namespace'
 
@@ -123,9 +119,6 @@ def get_global_namespace():
 
 ```
 
-```shell--curl
-
-```
 
 ```javascript
 	$.ajax({
@@ -172,9 +165,6 @@ success: True
 message: Parameter Get Global Namespace Successful	flytpod
 ```
 
-```shell--curl
-
-```
 
 ```javascript
 	data:{

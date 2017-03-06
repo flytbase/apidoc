@@ -76,10 +76,6 @@ response srv: bool success
 
 ```
 
-```shell--curl
-
-```
-
 ```javascript
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
 
@@ -105,7 +101,9 @@ JSON Request:
 }
 
 JSON Response:
-
+{
+	success: Boolean,
+}
 
 ```
 
@@ -153,15 +151,36 @@ drone.position_set(-5, 0, 0, relative=True)
 
 ```
 
-```shell--curl
+
+```javascript
+var  msgdata={};
+msgdata["twist"]={};
+msgdata.twist["twist"]={};
+masdata.twist.twist["linear"]={};
+msgdata.twist.twist.linear["x"]=2.00;
+msgdata.twist.twist.linear["y"]=3.00;
+msgdata.twist.twist.linear["z"]=-1.00;
+msgdata.twist.twist["angular"]={};
+msgdata.twist.twist.angular["z"]=1.00;
+msgdata["tolerance"]=2.00;
+msgdata["async"]=true;
+msgdata["relative"]=false;
+msgdata["yaw_valid"]=true;
+msgdata["body_frame"]=false;
+
+$.ajax({
+    type: "POST",
+    dataType: "json",
+    data: JSON.stringify(msgdata),
+    url: "http://<ip>/ros/<namespace>/navigation/position_set",  
+    success: function(data){
+           console.log(data);
+    }
+};
 
 ```
 
-```javascript--REST
-
-```
-
-```javascript--Webocket
+```java
 
 ```
 
@@ -184,15 +203,14 @@ True
 Success: True
 ```
 
-```shell--curl
+```javascript
+{
+	success:True
+}
 
 ```
 
-```javascript--REST
-
-```
-
-```javascript--Webocket
+```java
 
 ```
 
