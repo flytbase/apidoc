@@ -1,9 +1,11 @@
 # Position Setpoint
 
 
-> API definition
+> Description
 
 ```shell
+# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+
 ROS-Service Name: /<namespace>/navigation/position_set
 ROS-Service Type: core_api/PositionSet, below is its description
 
@@ -21,6 +23,8 @@ bool success
 ```
 
 ```cpp
+// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+
 Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 Arguments:
 	:param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
@@ -34,22 +38,17 @@ Arguments:
 ```
 
 ```python
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+
 Class: flyt_python.api.navigation
+
 Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
                      body_frame=False):
-Arguments: 
-    :float x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    :float yaw: Yaw Setpoint in radians
-    :bool yaw_valid: Must be set to true, if yaw setpoint is provided
-	:float tolerance: Acceptance radius in meters, default value=1.0m
-	:bool relative: If true, position setpoints relative to current position is sent
-	:bool async: If true, asynchronous mode is set
-	:bool body_frame: If true, position setpoints are relative with respect to body frame
-Response: 
-    :bool success
 ```
 
 ```cpp--ros
+// ROS services and topics are accessible from onboard scripts only.
+
 Type: Ros Service
 Name: /<namespace>/navigation/position_set()
 call srv:
@@ -63,6 +62,8 @@ response srv: bool success
 ```
 
 ```python--ros
+# ROS services and topics are accessible from onboard scripts only.
+
 Type: Ros Service
 Name: /<namespace>/navigation/position_set()
 call srv:
@@ -73,6 +74,10 @@ call srv:
     :bool yaw_valid
     :bool body_frame
 response srv: bool success
+
+```
+
+```shell--curl
 
 ```
 
@@ -112,7 +117,7 @@ JSON Response:
 ```
 
 
-> Example API call
+> Example
 
 ```shell
 rosservice call /<namespace>/navigation/position_set "twist:
@@ -142,10 +147,13 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
+# create flyt_python navigation class instance
 from flyt_python import api
 drone = api.navigation()
+# wait for interface to initialize
 time.sleep(3.0)
 
+# command vehicle towards 5 meteres WEST from current location regardless of heading
 drone.position_set(-5, 0, 0, relative=True)
 
 ```
@@ -158,6 +166,7 @@ rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp
 
 ```
 
+```shell--curl
 
 ```javascript
 var  msgdata={};
@@ -192,7 +201,7 @@ $.ajax({
 ```
 
 
-> Example API Response
+> Example response
 
 ```shell
 success: true
@@ -214,10 +223,7 @@ success: True
 Success: True
 ```
 
-```javascript
-{
-	success:True
-}
+```shell--curl
 
 ```
 
@@ -229,9 +235,43 @@ Success: True
 
 
 
-
+###Description:
 This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+
+###Parameters:
+
+    Arguments:
+    
+    Argument | Type | Description
+    -------------- | -------------- | --------------
+    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    yaw | float | Yaw Setpoint in radians
+    yaw_valid | bool | Must be set to true, if yaw 
+    tolerance | float | Acceptance radius in meters, default value=1.0m 
+    relative | bool | If true, position setpoints relative to current position is sent
+    async | bool | If true, asynchronous mode is set
+    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    
+    Output:
+    
+    Parameter | type | Description
+    ---------- | ---------- | ------------
+    success | bool | true if action successful
+
+### ROS endpoint:
+
+Type: Ros Service</br> 
+Name: /namespace/navigation/position_set</br>
+Service Type: PositionSet
+
+### RESTFull endpoint:
+
+URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
+
+### Websocket endpoint:
+
+
 
 Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
@@ -239,8 +279,3 @@ Tip: Asynchronous mode - The API call would return as soon as the command has be
 
 Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 
--------rest API doc will be here-------------
-
-Over here we will define the REST endpoint API.
-
-````POST http://<ip>/ros/<namespace>/navigation/position_set````
