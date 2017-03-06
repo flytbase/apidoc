@@ -1,6 +1,6 @@
 # Position Setpoint Global
 
-> Make sure to replace \<namespace\> with your FlytOS namespace.
+> API definition
 
 ----------a brief description of the API will come over here---------
 
