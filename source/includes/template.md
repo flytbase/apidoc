@@ -56,7 +56,6 @@ Arguments:
 
 ```
 
-
 > Example API call
 
 ```shell
@@ -132,9 +131,6 @@ success: true
 ```javascript--Webocket
 
 ```
-
-
-
 
 
 ----------a brief description of the API will come over here---------
