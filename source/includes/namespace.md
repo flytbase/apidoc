@@ -55,10 +55,6 @@ response srv: ParamGetGlobalNamespace
 
 ```
 
-```shell--curl
-
-```
-
 ```javascript
 URL: ' <ip>/ros/get_global_namespace'
 
@@ -123,9 +119,6 @@ def get_global_namespace():
 
 ```
 
-```shell--curl
-
-```
 
 ```javascript
 	$.ajax({
@@ -172,9 +165,6 @@ success: True
 message: Parameter Get Global Namespace Successful	flytpod
 ```
 
-```shell--curl
-
-```
 
 ```javascript
 	data:{
@@ -194,7 +184,6 @@ message: Parameter Get Global Namespace Successful	flytpod
 
 
 
-
-This API returns the namespace under which FlytOS is running. By default, namespace is set to flytpod for FlytOS and flytsim for FlytSim. This API is only available in ROS as CPP/Python APIs do not need this information.
+This API returns the namespace under which FlytOS is running. By default, namespace is set to flytpod for FlytOS and flytsim for FlytSim. This API is only available in ROS as CPP/Python APIs do not need this information.This is required for making python, cpp service calls and REST calls for the all other APIs.
 
 ```GET http://< ip >/ros/get_global_namepsace```

@@ -1,5 +1,6 @@
 # Position Setpoint
 
+
 > API definition
 
 ```shell
@@ -75,15 +76,38 @@ response srv: bool success
 
 ```
 
-```shell--curl
+```javascript
+URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
+
+JSON Request:
+{
+	twist:{
+		twist:{
+			linear:{
+				x: Float,
+				y: Float,
+				z: Float
+			},
+			angular:{
+				z: Float
+			}
+		}
+	},
+	tolerance: Float,
+	async: Boolean,
+	relative: Boolean,
+	yaw_valid : Boolean,
+	body_frame : Boolean
+}
+
+JSON Response:
+{
+	success: Boolean,
+}
 
 ```
 
-```javascript--REST
-
-```
-
-```javascript--Webocket
+```java
 
 ```
 
@@ -134,15 +158,36 @@ rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp
 
 ```
 
-```shell--curl
+
+```javascript
+var  msgdata={};
+msgdata["twist"]={};
+msgdata.twist["twist"]={};
+masdata.twist.twist["linear"]={};
+msgdata.twist.twist.linear["x"]=2.00;
+msgdata.twist.twist.linear["y"]=3.00;
+msgdata.twist.twist.linear["z"]=-1.00;
+msgdata.twist.twist["angular"]={};
+msgdata.twist.twist.angular["z"]=1.00;
+msgdata["tolerance"]=2.00;
+msgdata["async"]=true;
+msgdata["relative"]=false;
+msgdata["yaw_valid"]=true;
+msgdata["body_frame"]=false;
+
+$.ajax({
+    type: "POST",
+    dataType: "json",
+    data: JSON.stringify(msgdata),
+    url: "http://<ip>/ros/<namespace>/navigation/position_set",  
+    success: function(data){
+           console.log(data);
+    }
+};
 
 ```
 
-```javascript--REST
-
-```
-
-```javascript--Webocket
+```java
 
 ```
 
@@ -169,15 +214,14 @@ success: True
 Success: True
 ```
 
-```shell--curl
+```javascript
+{
+	success:True
+}
 
 ```
 
-```javascript--REST
-
-```
-
-```javascript--Webocket
+```java
 
 ```
 
@@ -185,7 +229,6 @@ Success: True
 
 
 
-----------a brief description of the API will come over here---------
 
 This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
@@ -199,3 +242,5 @@ Tip: Synchronous mode - The API call would wait for the function to return, whic
 -------rest API doc will be here-------------
 
 Over here we will define the REST endpoint API.
+
+````POST http://<ip>/ros/<namespace>/navigation/position_set````

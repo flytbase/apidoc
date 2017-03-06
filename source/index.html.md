@@ -7,7 +7,6 @@ language_tabs:
   - python: Python
   - cpp--ros: roscpp
   - python--ros: rospy
-  - shell--curl: cURL
   - javascript: Javascript
   - java: Java
 
