@@ -78,6 +78,10 @@ response srv: bool success
 ```
 
 ```javascript--REST
+This is a REST call for the API. Make sure to replace 
+    ip: ip of the FlytOS running device
+    namespace: namespace used by the FlytOS device.
+
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
 
 JSON Request:
@@ -100,6 +104,8 @@ JSON Response:
 ```
 
 ```javascript--Websocket
+This is a Websocket call for the API. Make sure you initialise the websocket using websocket initialisng API and and replace namespace with the namespace of the FlytOS running device before calling the API with websocket.
+
 name: '/<namespace>/navigation/position_set',
 serviceType: 'core_api/PositionSet'
 
