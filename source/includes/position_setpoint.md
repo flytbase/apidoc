@@ -270,6 +270,33 @@ Service Type: PositionSet
 
 URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
 
+JSON Request:
+{
+	twist:{
+		twist:{
+			linear:{
+				x: Float,
+				y: Float,
+				z: Float
+			},
+			angular:{
+				z: Float
+			}
+		}
+	},
+	tolerance: Float,
+	async: Boolean,
+	relative: Boolean,
+	yaw_valid : Boolean,
+	body_frame : Boolean
+}
+
+JSON Response:
+{
+	success: Boolean,
+}
+
+
 ### Websocket endpoint:
 
 
