@@ -90,6 +90,24 @@ bool success
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/position_set'</span><span class="p">,</span>
 <span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/PositionSet'</span>
 
+<span class="nl">Request</span><span class="p">:</span>
+<span class="p">{</span>   <span class="nl">twist</span><span class="p">:{</span><span class="nl">twist</span><span class="p">:{</span>  <span class="nl">linear</span><span class="p">:{</span>
+                <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+                <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+                <span class="nx">z</span><span class="p">:</span> <span class="nx">Float</span>
+            <span class="p">},</span><span class="nx">angular</span><span class="p">:{</span>
+                <span class="nl">z</span><span class="p">:</span> <span class="nx">Float</span>
+    <span class="p">}}},</span>
+    <span class="nx">tolerance</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">async</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">relative</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">yaw_valid</span> <span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">body_frame</span> <span class="p">:</span> <span class="nb">Boolean</span> <span class="p">}</span>
+
+<span class="nl">Response</span><span class="p">:</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+
+
 </code></pre>
 <blockquote>
 <p>Example</p>

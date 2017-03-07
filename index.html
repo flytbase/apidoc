@@ -201,7 +201,7 @@
     <link href="images/flytFavicon.ico" rel="icon" type="image/ico" />
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;cpp&quot;,&quot;python&quot;,&quot;cpp--ros&quot;,&quot;python--ros&quot;,&quot;javascript--REST&quot;,&quot;javascript--Websoket&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;cpp&quot;,&quot;python&quot;,&quot;cpp--ros&quot;,&quot;python--ros&quot;,&quot;javascript--REST&quot;,&quot;javascript--Websocket&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -217,7 +217,7 @@
               <a href="#" data-language-name="cpp--ros">roscpp</a>
               <a href="#" data-language-name="python--ros">rospy</a>
               <a href="#" data-language-name="javascript--REST">JS REST</a>
-              <a href="#" data-language-name="javascript--Websoket">JS Websocket</a>
+              <a href="#" data-language-name="javascript--Websocket">JS Websocket</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -457,6 +457,24 @@ bool success
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/position_set'</span><span class="p">,</span>
 <span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/PositionSet'</span>
+
+<span class="nl">Request</span><span class="p">:</span>
+<span class="p">{</span>   <span class="nl">twist</span><span class="p">:{</span><span class="nl">twist</span><span class="p">:{</span>  <span class="nl">linear</span><span class="p">:{</span>
+                <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+                <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+                <span class="nx">z</span><span class="p">:</span> <span class="nx">Float</span>
+            <span class="p">},</span><span class="nx">angular</span><span class="p">:{</span>
+                <span class="nl">z</span><span class="p">:</span> <span class="nx">Float</span>
+    <span class="p">}}},</span>
+    <span class="nx">tolerance</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">async</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">relative</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">yaw_valid</span> <span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">body_frame</span> <span class="p">:</span> <span class="nb">Boolean</span> <span class="p">}</span>
+
+<span class="nl">Response</span><span class="p">:</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+
 
 </code></pre>
 <blockquote>
@@ -789,7 +807,7 @@ body_frame: false"</span>
                 <a href="#" data-language-name="cpp--ros">roscpp</a>
                 <a href="#" data-language-name="python--ros">rospy</a>
                 <a href="#" data-language-name="javascript--REST">JS REST</a>
-                <a href="#" data-language-name="javascript--Websoket">JS Websocket</a>
+                <a href="#" data-language-name="javascript--Websocket">JS Websocket</a>
           </div>
       </div>
     </div>
