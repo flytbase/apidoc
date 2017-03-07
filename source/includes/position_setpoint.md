@@ -138,7 +138,7 @@ body_frame: false"
 
 Navigation nav;
 nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
@@ -154,7 +154,23 @@ drone.position_set(-5, 0, 0, relative=True)
 ```
 
 ```cpp--ros
-rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}}, tolerance: 0.0, async: false, relative: false, yaw_rate_valid: false, body_frame: false}"
+#include <core_api/PositionSet.h>
+
+ros::NodeHandle nh;
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+core_api::PositionSet srv;
+
+srv.request.twist.twist.angular.z = 0.5;
+srv.request.twist.twist.linear.x = 4,0;
+srv.request.twist.twist.linear.y = 3.0;
+srv.request.twist.twist.linear.z = 5.0;
+srv.request.tolerance = 2.0;
+srv.request.async = true;
+srv.request.yaw_valid = true;
+srv.request.relative = false;
+srv.request.body_frame = false;
+client.call(srv);
+success = srv.response.success;
 ```
 
 ```python--ros
