@@ -77,42 +77,31 @@ response srv: bool success
 
 ```
 
-```shell--curl
-
-```
-
-```javascript
+```javascript--REST
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
 
 JSON Request:
-{
-	twist:{
-		twist:{
-			linear:{
+{   twist:{twist:{	linear:{
 				x: Float,
 				y: Float,
 				z: Float
-			},
-			angular:{
+			},angular:{
 				z: Float
-			}
-		}
-	},
-	tolerance: Float,
+	}}},
+    tolerance: Float,
 	async: Boolean,
 	relative: Boolean,
 	yaw_valid : Boolean,
-	body_frame : Boolean
-}
+	body_frame : Boolean }
 
 JSON Response:
-{
-	success: Boolean,
-}
+{	success: Boolean, }
 
 ```
 
-```java
+```javascript--Websocket
+name: '/<namespace>/navigation/position_set',
+serviceType: 'core_api/PositionSet'
 
 ```
 
@@ -182,10 +171,8 @@ success = srv.response.success;
 
 ```
 
-```shell--curl
-```
 
-```javascript
+```javascript--REST
 var  msgdata={};
 msgdata["twist"]={};
 msgdata.twist["twist"]={};
@@ -207,14 +194,40 @@ $.ajax({
     data: JSON.stringify(msgdata),
     url: "http://<ip>/ros/<namespace>/navigation/position_set",  
     success: function(data){
-           console.log(data);
+           console.log(data.success);
     }
 };
 
 ```
 
-```java
+```javascript--Websocket
+var positionSet = new ROSLIB.Service({
+    ros : ros,
+    name : '/<namespace>/navigation/position_set',
+    serviceType : 'core_api/PositionSet'
+});
 
+var request = new ROSLIB.ServiceRequest({
+    twist:{twist:{  linear:{
+                x: 2.00,
+                y: 3.00,
+                z: -1.00
+            },angular:{
+                z: 1.00
+    }}},
+    tolerance: 2.00,
+    async: true,
+    relative: false,
+    yaw_valid : true,
+    body_frame : false
+});
+
+positionSet.callService(request, function(result) {
+    console.log('Result for service call on '
+      + positionSet.name
+      + ': '
+      + result.success);
+});
 ```
 
 
@@ -240,11 +253,17 @@ success: True
 Success: True
 ```
 
-```shell--curl
+```javascript--REST
+    {
+        success:True
+    }
 
 ```
 
-```java
+```javascript--Websocket
+{
+    success:True
+}
 
 ```
 
@@ -280,9 +299,9 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 Type: Ros Service</br> 
 Name: /namespace/navigation/position_set</br>
-Service Type: PositionSet
+Service Type: core_api/PositionSet
 
-### RESTFull endpoint:
+### RESTFul endpoint:
 
 URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
 
@@ -290,30 +309,33 @@ JSON Request:
 {
 	twist:{
 		twist:{
-			linear:{
-				x: Float,
-				y: Float,
-				z: Float
+			linear:{<br>
+				x: Float,<br>
+				y: Float,<br>
+				z: Float<br>
 			},
-			angular:{
-				z: Float
+			angular:{<br>
+				z: Float<br>
 			}
 		}
 	},
-	tolerance: Float,
-	async: Boolean,
-	relative: Boolean,
-	yaw_valid : Boolean,
+	tolerance: Float,<br>
+	async: Boolean,<br>
+	relative: Boolean,<br>
+	yaw_valid : Boolean,<br>
 	body_frame : Boolean
 }
 
 JSON Response:
 {
-	success: Boolean,
+	success: Boolean
 }
 
 
 ### Websocket endpoint:
+
+name: '/namespace/navigation/position_set'</br>
+serviceType: 'core_api/PositionSet'
 
 
 ### API usage information:
