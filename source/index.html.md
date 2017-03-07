@@ -8,7 +8,7 @@ language_tabs:
   - cpp--ros: roscpp
   - python--ros: rospy
   - javascript--REST: JS REST
-  - javascript--Websoket: JS Websocket
+  - javascript--Websocket: JS Websocket
 
 
 includes:

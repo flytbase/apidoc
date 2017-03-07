@@ -109,6 +109,24 @@ This is a Websocket call for the API. Make sure you initialise the websocket usi
 name: '/<namespace>/navigation/position_set',
 serviceType: 'core_api/PositionSet'
 
+Request:
+{   twist:{twist:{  linear:{
+                x: Float,
+                y: Float,
+                z: Float
+            },angular:{
+                z: Float
+    }}},
+    tolerance: Float,
+    async: Boolean,
+    relative: Boolean,
+    yaw_valid : Boolean,
+    body_frame : Boolean }
+
+Response:
+{   success: Boolean, }
+
+
 ```
 
 
