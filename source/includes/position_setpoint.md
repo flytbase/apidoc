@@ -82,9 +82,6 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-```
-
-```javascript
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
 
 JSON Request:
