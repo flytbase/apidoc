@@ -82,6 +82,9 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
+```
+
+```javascript
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
 
 JSON Request:
@@ -160,7 +163,7 @@ body_frame: false"
 
 Navigation nav;
 nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
@@ -199,6 +202,8 @@ success = srv.response.success;
 
 ```
 
+```shell--curl
+```
 
 ```javascript--REST
 var  msgdata={};
@@ -300,7 +305,7 @@ Success: True
 
 
 ###Description:
-This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
+This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
 
 ###Parameters:
@@ -324,16 +329,17 @@ This command commands the vehicle to go to a specified location and hover. It ov
     success | bool | true if action successful
 
 ### ROS endpoint:
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
-Type: Ros Service</br> 
-Name: /namespace/navigation/position_set</br>
-Service Type: core_api/PositionSet
+* Type: Ros Service</br> 
+* Name: /namespace/navigation/position_set</br>
+* Service Type: PositionSet
 
 ### RESTFul endpoint:
+FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
 
-URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
-
-JSON Request:
+* URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
+* JSON Request:
 {
 	twist:{
 		twist:{
@@ -353,8 +359,7 @@ JSON Request:
 	yaw_valid : Boolean,
 	body_frame : Boolean
 }
-
-JSON Response:
+* JSON Response:
 {
 	success: Boolean
 }
