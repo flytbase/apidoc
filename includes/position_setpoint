@@ -79,7 +79,11 @@ bool success
     <span class="nx">tolerance</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
     <span class="nx">async</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
     <span class="nx">relative</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
-    <span class="nx">yaw_valid</span> <span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
+<span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialisng</span> 
+<span class="nx">API</span> <span class="nx">and</span> <span class="nx">and</span> <span class="nx">replace</span> <span class="nx">namespace</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">namespace</span> <span class="nx">of</span> 
+<span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span> <span class="nx">before</span> <span class="nx">calling</span> <span class="nx">the</span> <span class="nx">API</span> 
+<span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span> <span class="nx">yaw_valid</span> <span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
     <span class="nx">body_frame</span> <span class="p">:</span> <span class="nb">Boolean</span> <span class="p">}</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
@@ -241,6 +245,8 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 <h3 id="parameters">Parameters:</h3>
 
+<p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+
 <p>Arguments:</p>
 
 <table><thead>
@@ -347,8 +353,13 @@ success: Boolean
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>name: &lsquo;/namespace/navigation/position_set&rsquo;</br>
-serviceType: &lsquo;core_api/PositionSet&rsquo;</p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
+Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+
+<ul>
+<li>name: &lsquo;/namespace/navigation/position_set&rsquo;</br></li>
+<li>serviceType: &lsquo;core_api/PositionSet&rsquo;</li>
+</ul>
 
 <h3 id="api-usage-information">API usage information:</h3>
 
