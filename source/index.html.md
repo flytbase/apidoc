@@ -7,8 +7,8 @@ language_tabs:
   - python: Python
   - cpp--ros: roscpp
   - python--ros: rospy
-  - javascript: Javascript
-  - java: Java
+  - javascript--REST: Javascript
+  - javascript--Websoket: Javascript
 
 
 includes:
