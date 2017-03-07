@@ -41,7 +41,7 @@ string message
 <span class="n">Name</span><span class="p">:</span> <span class="o">/</span><span class="n">get_global_namespce</span><span class="p">()</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="n">ParamGetGlobalNamespace</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">URL</span><span class="p">:</span> <span class="s1">' &lt;ip&gt;/ros/get_global_namespace'</span>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">URL</span><span class="p">:</span> <span class="s1">' &lt;ip&gt;/ros/get_global_namespace'</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
     <span class="p">{</span>
@@ -51,7 +51,7 @@ string message
         <span class="p">}</span>
     <span class="p">}</span>
 
-</code></pre><pre class="highlight java tab-java"><code>
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code>
 </code></pre>
 <blockquote>
 <p>Example API call</p>
@@ -88,7 +88,7 @@ body_frame: false"</span>
         <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">"global namespace service not available"</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">None</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code>    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code>    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
         <span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
         <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/get_global_namespace"</span><span class="p">,</span>   
@@ -116,14 +116,14 @@ body_frame: false"</span>
   <span class="n">param_value</span><span class="p">:</span> <span class="n">flytpod</span>
 <span class="n">success</span><span class="p">:</span> <span class="bp">True</span>
 <span class="n">message</span><span class="p">:</span> <span class="n">Parameter</span> <span class="n">Get</span> <span class="n">Global</span> <span class="n">Namespace</span> <span class="n">Successful</span>  <span class="n">flytpod</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code>    <span class="nx">data</span><span class="p">:{</span>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code>    <span class="nx">data</span><span class="p">:{</span>
         <span class="nl">success</span><span class="p">:</span><span class="nx">True</span><span class="p">,</span>
         <span class="nx">param_info</span><span class="p">:{</span>
             <span class="nl">param_value</span><span class="p">:</span><span class="s1">'flytpod'</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-</code></pre><pre class="highlight java tab-java"><code>
+</code></pre><pre class="highlight plaintext"><code>
 </code></pre>
 <p>This API returns the namespace under which FlytOS is running. By default, namespace is set to flytpod for FlytOS and flytsim for FlytSim. This API is only available in ROS as CPP/Python APIs do not need this information.This is required for making python, cpp service calls and REST calls for the all other APIs.</p>
 
