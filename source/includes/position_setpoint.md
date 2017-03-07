@@ -104,7 +104,11 @@ JSON Response:
 ```
 
 ```javascript--Websocket
-This is a Websocket call for the API. Make sure you initialise the websocket using websocket initialisng API and and replace namespace with the namespace of the FlytOS running device before calling the API with websocket.
+This is a Websocket call for the API. Make sure you 
+initialise the websocket using websocket initialisng 
+API and and replace namespace with the namespace of 
+the FlytOS running device before calling the API 
+with websocket.
 
 name: '/<namespace>/navigation/position_set',
 serviceType: 'core_api/PositionSet'
@@ -333,20 +337,20 @@ JSON Request:
 {
 	twist:{
 		twist:{
-			linear:{<br>
-				x: Float,<br>
-				y: Float,<br>
-				z: Float<br>
+			linear:{
+				x: Float,
+				y: Float,
+				z: Float
 			},
-			angular:{<br>
-				z: Float<br>
+			angular:{
+				z: Float
 			}
 		}
 	},
-	tolerance: Float,<br>
-	async: Boolean,<br>
-	relative: Boolean,<br>
-	yaw_valid : Boolean,<br>
+	tolerance: Float,
+	async: Boolean,
+	relative: Boolean,
+	yaw_valid : Boolean,
 	body_frame : Boolean
 }
 
