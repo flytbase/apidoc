@@ -95,11 +95,7 @@ JSON Request:
     tolerance: Float,
 	async: Boolean,
 	relative: Boolean,
-This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
-the FlytOS running device before calling the API 
-with websocket.	yaw_valid : Boolean,
+    yaw_valid : Boolean,
 	body_frame : Boolean }
 
 JSON Response:
