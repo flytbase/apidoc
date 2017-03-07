@@ -95,7 +95,11 @@ JSON Request:
     tolerance: Float,
 	async: Boolean,
 	relative: Boolean,
-	yaw_valid : Boolean,
+This is a Websocket call for the API. Make sure you 
+initialise the websocket using websocket initialisng 
+API and and replace namespace with the namespace of 
+the FlytOS running device before calling the API 
+with websocket.	yaw_valid : Boolean,
 	body_frame : Boolean }
 
 JSON Response:
@@ -306,7 +310,9 @@ This API sends local position setpoint command to the autopilot. Additionally, y
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
 
 ###Parameters:
-
+    
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    
     Arguments:
     
     Argument | Type | Description
@@ -363,9 +369,11 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 
 
 ### Websocket endpoint:
+Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-name: '/namespace/navigation/position_set'</br>
-serviceType: 'core_api/PositionSet'
+* name: '/namespace/navigation/position_set'</br>
+* serviceType: 'core_api/PositionSet'
 
 
 ### API usage information:
