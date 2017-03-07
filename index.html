@@ -434,7 +434,7 @@ bool success
     <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
     <span class="nl">namespace</span><span class="p">:</span> <span class="nx">namespace</span> <span class="nx">used</span> <span class="nx">by</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">device</span><span class="p">.</span>
 
-<span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_set'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_set'</span>
 
 <span class="nx">JSON</span> <span class="nx">Request</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">twist</span><span class="p">:{</span><span class="nl">twist</span><span class="p">:{</span>  <span class="nl">linear</span><span class="p">:{</span>
@@ -453,7 +453,11 @@ bool success
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
 
-</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> <span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialisng</span> <span class="nx">API</span> <span class="nx">and</span> <span class="nx">and</span> <span class="nx">replace</span> <span class="nx">namespace</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">namespace</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span> <span class="nx">before</span> <span class="nx">calling</span> <span class="nx">the</span> <span class="nx">API</span> <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
+<span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialisng</span> 
+<span class="nx">API</span> <span class="nx">and</span> <span class="nx">and</span> <span class="nx">replace</span> <span class="nx">namespace</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">namespace</span> <span class="nx">of</span> 
+<span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span> <span class="nx">before</span> <span class="nx">calling</span> <span class="nx">the</span> <span class="nx">API</span> 
+<span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/position_set'</span><span class="p">,</span>
 <span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/PositionSet'</span>
@@ -500,7 +504,7 @@ body_frame: false"</span>
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">position_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
-<span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+<span class="cp">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 </span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
 <span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
@@ -528,7 +532,7 @@ body_frame: false"</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
 </code></pre><pre class="highlight python tab-python--ros"><code>
-</code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span>  <span class="nx">msgdata</span><span class="o">=</span><span class="p">{};</span>
+</code></pre><pre class="highlight shell tab-shell--curl"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span>  <span class="nx">msgdata</span><span class="o">=</span><span class="p">{};</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="s2">"twist"</span><span class="p">]</span><span class="o">=</span><span class="p">{};</span>
 <span class="nx">msgdata</span><span class="p">.</span><span class="nx">twist</span><span class="p">[</span><span class="s2">"twist"</span><span class="p">]</span><span class="o">=</span><span class="p">{};</span>
 <span class="nx">masdata</span><span class="p">.</span><span class="nx">twist</span><span class="p">.</span><span class="nx">twist</span><span class="p">[</span><span class="s2">"linear"</span><span class="p">]</span><span class="o">=</span><span class="p">{};</span>
@@ -600,7 +604,7 @@ body_frame: false"</span>
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API sends position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
+<p>This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
 This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
 
 <h3 id="parameters">Parameters:</h3>
@@ -669,39 +673,45 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>Type: Ros Service</br> 
-Name: /namespace/navigation/position_set</br>
-Service Type: core_api/PositionSet</p>
+<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+
+<ul>
+<li>Type: Ros Service</br> </li>
+<li>Name: /namespace/navigation/position_set</br></li>
+<li>Service Type: PositionSet</li>
+</ul>
 
 <h3 id="restful-endpoint">RESTFul endpoint:</h3>
 
-<p>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_set</code></p>
+<p>FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.</p>
 
-<p>JSON Request:
+<ul>
+<li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_set</code></li>
+<li>JSON Request:
 {
+twist:{
     twist:{
-        twist:{
-            linear:{<br>
-                x: Float,<br>
-                y: Float,<br>
-                z: Float<br>
-            },
-            angular:{<br>
-                z: Float<br>
-            }
+        linear:{
+            x: Float,
+            y: Float,
+            z: Float
+        },
+        angular:{
+            z: Float
         }
-    },
-    tolerance: Float,<br>
-    async: Boolean,<br>
-    relative: Boolean,<br>
-    yaw_valid : Boolean,<br>
-    body_frame : Boolean
-}</p>
-
-<p>JSON Response:
+    }
+},
+tolerance: Float,
+async: Boolean,
+relative: Boolean,
+yaw_valid : Boolean,
+body_frame : Boolean
+}</li>
+<li>JSON Response:
 {
-    success: Boolean
-}</p>
+success: Boolean
+}</li>
+</ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
