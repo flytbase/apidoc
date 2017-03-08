@@ -13,8 +13,23 @@ language_tabs:
 
 includes:
   - namespace
+  - arm
+  - disarm
+  - takeoff
+  - land
+  - position_hold
   - position_setpoint
+  - velocity_setpoint
+  - attitude_setpoint
+  - execute_script
+  - get_waypoints
+  - set_waypoints
+  - execute_waypoints
+  - clear_waypoints
+  - pause_waypoints
   - position_setpoint_global
+  - set_home
+  - set_current_waypoint
   
 search: true
 ---
