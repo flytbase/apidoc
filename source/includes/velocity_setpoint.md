@@ -313,9 +313,9 @@ This API gives linear (x,y,z) and angular (yaw) velocity setpoint to vehicle. Pl
     Argument | Type | Description
     -------------- | -------------- | --------------
     vx, vy, vz | float | Velocity Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw_rate | float | Yaw rate Setpoint in radians
+    yaw_rate | float | Yaw rate Setpoint in rad/sec
     yaw_rate_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance range in m/s, default value=1.0m/s 
+    tolerance | float | Acceptance range in m/s, default value=1.0 m/s 
     relative | bool | If true, velocity setpoints relative to current position is sent
     async | bool | If true, asynchronous mode is set
     body_frame | bool | If true, velocity setpoints are relative with respect to body frame
