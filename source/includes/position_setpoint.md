@@ -189,12 +189,12 @@ success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
+def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_valid= False, body_frame= False):
     rospy.wait_for_service('namespace/navigation/position_set')
     try:
         handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
+        resp = handle(twist, tolerance, async, relative, yaw_valid, body_frame)
         return resp
     except rospy.ServiceException, e:
         rospy.logerr("pos set service call failed %s", e)
@@ -299,8 +299,8 @@ Success: True
 
 
 ###Description:
-This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+
+This API commands the vehicle to go to a specified location in local frame and hover.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -329,7 +329,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /namespace/navigation/position_set</br>
-* Service Type: PositionSet
+* Service Type: core_api/PositionSet
 
 ### RESTFul endpoint:
 FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
@@ -370,8 +370,31 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 
 ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
+* Vehicle should be in OFFBOARD/API_CTL mode for this API to work.
+* Vehicle should be armed for this API to work.
+* Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
+* X,Y,Z are position setpoints in 3 linear axes. Yaw is angular rotation around Z axis. Right hand notation is used to find positive yaw direction.
+* Effect of parameters:
+  * Async:
+     * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
+     * False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
+  * Relative: 
+     * True: Linear position setpoints (x,y,z) are calculated from current location. Home location is not relevant. Yaw is calculated from North.
+     * False: Linear position setpoints (x,y,z) are calculated from home location. Home location is reset every time vehicle arms. Yaw is calculated from North. 
+  * Body_frame 
+     * True: All the setpoints are converted to body frame. 
+        * Front of vehicle : +x
+        * Right of vehicle : +y
+        * down: +z
+        * yaw is calculated from front of vehicle. 
+     * False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. 
+* Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.
+* For yaw setpoint to be effective the yaw_valid argument must be set to true.
+* This API overrides any previous mission / navigation API being carried out.
+* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
+* To provide only Yaw setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True
+* * Following parameters need to be manually configured according to vehicle frame.
+  * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
+  * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
+  * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.

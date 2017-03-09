@@ -30,8 +30,7 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 
 Class: flyt_python.api.navigation
 
-Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
-                     body_frame=False):
+Function: position_hold():
 ```
 
 ```cpp--ros
@@ -47,14 +46,8 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
-call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
+Name: /<namespace>/navigation/position_hold()
+call srv: NULL
 response srv: bool success
 
 ```
@@ -110,8 +103,8 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# command vehicle towards 5 meteres WEST from current location regardless of heading
-drone.position_set(-5, 0, 0, relative=True)
+# hold position
+drone.position_hold()
 
 ```
 
@@ -126,15 +119,14 @@ success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
+def position_hold():
+    rospy.wait_for_service('namespace/navigation/position_hold')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
+        handle = rospy.ServiceProxy('namespace/navigation/position_hold', PositionHold)
+        resp = handle()
         return resp
     except rospy.ServiceException, e:
-        rospy.logerr("pos set service call failed %s", e)
+        rospy.logerr("service call failed %s", e)
 
 ```
 
@@ -210,24 +202,14 @@ Success: True
 
 
 ###Description:
-This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+
+Position hold / hover / loiter at current position.  
 
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Arguments:
-    
-    Argument | Type | Description
-    -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    Arguments: None
     
     Output:
     
@@ -240,7 +222,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /namespace/navigation/position_hold</br>
-* Service Type: PositionHold
+* Service Type: core_api/PositionHold
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -261,9 +243,10 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 
 ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
+This API can be used to stop the vehicle at current location. 
 
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
-
+* This API requires vehicle to be in OFFBOARD / API_CTL mode.
+* Thia API will override current mission / navigation commmands. 
+* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
+* Vehicle may take few seconds to come to rest depending on current linear velocity.
