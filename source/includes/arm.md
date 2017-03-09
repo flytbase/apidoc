@@ -205,7 +205,7 @@ Success: True
 
 
 ###Description:
-This API arms the drone. If arm fails then check debug messages for arming errors. Likely reasons are unclaibrated sensors, misconfiguration.
+This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are unclaibrated sensors, misconfiguration.
 
 ###Parameters:
     
@@ -224,7 +224,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /namespace/navigation/arm</br>
-* Service Type: Arm
+* Service Type: core_api/Arm
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -246,3 +246,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
+* ARM API will only work when device is in OFFBOARD / API CTL mode.
+* All navigation setpoint API's except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.
+* It is safer to use take_off command instead of arm command. 
