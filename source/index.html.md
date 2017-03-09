@@ -38,6 +38,9 @@ includes:
   - param_create
   - param_delete
   - param_reset
+  - actuator_testing
+  - esc_calibration
+  - module_calibration
   
 search: true
 ---
