@@ -17,7 +17,7 @@ bool success
 ```
 
 ```cpp
-// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
 Function Definition:  int Navigation::take_off(float takeoff_alt = 5.0)
 
@@ -28,7 +28,7 @@ Returns: 0 if the vehicle reaches takeoff_alt before timeout=30sec, else returns
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
 Class: flyt_python.api.navigation
 
@@ -62,25 +62,14 @@ response srv: bool success
 ```
 
 ```javascript--REST
-This is a REST call for the API. Make sure to replace 
+This is a REST call for the API to takeoff. Make sure to replace 
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
+URL: 'http://<ip>/ros/<namespace>/navigation/take_off'
 
 JSON Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+{   takeoff_alt: Float }
 
 JSON Response:
 {   success: Boolean, }
@@ -88,28 +77,17 @@ JSON Response:
 ```
 
 ```javascript--Websocket
-This is a Websocket call for the API. Make sure you 
+This is a Websocket call for the API to takeoff. Make sure you 
 initialise the websocket using websocket initialisng 
 API and and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/position_set',
-serviceType: 'core_api/PositionSet'
+name: '/<namespace>/navigation/take_off',
+serviceType: 'core_api/TakeOff'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+{   takeoff_alt: Float }
 
 Response:
 {   success: Boolean, }
@@ -170,25 +148,13 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 
 ```javascript--REST
 var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
-msgdata["tolerance"]=2.00;
-msgdata["async"]=true;
-msgdata["relative"]=false;
-msgdata["yaw_valid"]=true;
-msgdata["body_frame"]=false;
+msgdata["takeoff_alt"]=5.00;
 
 $.ajax({
     type: "POST",
     dataType: "json",
     data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/navigation/position_set",  
+    url: "http://<ip>/ros/<namespace>/navigation/take_off",  
     success: function(data){
            console.log(data.success);
     }
@@ -197,30 +163,19 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var positionSet = new ROSLIB.Service({
+var takeoff = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/position_set',
-    serviceType : 'core_api/PositionSet'
+    name : '/<namespace>/navigation/take_off',
+    serviceType : 'core_api/TakeOff'
 });
 
 var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
-    tolerance: 2.00,
-    async: true,
-    relative: false,
-    yaw_valid : true,
-    body_frame : false
+    takeoff_alt: 5.00
 });
 
-positionSet.callService(request, function(result) {
+takeoff.callService(request, function(result) {
     console.log('Result for service call on '
-      + positionSet.name
+      + takeoff.name
       + ': '
       + result.success);
 });
@@ -273,7 +228,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -300,29 +255,13 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 * Name: /namespace/navigation/takeoff</br>
 * Service Type: TakeOff
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
+* URL: ````POST http://<ip>/ros/<namespace>/navigation/take_off````
 * JSON Request:
 {
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean
+    takeoff_alt: Float
 }
 * JSON Response:
 {
@@ -334,8 +273,8 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
-* serviceType: 'core_api/PositionSet'
+* name: '/namespace/navigation/take_off'</br>
+* serviceType: 'core_api/TakeOff'
 
 
 ### API usage information:

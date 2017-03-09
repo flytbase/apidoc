@@ -6,8 +6,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/position_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Service Name: /<namespace>/navigation/set_home
+ROS-Service Type: core_api/SetHome, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -23,9 +23,9 @@ bool success
 ```
 
 ```cpp
-// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: int Navigation::set_home(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 Arguments:
     :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
     :param yaw: Yaw Setpoint in radians
@@ -38,11 +38,11 @@ Arguments:
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
 Class: flyt_python.api.navigation
 
-Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
+Function: set_home(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
                      body_frame=False):
 ```
 
@@ -50,7 +50,7 @@ Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, as
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/set_home()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -65,7 +65,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/set_home()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -82,21 +82,13 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
+URL: 'http://<ip>/ros/<namespace>/navigation/set_home'
 
 JSON Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+{   lat: Float,
+    lon: Float,
+    alt: Float,
+    set_current : Boolean }
 
 JSON Response:
 {   success: Boolean, }
@@ -110,22 +102,14 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/position_set',
-serviceType: 'core_api/PositionSet'
+name: '/<namespace>/navigation/set_home',
+serviceType: 'core_api/SetHome'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+{   lat: Float,
+    lon: Float,
+    alt: Float,
+    set_current : Boolean }
 
 Response:
 {   success: Boolean, }
@@ -137,7 +121,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/position_set "twist:
+rosservice call /<namespace>/navigation/set_home "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -159,7 +143,7 @@ body_frame: false"
 #include <core_script_bridge/navigation_bridge.h>
 
 Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
+nav.set_home(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 #sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
@@ -171,16 +155,16 @@ drone = api.navigation()
 time.sleep(3.0)
 
 # command vehicle towards 5 meteres WEST from current location regardless of heading
-drone.position_set(-5, 0, 0, relative=True)
+drone.set_home(-5, 0, 0, relative=True)
 
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <core_api/SetHome.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("navigation/set_home");
+core_api::SetHome srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -197,9 +181,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
+    rospy.wait_for_service('namespace/navigation/set_home')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
+        handle = rospy.ServiceProxy('namespace/navigation/set_home', SetHome)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -210,25 +194,17 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 
 ```javascript--REST
 var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
-msgdata["tolerance"]=2.00;
-msgdata["async"]=true;
-msgdata["relative"]=false;
-msgdata["yaw_valid"]=true;
-msgdata["body_frame"]=false;
+msgdata["lat"]=73.25564541;
+msgdata["lon"]=18.36155;
+msgdata["alt"]=2.00;
+msgdata["set_current"]=true;
+
 
 $.ajax({
     type: "POST",
     dataType: "json",
     data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/navigation/position_set",  
+    url: "http://<ip>/ros/<namespace>/navigation/set_home",  
     success: function(data){
            console.log(data.success);
     }
@@ -237,30 +213,22 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var positionSet = new ROSLIB.Service({
+var setHome = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/position_set',
-    serviceType : 'core_api/PositionSet'
+    name : '/<namespace>/navigation/set_home',
+    serviceType : 'core_api/SetHome'
 });
 
 var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
-    tolerance: 2.00,
-    async: true,
-    relative: false,
-    yaw_valid : true,
-    body_frame : false
+    lat: 73.12516255,
+    lon: 18.2165632,
+    alt: 2.00,
+    set_current : True 
 });
 
-positionSet.callService(request, function(result) {
+setHome.callService(request, function(result) {
     console.log('Result for service call on '
-      + positionSet.name
+      + setHome.name
       + ': '
       + result.success);
 });
@@ -313,7 +281,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -337,32 +305,19 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
-* Service Type: PositionSet
+* Name: /namespace/navigation/set_home</br>
+* Service Type: SetHome
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
+* URL: ````POST http://<ip>/ros/<namespace>/navigation/set_home````
 * JSON Request:
 {
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean
+    lat: Float,
+    lon: Float,
+    alt: Float,
+    set_current : Boolean 
 }
 * JSON Response:
 {
@@ -374,8 +329,8 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
-* serviceType: 'core_api/PositionSet'
+* name: '/namespace/navigation/set_home'</br>
+* serviceType: 'core_api/SetHome'
 
 
 ### API usage information:

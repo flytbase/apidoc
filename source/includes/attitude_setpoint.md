@@ -78,25 +78,20 @@ response srv: bool success
 ```
 
 ```javascript--REST
-This is a REST call for the API. Make sure to replace 
+This is a REST call for the API to give an attitude setpoint.
+ Make sure to replace 
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
+URL: 'http://<ip>/ros/<namespace>/navigation/attitude_set'
 
 JSON Request:
-{   twist:{twist:{  linear:{
+{   twist:{twist:{  angular:{
                 x: Float,
                 y: Float,
                 z: Float
-            },angular:{
-                z: Float
     }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+    thrust: Float }
 
 JSON Response:
 {   success: Boolean, }
@@ -104,14 +99,15 @@ JSON Response:
 ```
 
 ```javascript--Websocket
-This is a Websocket call for the API. Make sure you 
+This is a Websocket call for the API to give an
+ attitude setpoint. Make sure you 
 initialise the websocket using websocket initialisng 
 API and and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/position_set',
-serviceType: 'core_api/PositionSet'
+name: '/<namespace>/navigation/attitude_set',
+serviceType: 'core_api/AttitudeSet'
 
 Request:
 {   twist:{twist:{  linear:{
