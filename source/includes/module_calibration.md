@@ -1,4 +1,4 @@
-# Parameter Delete
+# Module Calibration
 
 
 > Definition
@@ -6,8 +6,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/param/param_delete
-ROS-Service Type: core_api/ParamDelete, below is its description
+ROS-Service Name: /<namespace>/setup/module_calibration
+ROS-Service Type: core_api/ModuleCalibration, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -50,7 +50,7 @@ Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, as
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_delete()
+Name: /<namespace>/setup/module_calibration()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -65,7 +65,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_delete()
+Name: /<namespace>/setup/module_calibration()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -82,10 +82,10 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/param/param_delete'
+URL: 'http://<ip>/ros/<namespace>/setup/module_calibration'
 
 JSON Request:
-{   param_id: String }
+{   module_calibrate: Int }
 
 JSON Response:
 {   success: Boolean, }
@@ -99,11 +99,11 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/param/param_delete',
-serviceType: 'core_api/ParamDelete'
+name: '/<namespace>/setup/module_calibration',
+serviceType: 'core_api/ModuleCalibration'
 
 Request:
-{   param_id: String }
+{   module_calibrate: Int }
 
 Response:
 {   success: Boolean, }
@@ -115,7 +115,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/param/param_delete "twist:
+rosservice call /<namespace>/setup/module_calibration "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -154,11 +154,11 @@ drone.position_set(-5, 0, 0, relative=True)
 ```
 
 ```cpp--ros
-#include <core_api/ParamDelete.h>
+#include <core_api/ModuleCalibration.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamDelete>("param/param_delete");
-core_api::ParamDelete srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ModuleCalibration>("setup/module_calibration");
+core_api::ModuleCalibration srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -175,9 +175,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/param/param_delete')
+    rospy.wait_for_service('namespace/setup/module_calibration')
     try:
-        handle = rospy.ServiceProxy('namespace/param/param_delete', ParamDelete)
+        handle = rospy.ServiceProxy('namespace/setup/module_calibration', ModuleCalibration)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -188,13 +188,13 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 
 ```javascript--REST
 var  msgdata={};
-msgdata["param_id"]='RTL_ALT;
+msgdata["module_calibrate"]=2;
 
 $.ajax({
     type: "POST",
     dataType: "json",
     data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/param/param_delete",  
+    url: "http://<ip>/ros/<namespace>/setup/module_calibration",  
     success: function(data){
            console.log(data.success);
     }
@@ -203,19 +203,19 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var paramDelete = new ROSLIB.Service({
+var moduleCalibration = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/param/param_delete',
-    serviceType : 'core_api/ParamDelete'
+    name : '/<namespace>/setup/module_calibration',
+    serviceType : 'core_api/ModuleCalibration'
 });
 
 var request = new ROSLIB.ServiceRequest({
-    param_id: String
+    module_calibrate: Int
 });
 
-paramDelete.callService(request, function(result) {
+moduleCalibration.callService(request, function(result) {
     console.log('Result for service call on '
-      + paramDelete.name
+      + moduleCalibration.name
       + ': '
       + result.success);
 });
@@ -292,16 +292,16 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/param/param_delete</br>
-* Service Type: ParamDelete
+* Name: /namespace/setup/module_calibration</br>
+* Service Type: ModuleCalibration
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/param/param_delete````
+* URL: ````POST http://<ip>/ros/<namespace>/setup/module_calibration````
 * JSON Request:
 {
-    param_id: String
+    module_calibrate: Int
 }
 * JSON Response:
 {
@@ -313,8 +313,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/param/param_delete'</br>
-* serviceType: 'core_api/ParamDelete'
+* name: '/namespace/setup/module_calibration'</br>
+* serviceType: 'core_api/ModuleCalibration'
 
 
 ### API usage information:

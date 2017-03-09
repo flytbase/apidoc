@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Service Type: core_api/ParamSet, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -103,21 +103,12 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/param/param_set',
-serviceType: 'core_api/PositionSet'
+serviceType: 'core_api/ParamSet'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+{   param_info:{
+        param_id: String,
+        param_value: String }}
 
 Response:
 {   success: Boolean, }
@@ -168,11 +159,11 @@ drone.position_set(-5, 0, 0, relative=True)
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <core_api/ParamSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("param/param_set");
-core_api::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ParamSet>("param/param_set");
+core_api::ParamSet srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -191,7 +182,7 @@ success = srv.response.success;
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
     rospy.wait_for_service('namespace/param/param_set')
     try:
-        handle = rospy.ServiceProxy('namespace/param/param_set', PositionSet)
+        handle = rospy.ServiceProxy('namespace/param/param_set', ParamSet)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -201,20 +192,9 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 ```
 
 ```javascript--REST
-var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
-msgdata["tolerance"]=2.00;
-msgdata["async"]=true;
-msgdata["relative"]=false;
-msgdata["yaw_valid"]=true;
-msgdata["body_frame"]=false;
+var  msgdata={};msgdata["param_info"]={};
+msgdata.param_info["param_id"]="RTL_ALT";
+msgdata.param_info["param_value"]="5.0";
 
 $.ajax({
     type: "POST",
@@ -229,30 +209,21 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var positionSet = new ROSLIB.Service({
+var paramSet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_set',
-    serviceType : 'core_api/PositionSet'
+    serviceType : 'core_api/ParamSet'
 });
 
 var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
-    tolerance: 2.00,
-    async: true,
-    relative: false,
-    yaw_valid : true,
-    body_frame : false
+    param_info:{
+        param_id: “RTL_ALT”,
+        param_value: “5.0”
 });
 
-positionSet.callService(request, function(result) {
+paramSet.callService(request, function(result) {
     console.log('Result for service call on '
-      + positionSet.name
+      + paramSet.name
       + ': '
       + result.success);
 });
@@ -330,7 +301,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /namespace/param/param_set</br>
-* Service Type: PositionSet
+* Service Type: ParamSet
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -338,23 +309,10 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * URL: ````POST http://<ip>/ros/<namespace>/param/param_set````
 * JSON Request:
 {
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean
+    param_info:{
+        param_id: [String],
+        param_value: [String]
+    }
 }
 * JSON Response:
 {
@@ -367,7 +325,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/namespace/param/param_set'</br>
-* serviceType: 'core_api/PositionSet'
+* serviceType: 'core_api/ParamSet'
 
 
 ### API usage information:
