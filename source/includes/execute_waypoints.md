@@ -23,7 +23,7 @@ bool success
 ```
 
 ```cpp
-// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
 Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 Arguments:
@@ -38,7 +38,7 @@ Arguments:
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
 Class: flyt_python.api.navigation
 
@@ -82,21 +82,7 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
-
-JSON Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_execute'
 
 JSON Response:
 {   success: Boolean, }
@@ -110,22 +96,8 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/position_set',
-serviceType: 'core_api/PositionSet'
-
-Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+name: '/<namespace>/navigation/waypoint_execute',
+serviceType: 'core_api/WaypointExecute'
 
 Response:
 {   success: Boolean, }
@@ -209,26 +181,11 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 ```
 
 ```javascript--REST
-var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
-msgdata["tolerance"]=2.00;
-msgdata["async"]=true;
-msgdata["relative"]=false;
-msgdata["yaw_valid"]=true;
-msgdata["body_frame"]=false;
 
 $.ajax({
-    type: "POST",
+    type: "GET",
     dataType: "json",
-    data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/navigation/position_set",  
+    url: "http://<ip>/ros/<namespace>/navigation/waypoint_execute",  
     success: function(data){
            console.log(data.success);
     }
@@ -237,30 +194,17 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var positionSet = new ROSLIB.Service({
+var waypointExecute = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/position_set',
-    serviceType : 'core_api/PositionSet'
+    name : '/<namespace>/navigation/waypoint_execute',
+    serviceType : 'core_api/WaypointExecute'
 });
 
-var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
-    tolerance: 2.00,
-    async: true,
-    relative: false,
-    yaw_valid : true,
-    body_frame : false
-});
+var request = new ROSLIB.ServiceRequest({});
 
-positionSet.callService(request, function(result) {
+waypointExecute.callService(request, function(result) {
     console.log('Result for service call on '
-      + positionSet.name
+      + waypointExecute.name
       + ': '
       + result.success);
 });
@@ -313,7 +257,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -340,30 +284,10 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 * Name: /namespace/navigation/position_set</br>
 * Service Type: PositionSet
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
-* JSON Request:
-{
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean
-}
+* URL: ````GET http://<ip>/ros/<namespace>/navigation/waypoint_execute````
 * JSON Response:
 {
     success: Boolean
@@ -374,8 +298,8 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
-* serviceType: 'core_api/PositionSet'
+* name: '/namespace/navigation/waypoint_execute'</br>
+* serviceType: 'core_api/WaypointExecute'
 
 
 ### API usage information:

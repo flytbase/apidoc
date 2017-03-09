@@ -30,6 +30,14 @@ includes:
   - position_setpoint_global
   - set_home
   - set_current_waypoint
+  - param_set
+  - param_get_all
+  - param_get
+  - param_save
+  - param_load
+  - param_create
+  - param_delete
+  - param_reset
   
 search: true
 ---

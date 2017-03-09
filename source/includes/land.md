@@ -78,25 +78,11 @@ response srv: bool success
 ```
 
 ```javascript--REST
-This is a REST call for the API. Make sure to replace 
+This is a REST call for the API to land. Make sure to replace 
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
-
-JSON Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+URL: 'http://<ip>/ros/<namespace>/navigation/land'
 
 JSON Response:
 {   success: Boolean, }
@@ -104,28 +90,17 @@ JSON Response:
 ```
 
 ```javascript--Websocket
-This is a Websocket call for the API. Make sure you 
+This is a Websocket call for the API to land. Make sure you 
 initialise the websocket using websocket initialisng 
 API and and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/position_set',
-serviceType: 'core_api/PositionSet'
+name: '/<namespace>/navigation/land',
+serviceType: 'core_api/Land'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean }
+{  }
 
 Response:
 {   success: Boolean, }
@@ -209,26 +184,11 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 ```
 
 ```javascript--REST
-var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
-msgdata["tolerance"]=2.00;
-msgdata["async"]=true;
-msgdata["relative"]=false;
-msgdata["yaw_valid"]=true;
-msgdata["body_frame"]=false;
 
 $.ajax({
-    type: "POST",
+    type: "GET",
     dataType: "json",
-    data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/navigation/position_set",  
+    url: "http://<ip>/ros/<namespace>/navigation/land",  
     success: function(data){
            console.log(data.success);
     }
@@ -237,30 +197,17 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var positionSet = new ROSLIB.Service({
+var land = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/position_set',
-    serviceType : 'core_api/PositionSet'
+    name : '/<namespace>/navigation/land',
+    serviceType : 'core_api/Land'
 });
 
-var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
-    tolerance: 2.00,
-    async: true,
-    relative: false,
-    yaw_valid : true,
-    body_frame : false
-});
+var request = new ROSLIB.ServiceRequest({});
 
-positionSet.callService(request, function(result) {
+land.callService(request, function(result) {
     console.log('Result for service call on '
-      + positionSet.name
+      + land.name
       + ': '
       + result.success);
 });
@@ -343,27 +290,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 ### RESTFul endpoint:
 FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
-* JSON Request:
-{
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean
-}
+* URL: ````GET http://<ip>/ros/<namespace>/navigation/land````
 * JSON Response:
 {
     success: Boolean
@@ -374,8 +301,8 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
-* serviceType: 'core_api/PositionSet'
+* name: '/namespace/navigation/land'</br>
+* serviceType: 'core_api/Land'
 
 
 ### API usage information:
