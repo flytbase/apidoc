@@ -6,35 +6,19 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/position_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Service Name: /<namespace>/navigation/exec_script
+ROS-Service Type: core_api/ExecScript, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
-float32 tolerance
-bool async
-bool relative
-bool yaw_valid
-bool body_frame
+#Request : Expects name of the application to execute and the arguments to be passed to it
+string app_name
+string arguments
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
+#Response : return success=true if script starts to get executed
 bool success
 ```
 
 ```cpp
-// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
-
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
-Arguments:
-    :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    :param yaw: Yaw Setpoint in radians
-    :param yaw_valid: Must be set to true, if yaw setpoint is provided
-    :param tolerance: Acceptance radius in meters, default value=1.0m
-    :param relative: If true, position setpoints relative to current position is sent
-    :param async: If true, asynchronous mode is set
-    :param body_frame: If true, position setpoints are relative with respect to body frame
-    :return: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+No CPP API is available for execution of onboard scripts.
 ```
 
 ```python
@@ -50,14 +34,10 @@ Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, as
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/exec_script()
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
+    :string app_name
+    :string arguments
 response srv: bool success
 ```
 
@@ -117,30 +97,10 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/position_set "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rosservice call /<namespace>/navigation/exec_script "{}"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
-
-Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
@@ -156,21 +116,14 @@ drone.position_set(-5, 0, 0, relative=True)
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <core_api/ExecScript.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("navigation/exec_script");
+core_api::ExecScript srv;
 
-srv.request.twist.twist.angular.z = 0.5;
-srv.request.twist.twist.linear.x = 4,0;
-srv.request.twist.twist.linear.y = 3.0;
-srv.request.twist.twist.linear.z = 5.0;
-srv.request.tolerance = 2.0;
-srv.request.async = true;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
+srv.request.app_name = "sample_script.sh";
+srv.request.arguments = "arg1 arg2 arg3";
 client.call(srv);
 success = srv.response.success;
 ```
@@ -233,7 +186,6 @@ success: true
 ```
 
 ```cpp
-0
 ```
 
 ```python
@@ -296,8 +248,8 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
-* Service Type: PositionSet
+* Name: /namespace/navigation/exec_script</br>
+* Service Type: ExecScript
 
 ### RESTFul endpoint:
 FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.

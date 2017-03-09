@@ -9,32 +9,29 @@
 ROS-Service Name: /<namespace>/navigation/position_set_global
 ROS-Service Type: core_api/PositionSetGlobal, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
+#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z which corresponds respectively to the desired Latitude, longitude and altitude 
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
 geometry_msgs/TwistStamped twist
 float32 tolerance
 bool async
-bool relative
 bool yaw_valid
-bool body_frame
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
+#Response : return success=true, (if async=false && if setpoint reached before timeout = 30sec) || (if async=true && command sent to autopilot)
 bool success
 ```
 
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: int Navigation::position_set_global(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition:     int position_set_global(float lat, float lon, float alt, float yaw=0, float tolerance=0, bool async=false, bool yaw_valid=false);
 Arguments:
-    :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    :param yaw: Yaw Setpoint in radians
-    :param yaw_valid: Must be set to true, if yaw setpoint is provided
-    :param tolerance: Acceptance radius in meters, default value=1.0m
-    :param relative: If true, position setpoints relative to current position is sent
-    :param async: If true, asynchronous mode is set
-    :param body_frame: If true, position setpoints are relative with respect to body frame
-    :return: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+    :lat, lon: Latitude and Longitude
+    :alt: Altitue (Positive distance upwards from home position)
+    :yaw: Yaw Setpoint in radians
+    :yaw_valid: Must be set to true, if yaw setpoint is provided
+    :tolerance: Acceptance radius in meters, default value=1.0m
+    :async: If true, asynchronous mode is set
+    :returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
 ```
 
 ```python
@@ -55,9 +52,8 @@ call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
     :bool async
-    :bool relative
     :bool yaw_valid
-    :bool body_frame
+
 response srv: bool success
 ```
 
@@ -73,7 +69,7 @@ call srv:
     :bool relative
     :bool yaw_valid
     :bool body_frame
-response srv: bool success
+response srv: bool successresponse srv: bool success
 
 ```
 
@@ -136,21 +132,10 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/position_set_global "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
 
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
+rosservice call /flytpod/navigation/position_set_global "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 18.5204303, y:  73.8567437, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, yaw_valid: true}"
+
+#sends (Lat,Lon,Alt)=(18.5204303, 73.8567437,5.0)(m), yaw=0.12rad, async=false, yaw_valid=true
 #default value of tolerance=1.0m if left at 0    
 ```
 
@@ -297,7 +282,6 @@ Success: True
 {
     success:True
 }
-
 ```
 
 
@@ -380,4 +364,5 @@ Note: You can either set body_frame or relative flag. If both are set, body_fram
 Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
 
 Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
+
 
