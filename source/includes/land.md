@@ -19,7 +19,7 @@ bool success
 ```cpp
 // CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-Function Definition:    int Navigation::land(bool async = true)
+Function Definition:    int Navigation::land(bool async = false)
 
 Arguments:
     async: If true, asynchronous mode is set
@@ -32,8 +32,7 @@ Returns:    0 if the land command is successfully sent to the vehicle, else retu
 
 Class: flyt_python.api.navigation
 
-Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
-                     body_frame=False):
+Function: land(async=False):
 ```
 
 ```cpp--ros
@@ -41,7 +40,8 @@ Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, as
 
 Type: Ros Service
 Name: /<namespace>/navigation/land()
-call srv: NULL
+call srv: 
+    async=false
 response srv: bool success
 ```
 
@@ -49,14 +49,9 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
-call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
+Name: /<namespace>/navigation/land()
+call srv: 
+    async=False
 response srv: bool success
 
 ```
@@ -113,9 +108,11 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# command vehicle towards 5 meteres WEST from current location regardless of heading
-drone.position_set(-5, 0, 0, relative=True)
+# land at current location. Return after landed
+drone.land(async=False)
 
+# land at current location. Function returns immediately and land action finishes asynchronously.  
+drone.land(async=True)
 ```
 
 ```cpp--ros
@@ -131,15 +128,14 @@ success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
+def land(async= False):
+    rospy.wait_for_service('namespace/navigation/land')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
+        handle = rospy.ServiceProxy('namespace/navigation/land', Land)
+        resp = handle(async)
         return resp
     except rospy.ServiceException, e:
-        rospy.logerr("pos set service call failed %s", e)
+        rospy.logerr("service call failed %s", e)
 
 ```
 
@@ -215,8 +211,8 @@ Success: True
 
 
 ###Description:
-This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+
+Land vehicle at current position. Check API usage section below before using this API.
 
 ###Parameters:
     
@@ -226,13 +222,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
     async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
     
     Output:
     
@@ -245,7 +235,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /namespace/navigation/land</br>
-* Service Type: Land
+* Service Type: core_api/Land
 
 ### RESTFul endpoint:
 FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
@@ -266,9 +256,15 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 
 ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
+This API will land the vehicle at current location. 
 
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
-
+* This API can be used only in OFFBOARD/API_CTL mode.
+* If in synchronous mode and another navigation API is called then land call be overridden by that API call. 
+* Automatic land flow can be configured with following parameters.
+  * LNDMC_Z_VEL_MAX : Maximum velocity in vertical direction when landing (ideal value 0.8 m/s to 1.5 m/s)
+  * LNDMC_XY_VEL_MAX: Maximum velocity in horizontal direction when landing (ideal value 1 m/s to 2 m/s)
+  * MPC_LAND_SPEED: Landing velocity (ideal value 0.8 m/s)
+* To disarm vehicle automatically after landing following parameter can be configured.
+  * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inclusive) : enabled with n seconds timeout before disarming after landed. 
+  * If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. 

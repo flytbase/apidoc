@@ -253,4 +253,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * Land API with auto diarm on landing feature is preferred over calling disarm API specifically.
 * To configure auto disarm on landing set following parameters. 
   * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. 
-  * If this feaure is enabled motors will disarm automatically even in case where vehicle was armed but not flown. So for most scenarios value 5 should be fine. 
+  * If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. 

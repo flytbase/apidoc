@@ -9,32 +9,19 @@
 ROS-Service Name: /<namespace>/navigation/set_home
 ROS-Service Type: core_api/SetHome, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
-float32 tolerance
-bool async
-bool relative
-bool yaw_valid
-bool body_frame
+#Request : Expects home position to be set by specifying Latitude, Longitude and altitude
+#Request: If set_current is true, the current location of craft is set as home position
+float64 lat
+float64 lon
+float64 alt
+bool set_current
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
+#Response : success=true if service called successfully 
 bool success
 ```
 
 ```cpp
-// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
-
-Function Definition: int Navigation::set_home(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
-Arguments:
-    :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    :param yaw: Yaw Setpoint in radians
-    :param yaw_valid: Must be set to true, if yaw setpoint is provided
-    :param tolerance: Acceptance radius in meters, default value=1.0m
-    :param relative: If true, position setpoints relative to current position is sent
-    :param async: If true, asynchronous mode is set
-    :param body_frame: If true, position setpoints are relative with respect to body frame
-    :return: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+No CPP API available.
 ```
 
 ```python
@@ -52,12 +39,10 @@ Function: set_home(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=
 Type: Ros Service
 Name: /<namespace>/navigation/set_home()
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
+    :float64 lat
+    :float64 lon
+    :float64 alt
+    :bool set_current
 response srv: bool success
 ```
 
@@ -121,30 +106,10 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/set_home "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rosservice call /flytsim/navigation/set_home "{lat: 73.25564541, lon: 18.2165632, alt: 2.0, set_current: false}"  
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
-
-Navigation nav;
-nav.set_home(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
@@ -166,15 +131,10 @@ ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("navigation/set_home");
 core_api::SetHome srv;
 
-srv.request.twist.twist.angular.z = 0.5;
-srv.request.twist.twist.linear.x = 4,0;
-srv.request.twist.twist.linear.y = 3.0;
-srv.request.twist.twist.linear.z = 5.0;
-srv.request.tolerance = 2.0;
-srv.request.async = true;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
+srv.request.lat = 73.25564541;
+srv.request.lon = 18.2165632;
+srv.request.alt = 2.00;
+srv.request.set_current = false;
 client.call(srv);
 success = srv.response.success;
 ```
@@ -242,7 +202,6 @@ success: true
 ```
 
 ```cpp
-0
 ```
 
 ```python

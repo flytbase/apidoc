@@ -19,6 +19,7 @@ includes:
   - land
   - position_hold
   - position_setpoint
+  - position_setpoint_global
   - velocity_setpoint
   - execute_script
   - get_waypoints
@@ -26,7 +27,6 @@ includes:
   - execute_waypoints
   - clear_waypoints
   - pause_waypoints
-  - position_setpoint_global
   - set_home
   - set_current_waypoint
   - param_set
@@ -47,6 +47,8 @@ includes:
   - battery_status
   - hud
   
+
+>>>>>>> 85495ace83d07eacf7b3cf173b2fe655ccaf622c
 search: true
 ---
 

@@ -1,4 +1,4 @@
-# Position Setpoint
+# Get Attitude Euler
 
 
 
@@ -7,20 +7,25 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/position_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Topic Name: /<namespace>/mavros/imu/data_euler
+ROS-Topic Type: geometry_msgs/TwistStamped, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
-float32 tolerance
-bool async
-bool relative
-bool yaw_valid
-bool body_frame
+#Subscriber response : Euler angles 
+Response structure:
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
-bool success
 ```
 
 ```cpp
@@ -45,38 +50,64 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 
 Class: flyt_python.api.navigation
 
-Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
-                     body_frame=False):
+Function: get_attitude_euler()
+
+Response: attitude_euler_object as described below.
+    class attitude_euler:
+        '''
+        Holds fields for Attitude data in Euler Angles
+        '''
+        roll = 0.0
+        pitch = 0.0
+        yaw = 0.0
+        rollspeed = 0.0
+        pitchspeed = 0.0
+        yawspeed = 0.0
+
+This API support single pole mode only.
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Service
-Name: /<namespace>/navigation/position_set()
-call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
-response srv: bool success
+Type: Ros Topic
+Name: /<namespace>/mavros/imu/data_euler
+Response Type:
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
+
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Service
-Name: /<namespace>/navigation/position_set()
-call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
-response srv: bool success
+Type: Ros Topic
+Name: /<namespace>/mavros/imu/data_euler
+Response Type:
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
 
 ```
 
@@ -161,8 +192,10 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# command vehicle towards 5 meteres WEST from current location regardless of heading
-drone.position_set(-5, 0, 0, relative=True)
+# Poll attitude euler data
+att = drone.get_attitude_euler()
+# Print the data
+print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
 
 ```
 
@@ -189,16 +222,18 @@ success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
-    try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_valid, body_frame)
-        return resp
-    except rospy.ServiceException, e:
-        rospy.logerr("pos set service call failed %s", e)
+from geometry_msgs.msg import TwistStamped
 
+# setup a subscriber and associate a callback function which will be called every time topic is updated.
+topic_sub = rospy.Subscriber("/namespace/mavros/imu/data_euler"), TwistStamped, topic_callback)
+
+# define the callback function which will print the values every time topic is updated
+def topic_callback(data):
+    roll, pitch, yaw = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
+    print roll, pitch, yaw
+
+# unsubscribe from a topic
+topic_sub.unregister()  # unregister topic subscription
 ```
 
 ```javascript--REST
@@ -271,7 +306,18 @@ success: true
 ```
 
 ```python
-True
+instance of class
+class attitude_euler:
+    '''
+    Holds fields for Attitude data in Euler Angles
+    '''
+    roll = 0.0
+    pitch = 0.0
+    yaw = 0.0
+    rollspeed = 0.0
+    pitchspeed = 0.0
+    yawspeed = 0.0
+
 ```
 
 ```cpp--ros
@@ -279,7 +325,21 @@ success: True
 ```
 
 ```python--ros
-Success: True
+instance of gemometry_msgs.msg.TwistStamped class
+std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
+
 ```
 
 ```javascript--REST
@@ -300,39 +360,32 @@ Success: True
 
 ###Description:
 
-This API commands the vehicle to go to a specified location in local frame and hover.  Please check API usage section below before using API.
+This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
 
 ###Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Arguments:
-    
-    Argument | Type | Description
-    -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
-    
-    Output:
+    Response:
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    success | bool | true if action successful
+    roll | float | roll angle in radians, NED frame.
+    pitch | float | pitch angle in radians, NED frame.
+    yaw | float | yaw angle in radians, NED frame.
+    rollspeed | float | roll rate in radians/sec, NED frame.
+    pitchspeed | float | pitch rate in radians/sec, NED frame.
+    yawspeed | float | yaw rate in radians/sec, NED frame.
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
-* Service Type: core_api/PositionSet
+* Type: Ros Topic</br> 
+* Name: /namespace/mavros/imu/data_euler</br>
+* Response Type: geometry_msgs/TwistStamped
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
 * URL: ````POST http://<ip>/ros/<namespace>/navigation/position_set````
 * JSON Request:
@@ -365,36 +418,10 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
-* serviceType: 'core_api/PositionSet'
-
+* name: '/namespace/mavros/imu/data_euler'</br>
+* serviceType: 'geometry_msgs/TwistStamped'
 
 ### API usage information:
 
-* Vehicle should be in OFFBOARD/API_CTL mode for this API to work.
-* Vehicle should be armed for this API to work.
-* Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
-* X,Y,Z are position setpoints in 3 linear axes. Yaw is angular rotation around Z axis. Right hand notation is used to find positive yaw direction.
-* Effect of parameters:
-  * Async:
-     * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-     * False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
-  * Relative: 
-     * True: Linear position setpoints (x,y,z) are calculated from current location. Home location is not relevant. Yaw is calculated from North.
-     * False: Linear position setpoints (x,y,z) are calculated from home location. Home location is reset every time vehicle arms. Yaw is calculated from North. 
-  * Body_frame 
-     * True: All the setpoints are converted to body frame. 
-        * Front of vehicle : +x
-        * Right of vehicle : +y
-        * down: +z
-        * yaw is calculated from front of vehicle. 
-     * False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. 
-* Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.
-* For yaw setpoint to be effective the yaw_valid argument must be set to true.
-* This API overrides any previous mission / navigation API being carried out.
-* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
-* To provide only Yaw setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True
-* * Following parameters need to be manually configured according to vehicle frame.
-  * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
-  * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
-  * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.
+* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
+* Data returned is in NED frame.
