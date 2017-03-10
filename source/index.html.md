@@ -46,6 +46,7 @@ includes:
   - get_GPS
   - get_battery_status
   - get_hud
+  - video_streaming
   
 
 search: true
