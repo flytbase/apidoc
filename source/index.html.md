@@ -19,15 +19,14 @@ includes:
   - land
   - position_hold
   - position_setpoint
+  - position_setpoint_global
   - velocity_setpoint
-  - attitude_setpoint
   - execute_script
   - get_waypoints
   - set_waypoints
   - execute_waypoints
   - clear_waypoints
   - pause_waypoints
-  - position_setpoint_global
   - set_home
   - set_current_waypoint
   - param_set
@@ -41,7 +40,8 @@ includes:
   - actuator_testing
   - esc_calibration
   - module_calibration
-  
+  - get_attitude_euler
+
 search: true
 ---
 
