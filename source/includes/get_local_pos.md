@@ -1,5 +1,4 @@
-# Get Attitude Euler
-
+# Local Position Data
 
 
 > Definition
@@ -34,13 +33,13 @@ Response structure:
 Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 
 Arguments:
-	x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-	yaw: Yaw Setpoint in radians
-	yaw_valid: Must be set to true, if yaw setpoint is provided
-	tolerance: Acceptance radius in meters, default value=1.0m
-	relative: If true, position setpoints relative to current position is sent
-	async: If true, asynchronous mode is set
-	body_frame: If true, position setpoints are relative with respect to body frame
+    x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    yaw: Yaw Setpoint in radians
+    yaw_valid: Must be set to true, if yaw setpoint is provided
+    tolerance: Acceptance radius in meters, default value=1.0m
+    relative: If true, position setpoints relative to current position is sent
+    async: If true, asynchronous mode is set
+    body_frame: If true, position setpoints are relative with respect to body frame
 
 Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
 ```
@@ -116,10 +115,10 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
+URL: 'http://<ip>/ros/<namespace>/mavros/local_position/local'
 
 JSON Response:
-{  twist:{
+{   twist:{
     linear:{
         x: Float,
         y: Float,
@@ -139,7 +138,7 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/mavros/imu/data_euler',
+name: '/<namespace>/mavros/local_position/local',
 messageType: 'geometry_msgs/TwistStamped'
 
 Response:
@@ -153,6 +152,7 @@ Response:
         y: Float,
         z: FLoat}
 }}
+
 
 ```
 
@@ -229,28 +229,29 @@ topic_sub.unregister()  # unregister topic subscription
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
+    url: "http://<ip>/ros/<namespace>/mavros/local_position/local",  
     success: function(data){
            console.log(data);
     }
 };
 
-
 ```
 
 ```javascript--Websocket
-var imuEulerData = new ROSLIB.Service({
+var lpos = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/mavros/imu/data_euler',
-    messageType : 'geometry_msgs/TwistStamped'
+    name : '/<namespace>/mavros/local_position/local',
+    messageType : 'geometry_msgs/TwistStamped',
+    throttle_rate: 200
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-imuEulerData.subscribe(request, function(result) {
-    console.log(result.data);
+lpos.subscribe(request, function(result) {
+    console.log(result.twist);
 });
 ```
+
 
 
 > Example response
@@ -300,6 +301,7 @@ std_msgs/Header header
 
 ```
 
+
 ```javascript--REST
 {
     twist:{
@@ -311,7 +313,7 @@ std_msgs/Header header
         x: Float,
         y: Float,
         z: FLoat}
-}
+}}
 
 ```
 
@@ -326,8 +328,7 @@ std_msgs/Header header
         x: Float,
         y: Float,
         z: FLoat}
-}
-
+}}
 
 ```
 
@@ -362,7 +363,8 @@ All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboar
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/imu/data_euler````
+
+* URL: ````GET http://<ip>/ros/<namespace>/mavros/local_position/local````
 * JSON Response:
 {
     twist:{
@@ -374,17 +376,18 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
         x: Float,
         y: Float,
         z: FLoat}
-}
+}}
 
 
 ### Websocket endpoint:
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/imu/data_euler'</br>
+* name: '/namespace/mavros/local_position/local'</br>
 * messageType: 'geometry_msgs/TwistStamped'
 
 ### API usage information:
 
 * This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
 * Data returned is in NED frame.
+

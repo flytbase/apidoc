@@ -40,15 +40,14 @@ includes:
   - actuator_testing
   - esc_calibration
   - module_calibration
-  - attitude_quat
-  - attitude_euler
-  - local_pos
-  - GPS
-  - battery_status
-  - hud
+  - get_attitude_quat
+  - get_attitude_euler
+  - get_local_pos
+  - get_GPS
+  - get_battery_status
+  - get_hud
   
 
->>>>>>> 85495ace83d07eacf7b3cf173b2fe655ccaf622c
 search: true
 ---
 
