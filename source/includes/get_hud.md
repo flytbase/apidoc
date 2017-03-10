@@ -290,18 +290,18 @@ This API subscribes/poles VFR HUD data.  Please check API usage section below be
     Parameter | type | Description
     ---------- | ---------- | ------------
     airspeed | float | airspeed in m/s
-    pitch | float | pitch angle in radians, NED frame.
-    yaw | float | yaw angle in radians, NED frame.
-    rollspeed | float | roll rate in radians/sec, NED frame.
-    pitchspeed | float | pitch rate in radians/sec, NED frame.
-    yawspeed | float | yaw rate in radians/sec, NED frame.
+    groundspeed | float | groundspeed in m/s
+    heading | int16 | yaw angle in degrees (NED frame)
+    throttle | float | throttle
+    altitude | float | altitude
+    climb | float | climb
 
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data_euler</br>
-* Response Type: geometry_msgs/TwistStamped
+* Name: /namespace/mavros/vfr_hud</br>
+* Response Type: mavros_msgs/VFR_HUD
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -325,10 +325,9 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/imu/data_euler'</br>
-* messageType: 'geometry_msgs/TwistStamped'
+* name: '/namespace/mavros/vfr_hud'</br>
+* messageType: 'mavros_msgs/VFR_HUD'
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
+* airspeed data is the data from airspeed sensor.
