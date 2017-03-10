@@ -1,4 +1,4 @@
-# Get Battery Data
+# Get Battery Status
 
 
 
@@ -10,22 +10,46 @@
 ROS-Topic Name: /<namespace>/mavros/battery
 ROS-Topic Type: mavros_msgs/BatteryStatus, below is its description
 
-#Subscriber response : Euler angles 
+#Subscriber response : Battery Status 
 Response structure:
-    std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
-
+uint8 POWER_SUPPLY_STATUS_UNKNOWN=0
+uint8 POWER_SUPPLY_STATUS_CHARGING=1
+uint8 POWER_SUPPLY_STATUS_DISCHARGING=2
+uint8 POWER_SUPPLY_STATUS_NOT_CHARGING=3
+uint8 POWER_SUPPLY_STATUS_FULL=4
+uint8 POWER_SUPPLY_HEALTH_UNKNOWN=0
+uint8 POWER_SUPPLY_HEALTH_GOOD=1
+uint8 POWER_SUPPLY_HEALTH_OVERHEAT=2
+uint8 POWER_SUPPLY_HEALTH_DEAD=3
+uint8 POWER_SUPPLY_HEALTH_OVERVOLTAGE=4
+uint8 POWER_SUPPLY_HEALTH_UNSPEC_FAILURE=5
+uint8 POWER_SUPPLY_HEALTH_COLD=6
+uint8 POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE=7
+uint8 POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE=8
+uint8 POWER_SUPPLY_TECHNOLOGY_UNKNOWN=0
+uint8 POWER_SUPPLY_TECHNOLOGY_NIMH=1
+uint8 POWER_SUPPLY_TECHNOLOGY_LION=2
+uint8 POWER_SUPPLY_TECHNOLOGY_LIPO=3
+uint8 POWER_SUPPLY_TECHNOLOGY_LIFE=4
+uint8 POWER_SUPPLY_TECHNOLOGY_NICD=5
+uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6
+std_msgs/Header header
+  uint32 seq
+  time stamp
+  string frame_id
+float32 voltage
+float32 current
+float32 charge
+float32 capacity
+float32 design_capacity
+float32 percentage
+uint8 power_supply_status
+uint8 power_supply_health
+uint8 power_supply_technology
+bool present
+float32[] cell_voltage
+string location
+string serial_number
 ```
 
 ```cpp
@@ -47,24 +71,8 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+NotImplemented
 
-Class: flyt_python.api.navigation
-
-Function: get_attitude_euler()
-
-Response: attitude_euler_object as described below.
-    class attitude_euler:
-        '''
-        Holds fields for Attitude data in Euler Angles
-        '''
-        roll = 0.0
-        pitch = 0.0
-        yaw = 0.0
-        rollspeed = 0.0
-        pitchspeed = 0.0
-        yawspeed = 0.0
-
-This API support single pole mode only.
 ```
 
 ```cpp--ros
@@ -72,20 +80,45 @@ This API support single pole mode only.
 
 Type: Ros Topic
 Name: /<namespace>/mavros/battery
-Response Type:
+Response Type: sensor_msgs/BatteryState
+    uint8 POWER_SUPPLY_STATUS_UNKNOWN=0
+    uint8 POWER_SUPPLY_STATUS_CHARGING=1
+    uint8 POWER_SUPPLY_STATUS_DISCHARGING=2
+    uint8 POWER_SUPPLY_STATUS_NOT_CHARGING=3
+    uint8 POWER_SUPPLY_STATUS_FULL=4
+    uint8 POWER_SUPPLY_HEALTH_UNKNOWN=0
+    uint8 POWER_SUPPLY_HEALTH_GOOD=1
+    uint8 POWER_SUPPLY_HEALTH_OVERHEAT=2
+    uint8 POWER_SUPPLY_HEALTH_DEAD=3
+    uint8 POWER_SUPPLY_HEALTH_OVERVOLTAGE=4
+    uint8 POWER_SUPPLY_HEALTH_UNSPEC_FAILURE=5
+    uint8 POWER_SUPPLY_HEALTH_COLD=6
+    uint8 POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE=7
+    uint8 POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE=8
+    uint8 POWER_SUPPLY_TECHNOLOGY_UNKNOWN=0
+    uint8 POWER_SUPPLY_TECHNOLOGY_NIMH=1
+    uint8 POWER_SUPPLY_TECHNOLOGY_LION=2
+    uint8 POWER_SUPPLY_TECHNOLOGY_LIPO=3
+    uint8 POWER_SUPPLY_TECHNOLOGY_LIFE=4
+    uint8 POWER_SUPPLY_TECHNOLOGY_NICD=5
+    uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6
     std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+        uint32 seq
+        time stamp
+        string frame_id
+    float32 voltage
+    float32 current
+    float32 charge
+    float32 capacity
+    float32 design_capacity
+    float32 percentage
+    uint8 power_supply_status
+    uint8 power_supply_health
+    uint8 power_supply_technology
+    bool present
+    float32[] cell_voltage
+    string location
+    string serial_number
 
 ```
 
@@ -94,20 +127,45 @@ Response Type:
 
 Type: Ros Topic
 Name: /<namespace>/mavros/battery
-Response Type:
+Response Type: sensor_msgs/BatteryState
+    uint8 POWER_SUPPLY_STATUS_UNKNOWN=0
+    uint8 POWER_SUPPLY_STATUS_CHARGING=1
+    uint8 POWER_SUPPLY_STATUS_DISCHARGING=2
+    uint8 POWER_SUPPLY_STATUS_NOT_CHARGING=3
+    uint8 POWER_SUPPLY_STATUS_FULL=4
+    uint8 POWER_SUPPLY_HEALTH_UNKNOWN=0
+    uint8 POWER_SUPPLY_HEALTH_GOOD=1
+    uint8 POWER_SUPPLY_HEALTH_OVERHEAT=2
+    uint8 POWER_SUPPLY_HEALTH_DEAD=3
+    uint8 POWER_SUPPLY_HEALTH_OVERVOLTAGE=4
+    uint8 POWER_SUPPLY_HEALTH_UNSPEC_FAILURE=5
+    uint8 POWER_SUPPLY_HEALTH_COLD=6
+    uint8 POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE=7
+    uint8 POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE=8
+    uint8 POWER_SUPPLY_TECHNOLOGY_UNKNOWN=0
+    uint8 POWER_SUPPLY_TECHNOLOGY_NIMH=1
+    uint8 POWER_SUPPLY_TECHNOLOGY_LION=2
+    uint8 POWER_SUPPLY_TECHNOLOGY_LIPO=3
+    uint8 POWER_SUPPLY_TECHNOLOGY_LIFE=4
+    uint8 POWER_SUPPLY_TECHNOLOGY_NICD=5
+    uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6
     std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+        uint32 seq
+        time stamp
+        string frame_id
+    float32 voltage
+    float32 current
+    float32 charge
+    float32 capacity
+    float32 design_capacity
+    float32 percentage
+    uint8 power_supply_status
+    uint8 power_supply_health
+    uint8 power_supply_technology
+    bool present
+    float32[] cell_voltage
+    string location
+    string serial_number
 
 ```
 
@@ -161,17 +219,7 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
-# create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
-# wait for interface to initialize
-time.sleep(3.0)
-
-# Poll attitude euler data
-att = drone.get_attitude_euler()
-# Print the data
-print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
-
+NotImplemented
 ```
 
 ```cpp--ros
@@ -197,15 +245,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from geometry_msgs.msg import TwistStamped
+from sensor_msgs.msg import BatteryState
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/battery"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/battery"), BatteryState, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    roll, pitch, yaw = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
-    print roll, pitch, yaw
+    voltage = data.voltage
+    print voltage
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -250,18 +298,7 @@ success: true
 ```
 
 ```python
-instance of class
-class attitude_euler:
-    '''
-    Holds fields for Attitude data in Euler Angles
-    '''
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
-    rollspeed = 0.0
-    pitchspeed = 0.0
-    yawspeed = 0.0
-
+NotImplemented
 ```
 
 ```cpp--ros
@@ -269,20 +306,7 @@ success: True
 ```
 
 ```python--ros
-instance of gemometry_msgs.msg.TwistStamped class
-std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+instance of sensor_msgs.msg.BatteryState class
 
 ```
 
@@ -309,7 +333,7 @@ std_msgs/Header header
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
+This API subscribes/poles battery status.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -319,19 +343,19 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    roll | float | roll angle in radians, NED frame.
-    pitch | float | pitch angle in radians, NED frame.
-    yaw | float | yaw angle in radians, NED frame.
-    rollspeed | float | roll rate in radians/sec, NED frame.
-    pitchspeed | float | pitch rate in radians/sec, NED frame.
-    yawspeed | float | yaw rate in radians/sec, NED frame.
-
+    voltage | float | total voltage, Volts
+    current | float | instantaneous current consumption, Amperes
+    charge | float | Charge
+    capacity | float | capacity
+    percentage | float | percentage left
+   
+   
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
 * Name: /namespace/mavros/battery</br>
-* Response Type: mavros_msgs/BatteryStatus
+* Response Type: sensor_msgs/BatteryStatus
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -350,7 +374,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/namespace/mavros/battery'</br>
-* messageType: 'mavros_msgs/BatteryStatus'
+* messageType: 'sensor_msgs/BatteryStatus'
 
 ### API usage information:
 
