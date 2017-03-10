@@ -1,8 +1,10 @@
 # Namespace
 
-> API definition
+> Definition
 
 ```shell
+# API call described below requires shell access, either login to the device using desktop or use ssh for remote login. 
+
 ROS-Service Name: /get_global_namespace
 ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
 
@@ -24,6 +26,8 @@ string message
 ```
 
 ```cpp
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
+
 Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 Arguments:
 	:param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
@@ -37,6 +41,8 @@ Arguments:
 ```
 
 ```python
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
 Class: flyt_python.api.navigation
 Function Definition: get_global_namespace()
 Arguments: None
@@ -44,11 +50,15 @@ return: string
 ```
 
 ```cpp--ros
+// ROS services and topics are accessible from onboard scripts only.
+
 Function Definition: void ros::param::get("/global_namespace", string global_namespace)
 Arguments:
 ```
 
 ```python--ros
+# ROS services and topics are accessible from onboard scripts only.
+
 Type: Ros Service
 Name: /get_global_namespce()
 response srv: ParamGetGlobalNamespace
@@ -56,11 +66,15 @@ response srv: ParamGetGlobalNamespace
 ```
 
 ```javascript--REST
+This is a REST call for the API. Make sure to replace 
+    ip: ip of the FlytOS running device
+    namespace: namespace used by the FlytOS device.
+
 URL: ' <ip>/ros/get_global_namespace'
 
 JSON Response:
 	{
-		success: Boolean
+		success: Boolean,
 		param_info:{
 			param_value: String
 		}
@@ -69,6 +83,22 @@ JSON Response:
 ```
 
 ```javascript--Websocket
+This is a Websocket call for the API. Make sure you 
+initialise the websocket using websocket initialisng 
+API and and replace namespace with the namespace of 
+the FlytOS running device before calling the API 
+with websocket.
+
+name: '/get_global_namespace',
+serviceType: 'core_api/ParamGetGlobalNamespace'
+
+Response:
+{   success: Boolean,
+    param_info:{
+            param_value: String
+        }
+}
+
 
 ```
 
@@ -95,6 +125,8 @@ body_frame: false"
 ```
 
 ```python
+# create flyt_python navigation class instance
+
 from flyt_python import api
 drone = api.navigation()
 time.sleep(3.0)
@@ -126,7 +158,7 @@ def get_global_namespace():
 	    dataType: "json",
 	    url: "http://<ip>/ros/get_global_namespace",   
 	    success: function(data){
-	        console.log(data);
+	        console.log(data.param_info.param_value);
 	    }
 	});
 
@@ -134,7 +166,20 @@ def get_global_namespace():
 ```
 
 ```javascript--Webocket
+var namespace = new ROSLIB.Service({
+    ros : ros,
+    name : '/get_global_namespace',
+    serviceType : 'core_api/ParamGetGlobalNamespace'
+});
 
+var request = new ROSLIB.ServiceRequest({});
+
+namespace.callService(request, function(result) {
+    console.log('Result for service call on '
+      + namespace.name
+      + ': '
+      + result.param_info.param_value);
+});
 ```
 
 
@@ -167,17 +212,22 @@ message: Parameter Get Global Namespace Successful	flytpod
 
 
 ```javascript--REST
-	data:{
-		success:True,
-		param_info:{
-			param_value:'flytpod'
-		}
+{
+	success:True,
+	param_info:{
+		param_value:'flytpod'
 	}
+}
 
 ```
 
 ```javascript-Websocket
-
+{
+    success:True,
+    param_info:{
+        param_value:'flytpod'
+    }
+}
 ```
 
 
@@ -220,10 +270,11 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/<namespace>/navigation/disarm````
+* URL: ````GET http://<ip>/ros/get_global_namespace````
 * JSON Response:
 {
-    success: Boolean
+    success: Boolean,
+    param_info:{param_value: String}
 }
 
 
@@ -231,8 +282,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/disarm'</br>
-* serviceType: 'core_api/Disarm'
+* name: '/get_global_namespace'</br>
+* serviceType: 'core_api/ParamGetGlobalNamespace'
 
 
 ### API usage information:

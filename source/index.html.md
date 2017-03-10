@@ -20,7 +20,6 @@ includes:
   - position_hold
   - position_setpoint
   - velocity_setpoint
-  - attitude_setpoint
   - execute_script
   - get_waypoints
   - set_waypoints
@@ -41,6 +40,12 @@ includes:
   - actuator_testing
   - esc_calibration
   - module_calibration
+  - attitude_quat
+  - attitude_euler
+  - local_pos
+  - GPS
+  - battery_status
+  - hud
   
 search: true
 ---
