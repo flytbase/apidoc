@@ -1,4 +1,4 @@
-# Get Attitude Euler
+# Get HUD Data
 
 
 
@@ -7,8 +7,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/imu/data_euler
-ROS-Topic Type: geometry_msgs/TwistStamped, below is its description
+ROS-Topic Name: /<namespace>/mavros/vfr_hud
+ROS-Topic Type: mavros_msgs/VFR_HUD, below is its description
 
 #Subscriber response : Euler angles 
 Response structure:
@@ -71,7 +71,7 @@ This API support single pole mode only.
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/imu/data_euler
+Name: /<namespace>/mavros/vfr_hud
 Response Type:
     std_msgs/Header header
       uint32 seq
@@ -93,7 +93,7 @@ Response Type:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/imu/data_euler
+Name: /<namespace>/mavros/vfr_hud
 Response Type:
     std_msgs/Header header
       uint32 seq
@@ -116,19 +116,15 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
+URL: 'http://<ip>/ros/<namespace>/mavros/vfr_hud'
 
 JSON Response:
-{  twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
-}}
+{   airspeed: Float,
+    groundspeed: Float,
+    heading: Float,
+    throttle: Float,
+    altitude: Float,
+    climb: Float}
 
 ```
 
@@ -139,20 +135,16 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/mavros/imu/data_euler',
-messageType: 'geometry_msgs/TwistStamped'
+name: '/<namespace>/mavros/vfr_hud',
+messageType: 'mavros_msgs/VFR_HUD'
 
 Response:
-{   twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
-}}
+{   airspeed: Float,
+    groundspeed: Float,
+    heading: Float,
+    throttle: Float,
+    altitude: Float,
+    climb: Float}
 
 ```
 
@@ -214,7 +206,7 @@ success = srv.response.success;
 from geometry_msgs.msg import TwistStamped
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/imu/data_euler"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), TwistStamped, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -229,7 +221,7 @@ topic_sub.unregister()  # unregister topic subscription
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
+    url: "http://<ip>/ros/<namespace>/mavros/vfr_hud",  
     success: function(data){
            console.log(data);
     }
@@ -239,15 +231,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var imuEulerData = new ROSLIB.Service({
+var hudData = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/mavros/imu/data_euler',
-    messageType : 'geometry_msgs/TwistStamped'
+    name : '/<namespace>/mavros/vfr_hud',
+    messageType : 'mavros_msgs/VFR_HUD'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-imuEulerData.subscribe(request, function(result) {
+hudData.subscribe(request, function(result) {
     console.log(result.data);
 });
 ```
@@ -302,30 +294,24 @@ std_msgs/Header header
 
 ```javascript--REST
 {
-    twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
+    airspeed: Float,
+    groundspeed: Float,
+    heading: Float,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
 }
 
 ```
 
 ```javascript--Websocket
 {
-    twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
+    airspeed: Float,
+    groundspeed: Float,
+    heading: Float,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
 }
 
 
@@ -356,24 +342,21 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data_euler</br>
-* Response Type: geometry_msgs/TwistStamped
+* Name: /namespace/mavros/vfr_hud</br>
+* Response Type: mavros_msgs/VFR_HUD
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/imu/data_euler````
+* URL: ````GET http://<ip>/ros/<namespace>/mavros/vfr_hud````
 * JSON Response:
 {
-    twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
+    airspeed: Float,
+    groundspeed: Float,
+    heading: Float,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
 }
 
 
@@ -381,8 +364,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/imu/data_euler'</br>
-* messageType: 'geometry_msgs/TwistStamped'
+* name: '/namespace/mavros/vfr_hud'</br>
+* messageType: 'mavros_msgs/VFR_HUD'
 
 ### API usage information:
 

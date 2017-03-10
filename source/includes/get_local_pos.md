@@ -1,4 +1,4 @@
-# Local Position Data
+# Get Local Position Data
 
 
 > Definition
