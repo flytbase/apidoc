@@ -8,7 +8,7 @@
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/battery
-ROS-Topic Type: mavros_msgs/BatteryStatus, below is its description
+ROS-Topic Type: sensor_msgs/BatteryState, below is its description
 
 #Subscriber response : Euler angles 
 Response structure:
@@ -133,7 +133,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/mavros/battery',
-messageType: 'mavros_msgs/BatteryStatus'
+messageType: 'sensor_msgs/BatteryState'
 
 Response:
 {   voltage: Float,
@@ -228,7 +228,7 @@ $.ajax({
 var batteryData = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/mavros/battery',
-    messageType : 'mavros_msgs/BatteryStatus'
+    messageType : 'sensor_msgs/BatteryState'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -331,7 +331,7 @@ All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboar
 
 * Type: Ros Topic</br> 
 * Name: /namespace/mavros/battery</br>
-* Response Type: mavros_msgs/BatteryStatus
+* Response Type: sensor_msgs/BatteryState
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -350,7 +350,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/namespace/mavros/battery'</br>
-* messageType: 'mavros_msgs/BatteryStatus'
+* messageType: 'sensor_msgs/BatteryState'
 
 ### API usage information:
 
