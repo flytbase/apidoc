@@ -100,12 +100,37 @@ Response structure:
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/rc/in 
-</code></pre><pre class="highlight cpp tab-cpp"><code>
-</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/navigation/position_set <span class="s2">"{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"</span>
+
+<span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
+<span class="c">#default value of tolerance=1.0m if left at 0    </span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</span>
+<span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
+<span class="n">nav</span><span class="p">.</span><span class="n">position_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+<span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
 
 <span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
+</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set"</span><span class="p">);</span>
+<span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
+
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">async</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">yaw_valid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">relative</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body_frame</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
+
+<span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">RCIn</span>
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
 <span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/mavros/rc/in"</span><span class="p">),</span> <span class="n">State</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>

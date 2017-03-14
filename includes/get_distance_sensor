@@ -22,7 +22,20 @@ Response structure:
     float32 range
 
 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+</span>
+<span class="n">Function</span> <span class="n">Definition</span><span class="o">:</span> <span class="kt">int</span> <span class="n">Navigation</span><span class="o">::</span><span class="n">position_set</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="kt">float</span> <span class="n">z</span><span class="p">,</span> <span class="kt">float</span> <span class="n">yaw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">float</span> <span class="n">tolerance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">relative</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">yaw_valid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">body_frame</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">Arguments</span><span class="o">:</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="o">:</span> <span class="n">Position</span> <span class="n">Setpoint</span> <span class="n">in</span> <span class="n">NED</span><span class="o">-</span><span class="n">Frame</span> <span class="p">(</span><span class="n">in</span> <span class="n">body</span><span class="o">-</span><span class="n">frame</span> <span class="k">if</span> <span class="n">body_frame</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+    <span class="n">yaw</span><span class="o">:</span> <span class="n">Yaw</span> <span class="n">Setpoint</span> <span class="n">in</span> <span class="n">radians</span>
+    <span class="n">yaw_valid</span><span class="o">:</span> <span class="n">Must</span> <span class="n">be</span> <span class="n">set</span> <span class="n">to</span> <span class="nb">true</span><span class="p">,</span> <span class="k">if</span> <span class="n">yaw</span> <span class="n">setpoint</span> <span class="n">is</span> <span class="n">provided</span>
+    <span class="n">tolerance</span><span class="o">:</span> <span class="n">Acceptance</span> <span class="n">radius</span> <span class="n">in</span> <span class="n">meters</span><span class="p">,</span> <span class="k">default</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="n">m</span>
+    <span class="n">relative</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">position</span> <span class="n">setpoints</span> <span class="n">relative</span> <span class="n">to</span> <span class="n">current</span> <span class="n">position</span> <span class="n">is</span> <span class="n">sent</span>
+    <span class="n">async</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">asynchronous</span> <span class="n">mode</span> <span class="n">is</span> <span class="n">set</span>
+    <span class="n">body_frame</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">position</span> <span class="n">setpoints</span> <span class="n">are</span> <span class="n">relative</span> <span class="n">with</span> <span class="n">respect</span> <span class="n">to</span> <span class="n">body</span> <span class="n">frame</span>
+
+<span class="n">Returns</span><span class="o">:</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">reaches</span> <span class="n">given</span> <span class="n">setpoint</span> <span class="n">before</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="n">secs</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
 <span class="nb">NotImplemented</span>
@@ -106,10 +119,35 @@ Response structure:
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/distance_sensor/lidarlite_pub
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/navigation/position_set <span class="s2">"{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"</span>
+
+<span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
+<span class="c">#default value of tolerance=1.0m if left at 0    </span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</span>
+<span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
+<span class="n">nav</span><span class="p">.</span><span class="n">position_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+<span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+</span></code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
+</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set"</span><span class="p">);</span>
+<span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
+
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">async</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">yaw_valid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">relative</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body_frame</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
+
+<span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msgs</span> <span class="kn">import</span> <span class="n">Range</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
@@ -147,10 +185,11 @@ Response structure:
 <blockquote>
 <p>Example response</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>instance of sensor_msgs/Range
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+<pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">Range</span> <span class="nb">object</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">Range</span> <span class="nb">object</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">twist</span><span class="p">:{</span>
