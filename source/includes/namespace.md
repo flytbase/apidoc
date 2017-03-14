@@ -22,7 +22,7 @@ string message
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 std::string global_namespace
 
-//No API call required. Global namespace already available in private variable:
+//No API call required. Global namespace already available in private variable: std::string global_namespace
 ```
 
 ```python
@@ -100,7 +100,7 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```cpp
-
+//No API call required. Global namespace already available in private variable: std::string global_namespace
 ```
 
 ```python
@@ -182,7 +182,7 @@ message: Parameter Get Global Namespace Successful  flytpod
 ```
 
 ```cpp
-
+//No API call required. Global namespace already available in private variable: std::string global_namespace
 ```
 
 ```python
@@ -216,7 +216,7 @@ message: Parameter Get Global Namespace Successful	flytpod
 
 ```
 
-```javascript-Websocket
+```javascript--Websocket
 {
     success:True,
     param_info:{
