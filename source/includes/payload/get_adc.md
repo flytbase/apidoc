@@ -1,4 +1,6 @@
-# Get ADC payload
+# Payload APIs
+
+## Get ADC payload
 
 
 

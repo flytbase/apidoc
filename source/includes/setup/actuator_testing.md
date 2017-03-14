@@ -1,4 +1,5 @@
-# Module Calibration
+# Vehicle Setup APIs
+## Actuator Testing
 
 
 > Definition
@@ -6,22 +7,12 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
+ROS-Service Name: /<namespace>/setup/actuator_testing
+ROS-Service Type: core_api/ActuatorTesting, below is its description
 
-Type: Ros Service
-Name: /<namespace>/setup/module_calibration()
-MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP = 0
-    uint8 ACCELEROMETER = 1
-    uint8 GYROSCOPE = 2
-    uint8 MAGNETOMETER = 3
-    uint8 RC = 4
-    uint8 RC_TRIM = 5
-    uint8 RC_STOP = 6
-    uint8 LEVEL = 7
-    uint8 AIRSPEED = 8
-    
-    int8 module_calibrate
+ReqStructure:
+    uint8 actuator_id
+    float32 time_s
     ---
     bool success
 ```
@@ -41,47 +32,27 @@ NotImplemented
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Service
-Name: /<namespace>/setup/module_calibration()
-MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP = 0
-    uint8 ACCELEROMETER = 1
-    uint8 GYROSCOPE = 2
-    uint8 MAGNETOMETER = 3
-    uint8 RC = 4
-    uint8 RC_TRIM = 5
-    uint8 RC_STOP = 6
-    uint8 LEVEL = 7
-    uint8 AIRSPEED = 8
-    
-    int8 module_calibrate
+ROS-Service Name: /<namespace>/setup/actuator_testing
+ROS-Service Type: core_api/ActuatorTesting, below is its description
+
+ReqStructure:
+    uint8 actuator_id
+    float32 time_s
     ---
     bool success
-
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Service
-Name: /<namespace>/setup/module_calibration()
-MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP = 0
-    uint8 ACCELEROMETER = 1
-    uint8 GYROSCOPE = 2
-    uint8 MAGNETOMETER = 3
-    uint8 RC = 4
-    uint8 RC_TRIM = 5
-    uint8 RC_STOP = 6
-    uint8 LEVEL = 7
-    uint8 AIRSPEED = 8
-    
-    int8 module_calibrate
+ROS-Service Name: /<namespace>/setup/actuator_testing
+ROS-Service Type: core_api/ActuatorTesting, below is its description
+
+ReqStructure:
+    uint8 actuator_id
+    float32 time_s
     ---
     bool success
-
 ```
 
 ```javascript--REST
@@ -89,10 +60,11 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/setup/module_calibration'
+URL: 'http://<ip>/ros/<namespace>/setup/actuator_testing'
 
 JSON Request:
-{   module_calibrate: Int }
+{   actuator_id: Int,
+    time_s: Float }
 
 JSON Response:
 {   success: Boolean, }
@@ -106,11 +78,12 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/setup/module_calibration',
-serviceType: 'core_api/ModuleCalibration'
+name: '/<namespace>/setup/actuator_testing',
+serviceType: 'core_api/ActuatorTesting'
 
 Request:
-{   module_calibrate: Int }
+{   actuator_id: Int,
+    time_s: Float }
 
 Response:
 {   success: Boolean, }
@@ -122,9 +95,8 @@ Response:
 > Example
 
 ```shell
-
 // Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice
-    
+
 ```
 
 ```cpp
@@ -137,23 +109,22 @@ NotImplemented
 
 ```cpp--ros
 // Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
-
 ```
 
 ```python--ros
-
 # Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 ```
 
 ```javascript--REST
 var  msgdata={};
-msgdata["module_calibrate"]=2;
+msgdata["actuator_id"]=2;
+msgdata["time_s"]=4.00;
 
 $.ajax({
     type: "POST",
     dataType: "json",
     data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/setup/module_calibration",  
+    url: "http://<ip>/ros/<namespace>/setup/actuator_testing",  
     success: function(data){
            console.log(data.success);
     }
@@ -162,19 +133,20 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var moduleCalibration = new ROSLIB.Service({
+var actuatorTesting = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/setup/module_calibration',
-    serviceType : 'core_api/ModuleCalibration'
+    name : '/<namespace>/setup/actuator_testing',
+    serviceType : 'core_api/ActuatorTesting'
 });
 
 var request = new ROSLIB.ServiceRequest({
-    module_calibrate: Int
+    actuator_id: 2,
+    time_s: 4.00
 });
 
-moduleCalibration.callService(request, function(result) {
+actuatorTesting.callService(request, function(result) {
     console.log('Result for service call on '
-      + moduleCalibration.name
+      + actuatorTesting.name
       + ': '
       + result.success);
 });
@@ -184,7 +156,7 @@ moduleCalibration.callService(request, function(result) {
 > Example response
 
 ```shell
-
+success: true
 ```
 
 ```cpp
@@ -251,16 +223,17 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/setup/module_calibration</br>
-* Service Type: ModuleCalibration
+* Name: /namespace/setup/actuator_testing</br>
+* Service Type: ActuatorTesting
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/setup/module_calibration````
+* URL: ````POST http://<ip>/ros/<namespace>/setup/actuator_testing````
 * JSON Request:
 {
-    module_calibrate: Int
+    actuator_id: Int,
+    time_s: Float
 }
 * JSON Response:
 {
@@ -272,8 +245,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/setup/module_calibration'</br>
-* serviceType: 'core_api/ModuleCalibration'
+* name: '/namespace/setup/actuator_testing'</br>
+* serviceType: 'core_api/ActuatorTesting'
 
 
 ### API usage information:

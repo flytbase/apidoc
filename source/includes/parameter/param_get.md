@@ -1,4 +1,4 @@
-# Parameter Delete
+## Parameter Get
 
 
 > Definition
@@ -6,8 +6,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/param/param_delete
-ROS-Service Type: core_api/ParamDelete, below is its description
+ROS-Service Name: /<namespace>/param/param_get
+ROS-Service Type: core_api/ParamGet, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -47,7 +47,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_delete()
+Name: /<namespace>/param/param_get()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -62,7 +62,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_delete()
+Name: /<namespace>/param/param_get()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -79,13 +79,14 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/param/param_delete'
+URL: 'http://<ip>/ros/<namespace>/param/param_get'
 
 JSON Request:
 {   param_id: String }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    param_info:{ param_value: String } }
 
 ```
 
@@ -96,14 +97,15 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/param/param_delete',
-serviceType: 'core_api/ParamDelete'
+name: '/<namespace>/param/param_get',
+serviceType: 'core_api/ParamGet'
 
 Request:
 {   param_id: String }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    param_info:{ param_value: String } }
 
 
 ```
@@ -112,7 +114,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/param/param_delete "twist:
+rosservice call /<namespace>/param/param_get "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -144,11 +146,11 @@ NotImplemented
 ```
 
 ```cpp--ros
-#include <core_api/ParamDelete.h>
+#include <core_api/ParamGet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamDelete>("param/param_delete");
-core_api::ParamDelete srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ParamGet>("param/param_get");
+core_api::ParamGet srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -165,9 +167,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/param/param_delete')
+    rospy.wait_for_service('namespace/param/param_get')
     try:
-        handle = rospy.ServiceProxy('namespace/param/param_delete', ParamDelete)
+        handle = rospy.ServiceProxy('namespace/param/param_get', ParamGet)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -178,36 +180,36 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 
 ```javascript--REST
 var  msgdata={};
-msgdata["param_id"]='RTL_ALT;
+msgdata["param_id"]="RTL_ALT";
 
 $.ajax({
     type: "POST",
     dataType: "json",
     data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/param/param_delete",  
+    url: "http://<ip>/ros/<namespace>/param/param_get",  
     success: function(data){
-           console.log(data.success);
+           console.log(data.param_info.param_value);
     }
 };
 
 ```
 
 ```javascript--Websocket
-var paramDelete = new ROSLIB.Service({
+var paramGet = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/param/param_delete',
-    serviceType : 'core_api/ParamDelete'
+    name : '/<namespace>/param/param_get',
+    serviceType : 'core_api/ParamGet'
 });
 
 var request = new ROSLIB.ServiceRequest({
-    param_id: String
+    param_id: 'RTL_ALT'
 });
 
-paramDelete.callService(request, function(result) {
+paramGet.callService(request, function(result) {
     console.log('Result for service call on '
-      + paramDelete.name
+      + paramGet.name
       + ': '
-      + result.success);
+      + result.param_info.param_value);
 });
 ```
 
@@ -236,14 +238,16 @@ Success: True
 
 ```javascript--REST
 {
-    success:True
+    success:True,
+    param_info:{ param_value: '6.00'}
 }
 
 ```
 
 ```javascript--Websocket
 {
-    success:True
+    success:True,
+    param_info:{ param_value: '6.00'}
 }
 
 ```
@@ -282,13 +286,13 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/param/param_delete</br>
-* Service Type: ParamDelete
+* Name: /namespace/param/param_get</br>
+* Service Type: ParamGet
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/param/param_delete````
+* URL: ````POST http://<ip>/ros/<namespace>/param/param_get````
 * JSON Request:
 {
     param_id: String
@@ -296,6 +300,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * JSON Response:
 {
     success: Boolean
+    param_info:{param_value: String}
 }
 
 
@@ -303,8 +308,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/param/param_delete'</br>
-* serviceType: 'core_api/ParamDelete'
+* name: '/namespace/param/param_get'</br>
+* serviceType: 'core_api/ParamGet'
 
 
 ### API usage information:

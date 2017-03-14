@@ -1,4 +1,4 @@
-# Parameter Load
+## Parameter Get All
 
 
 > Definition
@@ -6,8 +6,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/param/param_load
-ROS-Service Type: core_api/ParamLoad, below is its description
+ROS-Service Name: /<namespace>/param/param_get_all
+ROS-Service Type: core_api/ParamGetAll, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -47,7 +47,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_load()
+Name: /<namespace>/param/param_get_all()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -62,7 +62,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_load()
+Name: /<namespace>/param/param_get_all()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -79,10 +79,13 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/param/param_load'
+URL: 'http://<ip>/ros/<namespace>/param/param_get_all'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    param_list: [{ param_id: [String],
+        param_value: [String]},{},{},...]
+}
 
 ```
 
@@ -93,11 +96,13 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/param/param_load',
-serviceType: 'core_api/ParamLoad'
+name: '/<namespace>/param/param_get_all',
+serviceType: 'core_api/ParamGetAll'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    param_list: [{ param_id: [String],
+        param_value: [String]},{},{},...] }
 
 
 ```
@@ -106,7 +111,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/param/param_load "twist:
+rosservice call /<namespace>/param/param_get_all "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -138,11 +143,11 @@ NotImplemented
 ```
 
 ```cpp--ros
-#include <core_api/ParamLoad.h>
+#include <core_api/ParamGetAll.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamLoad>("param/param_load");
-core_api::ParamLoad srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ParamGetAll>("param/param_get_all");
+core_api::ParamGetAll srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -159,9 +164,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/param/param_load')
+    rospy.wait_for_service('namespace/param/param_get_all')
     try:
-        handle = rospy.ServiceProxy('namespace/param/param_load', ParamLoad)
+        handle = rospy.ServiceProxy('namespace/param/param_get_all', ParamGetAll)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -175,28 +180,29 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/param/param_load",  
+    data: JSON.stringify(msgdata),
+    url: "http://<ip>/ros/<namespace>/param/param_get_all",  
     success: function(data){
-           console.log(data.success);
+           console.log(data.param_list);
     }
 };
 
 ```
 
 ```javascript--Websocket
-var paramLoad = new ROSLIB.Service({
+var paramGetAll = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/param/param_load',
-    serviceType : 'core_api/ParamLoad'
+    name : '/<namespace>/param/param_get_all',
+    serviceType : 'core_api/ParamGetAll'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-paramLoad.callService(request, function(result) {
+paramGetAll.callService(request, function(result) {
     console.log('Result for service call on '
-      + paramLoad.name
+      + ParamGetAll.name
       + ': '
-      + result.success);
+      + result.param_list);
 });
 ```
 
@@ -225,14 +231,16 @@ Success: True
 
 ```javascript--REST
 {
-    success:True
+    success:True,
+    param_list:[{},{},{},....]
 }
 
 ```
 
 ```javascript--Websocket
 {
-    success:True
+    success:True,
+    param_list:[{},{},{},....]    
 }
 
 ```
@@ -271,16 +279,20 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/param/param_load</br>
-* Service Type: ParamLoad
+* Name: /namespace/param/param_get_all</br>
+* Service Type: ParamGetAll
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/<namespace>/param/param_load````
+* URL: ````POST http://<ip>/ros/<namespace>/param/param_get_all````
 * JSON Response:
 {
-    success: Boolean
+    success: Boolean,
+    param_list:[{
+        param_id: String,
+        param_value: String
+    },{},{},....]
 }
 
 
@@ -288,8 +300,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/param/param_load'</br>
-* serviceType: 'core_api/ParamLoad'
+* name: '/namespace/param/param_get_all'</br>
+* serviceType: 'core_api/ParamGetAll'
 
 
 ### API usage information:

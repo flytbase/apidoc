@@ -1,4 +1,6 @@
-# Parameter Reset
+# Parameter Management APIs
+
+## Parameter Set
 
 
 > Definition
@@ -6,8 +8,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/param/param_reset
-ROS-Service Type: core_api/ParamReset, below is its description
+ROS-Service Name: /<namespace>/param/param_set
+ROS-Service Type: core_api/ParamSet, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -47,7 +49,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_reset()
+Name: /<namespace>/param/param_set()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -62,7 +64,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_reset()
+Name: /<namespace>/param/param_set()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -79,7 +81,13 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/param/param_reset'
+URL: 'http://<ip>/ros/<namespace>/param/param_set'
+
+JSON Request:
+{   param_info:{
+        param_id: String,
+        param_value: String
+}}
 
 JSON Response:
 {   success: Boolean, }
@@ -93,8 +101,13 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/param/param_reset',
-serviceType: 'core_api/ParamReset'
+name: '/<namespace>/param/param_set',
+serviceType: 'core_api/ParamSet'
+
+Request:
+{   param_info:{
+        param_id: String,
+        param_value: String }}
 
 Response:
 {   success: Boolean, }
@@ -106,7 +119,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/param/param_reset "twist:
+rosservice call /<namespace>/param/param_set "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -138,11 +151,11 @@ NotImplemented
 ```
 
 ```cpp--ros
-#include <core_api/ParamReset.h>
+#include <core_api/ParamSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamReset>("param/param_reset");
-core_api::ParamReset srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ParamSet>("param/param_set");
+core_api::ParamSet srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -159,9 +172,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/param/param_reset')
+    rospy.wait_for_service('namespace/param/param_set')
     try:
-        handle = rospy.ServiceProxy('namespace/param/param_reset', ParamReset)
+        handle = rospy.ServiceProxy('namespace/param/param_set', ParamSet)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -171,10 +184,15 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 ```
 
 ```javascript--REST
+var  msgdata={};msgdata["param_info"]={};
+msgdata.param_info["param_id"]="RTL_ALT";
+msgdata.param_info["param_value"]="5.0";
+
 $.ajax({
-    type: "GET",
+    type: "POST",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/param/param_reset",  
+    data: JSON.stringify(msgdata),
+    url: "http://<ip>/ros/<namespace>/param/param_set",  
     success: function(data){
            console.log(data.success);
     }
@@ -183,17 +201,21 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var paramReset = new ROSLIB.Service({
+var paramSet = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/param/param_reset',
-    serviceType : 'core_api/ParamReset'
+    name : '/<namespace>/param/param_set',
+    serviceType : 'core_api/ParamSet'
 });
 
-var request = new ROSLIB.ServiceRequest({});
+var request = new ROSLIB.ServiceRequest({
+    param_info:{
+        param_id: “RTL_ALT”,
+        param_value: “5.0”
+});
 
-paramReset.callService(request, function(result) {
+paramSet.callService(request, function(result) {
     console.log('Result for service call on '
-      + paramReset.name
+      + paramSet.name
       + ': '
       + result.success);
 });
@@ -270,13 +292,20 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/param/param_reset</br>
-* Service Type: ParamReset
+* Name: /namespace/param/param_set</br>
+* Service Type: ParamSet
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/<namespace>/param/param_reset````
+* URL: ````POST http://<ip>/ros/<namespace>/param/param_set````
+* JSON Request:
+{
+    param_info:{
+        param_id: [String],
+        param_value: [String]
+    }
+}
 * JSON Response:
 {
     success: Boolean
@@ -287,8 +316,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/param/param_reset'</br>
-* serviceType: 'core_api/ParamReset'
+* name: '/namespace/param/param_set'</br>
+* serviceType: 'core_api/ParamSet'
 
 
 ### API usage information:
