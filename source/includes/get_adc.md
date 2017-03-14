@@ -1,32 +1,44 @@
-# Get ADC Payload
+# Get ADC payload
+
+
 
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login. 
+# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /get_global_namespace
-ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
+ROS-Topic Name: /<namespace>/mavros/payload_adc
+ROS-Topic Type: mavros_msgs/PayloadADC
 
-#Request : None
+Response structure:
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    float32[2] adc_voltage
+    uint8 adc_updated
 
-#Response : Paramter info
-core_api/ParamInfo param_info
-#Response : success=true if parameter get was successfull.
-bool success
-#Response : Returns error message/success message if any.
-string message
 ```
 
 ```cpp
-// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
-std::string global_namespace
+// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-//No API call required. Global namespace already available in private variable:
+Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+
+Arguments:
+    x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    yaw: Yaw Setpoint in radians
+    yaw_valid: Must be set to true, if yaw setpoint is provided
+    tolerance: Acceptance radius in meters, default value=1.0m
+    relative: If true, position setpoints relative to current position is sent
+    async: If true, asynchronous mode is set
+    body_frame: If true, position setpoints are relative with respect to body frame
+
+Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
 NotImplemented
 ```
@@ -34,22 +46,34 @@ NotImplemented
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Service
-Name: /get_global_namespace()
-call srv: NULL
-response srv: 
-    :bool success
-    :core_api/ParamInfo param_info
-    :string message
+ROS-Topic Name: /<namespace>/mavros/payload_adc
+ROS-Topic Type: mavros_msgs/PayloadADC
+
+Response structure:
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    float32[2] adc_voltage
+    uint8 adc_updated
+
+
+
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Service
-Name: /get_global_namespce()
-response srv: ParamGetGlobalNamespace
+ROS-Topic Name: /<namespace>/mavros/payload_adc
+ROS-Topic Type: mavros_msgs/PayloadADC
 
+Response structure:
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    float32[2] adc_voltage
+    uint8 adc_updated
 ```
 
 ```javascript--REST
@@ -57,15 +81,19 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: ' <ip>/ros/get_global_namespace'
+URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
 
 JSON Response:
-	{
-		success: Boolean,
-		param_info:{
-			param_value: String
-		}
-	}
+{  twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}}
 
 ```
 
@@ -76,107 +104,117 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/get_global_namespace',
-serviceType: 'core_api/ParamGetGlobalNamespace'
+name: '/<namespace>/mavros/imu/data_euler',
+messageType: 'geometry_msgs/TwistStamped'
 
 Response:
-{   success: Boolean,
-    param_info:{
-            param_value: String
-        }
-}
-
+{   twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}}
 
 ```
 
 
-> Example API call
+> Example
 
 ```shell
-rosservice call /get_global_namespace "{}"
+rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
+
+#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
+#default value of tolerance=1.0m if left at 0    
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
+//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
-# create flyt_python navigation class instance
-
 NotImplemented
-
 ```
 
 ```cpp--ros
-#include <core_api/ParamGetGlobalNamespace.h>
+#include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamGetGlobalNamespace>("navigation/get_global_namespace");
-core_api::ParamGetGlobalNamespace srv;
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+core_api::PositionSet srv;
+
+srv.request.twist.twist.angular.z = 0.12;
+srv.request.twist.twist.linear.x = 1.0;
+srv.request.twist.twist.linear.y = 3.5;
+srv.request.twist.twist.linear.z = -5.0;
+srv.request.tolerance = 5.0;
+srv.request.async = false;
+srv.request.yaw_valid = true;
+srv.request.relative = false;
+srv.request.body_frame = false;
 client.call(srv);
-std::string param_id = srv.response.param_info.param_id;
-std::string param_value = srv.response.param_info.param_value;
-bool success = srv.response.success;
-std::string = srv.response.message;
+success = srv.response.success;
+
+//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python--ros
-def get_global_namespace():
-    rospy.wait_for_service('/get_global_namespace')
-    try:
-        res = rospy.ServiceProxy('/get_global_namespace', ParamGetGlobalNamespace)
-        op = res()
-        return str(op.param_info.param_value)
-    except rospy.ServiceException, e:
-        rospy.logerr("global namespace service not available", e)
-        return None
+from mavros_msgs.msgs import PayloadADC
+# setup a subscriber and associate a callback function which will be called every time topic is updated.
+topic_sub = rospy.Subscriber("/namespace/mavros/payload_adc"), PayloadADC, topic_callback)
 
+# define the callback function which will print the values every time topic is updated
+def topic_callback(data):
+    adc1,adc2 = data.adc_voltage[0],data.adc_voltage[1]
+    print adc1, adc2
+
+# unsubscribe from a topic
+topic_sub.unregister()  # unregister topic subscription
 ```
 
-
 ```javascript--REST
-	$.ajax({
-	    type: "GET",
-	    dataType: "json",
-	    url: "http://<ip>/ros/get_global_namespace",   
-	    success: function(data){
-	        console.log(data.param_info.param_value);
-	    }
-	});
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
+    success: function(data){
+           console.log(data);
+    }
+};
 
 
 ```
 
 ```javascript--Websocket
-var namespace = new ROSLIB.Service({
+var imuEulerData = new ROSLIB.Service({
     ros : ros,
-    name : '/get_global_namespace',
-    serviceType : 'core_api/ParamGetGlobalNamespace'
+    name : '/<namespace>/mavros/imu/data_euler',
+    messageType : 'geometry_msgs/TwistStamped'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-namespace.callService(request, function(result) {
-    console.log('Result for service call on '
-      + namespace.name
-      + ': '
-      + result.param_info.param_value);
+imuEulerData.subscribe(request, function(result) {
+    console.log(result.data);
 });
 ```
 
 
-> Example API Response
+> Example response
 
 ```shell
-param_info: 
-  param_id: global_namespace
-  param_value: flytpod
-success: True
-message: Parameter Get Global Namespace Successful  flytpod
+success: true
 ```
 
 ```cpp
-
+0
 ```
 
 ```python
@@ -184,74 +222,85 @@ NotImplemented
 ```
 
 ```cpp--ros
-std::string param_id = srv.response.param_info.param_id;
-std::string param_value = srv.response.param_info.param_value;
-bool success = srv.response.success;
-std::string = srv.response.message;
+success: True
 ```
 
 ```python--ros
-Response object with following structure.
-param_info: 
-  param_id: global_namespace
-  param_value: flytpod
-success: True
-message: Parameter Get Global Namespace Successful	flytpod
-```
+instance of mavros_msgs.msgs.PayloadADC object
 
+```
 
 ```javascript--REST
 {
-	success:True,
-	param_info:{
-		param_value:'flytpod'
-	}
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
 
 ```
 
-```javascript-Websocket
+```javascript--Websocket
 {
-    success:True,
-    param_info:{
-        param_value:'flytpod'
-    }
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
+
+
 ```
-
-
 
 
 
 ###Description:
 
-This API subscribes/polls to ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.
+This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.
 
 ###Parameters:
     
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Output:
+    Response:
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    namespace | string | global namespace name
-
+    adc_voltage | array (2*1) of floats | array of adc voltage readings in volts.
+    adc_updated | uint8 | Bitmask indicating updated channel. possible values: [0,1,2,3]
+    
+    
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Service</br> 
-* Name: /get_global_namespace</br>
-* Service Type: ParamGetGlobalNamespace
+* Type: Ros Topic</br> 
+* Name: /namespace/mavros/payload_adc</br>
+* Response Type: mavros_msgs/PayloadADC
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/get_global_namespace````
+* URL: ````GET http://<ip>/ros/<namespace>/mavros/imu/data_euler````
 * JSON Response:
 {
-    success: Boolean,
-    param_info:{param_value: String}
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
 
 
@@ -259,12 +308,11 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/get_global_namespace'</br>
-* serviceType: 'core_api/ParamGetGlobalNamespace'
-
+* name: '/namespace/mavros/vfr_hud'</br>
+* messageType: 'mavros_msgs/VFR_HUD'
 
 ### API usage information:
 
-* This API is useful on FlytPOD only. 
-* There are two ADC ports available on back IO panel of FlytPOD. Read hardware connections section in FlytPOD documentation for more info on wiring.
-* ADC allowed range is 0 to 3.3 V.
+* This API works only on FlytPOD.  
+* There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.
+* ADC channel operational input voltage range is 0 to 3.3 V.
