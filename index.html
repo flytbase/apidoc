@@ -3511,7 +3511,7 @@ wp_transfered: 0
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+<p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Arguments:</p>
 
@@ -3523,39 +3523,59 @@ wp_transfered: 0
 </tr>
 </thead><tbody>
 <tr>
-<td>x, y, z</td>
+<td>frame</td>
+<td>int</td>
+<td>The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt</td>
+</tr>
+<tr>
+<td>command</td>
+<td>int</td>
+<td>defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19:Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off</td>
+</tr>
+<tr>
+<td>is_current</td>
+<td>bool</td>
+<td>Set it as the first waypoint</td>
+</tr>
+<tr>
+<td>autocontinue</td>
+<td>bool</td>
+<td>continue to the next waypoint as soon as the current waypoint is achieved</td>
+</tr>
+<tr>
+<td>param1</td>
 <td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
+<td>Time to stay at the location in sec.</td>
 </tr>
 <tr>
-<td>yaw</td>
+<td>param2</td>
 <td>float</td>
-<td>Yaw Setpoint in radians</td>
+<td>radius around the waypoint within which the waypoint is marked as done</td>
 </tr>
 <tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
+<td>param3</td>
 <td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
+<td>Orbit radius in meters</td>
 </tr>
 <tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
+<td>param4</td>
+<td>float</td>
+<td>Yaw/direction in degrees</td>
 </tr>
 <tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
+<td>x_lat</td>
+<td>float</td>
+<td>Latitude</td>
 </tr>
 <tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>y_long</td>
+<td>float</td>
+<td>Longitude</td>
+</tr>
+<tr>
+<td>z_alt</td>
+<td>float</td>
+<td>Relative altitude</td>
 </tr>
 </tbody></table>
 
@@ -3622,14 +3642,6 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>name: &lsquo;/namespace/navigation/waypoint_set&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/WaypointSet&rsquo;</li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
-
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
 
           <h2 id="execute-waypoints">Execute Waypoints</h2>
 
@@ -3742,55 +3754,7 @@ bool success
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
-
-<p>Arguments:</p>
-
-<table><thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>x, y, z</td>
-<td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
-</tr>
-<tr>
-<td>yaw</td>
-<td>float</td>
-<td>Yaw Setpoint in radians</td>
-</tr>
-<tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
-</tr>
-</tbody></table>
-
-<p>Output:</p>
+<p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <table><thead>
 <tr>
@@ -3840,11 +3804,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <h3 id="api-usage-information">API usage information:</h3>
 
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
-
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
+<p>Note: Make sure you have a list of waypoints already set using set_waypoints API before you give it execute_waypoint API call.</p>
 
           <h2 id="clear-waypoints">Clear Waypoints</h2>
 
@@ -3966,55 +3926,7 @@ bool success
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
-
-<p>Arguments:</p>
-
-<table><thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>x, y, z</td>
-<td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
-</tr>
-<tr>
-<td>yaw</td>
-<td>float</td>
-<td>Yaw Setpoint in radians</td>
-</tr>
-<tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
-</tr>
-</tbody></table>
-
-<p>Output:</p>
+<p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <table><thead>
 <tr>
@@ -4061,14 +3973,6 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>name: &lsquo;/namespace/navigation/waypoint_clear&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/WaypointClear&rsquo;</li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
-
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
 
           <h2 id="pause-waypoints">Pause Waypoints</h2>
 
@@ -4181,53 +4085,7 @@ bool success
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
-
-<p>Arguments:</p>
-
-<table><thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>x, y, z</td>
-<td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
-</tr>
-<tr>
-<td>yaw</td>
-<td>float</td>
-<td>Yaw Setpoint in radians</td>
-</tr>
-<tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
-</tr>
-</tbody></table>
+<p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Output:</p>
 
@@ -4276,14 +4134,6 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>name: &lsquo;/namespace/navigation/waypoint_pause&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/WaypointPause&rsquo;</li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
-
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
 
           <h2 id="set-home">Set Home</h2>
 
@@ -4462,39 +4312,14 @@ bool success
 </tr>
 </thead><tbody>
 <tr>
-<td>x, y, z</td>
+<td>lat,long,alt</td>
 <td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
+<td>Latitude, longitude and relative altitude</td>
 </tr>
 <tr>
-<td>yaw</td>
-<td>float</td>
-<td>Yaw Setpoint in radians</td>
-</tr>
-<tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>set_current</td>
+<td>boolean</td>
+<td>if true uses current location and altitude of the device else uses the provided values.</td>
 </tr>
 </tbody></table>
 
@@ -4552,14 +4377,6 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>name: &lsquo;/namespace/navigation/set_home&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/SetHome&rsquo;</li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
-
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
 
           <h2 id="set-current-waypoint">Set Current Waypoint</h2>
 
@@ -4679,8 +4496,7 @@ bool success
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
+<p>Sets the waypoint Id specified, as the current waypoint from the list of already set wayopints.</p>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -4696,39 +4512,9 @@ This command commands the vehicle to go to a specified location and hover. It ov
 </tr>
 </thead><tbody>
 <tr>
-<td>x, y, z</td>
-<td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
-</tr>
-<tr>
-<td>yaw</td>
-<td>float</td>
-<td>Yaw Setpoint in radians</td>
-</tr>
-<tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>wp_seq</td>
+<td>int</td>
+<td>Id of the waypoint fro  the list of set waypoints.</td>
 </tr>
 </tbody></table>
 
@@ -4786,11 +4572,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <h3 id="api-usage-information">API usage information:</h3>
 
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
-
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
+<p>Note: Make sure you already have a waypoint list set beforehand executing this API for it to work.</p>
 
           <h1 id="telemetry-apis">Telemetry APIs</h1>
 
