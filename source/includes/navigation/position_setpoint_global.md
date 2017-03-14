@@ -1,4 +1,4 @@
-# Global Position Setpoint
+## Global Position Setpoint
 
 
 > Definition

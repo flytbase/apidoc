@@ -1,4 +1,4 @@
-# Position Hold
+## Take Off
 
 
 > Definition
@@ -6,23 +6,25 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/position_hold
-ROS-Service Type: core_api/PositionHold, below is its description
+ROS-Service Name: /<namespace>/navigation/takeoff
+ROS-Service Type: core_api/TakeOff, below is its description
 
-#Request : NULL
+#Request : expects take off altitude in metres
+float32 takeoff_alt
 
-#Response : return success=true if command sent successfully to autopilot
+#Response : returns success=true if takeoff altitude is reached
 bool success
 ```
 
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition:     int Navigation::position_hold()
+Function Definition:  int Navigation::take_off(float takeoff_alt = 5.0)
 
-Arguments: None
+Arguments: 
+    takeoff_alt: TakeOff Altitude in meters with default value of 5.0
 
-Returns:    returns 0 if the command is successfully sent to the vehicle
+Returns: 0 if the vehicle reaches takeoff_alt before timeout=30sec, else returns 1.
 ```
 
 ```python
@@ -30,15 +32,16 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 
 Class: flyt_python.api.navigation
 
-Function: position_hold():
+Function: take_off(self, takeoff_alt=5.0):
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_hold()
-call srv: NULL
+Name: /<namespace>/navigation/takeoff()
+call srv: 
+    : int takeoff_alt
 response srv: bool success
 ```
 
@@ -46,19 +49,22 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_hold()
-call srv: NULL
+Name: /<namespace>/navigation/takeoff()
+call srv: 
+    : int takeoff_alt
 response srv: bool success
 
 ```
 
 ```javascript--REST
-This is a REST call for the API to halt and hover at 
-current location. Make sure to replace 
+This is a REST call for the API to takeoff. Make sure to replace 
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/position_hold'
+URL: 'http://<ip>/ros/<namespace>/navigation/take_off'
+
+JSON Request:
+{   takeoff_alt: Float }
 
 JSON Response:
 {   success: Boolean, }
@@ -66,15 +72,17 @@ JSON Response:
 ```
 
 ```javascript--Websocket
-This is a Websocket call for the API to halt and 
-hover at current location. Make sure you 
+This is a Websocket call for the API to takeoff. Make sure you 
 initialise the websocket using websocket initialisng 
 API and and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/position_hold',
-serviceType: 'core_api/PositionHold'
+name: '/<namespace>/navigation/take_off',
+serviceType: 'core_api/TakeOff'
+
+Request:
+{   takeoff_alt: Float }
 
 Response:
 {   success: Boolean, }
@@ -86,14 +94,14 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/position_hold "{}"
+rosservice call /flytpod/navigation/take_off "takeoff_alt: 3.0"
 ```
 
 ```cpp
 #include <core_script_bridge/navigation_bridge.h>
 
 Navigation nav;
-nav.position_hold();
+nav.take_off(3.0);
 ```
 
 ```python
@@ -103,27 +111,28 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# hold position
-drone.position_hold()
-
+# takeoff over current location 
+drone.take_off(6.0)
 ```
 
 ```cpp--ros
-#include <core_api/PositionHold.h>
+#include <core_api/TakeOff.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionHold>("navigation/position_hold");
-core_api::PositionHold srv;
+ros::ServiceClient client = nh.serviceClient<core_api::TakeOff>("navigation/takeoff");
+core_api::TakeOff srv;
+
+srv.request.takeoff_alt = 3.0;
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-def position_hold():
-    rospy.wait_for_service('namespace/navigation/position_hold')
+def takeoff(height)
+    rospy.wait_for_service('namespace/navigation/take_off')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_hold', PositionHold)
-        resp = handle()
+        handle = rospy.ServiceProxy('namespace/navigation/take_off', TakeOff)
+        resp = handle(takeoff_alt=height)
         return resp
     except rospy.ServiceException, e:
         rospy.logerr("service call failed %s", e)
@@ -131,11 +140,14 @@ def position_hold():
 ```
 
 ```javascript--REST
+var  msgdata={};
+msgdata["takeoff_alt"]=5.00;
 
 $.ajax({
-    type: "GET",
+    type: "POST",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/navigation/position_hold",  
+    data: JSON.stringify(msgdata),
+    url: "http://<ip>/ros/<namespace>/navigation/take_off",  
     success: function(data){
            console.log(data.success);
     }
@@ -144,17 +156,19 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var positionHold = new ROSLIB.Service({
+var takeoff = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/position_hold',
-    serviceType : 'core_api/PositionHold'
+    name : '/<namespace>/navigation/take_off',
+    serviceType : 'core_api/TakeOff'
 });
 
-var request = new ROSLIB.ServiceRequest({});
+var request = new ROSLIB.ServiceRequest({
+    takeoff_alt: 5.00
+});
 
-positionHold.callService(request, function(result) {
+takeoff.callService(request, function(result) {
     console.log('Result for service call on '
-      + positionHold.name
+      + takeoff.name
       + ': '
       + result.success);
 });
@@ -203,14 +217,17 @@ Success: True
 
 ###Description:
 
-Position hold / hover / loiter at current position.  
+Takeoff and reach to specified height from current location.
 
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Arguments: None
+    Arguments:
     
+    Argument | Type | Description
+    -------------- | -------------- | --------------
+    takeoff_alt | float32 | takeoff to given height at current location. (minimum 3 meters)
     Output:
     
     Parameter | type | Description
@@ -221,13 +238,17 @@ Position hold / hover / loiter at current position.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_hold</br>
-* Service Type: core_api/PositionHold
+* Name: /namespace/navigation/takeoff</br>
+* Service Type: core_api/TakeOff
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/<namespace>/navigation/position_hold````
+* URL: ````POST http://<ip>/ros/<namespace>/navigation/take_off````
+* JSON Request:
+{
+    takeoff_alt: Float
+}
 * JSON Response:
 {
     success: Boolean
@@ -238,15 +259,18 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_hold'</br>
-* serviceType: 'core_api/PositionHold'
+* name: '/namespace/navigation/take_off'</br>
+* serviceType: 'core_api/TakeOff'
 
 
 ### API usage information:
 
-This API can be used to stop the vehicle at current location. 
+Takeoff to specified height from current height at current location.
 
-* This API requires vehicle to be in OFFBOARD / API_CTL mode.
-* Thia API will override current mission / navigation commmands. 
-* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
-* Vehicle may take few seconds to come to rest depending on current linear velocity.
+* takeoff_alt value should be positive. 
+* Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.
+* Takeoff API will automatically arm the motors. 
+* Takeoff API will work only in OFFBOARD/API_CTL mode.
+* Minimum value of takeoff_alt argument is 3.0 meters.
+* Takeoff API is always synchronous. 
+* It is recommended not to send any other navigation commands while takeoff is under way.

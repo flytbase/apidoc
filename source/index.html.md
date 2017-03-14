@@ -13,15 +13,15 @@ language_tabs:
 
 includes:
   - namespace
-  - arm
-  - disarm
-  - takeoff
-  - land
-  - position_hold
-  - position_setpoint
-  - position_setpoint_global
-  - velocity_setpoint
-  - execute_script
+  - navigation/arm
+  - navigation/disarm
+  - navigation/takeoff
+  - navigation/land
+  - navigation/position_hold
+  - navigation/position_setpoint
+  - navigation/position_setpoint_global
+  - navigation/velocity_setpoint
+  - navigation/execute_script
   - get_attitude_quat
   - get_attitude_euler
   - get_local_pos
@@ -35,13 +35,13 @@ includes:
   - actuator_testing
   - esc_calibration
   - module_calibration
-  - get_waypoints
-  - set_waypoints
-  - execute_waypoints
-  - clear_waypoints
-  - pause_waypoints
-  - set_home
-  - set_current_waypoint
+  - navigation/get_waypoints
+  - navigation/set_waypoints
+  - navigation/execute_waypoints
+  - navigation/clear_waypoints
+  - navigation/pause_waypoints
+  - navigation/set_home
+  - navigation/set_current_waypoint
   - param_set
   - param_get_all
   - param_get

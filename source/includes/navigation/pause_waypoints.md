@@ -1,4 +1,4 @@
-# Set Home
+## Pause Waypoints
 
 
 > Definition
@@ -6,22 +6,35 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/set_home
-ROS-Service Type: core_api/SetHome, below is its description
+ROS-Service Name: /<namespace>/navigation/waypoint_pause
+ROS-Service Type: core_api/WaypointPause, below is its description
 
-#Request : Expects home position to be set by specifying Latitude, Longitude and altitude
-#Request: If set_current is true, the current location of craft is set as home position
-float64 lat
-float64 lon
-float64 alt
-bool set_current
+#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
+#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
+geometry_msgs/TwistStamped twist
+float32 tolerance
+bool async
+bool relative
+bool yaw_valid
+bool body_frame
 
-#Response : success=true if service called successfully 
+#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
 bool success
 ```
 
 ```cpp
-No CPP API available.
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
+
+Function Definition: int Navigation::waypoint_pause(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Arguments:
+    :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    :param yaw: Yaw Setpoint in radians
+    :param yaw_valid: Must be set to true, if yaw setpoint is provided
+    :param tolerance: Acceptance radius in meters, default value=1.0m
+    :param relative: If true, position setpoints relative to current position is sent
+    :param async: If true, asynchronous mode is set
+    :param body_frame: If true, position setpoints are relative with respect to body frame
+    :return: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
 ```
 
 ```python
@@ -34,12 +47,14 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/set_home()
+Name: /<namespace>/navigation/waypoint_pause()
 call srv:
-    :float64 lat
-    :float64 lon
-    :float64 alt
-    :bool set_current
+    :geometry_msgs/TwistStamped twist
+    :float32 tolerance
+    :bool async
+    :bool relative
+    :bool yaw_valid
+    :bool body_frame
 response srv: bool success
 ```
 
@@ -47,7 +62,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/set_home()
+Name: /<namespace>/navigation/waypoint_pause()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -64,13 +79,7 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/set_home'
-
-JSON Request:
-{   lat: Float,
-    lon: Float,
-    alt: Float,
-    set_current : Boolean }
+URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_pause'
 
 JSON Response:
 {   success: Boolean, }
@@ -84,14 +93,8 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/set_home',
-serviceType: 'core_api/SetHome'
-
-Request:
-{   lat: Float,
-    lon: Float,
-    alt: Float,
-    set_current : Boolean }
+name: '/<namespace>/navigation/waypoint_pause',
+serviceType: 'core_api/WaypointPause'
 
 Response:
 {   success: Boolean, }
@@ -103,36 +106,62 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytsim/navigation/set_home "{lat: 73.25564541, lon: 18.2165632, alt: 2.0, set_current: false}"  
+rosservice call /<namespace>/navigation/waypoint_pause "twist:
+  header:
+    seq: 0
+    stamp: {secs: 0, nsecs: 0}
+    frame_id: ''
+  twist:
+    linear: {x: 1.0, y: 3.5, z: -5.0}
+    angular: {x: 0.0, y: 0.0, z: 0.5}
+tolerance: 0.0
+async: false
+relative: false
+yaw_valid: true
+body_frame: false"
+
+#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
+#default value of tolerance=1.0m if left at 0    
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
+
+Navigation nav;
+nav.waypoint_pause(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
+#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
 NotImplemented
+
 ```
 
 ```cpp--ros
-#include <core_api/SetHome.h>
+#include <core_api/WaypointPause.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("navigation/set_home");
-core_api::SetHome srv;
+ros::ServiceClient client = nh.serviceClient<core_api::WaypointPause>("navigation/waypoint_pause");
+core_api::WaypointPause srv;
 
-srv.request.lat = 73.25564541;
-srv.request.lon = 18.2165632;
-srv.request.alt = 2.00;
-srv.request.set_current = false;
+srv.request.twist.twist.angular.z = 0.5;
+srv.request.twist.twist.linear.x = 4,0;
+srv.request.twist.twist.linear.y = 3.0;
+srv.request.twist.twist.linear.z = 5.0;
+srv.request.tolerance = 2.0;
+srv.request.async = true;
+srv.request.yaw_valid = true;
+srv.request.relative = false;
+srv.request.body_frame = false;
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/set_home')
+    rospy.wait_for_service('namespace/navigation/waypoint_pause')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/set_home', SetHome)
+        handle = rospy.ServiceProxy('namespace/navigation/waypoint_pause', WaypointPause)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -142,18 +171,11 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 ```
 
 ```javascript--REST
-var  msgdata={};
-msgdata["lat"]=73.25564541;
-msgdata["lon"]=18.36155;
-msgdata["alt"]=2.00;
-msgdata["set_current"]=true;
-
 
 $.ajax({
-    type: "POST",
+    type: "GET",
     dataType: "json",
-    data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/navigation/set_home",  
+    url: "http://<ip>/ros/<namespace>/navigation/waypoint_pause",  
     success: function(data){
            console.log(data.success);
     }
@@ -162,22 +184,17 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var setHome = new ROSLIB.Service({
+var waypointPause = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/set_home',
-    serviceType : 'core_api/SetHome'
+    name : '/<namespace>/navigation/waypoint_pause',
+    serviceType : 'core_api/WaypointPause'
 });
 
-var request = new ROSLIB.ServiceRequest({
-    lat: 73.12516255,
-    lon: 18.2165632,
-    alt: 2.00,
-    set_current : True 
-});
+var request = new ROSLIB.ServiceRequest({});
 
-setHome.callService(request, function(result) {
+waypointPause.callService(request, function(result) {
     console.log('Result for service call on '
-      + setHome.name
+      + waypointPause.name
       + ': '
       + result.success);
 });
@@ -191,6 +208,7 @@ success: true
 ```
 
 ```cpp
+0
 ```
 
 ```python
@@ -225,8 +243,7 @@ Success: True
 
 ###Description:
 
-Manually store a location as new home.
-
+This API pauses ongoing waypoint mission.
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -253,20 +270,13 @@ Manually store a location as new home.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/set_home</br>
-* Service Type: SetHome
+* Name: /namespace/navigation/waypoint_pause</br>
+* Service Type: WaypointPause
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/set_home````
-* JSON Request:
-{
-    lat: Float,
-    lon: Float,
-    alt: Float,
-    set_current : Boolean 
-}
+* URL: ````GET http://<ip>/ros/<namespace>/navigation/waypoint_pause````
 * JSON Response:
 {
     success: Boolean
@@ -277,8 +287,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/set_home'</br>
-* serviceType: 'core_api/SetHome'
+* name: '/namespace/navigation/waypoint_pause'</br>
+* serviceType: 'core_api/WaypointPause'
 
 
 ### API usage information:

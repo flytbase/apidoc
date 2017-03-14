@@ -1,4 +1,4 @@
-# Set Current Waypoint
+## Execute Waypoints
 
 
 > Definition
@@ -6,8 +6,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/waypoint_set_current
-ROS-Service Type: core_api/WaypointSetCurrent, below is its description
+ROS-Service Name: /<namespace>/navigation/position_set
+ROS-Service Type: core_api/PositionSet, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -23,9 +23,9 @@ bool success
 ```
 
 ```cpp
-// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: int Navigation::waypoint_set_current(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 Arguments:
     :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
     :param yaw: Yaw Setpoint in radians
@@ -38,7 +38,7 @@ Arguments:
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
 NotImplemented
 ```
@@ -47,7 +47,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_set_current()
+Name: /<namespace>/navigation/position_set()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -62,7 +62,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_set_current()
+Name: /<namespace>/navigation/position_set()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -79,10 +79,7 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_set_current'
-
-JSON Request:
-{   wp_seq: Int }
+URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_execute'
 
 JSON Response:
 {   success: Boolean, }
@@ -96,11 +93,8 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/waypoint_set_current',
-serviceType: 'core_api/WaypointSetCurrent'
-
-Request:
-{   wp_seq: Int }
+name: '/<namespace>/navigation/waypoint_execute',
+serviceType: 'core_api/WaypointExecute'
 
 Response:
 {   success: Boolean, }
@@ -112,7 +106,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/waypoint_set_current "twist:
+rosservice call /<namespace>/navigation/position_set "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -134,7 +128,7 @@ body_frame: false"
 #include <core_script_bridge/navigation_bridge.h>
 
 Navigation nav;
-nav.waypoint_set_current(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
+nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 #sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
@@ -144,11 +138,11 @@ NotImplemented
 ```
 
 ```cpp--ros
-#include <core_api/WaypointSetCurrent.h>
+#include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::WaypointSetCurrent>("navigation/waypoint_set_current");
-core_api::WaypointSetCurrent srv;
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -165,9 +159,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/waypoint_set_current')
+    rospy.wait_for_service('namespace/navigation/position_set')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/waypoint_set_current', WaypointSetCurrent)
+        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -177,14 +171,11 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 ```
 
 ```javascript--REST
-var  msgdata={};
-msgdata["wp_seq"]=2;
 
 $.ajax({
-    type: "POST",
+    type: "GET",
     dataType: "json",
-    data: JSON.stringify(msgdata),
-    url: "http://<ip>/ros/<namespace>/navigation/waypoint_set_current",  
+    url: "http://<ip>/ros/<namespace>/navigation/waypoint_execute",  
     success: function(data){
            console.log(data.success);
     }
@@ -193,19 +184,17 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var waypointSetCurrent = new ROSLIB.Service({
+var waypointExecute = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/waypoint_set_current',
-    serviceType : 'core_api/WaypointSetCurrent'
+    name : '/<namespace>/navigation/waypoint_execute',
+    serviceType : 'core_api/WaypointExecute'
 });
 
-var request = new ROSLIB.ServiceRequest({
-    wp_seq: 2
-});
+var request = new ROSLIB.ServiceRequest({});
 
-waypointSetCurrent.callService(request, function(result) {
+waypointExecute.callService(request, function(result) {
     console.log('Result for service call on '
-      +waypointSetCurrent.name
+      + waypointExecute.name
       + ': '
       + result.success);
 });
@@ -253,12 +242,12 @@ Success: True
 
 
 ###Description:
-This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+
+Exectute / resume current list of waypoints.
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -282,17 +271,13 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/waypoint_set_current</br>
-* Service Type: WaypointSetCurrent
+* Name: /namespace/navigation/position_set</br>
+* Service Type: PositionSet
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/waypoint_set_current````
-* JSON Request:
-{
-    wp_seq: Int
-}
+* URL: ````GET http://<ip>/ros/<namespace>/navigation/waypoint_execute````
 * JSON Response:
 {
     success: Boolean
@@ -303,8 +288,8 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/waypoint_set_current'</br>
-* serviceType: 'core_api/WaypointSetCurrent'
+* name: '/namespace/navigation/waypoint_execute'</br>
+* serviceType: 'core_api/WaypointExecute'
 
 
 ### API usage information:

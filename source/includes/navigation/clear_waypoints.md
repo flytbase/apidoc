@@ -1,4 +1,4 @@
-# Get Waypoints
+## Clear Waypoints
 
 
 > Definition
@@ -6,8 +6,8 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Service Name: /<namespace>/navigation/position_set
-ROS-Service Type: core_api/PositionSet, below is its description
+ROS-Service Name: /<namespace>/navigation/waypoint_clear
+ROS-Service Type: core_api/WaypointClear, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -25,7 +25,7 @@ bool success
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: int Navigation::waypoint_clear(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 Arguments:
     :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
     :param yaw: Yaw Setpoint in radians
@@ -47,7 +47,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/waypoint_clear()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -62,7 +62,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/waypoint_clear()
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -79,24 +79,10 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_get'
+URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_clear'
 
 JSON Response:
-{   success: Boolean, 
-    wp_recieved: Int,
-    waypoints: [{
-        frame: Int 0/1/2/3/4,
-        command:Int 16/17/18/19/20/21/22,
-        is_current: Boolean,
-        autocontinue: Boolean,
-        param1: Float,
-        param2: Float,
-        param3: Float,
-        param4: Float,
-        x_lat: Float,
-        y_long: Float,
-        z_alt: Float},{},{}...]
-}
+{   success: Boolean, }
 
 ```
 
@@ -107,24 +93,11 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/navigation/waypoint_get',
-serviceType: 'core_api/WaypointGet'
+name: '/<namespace>/navigation/waypoint_clear',
+serviceType: 'core_api/WaypointClear'
 
 Response:
-{   success: Boolean, 
-    wp_recieved: Int,
-    waypoints: [{
-        frame: Int 0/1/2/3/4,
-        command:Int 16/17/18/19/20/21/22,
-        is_current: Boolean,
-        autocontinue: Boolean,
-        param1: Float,
-        param2: Float,
-        param3: Float,
-        param4: Float,
-        x_lat: Float,
-        y_long: Float,
-        z_alt: Float},{},{}...] }
+{   success: Boolean, }
 
 
 ```
@@ -133,7 +106,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/navigation/position_set "twist:
+rosservice call /<namespace>/navigation/waypoint_clear "twist:
   header:
     seq: 0
     stamp: {secs: 0, nsecs: 0}
@@ -155,22 +128,21 @@ body_frame: false"
 #include <core_script_bridge/navigation_bridge.h>
 
 Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
+nav.waypoint_clear(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 #sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
-
 NotImplemented
 
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <core_api/WaypointClear.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::WaypointClear>("navigation/waypoint_clear");
+core_api::WaypointClear srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -187,9 +159,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
+    rospy.wait_for_service('namespace/navigation/waypoint_clear')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
+        handle = rospy.ServiceProxy('namespace/navigation/waypoint_clear', WaypointClear)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -203,26 +175,26 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, rela
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/navigation/waypoint_get",  
+    url: "http://<ip>/ros/<namespace>/navigation/waypoint_clear",  
     success: function(data){
-           console.log(data.waypoints);
+           console.log(data.success);
     }
 };
 
 ```
 
 ```javascript--Websocket
-var waypointGet = new ROSLIB.Service({
+var waypointClear = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/navigation/waypoint_get',
-    serviceType : 'core_api/WaypointGet'
+    name : '/<namespace>/navigation/waypoint_clear',
+    serviceType : 'core_api/WaypointClear'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-waypointGet.callService(request, function(result) {
+waypointClear.callService(request, function(result) {
     console.log('Result for service call on '
-      + waypointGet.name
+      + waypointClear.name
       + ': '
       + result.success);
 });
@@ -253,40 +225,14 @@ Success: True
 
 ```javascript--REST
 {
-    success: True, 
-    wp_recieved: 2,
-    waypoints: [{
-        frame: 3,
-        command:Int 16,
-        is_current: true,
-        autocontinue: true,
-        param1: 6.0,
-        param2: 7.0,
-        param3: 0.0,
-        param4: 0.0,
-        x_lat: 65.425532,
-        y_long: 18.542422,
-        z_alt: 25},{}]
+    success:True
 }
 
 ```
 
 ```javascript--Websocket
 {
-    success: True, 
-    wp_recieved: 2,
-    waypoints: [{
-        frame: 3,
-        command:Int 16,
-        is_current: true,
-        autocontinue: true,
-        param1: 6.0,
-        param2: 7.0,
-        param3: 0.0,
-        param4: 0.0,
-        x_lat: 65.425532,
-        y_long: 18.542422,
-        z_alt: 25},{}]
+    success:True
 }
 
 ```
@@ -297,8 +243,7 @@ Success: True
 
 ###Description:
 
-This API returns list of current waypoints on autopilot.
-
+Clear list of waypoints on autopilot.
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -325,29 +270,16 @@ This API returns list of current waypoints on autopilot.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
-* Service Type: PositionSet
+* Name: /namespace/navigation/waypoint_clear</br>
+* Service Type: WaypointClear
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/<namespace>/navigation/waypoint_get````
+* URL: ````POST http://<ip>/ros/<namespace>/navigation/waypoint_clear````
 * JSON Response:
 {
-    success: Boolean, 
-    wp_recieved: Int,
-    waypoints: [{
-        frame: Int 0/1/2/3/4,
-        command:Int 16/17/18/19/20/21/22,
-        is_current: Boolean,
-        autocontinue: Boolean,
-        param1: Float,
-        param2: Float,
-        param3: Float,
-        param4: Float,
-        x_lat: Float,
-        y_long: Float,
-        z_alt: Float},{},{}...] }
+    success: Boolean
 }
 
 
@@ -355,8 +287,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/waypoint_get'</br>
-* serviceType: 'core_api/WaypointGet'
+* name: '/namespace/navigation/waypoint_clear'</br>
+* serviceType: 'core_api/WaypointClear'
 
 
 ### API usage information:
