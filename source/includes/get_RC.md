@@ -1,28 +1,20 @@
 # Get RC Data
 
-
-
 > Definition
 
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/vfr_hud
-ROS-Topic Type: mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/mavros/rc/in
+ROS-Topic Type: mavros_msgs/RCIn
 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
-
-
+    uint8 rssi
+    uint16[] channels
 ```
 
 ```cpp
@@ -51,42 +43,32 @@ NotImplemented
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Topic
-Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/mavros/rc/in
+ROS-Topic Type: mavros_msgs/RCIn
 
-Response structure: mavros_msgs/VFR_HUD
+Response structure:
     std_msgs/Header header
-        uint32 seq
-        time stamp
-        string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
-
-
+      uint32 seq
+      time stamp
+      string frame_id
+    uint8 rssi
+    uint16[] channels
 
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Topic
-Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/mavros/rc/in
+ROS-Topic Type: mavros_msgs/RCIn
 
-Response structure: mavros_msgs/VFR_HUD
+Response structure:
     std_msgs/Header header
-        uint32 seq
-        time stamp
-        string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
+      uint32 seq
+      time stamp
+      string frame_id
+    uint8 rssi
+    uint16[] channels
 ```
 
 ```javascript--REST
@@ -153,6 +135,8 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
+# create flyt_python navigation class instance
+
 NotImplemented
 ```
 
@@ -179,15 +163,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from mavros_msgs.msgs import VFR_HUD
-
+from mavros_msgs.msgs import RCIn
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), VFR_HUD, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/rc/in"), State, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    airspeed = data.airspeed
-    print airspeed
+    # print data from first 6 channels
+    print data.channels[:6]
+
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -232,7 +216,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+[1001,999,1400,1234,1764,1900]
 ```
 
 ```cpp--ros
@@ -240,8 +224,7 @@ success: True
 ```
 
 ```python--ros
-instance of mavros_msgs.msgs.VFR_HUD class
-
+NotImplemented
 ```
 
 ```javascript--REST
@@ -279,7 +262,7 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 ###Description:
 
-This API subscribes/poles VFR HUD data.  Please check API usage section below before using API.
+This API subscribes/polls the input rc channel data. Please see usage information section below before using the API.
 
 ###Parameters:
     
@@ -289,19 +272,16 @@ This API subscribes/poles VFR HUD data.  Please check API usage section below be
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    airspeed | float | airspeed in m/s
-    groundspeed | float | groundspeed in m/s
-    heading | int16 | yaw angle in degrees (NED frame)
-    throttle | float | throttle
-    altitude | float | altitude
-    climb | float | climb
-
+    channels | Array of unit16 | Array of PWM data values for channels.
+    
+    
+    
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/vfr_hud</br>
-* Response Type: mavros_msgs/VFR_HUD
+* Name: /namespace/mavros/rc/in</br>
+* Response Type: mavros_msgs/RCIn
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -330,4 +310,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides RC data.
+* Channel mapping of the data depends on RC calibration. 
