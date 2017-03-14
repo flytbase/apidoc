@@ -186,12 +186,9 @@ NotImplemented
 ```
 
 
-
-
-
 ###Description:
-This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+Sets the waypoint Id specified, as the current waypoint from the list of already set wayopints.
+
 
 ###Parameters:
     
@@ -201,14 +198,8 @@ This command commands the vehicle to go to a specified location and hover. It ov
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
-    
+    wp_seq | int | Id of the waypoint fro  the list of set waypoints.
+
     Output:
     
     Parameter | type | Description
@@ -245,9 +236,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 
 ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
-
+Note: Make sure you already have a waypoint list set beforehand executing this API for it to work.

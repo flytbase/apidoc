@@ -181,21 +181,7 @@ NotImplemented
 Clear list of waypoints on autopilot.
 ###Parameters:
     
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
-    
-    Arguments:
-    
-    Argument | Type | Description
-    -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
-    
-    Output:
+    Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Parameter | type | Description
     ---------- | ---------- | ------------
@@ -226,10 +212,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * serviceType: 'core_api/WaypointClear'
 
 
-### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 
