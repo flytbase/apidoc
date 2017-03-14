@@ -1,25 +1,25 @@
-<h1 id="get-vehicle-state">Get Vehicle State</h1>
+<h2 id="get-vfr-hud">Get VFR HUD</h2>
 
 <blockquote>
 <p>Definition</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
 
-ROS-Topic Name: /&lt;namespace&gt;/flyt/state
-ROS-Topic Type: mavros_msgs/State
+ROS-Topic Name: /&lt;namespace&gt;/mavros/vfr_hud
+ROS-Topic Type: mavros_msgs/VFR_HUD
 
 Response structure:
     std_msgs/Header header
       uint32 seq
       <span class="nb">time </span>stamp
       string frame_id
-    bool connected
-    bool armed
-    bool guided
-    string mode
-    uint8 mav_type
-    uint8 mav_autopilot
-    uint8 mav_sys_status
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
+
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 </span>
@@ -37,55 +37,42 @@ Response structure:
 <span class="n">Returns</span><span class="o">:</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">reaches</span> <span class="n">given</span> <span class="n">setpoint</span> <span class="n">before</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="n">secs</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="c"># Python API for vehicle state is split into two APIs</span>
-
-<span class="c"># Check arm status</span>
-<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
-<span class="n">Function</span> <span class="n">Definition</span><span class="p">:</span> <span class="n">is_armed</span><span class="p">()</span>
-<span class="n">Arguments</span><span class="p">:</span> <span class="bp">None</span>
-<span class="k">return</span><span class="p">:</span> <span class="n">Boolean</span>
-
-<span class="c"># Check vehicle mode</span>
-<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
-<span class="n">Function</span> <span class="n">Definition</span><span class="p">:</span> <span class="n">get_vehicle_mode</span><span class="p">()</span>
-<span class="n">Arguments</span><span class="p">:</span> <span class="bp">None</span>
-<span class="k">return</span><span class="p">:</span> <span class="n">string</span>
-
+<span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
-<span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">flyt</span><span class="o">/</span><span class="n">state</span>
-<span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Type</span><span class="o">:</span> <span class="n">mavros_msgs</span><span class="o">/</span><span class="n">State</span>
+<span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Topic</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">mavros_msgs</span><span class="o">/</span><span class="n">VFR_HUD</span>
 
-<span class="n">Response</span> <span class="n">structure</span><span class="o">:</span>
+<span class="n">Response</span> <span class="n">structure</span><span class="o">:</span> <span class="n">mavros_msgs</span><span class="o">/</span><span class="n">VFR_HUD</span>
     <span class="n">std_msgs</span><span class="o">/</span><span class="n">Header</span> <span class="n">header</span>
-      <span class="n">uint32</span> <span class="n">seq</span>
-      <span class="n">time</span> <span class="n">stamp</span>
-      <span class="n">string</span> <span class="n">frame_id</span>
-    <span class="kt">bool</span> <span class="n">connected</span>
-    <span class="kt">bool</span> <span class="n">armed</span>
-    <span class="kt">bool</span> <span class="n">guided</span>
-    <span class="n">string</span> <span class="n">mode</span>
-    <span class="n">uint8</span> <span class="n">mav_type</span>
-    <span class="n">uint8</span> <span class="n">mav_autopilot</span>
-    <span class="n">uint8</span> <span class="n">mav_sys_status</span>
+        <span class="n">uint32</span> <span class="n">seq</span>
+        <span class="n">time</span> <span class="n">stamp</span>
+        <span class="n">string</span> <span class="n">frame_id</span>
+    <span class="n">float32</span> <span class="n">airspeed</span>
+    <span class="n">float32</span> <span class="n">groundspeed</span>
+    <span class="n">int16</span> <span class="n">heading</span>
+    <span class="n">float32</span> <span class="n">throttle</span>
+    <span class="n">float32</span> <span class="n">altitude</span>
+    <span class="n">float32</span> <span class="n">climb</span>
+
+
 
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
-<span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">flyt</span><span class="o">/</span><span class="n">state</span>
-<span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Type</span><span class="p">:</span> <span class="n">mavros_msgs</span><span class="o">/</span><span class="n">State</span>
+<span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Topic</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">mavros_msgs</span><span class="o">/</span><span class="n">VFR_HUD</span>
 
-<span class="n">Response</span> <span class="n">structure</span><span class="p">:</span>
+<span class="n">Response</span> <span class="n">structure</span><span class="p">:</span> <span class="n">mavros_msgs</span><span class="o">/</span><span class="n">VFR_HUD</span>
     <span class="n">std_msgs</span><span class="o">/</span><span class="n">Header</span> <span class="n">header</span>
-      <span class="n">uint32</span> <span class="n">seq</span>
-      <span class="n">time</span> <span class="n">stamp</span>
-      <span class="n">string</span> <span class="n">frame_id</span>
-    <span class="nb">bool</span> <span class="n">connected</span>
-    <span class="nb">bool</span> <span class="n">armed</span>
-    <span class="nb">bool</span> <span class="n">guided</span>
-    <span class="n">string</span> <span class="n">mode</span>
-    <span class="n">uint8</span> <span class="n">mav_type</span>
-    <span class="n">uint8</span> <span class="n">mav_autopilot</span>
-    <span class="n">uint8</span> <span class="n">mav_sys_status</span>
+        <span class="n">uint32</span> <span class="n">seq</span>
+        <span class="n">time</span> <span class="n">stamp</span>
+        <span class="n">string</span> <span class="n">frame_id</span>
+    <span class="n">float32</span> <span class="n">airspeed</span>
+    <span class="n">float32</span> <span class="n">groundspeed</span>
+    <span class="n">int16</span> <span class="n">heading</span>
+    <span class="n">float32</span> <span class="n">throttle</span>
+    <span class="n">float32</span> <span class="n">altitude</span>
+    <span class="n">float32</span> <span class="n">climb</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">REST</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">to</span> <span class="nx">replace</span> 
     <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
     <span class="nl">namespace</span><span class="p">:</span> <span class="nx">namespace</span> <span class="nx">used</span> <span class="nx">by</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">device</span><span class="p">.</span>
@@ -138,16 +125,7 @@ Response structure:
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">position_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
 <span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
-</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
-
-<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
-<span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
-<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
-
-<span class="c"># get arm status</span>
-<span class="k">print</span> <span class="n">drone</span><span class="o">.</span><span class="n">is_armed</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_vehicle_mode</span><span class="p">()</span>
-
+</span></code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
@@ -167,14 +145,15 @@ Response structure:
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
 
 <span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
-</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">State</span>
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">VFR_HUD</span>
+
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
-<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/flyt/state"</span><span class="p">),</span> <span class="n">State</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
+<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/mavros/vfr_hud"</span><span class="p">),</span> <span class="n">VFR_HUD</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
 
 <span class="c"># define the callback function which will print the values every time topic is updated</span>
 <span class="k">def</span> <span class="nf">topic_callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">mode</span><span class="p">,</span> <span class="n">is_armed</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">armed</span>
-    <span class="k">print</span> <span class="n">mode</span><span class="p">,</span> <span class="n">is_armed</span>
+    <span class="n">airspeed</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">airspeed</span>
+    <span class="k">print</span> <span class="n">airspeed</span>
 
 <span class="c"># unsubscribe from a topic</span>
 <span class="n">topic_sub</span><span class="o">.</span><span class="n">unregister</span><span class="p">()</span>  <span class="c"># unregister topic subscription</span>
@@ -205,10 +184,10 @@ Response structure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="bp">True</span>
-<span class="n">MANUAL</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
-</code></pre><pre class="highlight python tab-python--ros"><code><span class="bp">True</span> <span class="n">MANUAL</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">VFR_HUD</span> <span class="k">class</span>
+
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">twist</span><span class="p">:{</span>
     <span class="nl">linear</span><span class="p">:{</span>
@@ -237,7 +216,7 @@ Response structure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API subscribes/polls the vehicle state data. Please see usage information section below before using the API.</p>
+<p>This API subscribes/poles VFR HUD data.  Please check API usage section below before using API.</p>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -253,14 +232,34 @@ Response structure:
 </tr>
 </thead><tbody>
 <tr>
-<td>mode</td>
-<td>string</td>
-<td>autopilot flight mode e.g. MANUAL, APICTL</td>
+<td>airspeed</td>
+<td>float</td>
+<td>airspeed in m/s</td>
 </tr>
 <tr>
-<td>armed</td>
-<td>boolean</td>
-<td>Vehicle arm status. Armed if True and disarmed if False.</td>
+<td>groundspeed</td>
+<td>float</td>
+<td>groundspeed in m/s</td>
+</tr>
+<tr>
+<td>heading</td>
+<td>int16</td>
+<td>yaw angle in degrees (NED frame)</td>
+</tr>
+<tr>
+<td>throttle</td>
+<td>float</td>
+<td>throttle</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td>float</td>
+<td>altitude</td>
+</tr>
+<tr>
+<td>climb</td>
+<td>float</td>
+<td>climb</td>
 </tr>
 </tbody></table>
 
@@ -270,8 +269,8 @@ Response structure:
 
 <ul>
 <li>Type: Ros Topic</br> </li>
-<li>Name: /namespace/flyt/state</br></li>
-<li>Response Type: mavros_msgs/State</li>
+<li>Name: /namespace/mavros/vfr_hud</br></li>
+<li>Response Type: mavros_msgs/VFR_HUD</li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -307,7 +306,5 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <h3 id="api-usage-information">API usage information:</h3>
 
 <ul>
-<li>This API provides mode and arm status.</li>
-<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
-<li>This API only allows to read the mode and arm status. </li>
+<li>airspeed data is the data from airspeed sensor.</li>
 </ul>

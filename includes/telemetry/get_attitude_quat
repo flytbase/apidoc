@@ -1,4 +1,6 @@
-<h1 id="get-attitude-quaternion">Get Attitude Quaternion</h1>
+<h1 id="telemetry-apis">Telemetry APIs</h1>
+
+<h2 id="get-attitude-quaternion">Get Attitude Quaternion</h2>
 
 <blockquote>
 <p>Definition</p>
