@@ -29,16 +29,16 @@ includes:
   - navigation/pause_waypoints
   - navigation/set_home
   - navigation/set_current_waypoint
-  - get_attitude_quat
-  - get_attitude_euler
-  - get_local_pos
-  - get_GPS
-  - get_battery_status
-  - get_hud
-  - get_RC
+  - telemetry/get_attitude_quat
+  - telemetry/get_attitude_euler
+  - telemetry/get_local_pos
+  - telemetry/get_GPS
+  - telemetry/get_battery_status
+  - telemetry/get_hud
+  - telemetry/get_RC
+  - telemetry/get_distance_sensor
+  - telemetry/get_vehicle_state
   - payload/get_adc
-  - get_distance_sensor
-  - get_vehicle_state
   - setup/actuator_testing
   - setup/esc_calibration
   - setup/module_calibration
