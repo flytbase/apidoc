@@ -16,7 +16,13 @@ bool success
 ```
 
 ```cpp
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
+Function Definition: int Navigation::waypoint_execute(void)
+
+Arguments:  None
+
+Returns:    returns 0 if the command is successfully sent to the vehicle
 ```
 
 ```python
@@ -80,7 +86,10 @@ rosservice call /flytsim/navigation/waypoint_execute "{}"
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+nav.waypoint_execute();
 ```
 
 ```python
@@ -137,7 +146,7 @@ success: true
 ```
 
 ```cpp
-
+0
 ```
 
 ```python

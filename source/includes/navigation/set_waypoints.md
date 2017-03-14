@@ -19,6 +19,15 @@ uint32 wp_transfered
 ```
 
 ```cpp
+// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+
+Function Definition:    int Navigation::waypoint_set(std::vector<mavros_msgs::Waypoint> waypoints)
+
+Arguments:
+    waypoint: Array of waypoints to be sent to the autopilot
+
+Returns:    0 if the land command is successfully sent to the vehicle, else returns 1.
+
 ```
 
 ```python
@@ -121,7 +130,24 @@ Response:
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+mavros_msgs::Waypoint waypoint;
+std::vector<mavros_msgs::Waypoint> waypoints_array;
+waypoint.frame = 3;
+waypoint.command = 16;
+waypoint.is_current = false;
+waypoint.autocontinue = true;
+waypoint.param1 = 0; 
+waypoint.param2 = 1;
+waypoint.param3 = 0;
+waypoint.param4 = 0;
+waypoint.x_lat = 73.2154;
+waypoint.x_long = 18.5472;
+waypoint.z_alt = 5;
+waypoints_array.pushback(waypoint)
+nav.waypoint_set(waypoints_array);
 ```
 
 ```python
@@ -151,7 +177,7 @@ msgdata[1]["param3"]= 0;
 msgdata[1]["param4"]= 0;
 msgdata[1]["x_lat"]= 73.2154;
 msgdata[1]["y_long"]= 18.5472;
-msgdata[1]["z_lat"]= 5;
+msgdata[1]["z_alt"]= 5;
 
 $.ajax({
     type: "POST",
@@ -205,7 +231,7 @@ wp_transfered: 0
 ```
 
 ```cpp
-
+0
 ```
 
 ```python

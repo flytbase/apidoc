@@ -16,7 +16,14 @@ bool success
 ```
 
 ```cpp
+// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
+Function Definition: int Navigation::waypoint_set_current(int waypoint_no)
+
+Arguments:  
+    waypoint_no: Index of waypoint to be set as current waypoint
+
+Returns:    returns 0 if the command is successfully sent to the vehicle
 ```
 
 ```python
@@ -86,7 +93,11 @@ rosservice call /flytsim/navigation/waypoint_set_current "wp_seq: 1"
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+int waypoint_no = 2;
+nav.waypoint_set_current(waypoint_no);
 ```
 
 ```python
@@ -147,7 +158,7 @@ success: true
 ```
 
 ```cpp
-
+0
 ```
 
 ```python
