@@ -23,16 +23,14 @@ string message
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: bool Param::param_get(std::string param_id, std::string &param_value)
+
 Arguments:
-    :param x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    :param yaw: Yaw Setpoint in radians
-    :param yaw_valid: Must be set to true, if yaw setpoint is provided
-    :param tolerance: Acceptance radius in meters, default value=1.0m
-    :param relative: If true, position setpoints relative to current position is sent
-    :param async: If true, asynchronous mode is set
-    :param body_frame: If true, position setpoints are relative with respect to body frame
-    :return: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+    param_id: ID of param to be created
+    param_value: Variable to store parameter value
+Returns:
+    returns parameter value in param_value 
+    returns 0 if the command is successfull
 ```
 
 ```python
@@ -47,13 +45,11 @@ NotImplemented
 Type: Ros Service
 Name: /<namespace>/param/param_get()
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
-response srv: bool success
+    :string param_id
+response srv: 
+    :core_api/ParamInfo param_info
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -62,13 +58,11 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/param/param_get()
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
-response srv: bool success
+    :string param_id
+response srv: 
+    :core_api/ParamInfo param_info
+    :bool success
+    :string message
 
 ```
 
@@ -116,11 +110,14 @@ rosservice call /flytpod/param/param_get "param_id: ''"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <core_script_bridge/param_bridge.h>
 
-Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+Param param;
+std::string param_id = "RTL_ALT"; 
+std::string param_value;
+
+param.param_get(param_id, param_value);
+std::cout << "Parameter value: " << param_value << std::endl;
 ```
 
 ```python
@@ -129,35 +126,12 @@ NotImplemented
 ```
 
 ```cpp--ros
-#include <core_api/ParamGet.h>
-
-ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamGet>("param/param_get");
-core_api::ParamGet srv;
-
-srv.request.twist.twist.angular.z = 0.5;
-srv.request.twist.twist.linear.x = 4,0;
-srv.request.twist.twist.linear.y = 3.0;
-srv.request.twist.twist.linear.z = 5.0;
-srv.request.tolerance = 2.0;
-srv.request.async = true;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
-client.call(srv);
-success = srv.response.success;
+// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/param/param_get')
-    try:
-        handle = rospy.ServiceProxy('namespace/param/param_get', ParamGet)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
-        return resp
-    except rospy.ServiceException, e:
-        rospy.logerr("pos set service call failed %s", e)
+
+# Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 
 ```
 
@@ -200,10 +174,12 @@ paramGet.callService(request, function(result) {
 > Example response
 
 ```shell
-success: true
+    success:True,
+    param_info:{ param_value: '6.00'}
 ```
 
 ```cpp
+param_value = 6
 0
 ```
 
@@ -212,11 +188,9 @@ NotImplemented
 ```
 
 ```cpp--ros
-success: True
 ```
 
 ```python--ros
-Success: True
 ```
 
 ```javascript--REST
