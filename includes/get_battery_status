@@ -1,0 +1,333 @@
+<h1 id="get-battery-status">Get Battery Status</h1>
+
+<blockquote>
+<p>Definition</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+
+ROS-Topic Name: /&lt;namespace&gt;/mavros/battery
+ROS-Topic Type: sensor_msgs/BatteryState, below is its description
+
+<span class="c">#Subscriber response : Battery Status </span>
+Response structure:
+uint8 <span class="nv">POWER_SUPPLY_STATUS_UNKNOWN</span><span class="o">=</span>0
+uint8 <span class="nv">POWER_SUPPLY_STATUS_CHARGING</span><span class="o">=</span>1
+uint8 <span class="nv">POWER_SUPPLY_STATUS_DISCHARGING</span><span class="o">=</span>2
+uint8 <span class="nv">POWER_SUPPLY_STATUS_NOT_CHARGING</span><span class="o">=</span>3
+uint8 <span class="nv">POWER_SUPPLY_STATUS_FULL</span><span class="o">=</span>4
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_UNKNOWN</span><span class="o">=</span>0
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_GOOD</span><span class="o">=</span>1
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_OVERHEAT</span><span class="o">=</span>2
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_DEAD</span><span class="o">=</span>3
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_OVERVOLTAGE</span><span class="o">=</span>4
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_UNSPEC_FAILURE</span><span class="o">=</span>5
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_COLD</span><span class="o">=</span>6
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE</span><span class="o">=</span>7
+uint8 <span class="nv">POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE</span><span class="o">=</span>8
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_UNKNOWN</span><span class="o">=</span>0
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_NIMH</span><span class="o">=</span>1
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_LION</span><span class="o">=</span>2
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_LIPO</span><span class="o">=</span>3
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_LIFE</span><span class="o">=</span>4
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_NICD</span><span class="o">=</span>5
+uint8 <span class="nv">POWER_SUPPLY_TECHNOLOGY_LIMN</span><span class="o">=</span>6
+std_msgs/Header header
+  uint32 seq
+  <span class="nb">time </span>stamp
+  string frame_id
+float32 voltage
+float32 current
+float32 charge
+float32 capacity
+float32 design_capacity
+float32 percentage
+uint8 power_supply_status
+uint8 power_supply_health
+uint8 power_supply_technology
+bool present
+float32[] cell_voltage
+string location
+string serial_number
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
+<span class="nb">NotImplemented</span>
+
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
+</span>
+<span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Topic</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">battery</span>
+<span class="n">Response</span> <span class="n">Type</span><span class="o">:</span> <span class="n">sensor_msgs</span><span class="o">/</span><span class="n">BatteryState</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_UNKNOWN</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_CHARGING</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_DISCHARGING</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_NOT_CHARGING</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_FULL</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_UNKNOWN</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_GOOD</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_OVERHEAT</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_DEAD</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_OVERVOLTAGE</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_UNSPEC_FAILURE</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_COLD</span><span class="o">=</span><span class="mi">6</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE</span><span class="o">=</span><span class="mi">8</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_UNKNOWN</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_NIMH</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LION</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LIPO</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LIFE</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_NICD</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LIMN</span><span class="o">=</span><span class="mi">6</span>
+    <span class="n">std_msgs</span><span class="o">/</span><span class="n">Header</span> <span class="n">header</span>
+        <span class="n">uint32</span> <span class="n">seq</span>
+        <span class="n">time</span> <span class="n">stamp</span>
+        <span class="n">string</span> <span class="n">frame_id</span>
+    <span class="n">float32</span> <span class="n">voltage</span>
+    <span class="n">float32</span> <span class="n">current</span>
+    <span class="n">float32</span> <span class="n">charge</span>
+    <span class="n">float32</span> <span class="n">capacity</span>
+    <span class="n">float32</span> <span class="n">design_capacity</span>
+    <span class="n">float32</span> <span class="n">percentage</span>
+    <span class="n">uint8</span> <span class="n">power_supply_status</span>
+    <span class="n">uint8</span> <span class="n">power_supply_health</span>
+    <span class="n">uint8</span> <span class="n">power_supply_technology</span>
+    <span class="kt">bool</span> <span class="n">present</span>
+    <span class="n">float32</span><span class="p">[]</span> <span class="n">cell_voltage</span>
+    <span class="n">string</span> <span class="n">location</span>
+    <span class="n">string</span> <span class="n">serial_number</span>
+
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
+
+<span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Topic</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">battery</span>
+<span class="n">Response</span> <span class="n">Type</span><span class="p">:</span> <span class="n">sensor_msgs</span><span class="o">/</span><span class="n">BatteryState</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_UNKNOWN</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_CHARGING</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_DISCHARGING</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_NOT_CHARGING</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_STATUS_FULL</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_UNKNOWN</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_GOOD</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_OVERHEAT</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_DEAD</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_OVERVOLTAGE</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_UNSPEC_FAILURE</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_COLD</span><span class="o">=</span><span class="mi">6</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE</span><span class="o">=</span><span class="mi">8</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_UNKNOWN</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_NIMH</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LION</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LIPO</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LIFE</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_NICD</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">uint8</span> <span class="n">POWER_SUPPLY_TECHNOLOGY_LIMN</span><span class="o">=</span><span class="mi">6</span>
+    <span class="n">std_msgs</span><span class="o">/</span><span class="n">Header</span> <span class="n">header</span>
+        <span class="n">uint32</span> <span class="n">seq</span>
+        <span class="n">time</span> <span class="n">stamp</span>
+        <span class="n">string</span> <span class="n">frame_id</span>
+    <span class="n">float32</span> <span class="n">voltage</span>
+    <span class="n">float32</span> <span class="n">current</span>
+    <span class="n">float32</span> <span class="n">charge</span>
+    <span class="n">float32</span> <span class="n">capacity</span>
+    <span class="n">float32</span> <span class="n">design_capacity</span>
+    <span class="n">float32</span> <span class="n">percentage</span>
+    <span class="n">uint8</span> <span class="n">power_supply_status</span>
+    <span class="n">uint8</span> <span class="n">power_supply_health</span>
+    <span class="n">uint8</span> <span class="n">power_supply_technology</span>
+    <span class="nb">bool</span> <span class="n">present</span>
+    <span class="n">float32</span><span class="p">[]</span> <span class="n">cell_voltage</span>
+    <span class="n">string</span> <span class="n">location</span>
+    <span class="n">string</span> <span class="n">serial_number</span>
+
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">REST</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">to</span> <span class="nx">replace</span> 
+    <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
+    <span class="nl">namespace</span><span class="p">:</span> <span class="nx">namespace</span> <span class="nx">used</span> <span class="nx">by</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">device</span><span class="p">.</span>
+
+<span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/battery'</span>
+
+<span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
+<span class="p">{</span>  <span class="nl">voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">current</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">remaining</span><span class="p">:</span> <span class="nx">Float</span><span class="p">}</span>
+
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
+<span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialisng</span> 
+<span class="nx">API</span> <span class="nx">and</span> <span class="nx">and</span> <span class="nx">replace</span> <span class="nx">namespace</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">namespace</span> <span class="nx">of</span> 
+<span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span> <span class="nx">before</span> <span class="nx">calling</span> <span class="nx">the</span> <span class="nx">API</span> 
+<span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
+
+<span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/battery'</span><span class="p">,</span>
+<span class="nx">messageType</span><span class="p">:</span> <span class="s1">'sensor_msgs/BatteryState'</span>
+
+<span class="nl">Response</span><span class="p">:</span>
+<span class="p">{</span>   <span class="nl">voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">current</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">remaining</span><span class="p">:</span> <span class="nx">Float</span><span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/battery
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">BatteryState</span>
+
+<span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
+<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/mavros/battery"</span><span class="p">),</span> <span class="n">BatteryState</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
+
+<span class="c"># define the callback function which will print the values every time topic is updated</span>
+<span class="k">def</span> <span class="nf">topic_callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">voltage</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">voltage</span>
+    <span class="k">print</span> <span class="n">voltage</span>
+
+<span class="c"># unsubscribe from a topic</span>
+<span class="n">topic_sub</span><span class="o">.</span><span class="n">unregister</span><span class="p">()</span>  <span class="c"># unregister topic subscription</span>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/battery"</span><span class="p">,</span>  
+    <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">batteryData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
+    <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
+    <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/battery'</span><span class="p">,</span>
+    <span class="na">messageType</span> <span class="p">:</span> <span class="s1">'sensor_msgs/BatteryState'</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
+
+<span class="nx">batteryData</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>header: 
+  seq: 415
+  stamp: 
+    secs: 1489486630
+    nsecs: 434288692
+  frame_id: <span class="s1">''</span>
+voltage: 65.5350036621
+current: 0.00999999977648
+charge: nan
+capacity: nan
+design_capacity: nan
+percentage: -0.00999999977648
+power_supply_status: 2
+power_supply_health: 0
+power_supply_technology: 3
+present: True
+cell_voltage: <span class="o">[]</span>
+location: id0
+serial_number: <span class="s1">''</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">BatteryState</span> <span class="k">class</span>
+
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
+    <span class="nl">voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">current</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">remaining</span><span class="p">:</span> <span class="nx">Float</span><span class="p">}</span>
+
+
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="p">{</span>
+    <span class="nl">voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">current</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+    <span class="nx">remaining</span><span class="p">:</span> <span class="nx">Float</span><span class="p">}</span>
+
+
+
+</code></pre>
+<h3 id="description">Description:</h3>
+
+<p>This API subscribes/poles battery status.  Please check API usage section below before using API.</p>
+
+<h3 id="parameters">Parameters:</h3>
+
+<p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>voltage</td>
+<td>float</td>
+<td>total voltage, Volts</td>
+</tr>
+<tr>
+<td>current</td>
+<td>float</td>
+<td>instantaneous current consumption, Amperes</td>
+</tr>
+<tr>
+<td>charge</td>
+<td>float</td>
+<td>Charge</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>float</td>
+<td>capacity</td>
+</tr>
+<tr>
+<td>percentage</td>
+<td>float</td>
+<td>percentage left</td>
+</tr>
+</tbody></table>
+
+<h3 id="ros-endpoint">ROS endpoint:</h3>
+
+<p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
+
+<ul>
+<li>Type: Ros Topic</br> </li>
+<li>Name: /namespace/mavros/battery</br></li>
+<li>Response Type: sensor_msgs/BatteryState</li>
+</ul>
+
+<h3 id="restful-endpoint">RESTful endpoint:</h3>
+
+<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.</p>
+
+<ul>
+<li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/battery</code></li>
+<li>JSON Response:
+{
+voltage: Float,
+current: Float,
+remaining: Float
+}</li>
+</ul>
+
+<h3 id="websocket-endpoint">Websocket endpoint:</h3>
+
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
+Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+
+<ul>
+<li>name: &lsquo;/namespace/mavros/battery&rsquo;</br></li>
+<li>messageType: &lsquo;sensor_msgs/BatteryState&rsquo;</li>
+</ul>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.</li>
+<li>Data returned is in NED frame.</li>
+</ul>
