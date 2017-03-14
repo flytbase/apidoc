@@ -106,22 +106,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/param/param_load "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rosservice call /flytpod/param/param_load "{}" 
 ```
 
 ```cpp

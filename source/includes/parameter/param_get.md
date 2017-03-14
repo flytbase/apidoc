@@ -9,17 +9,15 @@
 ROS-Service Name: /<namespace>/param/param_get
 ROS-Service Type: core_api/ParamGet, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
-float32 tolerance
-bool async
-bool relative
-bool yaw_valid
-bool body_frame
+#Request : Param id to get
+string param_id
 
-#Response : success=true - (if async=false && if setpoint reached before timeout = 30sec) || (if async=true)
+#Response: Param info of requested param
+core_api/ParamInfo param_info
+#Response : success=true if command is successful.  
 bool success
+#Response : error message, if any
+string message
 ```
 
 ```cpp
@@ -114,22 +112,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /<namespace>/param/param_get "twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rosservice call /flytpod/param/param_get "param_id: ''"
 ```
 
 ```cpp
