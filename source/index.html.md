@@ -53,8 +53,10 @@ includes:
   - video_streaming
   
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='https://flytbase.com'>FlytBase</a>
+  - <a href='http://forums.flytbase.com'>Developer Forums</a>
+  - <a href='http://docs.flytbase.com'>Documentation</a>
+  - <a href='https://github.com/flytbase'>Github Organization</a>
 
 search: true
 ---
