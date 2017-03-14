@@ -1,27 +1,26 @@
 # Get Vehicle State
 
 
-
 > Definition
 
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/vfr_hud
-ROS-Topic Type: mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/flyt/state
+ROS-Topic Type: mavros_msgs/State
 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
-
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
 
 ```
 
@@ -45,48 +44,61 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+# Python API for vehicle state is split into two APIs
+
+# Check arm status
+Class: flyt_python.api.navigation
+Function Definition: is_armed()
+Arguments: None
+return: Boolean
+
+# Check vehicle mode
+Class: flyt_python.api.navigation
+Function Definition: get_vehicle_mode()
+Arguments: None
+return: string
+
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Topic
-Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/flyt/state
+ROS-Topic Type: mavros_msgs/State
 
-Response structure: mavros_msgs/VFR_HUD
+Response structure:
     std_msgs/Header header
-        uint32 seq
-        time stamp
-        string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
-
-
+      uint32 seq
+      time stamp
+      string frame_id
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
 
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Topic
-Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/flyt/state
+ROS-Topic Type: mavros_msgs/State
 
-Response structure: mavros_msgs/VFR_HUD
+Response structure:
     std_msgs/Header header
-        uint32 seq
-        time stamp
-        string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
+      uint32 seq
+      time stamp
+      string frame_id
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
 ```
 
 ```javascript--REST
@@ -153,7 +165,16 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
-NotImplemented
+# create flyt_python navigation class instance
+
+from flyt_python import api
+drone = api.navigation()
+time.sleep(3.0)
+
+# get arm status
+print drone.is_armed()
+print drone.get_vehicle_mode()
+
 ```
 
 ```cpp--ros
@@ -179,15 +200,14 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from mavros_msgs.msgs import VFR_HUD
-
+from mavros_msgs.msgs import State
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), VFR_HUD, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/flyt/state"), State, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    airspeed = data.airspeed
-    print airspeed
+    mode, is_armed = data.mode, data.armed
+    print mode, is_armed
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -232,7 +252,8 @@ success: true
 ```
 
 ```python
-NotImplemented
+True
+MANUAL
 ```
 
 ```cpp--ros
@@ -240,8 +261,7 @@ success: True
 ```
 
 ```python--ros
-instance of mavros_msgs.msgs.VFR_HUD class
-
+True MANUAL
 ```
 
 ```javascript--REST
@@ -279,7 +299,7 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 ###Description:
 
-This API subscribes/poles distance sensor data.  Please check API usage section below before using API.
+This API subscribes/polls the vehicle state data. Please see usage information section below before using the API.
 
 ###Parameters:
     
@@ -289,19 +309,17 @@ This API subscribes/poles distance sensor data.  Please check API usage section 
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    airspeed | float | airspeed in m/s
-    groundspeed | float | groundspeed in m/s
-    heading | int16 | yaw angle in degrees (NED frame)
-    throttle | float | throttle
-    altitude | float | altitude
-    climb | float | climb
-
+    mode | string | autopilot flight mode e.g. MANUAL, APICTL
+    armed | boolean | Vehicle arm status. Armed if True and disarmed if False.
+    
+    
+    
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/vfr_hud</br>
-* Response Type: mavros_msgs/VFR_HUD
+* Name: /namespace/flyt/state</br>
+* Response Type: mavros_msgs/State
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -330,4 +348,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This topic provides vehicle state information.
+* This API provides mode and arm status.
+* All navigation API's work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.
+* This API only allows to read the mode and arm status. 

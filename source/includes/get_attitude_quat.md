@@ -7,7 +7,7 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/imu/data_euler
+ROS-Topic Name: /<namespace>/mavros/imu/data
 ROS-Topic Type: sensor_msgs/Imu, below is its description
 
 #Subscriber response : Attitude Quaternion 
@@ -72,7 +72,7 @@ Response: attitude_quaternion as described below.
         pitchspeed = 0.0
         yawspeed = 0.0
 
-This API support single pole mode only.
+This API supports single pole mode only.
 ```
 
 ```cpp--ros
@@ -187,18 +187,12 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rostopic echo /flytpod/mavros/imu/data
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
 
-Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+
 ```
 
 ```python
@@ -216,25 +210,19 @@ print att.x, att.y, att.z, att.w, att.rollspeed, att.pitchspeed, att.yawspeed
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <sensor_msgs/Imu.h>
+
+
+void attCallback(const sensor_msgs::ImuConstPtr &att)
+{
+  att_data.orientation = att->orientation;
+  att_data.angular_velocity = att->angular_velocity;
+  att_data.linear_acceleration = att->linear_acceleration;
+}
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
-
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 3.5;
-srv.request.twist.twist.linear.z = -5.0;
-srv.request.tolerance = 5.0;
-srv.request.async = false;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
-client.call(srv);
-success = srv.response.success;
-
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+sensor_msgs::Imu att_data;
+ros::Subscriber sub = nh.subscribe("mavros/imu/data", 1, attCallback);
 ```
 
 ```python--ros
@@ -285,11 +273,32 @@ imuData.subscribe(request, function(result) {
 > Example response
 
 ```shell
-success: true
+header: 
+  seq: 112
+  stamp: 
+    secs: 1489476690
+    nsecs: 278339713
+  frame_id: fcu
+orientation: 
+  x: -0.00593215392702
+  y: 0.00396701722143
+  z: 0.988477372188
+  w: 0.151200386894
+orientation_covariance: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+angular_velocity: 
+  x: 0.00392133416608
+  y: -0.000496329041198
+  z: -0.000130902582896
+angular_velocity_covariance: [1.2184696791468346e-07, 0.0, 0.0, 0.0, 1.2184696791468346e-07, 0.0, 0.0, 0.0, 1.2184696791468346e-07]
+linear_acceleration: 
+  x: -0.1176798
+  y: -0.4314926
+  z: -9.81645665
+linear_acceleration_covariance: [8.999999999999999e-08, 0.0, 0.0, 0.0, 8.999999999999999e-08, 0.0, 0.0, 0.0, 8.999999999999999e-08]
 ```
 
 ```cpp
-0
+instance of sensor_msgs::Imu class
 ```
 
 ```python
@@ -297,7 +306,7 @@ instance of class attitude_quaternion
 ```
 
 ```cpp--ros
-success: True
+instance of sensor_msgs::Imu class
 ```
 
 ```python--ros

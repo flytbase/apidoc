@@ -160,10 +160,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rostopic echo /flytpods/mavros/imu/data_euler 
 ```
 
 ```cpp
@@ -189,25 +186,17 @@ print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <geometry_msgs/TwistStamped>
+
+void attCallback(const geometry_msgs::TwistStampedConstPtr &att)
+{
+  att_data.twist.linear = att->twist.linear;
+  att_data.twist.angular = att->twist.angular;
+}
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
-
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 3.5;
-srv.request.twist.twist.linear.z = -5.0;
-srv.request.tolerance = 5.0;
-srv.request.async = false;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
-client.call(srv);
-success = srv.response.success;
-
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+geometry_msgs::TwistStamped att_data;
+ros::Subscriber sub = nh.subscribe("mavros/imu/data_euler", 1, attCallback);
 ```
 
 ```python--ros
@@ -256,11 +245,25 @@ imuEulerData.subscribe(request, function(result) {
 > Example response
 
 ```shell
-success: true
+header: 
+  seq: 4090
+  stamp: 
+    secs: 1489483667
+    nsecs: 763130240
+  frame_id: fcu
+twist: 
+  linear: 
+    x: -0.0357596799731
+    y: -0.0206729210913
+    z: -1.89611303806
+  angular: 
+    x: -0.00441705761477
+    y: 0.00617094011977
+    z: -0.000732765707653
 ```
 
 ```cpp
-0
+instance of geometry_msgs::TwistStamped class
 ```
 
 ```python
@@ -279,7 +282,7 @@ class attitude_euler:
 ```
 
 ```cpp--ros
-success: True
+instance of geometry_msgs::TwistStamped class
 ```
 
 ```python--ros

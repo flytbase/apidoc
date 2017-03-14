@@ -40,10 +40,7 @@ Arguments:
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.api.navigation
-
-Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, async=False, yaw_valid=False,
-                     body_frame=False):
+NotImplemented
 ```
 
 ```cpp--ros
@@ -141,14 +138,7 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
-# create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
-# wait for interface to initialize
-time.sleep(3.0)
-
-# command vehicle towards 5 meteres WEST from current location regardless of heading
-drone.position_set(-5, 0, 0, relative=True)
+NotImplemented
 
 ```
 
@@ -228,7 +218,7 @@ success: true
 ```
 
 ```python
-True
+NotImplemented
 ```
 
 ```cpp--ros

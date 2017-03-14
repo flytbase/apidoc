@@ -160,10 +160,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rostopic echo /flytpod/mavros/local_position/local
 ```
 
 ```cpp
@@ -189,25 +186,17 @@ print pos.x, pos.vx
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <geometry_msgs/TwistStamped>
+
+void lposCallback(const geometry_msgs::TwistStampedConstPtr &lpos)
+{
+  lpos_data.twist.linear = lpos->twist.linear;
+  lpos_data.twist.angular = lpos->twist.angular;
+}
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
-
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 3.5;
-srv.request.twist.twist.linear.z = -5.0;
-srv.request.tolerance = 5.0;
-srv.request.async = false;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
-client.call(srv);
-success = srv.response.success;
-
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+geometry_msgs::TwistStamped lpos_data;
+ros::Subscriber sub = nh.subscribe("mavros/local_position/local", 1, lposCallback);
 ```
 
 ```python--ros
@@ -257,11 +246,25 @@ lpos.subscribe(request, function(result) {
 > Example response
 
 ```shell
-success: true
+header: 
+  seq: 2589
+  stamp: 
+    secs: 1489483590
+    nsecs: 137668160
+  frame_id: fcu
+twist: 
+  linear: 
+    x: 0.0
+    y: 0.0
+    z: 2.52842187881
+  angular: 
+    x: 0.000367590633687
+    y: 0.001967407763
+    z: 0.0995724499226
 ```
 
 ```cpp
-0
+instance of geometry_msgs::TwistStamped class
 ```
 
 ```python
@@ -269,7 +272,7 @@ instance of class local_position
 ```
 
 ```cpp--ros
-success: True
+instance of geometry_msgs::TwistStamped class
 ```
 
 ```python--ros
