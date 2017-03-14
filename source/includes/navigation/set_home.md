@@ -233,7 +233,7 @@ Manually store a location as new home.
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    lat,lat,alt | float | Latitude, longitude and relative altitude
+    lat,long,alt | float | Latitude, longitude and relative altitude
     set_current | boolean | if true uses current location and altitude of the device else uses the provided values.
     
     Output:
