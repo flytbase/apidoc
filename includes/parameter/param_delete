@@ -91,22 +91,7 @@ bool success
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rosservice call /&lt;namespace&gt;/param/param_delete <span class="s2">"twist:
-  header:
-    seq: 0
-    stamp: {secs: 0, nsecs: 0}
-    frame_id: ''
-  twist:
-    linear: {x: 1.0, y: 3.5, z: -5.0}
-    angular: {x: 0.0, y: 0.0, z: 0.5}
-tolerance: 0.0
-async: false
-relative: false
-yaw_valid: true
-body_frame: false"</span>
-
-<span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
-<span class="c">#default value of tolerance=1.0m if left at 0    </span>
+<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/param/param_delete <span class="s2">"param_id: ''"</span> 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>

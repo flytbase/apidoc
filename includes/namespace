@@ -19,7 +19,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 </span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">global_namespace</span>
 
-<span class="c1">//No API call required. Global namespace already available in private variable:
+<span class="c1">//No API call required. Global namespace already available in private variable: std::string global_namespace
 </span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
 <span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
@@ -77,8 +77,8 @@ string message
 <p>Example API call</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /get_global_namespace <span class="s2">"{}"</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code>
-</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//No API call required. Global namespace already available in private variable: std::string global_namespace
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
 
 <span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
@@ -138,8 +138,8 @@ string message
   param_value: flytpod
 success: True
 message: Parameter Get Global Namespace Successful  flytpod
-</code></pre><pre class="highlight cpp tab-cpp"><code>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">flytpod</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//No API call required. Global namespace already available in private variable: std::string global_namespace
+</span></code></pre><pre class="highlight python tab-python"><code><span class="n">flytpod</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_id</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_value</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
@@ -157,12 +157,12 @@ message: Parameter Get Global Namespace Successful  flytpod
     <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre><pre class="highlight plaintext"><code>{
-    success:True,
-    param_info:{
-        param_value:'flytpod'
-    }
-}
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="p">{</span>
+    <span class="nl">success</span><span class="p">:</span><span class="nx">True</span><span class="p">,</span>
+    <span class="nx">param_info</span><span class="p">:{</span>
+        <span class="nl">param_value</span><span class="p">:</span><span class="s1">'flytpod'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 <h3 id="description">Description:</h3>
 

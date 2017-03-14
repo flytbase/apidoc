@@ -15,7 +15,16 @@ mavros_msgs/Waypoint[] waypoints
 bool success
 uint32 wp_transfered
 
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+</span>
+<span class="n">Function</span> <span class="n">Definition</span><span class="o">:</span>    <span class="kt">int</span> <span class="n">Navigation</span><span class="o">::</span><span class="n">waypoint_set</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">mavros_msgs</span><span class="o">::</span><span class="n">Waypoint</span><span class="o">&gt;</span> <span class="n">waypoints</span><span class="p">)</span>
+
+<span class="n">Arguments</span><span class="o">:</span>
+    <span class="n">waypoint</span><span class="o">:</span> <span class="n">Array</span> <span class="n">of</span> <span class="n">waypoints</span> <span class="n">to</span> <span class="n">be</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">autopilot</span>
+
+<span class="n">Returns</span><span class="o">:</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">land</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
 <span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
@@ -97,7 +106,24 @@ uint32 wp_transfered
 - {frame: 0, command: 0, is_current: false, autocontinue: false, param1: 0.0, param2: 0.0,
   param3: 0.0, param4: 0.0, x_lat: 0.0, y_long: 0.0, z_alt: 0.0}"</span> 
 
-</code></pre><pre class="highlight cpp tab-cpp"><code>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</span>
+<span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
+<span class="n">mavros_msgs</span><span class="o">::</span><span class="n">Waypoint</span> <span class="n">waypoint</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">mavros_msgs</span><span class="o">::</span><span class="n">Waypoint</span><span class="o">&gt;</span> <span class="n">waypoints_array</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">command</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">is_current</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">autocontinue</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">param1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="n">waypoint</span><span class="p">.</span><span class="n">param2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">param3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">param4</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">x_lat</span> <span class="o">=</span> <span class="mf">73.2154</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">x_long</span> <span class="o">=</span> <span class="mf">18.5472</span><span class="p">;</span>
+<span class="n">waypoint</span><span class="p">.</span><span class="n">z_alt</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="n">waypoints_array</span><span class="p">.</span><span class="n">pushback</span><span class="p">(</span><span class="n">waypoint</span><span class="p">)</span>
+<span class="n">nav</span><span class="p">.</span><span class="n">waypoint_set</span><span class="p">(</span><span class="n">waypoints_array</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
@@ -115,7 +141,7 @@ uint32 wp_transfered
 <span class="nx">msgdata</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"param4"</span><span class="p">]</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"x_lat"</span><span class="p">]</span><span class="o">=</span> <span class="mf">73.2154</span><span class="p">;</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"y_long"</span><span class="p">]</span><span class="o">=</span> <span class="mf">18.5472</span><span class="p">;</span>
-<span class="nx">msgdata</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"z_lat"</span><span class="p">]</span><span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">msgdata</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"z_alt"</span><span class="p">]</span><span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="na">type</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
@@ -161,7 +187,7 @@ uint32 wp_transfered
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: True
 wp_transfered: 0
-</code></pre><pre class="highlight cpp tab-cpp"><code>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
