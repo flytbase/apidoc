@@ -29,7 +29,7 @@ MsgStructure:
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-NotImplemented
+Not Implemented
 ```
 
 ```python
@@ -123,12 +123,12 @@ Response:
 
 ```shell
 
-// Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice
+# Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice
     
 ```
 
 ```cpp
-NotImplemented
+Not Implemented
 ```
 
 ```python
@@ -184,11 +184,11 @@ moduleCalibration.callService(request, function(result) {
 > Example response
 
 ```shell
-
+success: True
 ```
 
 ```cpp
-NotImplemented
+Not Implemented
 ```
 
 ```python
@@ -196,7 +196,6 @@ NotImplemented
 ```
 
 ```cpp--ros
-
 ```
 
 ```python--ros

@@ -49,12 +49,10 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/navigation/set_home()
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_valid
-    :bool body_frame
+    :float64 lat
+    :float64 lon
+    :float64 alt
+    :bool set_current
 response srv: bool success
 
 ```

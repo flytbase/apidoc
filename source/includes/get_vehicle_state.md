@@ -25,20 +25,7 @@ Response structure:
 ```
 
 ```cpp
-// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
-
-Arguments:
-    x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw: Yaw Setpoint in radians
-    yaw_valid: Must be set to true, if yaw setpoint is provided
-    tolerance: Acceptance radius in meters, default value=1.0m
-    relative: If true, position setpoints relative to current position is sent
-    async: If true, asynchronous mode is set
-    body_frame: If true, position setpoints are relative with respect to body frame
-
-Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
 ```
 
 ```python
@@ -150,18 +137,11 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rotopic echo /flytpod/flyt/state
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
 
-Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
@@ -178,25 +158,7 @@ print drone.get_vehicle_mode()
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
-
-ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
-
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 3.5;
-srv.request.twist.twist.linear.z = -5.0;
-srv.request.tolerance = 5.0;
-srv.request.async = false;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
-client.call(srv);
-success = srv.response.success;
-
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 ```
 
 ```python--ros
@@ -244,11 +206,23 @@ imuEulerData.subscribe(request, function(result) {
 > Example response
 
 ```shell
-success: true
+header: 
+  seq: 1666
+  stamp: 
+    secs: 1489487905
+    nsecs: 864919940
+  frame_id: ''
+connected: True
+armed: False
+guided: False
+mode: RC|MANUAL
+mav_type: 2
+mav_autopilot: 12
+mav_sys_status: 0
 ```
 
 ```cpp
-0
+
 ```
 
 ```python
@@ -257,7 +231,6 @@ MANUAL
 ```
 
 ```cpp--ros
-success: True
 ```
 
 ```python--ros
