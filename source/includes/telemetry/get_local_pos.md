@@ -1,5 +1,4 @@
-# Get Distance Sensor
-
+## Get Local Position 
 
 
 > Definition
@@ -7,22 +6,24 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
-ROS-Topic Type: sensor_msgs/Range
+ROS-Topic Name: /<namespace>/mavros/imu/local_position/local
+ROS-Topic Type: geometry_msgs/TwistStamped, below is its description
 
+#Subscriber response : Euler angles 
 Response structure:
-    uint8 ULTRASOUND=0
-    uint8 INFRARED=1
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    uint8 radiation_type
-    float32 field_of_view
-    float32 min_range
-    float32 max_range
-    float32 range
-
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
 
 ```
 
@@ -46,50 +47,67 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Class: flyt_python.api.navigation
+
+Function: get_local_position()
+
+Response: local_position as described below.
+    class local_position:
+        '''
+        Holds fields for local position
+        '''
+        x = 0.0
+        y = 0.0
+        z = 0.0
+        vx = 0.0
+        vy = 0.0
+        vz = 0.0
+    
+This API support single pole mode only.
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
-ROS-Topic Type: sensor_msgs/Range
-
-Response structure:
-    uint8 ULTRASOUND=0
-    uint8 INFRARED=1
+Type: Ros Topic
+Name: /<namespace>/mavros/local_position/local
+Response Type:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    uint8 radiation_type
-    float32 field_of_view
-    float32 min_range
-    float32 max_range
-    float32 range
-
-
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
 
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
-ROS-Topic Type: sensor_msgs/Range
-
-Response structure:
-    uint8 ULTRASOUND=0
-    uint8 INFRARED=1
+Type: Ros Topic
+Name: /<namespace>/mavros/local_position/local
+Response Type:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    uint8 radiation_type
-    float32 field_of_view
-    float32 min_range
-    float32 max_range
-    float32 range
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x : x position
+        float64 y : y position
+        float64 z : z position
+      geometry_msgs/Vector3 angular
+        float64 x : linear acceleration along x axis
+        float64 y : linear acceleration along y axis
+        float64 z : linear acceleration along z axis
+
 ```
 
 ```javascript--REST
@@ -97,10 +115,10 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
+URL: 'http://<ip>/ros/<namespace>/mavros/local_position/local'
 
 JSON Response:
-{  twist:{
+{   twist:{
     linear:{
         x: Float,
         y: Float,
@@ -120,7 +138,7 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/mavros/imu/data_euler',
+name: '/<namespace>/mavros/local_position/local',
 messageType: 'geometry_msgs/TwistStamped'
 
 Response:
@@ -135,16 +153,14 @@ Response:
         z: FLoat}
 }}
 
+
 ```
 
 
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
-
-#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
-#default value of tolerance=1.0m if left at 0    
+rostopic echo /flytpod/mavros/local_position/local
 ```
 
 ```cpp
@@ -156,41 +172,43 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
-NotImplemented
+# create flyt_python navigation class instance
+from flyt_python import api
+drone = api.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+# Poll data
+pos = drone.get_local_position()
+# Print the data
+print pos.x, pos.vx
+
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <geometry_msgs/TwistStamped>
+
+void lposCallback(const geometry_msgs::TwistStampedConstPtr &lpos)
+{
+  lpos_data.twist.linear = lpos->twist.linear;
+  lpos_data.twist.angular = lpos->twist.angular;
+}
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
-core_api::PositionSet srv;
-
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 3.5;
-srv.request.twist.twist.linear.z = -5.0;
-srv.request.tolerance = 5.0;
-srv.request.async = false;
-srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
-client.call(srv);
-success = srv.response.success;
-
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+geometry_msgs::TwistStamped lpos_data;
+ros::Subscriber sub = nh.subscribe("mavros/local_position/local", 1, lposCallback);
 ```
 
 ```python--ros
-from sensor_msgs.msgs import Range
+from geometry_msgs.msg import TwistStamped
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/distance_sensor/lidarlite_pub"), Range, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/local_position/local"), TwistStamped, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    dist = data.range
-    print dist
+    x, y, z = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
+    print x, y, z
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -200,52 +218,68 @@ topic_sub.unregister()  # unregister topic subscription
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
+    url: "http://<ip>/ros/<namespace>/mavros/local_position/local",  
     success: function(data){
            console.log(data);
     }
 };
 
-
 ```
 
 ```javascript--Websocket
-var imuEulerData = new ROSLIB.Service({
+var lpos = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/mavros/imu/data_euler',
-    messageType : 'geometry_msgs/TwistStamped'
+    name : '/<namespace>/mavros/local_position/local',
+    messageType : 'geometry_msgs/TwistStamped',
+    throttle_rate: 200
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-imuEulerData.subscribe(request, function(result) {
-    console.log(result.data);
+lpos.subscribe(request, function(result) {
+    console.log(result.twist);
 });
 ```
+
 
 
 > Example response
 
 ```shell
-success: true
+header: 
+  seq: 2589
+  stamp: 
+    secs: 1489483590
+    nsecs: 137668160
+  frame_id: fcu
+twist: 
+  linear: 
+    x: 0.0
+    y: 0.0
+    z: 2.52842187881
+  angular: 
+    x: 0.000367590633687
+    y: 0.001967407763
+    z: 0.0995724499226
 ```
 
 ```cpp
-0
+instance of geometry_msgs::TwistStamped class
 ```
 
 ```python
-NotImplemented
+instance of class local_position
 ```
 
 ```cpp--ros
-success: True
+instance of geometry_msgs::TwistStamped class
 ```
 
 ```python--ros
-instance of sensor_msgs.msgs.Range object
+instance of gemometry_msgs.msg.TwistStamped class
 
 ```
+
 
 ```javascript--REST
 {
@@ -258,7 +292,7 @@ instance of sensor_msgs.msgs.Range object
         x: Float,
         y: Float,
         z: FLoat}
-}
+}}
 
 ```
 
@@ -273,8 +307,7 @@ instance of sensor_msgs.msgs.Range object
         x: Float,
         y: Float,
         z: FLoat}
-}
-
+}}
 
 ```
 
@@ -282,7 +315,7 @@ instance of sensor_msgs.msgs.Range object
 
 ###Description:
 
-This API subscribes/poles distance sensor data.  Please check API usage section below before using API.
+This API subscribes/poles linear position, velocity data in NED frame.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -292,20 +325,25 @@ This API subscribes/poles distance sensor data.  Please check API usage section 
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    range | float | distance to ground in meters
-    
-    
+    x | float | x position in local NED frame.
+    y | float | y position in local NED frame.
+    z | float | z position in local NED frame.
+    vx | float | x velocity in local NED frame.
+    vy | float | y velocity in local NED frame.
+    vz | float | z velocity in local NED frame.
+
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/distance_sensor/lidarlite_pub</br>
-* Response Type: sensor_msgs/Range
+* Name: /namespace/mavros/local_position/local</br>
+* Response Type: geometry_msgs/TwistStamped
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/imu/data_euler````
+
+* URL: ````GET http://<ip>/ros/<namespace>/mavros/local_position/local````
 * JSON Response:
 {
     twist:{
@@ -317,19 +355,19 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
         x: Float,
         y: Float,
         z: FLoat}
-}
+}}
 
 
 ### Websocket endpoint:
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/vfr_hud'</br>
-* messageType: 'mavros_msgs/VFR_HUD'
+* name: '/namespace/mavros/local_position/local'</br>
+* messageType: 'geometry_msgs/TwistStamped'
 
 ### API usage information:
 
-* This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.
-* This API will work on any px4 supported hardware.
-* If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.
-* If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.
+* This API provides linear position and lienar velocity.
+* Data returned is in NED frame.
+* Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
+

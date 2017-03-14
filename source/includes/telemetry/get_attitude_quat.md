@@ -1,4 +1,6 @@
-# Get Attitude Quaternion
+# Telemetry APIs
+
+## Get Attitude Quaternion
 
 
 

@@ -1,4 +1,4 @@
-# Get VFR HUD
+## Get Distance Sensor
 
 
 
@@ -7,20 +7,21 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/vfr_hud
-ROS-Topic Type: mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
+ROS-Topic Type: sensor_msgs/Range
 
 Response structure:
+    uint8 ULTRASOUND=0
+    uint8 INFRARED=1
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
+    uint8 radiation_type
+    float32 field_of_view
+    float32 min_range
+    float32 max_range
+    float32 range
 
 
 ```
@@ -51,20 +52,21 @@ NotImplemented
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Topic
-Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
+ROS-Topic Type: sensor_msgs/Range
 
-Response structure: mavros_msgs/VFR_HUD
+Response structure:
+    uint8 ULTRASOUND=0
+    uint8 INFRARED=1
     std_msgs/Header header
-        uint32 seq
-        time stamp
-        string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
+      uint32 seq
+      time stamp
+      string frame_id
+    uint8 radiation_type
+    float32 field_of_view
+    float32 min_range
+    float32 max_range
+    float32 range
 
 
 
@@ -73,20 +75,21 @@ Response structure: mavros_msgs/VFR_HUD
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-Type: Ros Topic
-Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
+ROS-Topic Type: sensor_msgs/Range
 
-Response structure: mavros_msgs/VFR_HUD
+Response structure:
+    uint8 ULTRASOUND=0
+    uint8 INFRARED=1
     std_msgs/Header header
-        uint32 seq
-        time stamp
-        string frame_id
-    float32 airspeed
-    float32 groundspeed
-    int16 heading
-    float32 throttle
-    float32 altitude
-    float32 climb
+      uint32 seq
+      time stamp
+      string frame_id
+    uint8 radiation_type
+    float32 field_of_view
+    float32 min_range
+    float32 max_range
+    float32 range
 ```
 
 ```javascript--REST
@@ -179,15 +182,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from mavros_msgs.msgs import VFR_HUD
+from sensor_msgs.msgs import Range
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), VFR_HUD, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/distance_sensor/lidarlite_pub"), Range, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    airspeed = data.airspeed
-    print airspeed
+    dist = data.range
+    print dist
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -240,7 +243,7 @@ success: True
 ```
 
 ```python--ros
-instance of mavros_msgs.msgs.VFR_HUD class
+instance of sensor_msgs.msgs.Range object
 
 ```
 
@@ -279,7 +282,7 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 ###Description:
 
-This API subscribes/poles VFR HUD data.  Please check API usage section below before using API.
+This API subscribes/poles distance sensor data.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -289,19 +292,15 @@ This API subscribes/poles VFR HUD data.  Please check API usage section below be
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    airspeed | float | airspeed in m/s
-    groundspeed | float | groundspeed in m/s
-    heading | int16 | yaw angle in degrees (NED frame)
-    throttle | float | throttle
-    altitude | float | altitude
-    climb | float | climb
-
+    range | float | distance to ground in meters
+    
+    
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/vfr_hud</br>
-* Response Type: mavros_msgs/VFR_HUD
+* Name: /namespace/mavros/distance_sensor/lidarlite_pub</br>
+* Response Type: sensor_msgs/Range
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -330,4 +329,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* airspeed data is the data from airspeed sensor.
+* This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.
+* This API will work on any px4 supported hardware.
+* If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.
+* If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.

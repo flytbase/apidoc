@@ -1,20 +1,27 @@
-# Get RC Data
+## Get Vehicle State
+
 
 > Definition
 
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/rc/in
-ROS-Topic Type: mavros_msgs/RCIn
+ROS-Topic Name: /<namespace>/flyt/state
+ROS-Topic Type: mavros_msgs/State
 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    uint8 rssi
-    uint16[] channels
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
+
 ```
 
 ```cpp
@@ -37,38 +44,61 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+# Python API for vehicle state is split into two APIs
+
+# Check arm status
+Class: flyt_python.api.navigation
+Function Definition: is_armed()
+Arguments: None
+return: Boolean
+
+# Check vehicle mode
+Class: flyt_python.api.navigation
+Function Definition: get_vehicle_mode()
+Arguments: None
+return: string
+
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
-ROS-Topic Name: /<namespace>/mavros/rc/in
-ROS-Topic Type: mavros_msgs/RCIn
+ROS-Topic Name: /<namespace>/flyt/state
+ROS-Topic Type: mavros_msgs/State
 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    uint8 rssi
-    uint16[] channels
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
 
 ```
 
 ```python--ros
 # ROS services and topics are accessible from onboard scripts only.
 
-ROS-Topic Name: /<namespace>/mavros/rc/in
-ROS-Topic Type: mavros_msgs/RCIn
+ROS-Topic Name: /<namespace>/flyt/state
+ROS-Topic Type: mavros_msgs/State
 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    uint8 rssi
-    uint16[] channels
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
 ```
 
 ```javascript--REST
@@ -137,7 +167,14 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```python
 # create flyt_python navigation class instance
 
-NotImplemented
+from flyt_python import api
+drone = api.navigation()
+time.sleep(3.0)
+
+# get arm status
+print drone.is_armed()
+print drone.get_vehicle_mode()
+
 ```
 
 ```cpp--ros
@@ -163,15 +200,14 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from mavros_msgs.msgs import RCIn
+from mavros_msgs.msgs import State
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/rc/in"), State, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/flyt/state"), State, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    # print data from first 6 channels
-    print data.channels[:6]
-
+    mode, is_armed = data.mode, data.armed
+    print mode, is_armed
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -216,7 +252,8 @@ success: true
 ```
 
 ```python
-[1001,999,1400,1234,1764,1900]
+True
+MANUAL
 ```
 
 ```cpp--ros
@@ -224,7 +261,7 @@ success: True
 ```
 
 ```python--ros
-NotImplemented
+True MANUAL
 ```
 
 ```javascript--REST
@@ -262,7 +299,7 @@ NotImplemented
 
 ###Description:
 
-This API subscribes/polls the input rc channel data. Please see usage information section below before using the API.
+This API subscribes/polls the vehicle state data. Please see usage information section below before using the API.
 
 ###Parameters:
     
@@ -272,7 +309,8 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    channels | Array of unit16 | Array of PWM data values for channels.
+    mode | string | autopilot flight mode e.g. MANUAL, APICTL
+    armed | boolean | Vehicle arm status. Armed if True and disarmed if False.
     
     
     
@@ -280,8 +318,8 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/rc/in</br>
-* Response Type: mavros_msgs/RCIn
+* Name: /namespace/flyt/state</br>
+* Response Type: mavros_msgs/State
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -310,4 +348,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Channel mapping of the data depends on RC calibration. 
+* This API provides mode and arm status.
+* All navigation API's work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.
+* This API only allows to read the mode and arm status. 
