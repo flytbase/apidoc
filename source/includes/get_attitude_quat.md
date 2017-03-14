@@ -1,4 +1,4 @@
-# Get Attitude Quaternion Data
+# Get Attitude Quaternion
 
 
 
@@ -8,23 +8,30 @@
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/imu/data_euler
-ROS-Topic Type: geometry_msgs/TwistStamped, below is its description
+ROS-Topic Type: sensor_msgs/Imu, below is its description
 
-#Subscriber response : Euler angles 
+#Subscriber response : Attitude Quaternion 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+    geometry_msgs/Quaternion orientation
+      float64 x
+      float64 y
+      float64 z
+      float64 w
+    float64[9] orientation_covariance
+    geometry_msgs/Vector3 angular_velocity
+      float64 x
+      float64 y
+      float64 z
+    float64[9] angular_velocity_covariance
+    geometry_msgs/Vector3 linear_acceleration
+      float64 x
+      float64 y
+      float64 z
+    float64[9] linear_acceleration_covariance
 
 ```
 
@@ -50,16 +57,17 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 
 Class: flyt_python.api.navigation
 
-Function: get_attitude_euler()
+Function: get_attitude_quaternion()
 
-Response: attitude_euler_object as described below.
-    class attitude_euler:
+Response: attitude_quaternion as described below.
+    class attitude_quaternion:
         '''
-        Holds fields for Attitude data in Euler Angles
+        Holds fields for Attitude data in Quaternion format
         '''
-        roll = 0.0
-        pitch = 0.0
-        yaw = 0.0
+        x = 0.0
+        y = 0.0
+        z = 0.0
+        w = 0.0
         rollspeed = 0.0
         pitchspeed = 0.0
         yawspeed = 0.0
@@ -71,21 +79,28 @@ This API support single pole mode only.
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/imu/data_euler
-Response Type:
+Name: /<namespace>/mavros/imu/data
+Response Type: sensor_msgs/Imu
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+    geometry_msgs/Quaternion orientation
+      float64 x
+      float64 y
+      float64 z
+      float64 w
+    float64[9] orientation_covariance
+    geometry_msgs/Vector3 angular_velocity
+      float64 x
+      float64 y
+      float64 z
+    float64[9] angular_velocity_covariance
+    geometry_msgs/Vector3 linear_acceleration
+      float64 x
+      float64 y
+      float64 z
+    float64[9] linear_acceleration_covariance
 
 ```
 
@@ -93,21 +108,28 @@ Response Type:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/imu/data_euler
-Response Type:
+Name: /<namespace>/mavros/imu/data
+Response Type: sensor_msgs/Imu
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+    geometry_msgs/Quaternion orientation
+      float64 x
+      float64 y
+      float64 z
+      float64 w
+    float64[9] orientation_covariance
+    geometry_msgs/Vector3 angular_velocity
+      float64 x
+      float64 y
+      float64 z
+    float64[9] angular_velocity_covariance
+    geometry_msgs/Vector3 linear_acceleration
+      float64 x
+      float64 y
+      float64 z
+    float64[9] linear_acceleration_covariance
 
 ```
 
@@ -187,9 +209,9 @@ drone = api.navigation()
 time.sleep(3.0)
 
 # Poll attitude euler data
-att = drone.get_attitude_euler()
+att = drone.get_attitude_quaternion()
 # Print the data
-print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
+print att.x, att.y, att.z, att.w, att.rollspeed, att.pitchspeed, att.yawspeed
 
 ```
 
@@ -216,15 +238,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from geometry_msgs.msg import TwistStamped
+from sensor_msgs.msg import Imu
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/imu/data_euler"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/imu/data"), Imu, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    roll, pitch, yaw = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
-    print roll, pitch, yaw
+    x, y, z, w= data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
+    print x, y, z, w
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -271,18 +293,7 @@ success: true
 ```
 
 ```python
-instance of class
-class attitude_euler:
-    '''
-    Holds fields for Attitude data in Euler Angles
-    '''
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
-    rollspeed = 0.0
-    pitchspeed = 0.0
-    yawspeed = 0.0
-
+instance of class attitude_quaternion
 ```
 
 ```cpp--ros
@@ -290,20 +301,7 @@ success: True
 ```
 
 ```python--ros
-instance of gemometry_msgs.msg.TwistStamped class
-std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+instance of sensor_msgs.msg.Imu class
 
 ```
 
@@ -348,7 +346,7 @@ std_msgs/Header header
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
+This API subscribes/poles attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -358,9 +356,10 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    roll | float | roll angle in radians, NED frame.
-    pitch | float | pitch angle in radians, NED frame.
-    yaw | float | yaw angle in radians, NED frame.
+    x | float | x vector.
+    y | float | y vector.
+    z | float | z vector.
+    w | float | w vector.
     rollspeed | float | roll rate in radians/sec, NED frame.
     pitchspeed | float | pitch rate in radians/sec, NED frame.
     yawspeed | float | yaw rate in radians/sec, NED frame.
@@ -369,8 +368,8 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data_euler</br>
-* Response Type: geometry_msgs/TwistStamped
+* Name: /namespace/mavros/imu/data</br>
+* Response Type: sensor_msgs/Imu
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
@@ -403,6 +402,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
-
+* This API provides orientation in quaternion and angular velocity

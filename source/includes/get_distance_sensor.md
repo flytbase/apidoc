@@ -1,4 +1,4 @@
-# Get Battery Status
+# Get Distance Sensor
 
 
 
@@ -7,49 +7,22 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/battery
-ROS-Topic Type: sensor_msgs/BatteryState, below is its description
+ROS-Topic Name: /<namespace>/mavros/vfr_hud
+ROS-Topic Type: mavros_msgs/VFR_HUD
 
-#Subscriber response : Battery Status 
 Response structure:
-uint8 POWER_SUPPLY_STATUS_UNKNOWN=0
-uint8 POWER_SUPPLY_STATUS_CHARGING=1
-uint8 POWER_SUPPLY_STATUS_DISCHARGING=2
-uint8 POWER_SUPPLY_STATUS_NOT_CHARGING=3
-uint8 POWER_SUPPLY_STATUS_FULL=4
-uint8 POWER_SUPPLY_HEALTH_UNKNOWN=0
-uint8 POWER_SUPPLY_HEALTH_GOOD=1
-uint8 POWER_SUPPLY_HEALTH_OVERHEAT=2
-uint8 POWER_SUPPLY_HEALTH_DEAD=3
-uint8 POWER_SUPPLY_HEALTH_OVERVOLTAGE=4
-uint8 POWER_SUPPLY_HEALTH_UNSPEC_FAILURE=5
-uint8 POWER_SUPPLY_HEALTH_COLD=6
-uint8 POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE=7
-uint8 POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE=8
-uint8 POWER_SUPPLY_TECHNOLOGY_UNKNOWN=0
-uint8 POWER_SUPPLY_TECHNOLOGY_NIMH=1
-uint8 POWER_SUPPLY_TECHNOLOGY_LION=2
-uint8 POWER_SUPPLY_TECHNOLOGY_LIPO=3
-uint8 POWER_SUPPLY_TECHNOLOGY_LIFE=4
-uint8 POWER_SUPPLY_TECHNOLOGY_NICD=5
-uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6
-std_msgs/Header header
-  uint32 seq
-  time stamp
-  string frame_id
-float32 voltage
-float32 current
-float32 charge
-float32 capacity
-float32 design_capacity
-float32 percentage
-uint8 power_supply_status
-uint8 power_supply_health
-uint8 power_supply_technology
-bool present
-float32[] cell_voltage
-string location
-string serial_number
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
+
+
 ```
 
 ```cpp
@@ -71,54 +44,29 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
-NotImplemented
 
+NotImplemented
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/battery
-Response Type: sensor_msgs/BatteryState
-    uint8 POWER_SUPPLY_STATUS_UNKNOWN=0
-    uint8 POWER_SUPPLY_STATUS_CHARGING=1
-    uint8 POWER_SUPPLY_STATUS_DISCHARGING=2
-    uint8 POWER_SUPPLY_STATUS_NOT_CHARGING=3
-    uint8 POWER_SUPPLY_STATUS_FULL=4
-    uint8 POWER_SUPPLY_HEALTH_UNKNOWN=0
-    uint8 POWER_SUPPLY_HEALTH_GOOD=1
-    uint8 POWER_SUPPLY_HEALTH_OVERHEAT=2
-    uint8 POWER_SUPPLY_HEALTH_DEAD=3
-    uint8 POWER_SUPPLY_HEALTH_OVERVOLTAGE=4
-    uint8 POWER_SUPPLY_HEALTH_UNSPEC_FAILURE=5
-    uint8 POWER_SUPPLY_HEALTH_COLD=6
-    uint8 POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE=7
-    uint8 POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE=8
-    uint8 POWER_SUPPLY_TECHNOLOGY_UNKNOWN=0
-    uint8 POWER_SUPPLY_TECHNOLOGY_NIMH=1
-    uint8 POWER_SUPPLY_TECHNOLOGY_LION=2
-    uint8 POWER_SUPPLY_TECHNOLOGY_LIPO=3
-    uint8 POWER_SUPPLY_TECHNOLOGY_LIFE=4
-    uint8 POWER_SUPPLY_TECHNOLOGY_NICD=5
-    uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6
+Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+
+Response structure: mavros_msgs/VFR_HUD
     std_msgs/Header header
         uint32 seq
         time stamp
         string frame_id
-    float32 voltage
-    float32 current
-    float32 charge
-    float32 capacity
-    float32 design_capacity
-    float32 percentage
-    uint8 power_supply_status
-    uint8 power_supply_health
-    uint8 power_supply_technology
-    bool present
-    float32[] cell_voltage
-    string location
-    string serial_number
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
+
+
 
 ```
 
@@ -126,47 +74,19 @@ Response Type: sensor_msgs/BatteryState
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/battery
-Response Type: sensor_msgs/BatteryState
-    uint8 POWER_SUPPLY_STATUS_UNKNOWN=0
-    uint8 POWER_SUPPLY_STATUS_CHARGING=1
-    uint8 POWER_SUPPLY_STATUS_DISCHARGING=2
-    uint8 POWER_SUPPLY_STATUS_NOT_CHARGING=3
-    uint8 POWER_SUPPLY_STATUS_FULL=4
-    uint8 POWER_SUPPLY_HEALTH_UNKNOWN=0
-    uint8 POWER_SUPPLY_HEALTH_GOOD=1
-    uint8 POWER_SUPPLY_HEALTH_OVERHEAT=2
-    uint8 POWER_SUPPLY_HEALTH_DEAD=3
-    uint8 POWER_SUPPLY_HEALTH_OVERVOLTAGE=4
-    uint8 POWER_SUPPLY_HEALTH_UNSPEC_FAILURE=5
-    uint8 POWER_SUPPLY_HEALTH_COLD=6
-    uint8 POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE=7
-    uint8 POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE=8
-    uint8 POWER_SUPPLY_TECHNOLOGY_UNKNOWN=0
-    uint8 POWER_SUPPLY_TECHNOLOGY_NIMH=1
-    uint8 POWER_SUPPLY_TECHNOLOGY_LION=2
-    uint8 POWER_SUPPLY_TECHNOLOGY_LIPO=3
-    uint8 POWER_SUPPLY_TECHNOLOGY_LIFE=4
-    uint8 POWER_SUPPLY_TECHNOLOGY_NICD=5
-    uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6
+Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+
+Response structure: mavros_msgs/VFR_HUD
     std_msgs/Header header
         uint32 seq
         time stamp
         string frame_id
-    float32 voltage
-    float32 current
-    float32 charge
-    float32 capacity
-    float32 design_capacity
-    float32 percentage
-    uint8 power_supply_status
-    uint8 power_supply_health
-    uint8 power_supply_technology
-    bool present
-    float32[] cell_voltage
-    string location
-    string serial_number
-
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
 ```
 
 ```javascript--REST
@@ -174,12 +94,19 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/mavros/battery'
+URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
 
 JSON Response:
-{  voltage: Float,
-    current: Float,
-    remaining: Float}
+{  twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}}
 
 ```
 
@@ -190,13 +117,20 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/mavros/battery',
-messageType: 'sensor_msgs/BatteryState'
+name: '/<namespace>/mavros/imu/data_euler',
+messageType: 'geometry_msgs/TwistStamped'
 
 Response:
-{   voltage: Float,
-    current: Float,
-    remaining: Float}
+{   twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}}
 
 ```
 
@@ -245,15 +179,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from sensor_msgs.msg import BatteryState
+from mavros_msgs.msgs import VFR_HUD
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/battery"), BatteryState, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), VFR_HUD, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    voltage = data.voltage
-    print voltage
+    airspeed = data.airspeed
+    print airspeed
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -263,7 +197,7 @@ topic_sub.unregister()  # unregister topic subscription
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/mavros/battery",  
+    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
     success: function(data){
            console.log(data);
     }
@@ -273,15 +207,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var batteryData = new ROSLIB.Service({
+var imuEulerData = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/mavros/battery',
-    messageType : 'sensor_msgs/BatteryState'
+    name : '/<namespace>/mavros/imu/data_euler',
+    messageType : 'geometry_msgs/TwistStamped'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-batteryData.subscribe(request, function(result) {
+imuEulerData.subscribe(request, function(result) {
     console.log(result.data);
 });
 ```
@@ -306,25 +240,37 @@ success: True
 ```
 
 ```python--ros
-instance of sensor_msgs.msg.BatteryState class
+instance of mavros_msgs.msgs.VFR_HUD class
 
 ```
 
 ```javascript--REST
 {
-    voltage: Float,
-    current: Float,
-    remaining: Float}
-
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}
 
 ```
 
 ```javascript--Websocket
 {
-    voltage: Float,
-    current: Float,
-    remaining: Float}
-
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}
 
 
 ```
@@ -333,7 +279,7 @@ instance of sensor_msgs.msg.BatteryState class
 
 ###Description:
 
-This API subscribes/poles battery status.  Please check API usage section below before using API.
+This API subscribes/poles distance sensor data.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -343,29 +289,35 @@ This API subscribes/poles battery status.  Please check API usage section below 
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    voltage | float | total voltage, Volts
-    current | float | instantaneous current consumption, Amperes
-    charge | float | Charge
-    capacity | float | capacity
-    percentage | float | percentage left
-   
-   
+    airspeed | float | airspeed in m/s
+    groundspeed | float | groundspeed in m/s
+    heading | int16 | yaw angle in degrees (NED frame)
+    throttle | float | throttle
+    altitude | float | altitude
+    climb | float | climb
+
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/battery</br>
-* Response Type: sensor_msgs/BatteryState
+* Name: /namespace/mavros/vfr_hud</br>
+* Response Type: mavros_msgs/VFR_HUD
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/battery````
+* URL: ````GET http://<ip>/ros/<namespace>/mavros/imu/data_euler````
 * JSON Response:
 {
-    voltage: Float,
-    current: Float,
-    remaining: Float
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
 
 
@@ -373,10 +325,9 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/battery'</br>
-* messageType: 'sensor_msgs/BatteryState'
+* name: '/namespace/mavros/vfr_hud'</br>
+* messageType: 'mavros_msgs/VFR_HUD'
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
+* This topic provides LIDAR, SONAR data.

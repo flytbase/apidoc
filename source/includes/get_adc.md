@@ -1,4 +1,4 @@
-# Namespace
+# Get ADC Payload
 
 > Definition
 
@@ -28,10 +28,7 @@ std::string global_namespace
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.api.navigation
-Function Definition: get_global_namespace()
-Arguments: None
-return: string
+NotImplemented
 ```
 
 ```cpp--ros
@@ -106,10 +103,7 @@ rosservice call /get_global_namespace "{}"
 ```python
 # create flyt_python navigation class instance
 
-from flyt_python import api
-drone = api.navigation()
-time.sleep(3.0)
-namespace = drone.get_global_namespace()
+NotImplemented
 
 ```
 
@@ -186,7 +180,7 @@ message: Parameter Get Global Namespace Successful  flytpod
 ```
 
 ```python
-flytpod
+NotImplemented
 ```
 
 ```cpp--ros
@@ -231,7 +225,7 @@ message: Parameter Get Global Namespace Successful	flytpod
 
 ###Description:
 
-This API returns the global namespace.
+This API subscribes/polls to ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.
 
 ###Parameters:
     
@@ -271,6 +265,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Global namespce is required when calling onboard/remote APIs except python APIs.
-* All the core nodes of FlytOS run inside this namespace.
-* Make sure that your custom ROS packages are not launched inside this namespace.
+* This API is useful on FlytPOD only. 
+* There are two ADC ports available on back IO panel of FlytPOD. Read hardware connections section in FlytPOD documentation for more info on wiring.
+* ADC allowed range is 0 to 3.3 V.

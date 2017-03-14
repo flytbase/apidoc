@@ -1,4 +1,4 @@
-# Get GPS Data
+# Get Global Position
 
 
 
@@ -10,22 +10,32 @@
 ROS-Topic Name: /<namespace>/mavros/global_position/global
 ROS-Topic Type: sensor_msgs/NavSatFix, below is its description
 
-#Subscriber response : Euler angles 
+#Subscriber response : GPS pos 
 Response structure:
+    uint8 COVARIANCE_TYPE_UNKNOWN=0
+    uint8 COVARIANCE_TYPE_APPROXIMATED=1
+    uint8 COVARIANCE_TYPE_DIAGONAL_KNOWN=2
+    uint8 COVARIANCE_TYPE_KNOWN=3
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
-
+    sensor_msgs/NavSatStatus status
+      int8 STATUS_NO_FIX=-1
+      int8 STATUS_FIX=0
+      int8 STATUS_SBAS_FIX=1
+      int8 STATUS_GBAS_FIX=2
+      uint16 SERVICE_GPS=1
+      uint16 SERVICE_GLONASS=2
+      uint16 SERVICE_COMPASS=4
+      uint16 SERVICE_GALILEO=8
+      int8 status
+      uint16 service
+    float64 latitude : latitude
+    float64 longitude : longitude
+    float64 altitude : altitude MSL
+    float64[9] position_covariance
+    uint8 position_covariance_type
 ```
 
 ```cpp
@@ -50,19 +60,16 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 
 Class: flyt_python.api.navigation
 
-Function: get_attitude_euler()
+Function: get_global_position()
 
-Response: attitude_euler_object as described below.
-    class attitude_euler:
+Response: glob_position as described below.
+    class glob_position:
         '''
-        Holds fields for Attitude data in Euler Angles
+        Holds fields for global position
         '''
-        roll = 0.0
-        pitch = 0.0
-        yaw = 0.0
-        rollspeed = 0.0
-        pitchspeed = 0.0
-        yawspeed = 0.0
+        lat = 0.0
+        lon = 0.0
+        alt = 0.0
 
 This API support single pole mode only.
 ```
@@ -72,21 +79,31 @@ This API support single pole mode only.
 
 Type: Ros Topic
 Name: /<namespace>/mavros/global_position/global
-Response Type:
+Response Type: sensor_msgs/NavSatFix
+    uint8 COVARIANCE_TYPE_UNKNOWN=0
+    uint8 COVARIANCE_TYPE_APPROXIMATED=1
+    uint8 COVARIANCE_TYPE_DIAGONAL_KNOWN=2
+    uint8 COVARIANCE_TYPE_KNOWN=3
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
-
+    sensor_msgs/NavSatStatus status
+      int8 STATUS_NO_FIX=-1
+      int8 STATUS_FIX=0
+      int8 STATUS_SBAS_FIX=1
+      int8 STATUS_GBAS_FIX=2
+      uint16 SERVICE_GPS=1
+      uint16 SERVICE_GLONASS=2
+      uint16 SERVICE_COMPASS=4
+      uint16 SERVICE_GALILEO=8
+      int8 status
+      uint16 service
+    float64 latitude : latitude
+    float64 longitude : longitude
+    float64 altitude : altitude MSL
+    float64[9] position_covariance
+    uint8 position_covariance_type
 ```
 
 ```python--ros
@@ -94,20 +111,31 @@ Response Type:
 
 Type: Ros Topic
 Name: /<namespace>/mavros/global_position/global
-Response Type:
+Response Type: sensor_msgs/NavSatFix
+    uint8 COVARIANCE_TYPE_UNKNOWN=0
+    uint8 COVARIANCE_TYPE_APPROXIMATED=1
+    uint8 COVARIANCE_TYPE_DIAGONAL_KNOWN=2
+    uint8 COVARIANCE_TYPE_KNOWN=3
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+    sensor_msgs/NavSatStatus status
+      int8 STATUS_NO_FIX=-1
+      int8 STATUS_FIX=0
+      int8 STATUS_SBAS_FIX=1
+      int8 STATUS_GBAS_FIX=2
+      uint16 SERVICE_GPS=1
+      uint16 SERVICE_GLONASS=2
+      uint16 SERVICE_COMPASS=4
+      uint16 SERVICE_GALILEO=8
+      int8 status
+      uint16 service
+    float64 latitude : latitude
+    float64 longitude : longitude
+    float64 altitude : altitude MSL
+    float64[9] position_covariance
+    uint8 position_covariance_type
 
 ```
 
@@ -167,11 +195,10 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# Poll attitude euler data
-att = drone.get_attitude_euler()
+# Poll data
+gpos = drone.get_global_position
 # Print the data
-print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
-
+print gpos.lat, gpos.lon, gpos.alt
 ```
 
 ```cpp--ros
@@ -197,15 +224,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from geometry_msgs.msg import TwistStamped
+from sensor_msgs.msg import NavSatFix
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/global_position/global"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/global_position/global"), NavSatFix, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    roll, pitch, yaw = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
-    print roll, pitch, yaw
+    lat, lon, alt = data.latitude, data.longitude, data.altitude
+    print lat, lon, alt
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -250,17 +277,7 @@ success: true
 ```
 
 ```python
-instance of class
-class attitude_euler:
-    '''
-    Holds fields for Attitude data in Euler Angles
-    '''
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
-    rollspeed = 0.0
-    pitchspeed = 0.0
-    yawspeed = 0.0
+instance of class glob_position
 
 ```
 
@@ -269,21 +286,7 @@ success: True
 ```
 
 ```python--ros
-instance of gemometry_msgs.msg.TwistStamped class
-std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
-
+instance of sensor_msgs.msg.NavSatFix class
 ```
 
 ```javascript--REST
@@ -309,7 +312,7 @@ std_msgs/Header header
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
+This API subscribes/poles position data in global coordinate system.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -319,13 +322,10 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    roll | float | roll angle in radians, NED frame.
-    pitch | float | pitch angle in radians, NED frame.
-    yaw | float | yaw angle in radians, NED frame.
-    rollspeed | float | roll rate in radians/sec, NED frame.
-    pitchspeed | float | pitch rate in radians/sec, NED frame.
-    yawspeed | float | yaw rate in radians/sec, NED frame.
-
+    lat | float | latitude in global coordinate system WGS84
+    lon | float | longitude in global coordinate system WGS84
+    alt | float | altitude from MSL (mean sea level) in meters.
+    
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
@@ -354,5 +354,8 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
+* This API provides GPS coordinates and altitude at current location
+* Altitude value returned is relative to MSL (mean sea level).
+* Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API's expect z values in local frame.
+
+

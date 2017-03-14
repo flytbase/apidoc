@@ -1,4 +1,4 @@
-# Get Local Position Data
+# Get Local Position 
 
 
 > Definition
@@ -6,7 +6,7 @@
 ```shell
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
-ROS-Topic Name: /<namespace>/mavros/imu/data_euler
+ROS-Topic Name: /<namespace>/mavros/imu/local_position/local
 ROS-Topic Type: geometry_msgs/TwistStamped, below is its description
 
 #Subscriber response : Euler angles 
@@ -49,20 +49,20 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 
 Class: flyt_python.api.navigation
 
-Function: get_attitude_euler()
+Function: get_local_position()
 
-Response: attitude_euler_object as described below.
-    class attitude_euler:
+Response: local_position as described below.
+    class local_position:
         '''
-        Holds fields for Attitude data in Euler Angles
+        Holds fields for local position
         '''
-        roll = 0.0
-        pitch = 0.0
-        yaw = 0.0
-        rollspeed = 0.0
-        pitchspeed = 0.0
-        yawspeed = 0.0
-
+        x = 0.0
+        y = 0.0
+        z = 0.0
+        vx = 0.0
+        vy = 0.0
+        vz = 0.0
+    
 This API support single pole mode only.
 ```
 
@@ -70,7 +70,7 @@ This API support single pole mode only.
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/imu/data_euler
+Name: /<namespace>/mavros/local_position/local
 Response Type:
     std_msgs/Header header
       uint32 seq
@@ -92,7 +92,7 @@ Response Type:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/imu/data_euler
+Name: /<namespace>/mavros/local_position/local
 Response Type:
     std_msgs/Header header
       uint32 seq
@@ -100,13 +100,13 @@ Response Type:
       string frame_id
     geometry_msgs/Twist twist
       geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
+        float64 x : x position
+        float64 y : y position
+        float64 z : z position
       geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+        float64 x : linear acceleration along x axis
+        float64 y : linear acceleration along y axis
+        float64 z : linear acceleration along z axis
 
 ```
 
@@ -181,10 +181,10 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# Poll attitude euler data
-att = drone.get_attitude_euler()
+# Poll data
+pos = drone.get_local_position()
 # Print the data
-print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
+print pos.x, pos.vx
 
 ```
 
@@ -214,12 +214,12 @@ success = srv.response.success;
 from geometry_msgs.msg import TwistStamped
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/imu/data_euler"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/local_position/local"), TwistStamped, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    roll, pitch, yaw = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
-    print roll, pitch, yaw
+    x, y, z = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
+    print x, y, z
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -265,18 +265,7 @@ success: true
 ```
 
 ```python
-instance of class
-class attitude_euler:
-    '''
-    Holds fields for Attitude data in Euler Angles
-    '''
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
-    rollspeed = 0.0
-    pitchspeed = 0.0
-    yawspeed = 0.0
-
+instance of class local_position
 ```
 
 ```cpp--ros
@@ -285,19 +274,6 @@ success: True
 
 ```python--ros
 instance of gemometry_msgs.msg.TwistStamped class
-std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
 
 ```
 
@@ -336,7 +312,7 @@ std_msgs/Header header
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
+This API subscribes/poles linear position, velocity data in NED frame.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -346,18 +322,18 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    roll | float | roll angle in radians, NED frame.
-    pitch | float | pitch angle in radians, NED frame.
-    yaw | float | yaw angle in radians, NED frame.
-    rollspeed | float | roll rate in radians/sec, NED frame.
-    pitchspeed | float | pitch rate in radians/sec, NED frame.
-    yawspeed | float | yaw rate in radians/sec, NED frame.
+    x | float | x position in local NED frame.
+    y | float | y position in local NED frame.
+    z | float | z position in local NED frame.
+    vx | float | x velocity in local NED frame.
+    vy | float | y velocity in local NED frame.
+    vz | float | z velocity in local NED frame.
 
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data_euler</br>
+* Name: /namespace/mavros/local_position/local</br>
 * Response Type: geometry_msgs/TwistStamped
 
 ### RESTful endpoint:
@@ -388,6 +364,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
+* This API provides linear position and lienar velocity.
 * Data returned is in NED frame.
+* Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
 

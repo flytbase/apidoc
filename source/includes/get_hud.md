@@ -1,4 +1,4 @@
-# Get HUD Data
+# Get VFR HUD
 
 
 
@@ -8,23 +8,20 @@
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/vfr_hud
-ROS-Topic Type: mavros_msgs/VFR_HUD, below is its description
+ROS-Topic Type: mavros_msgs/VFR_HUD
 
-#Subscriber response : Euler angles 
 Response structure:
     std_msgs/Header header
       uint32 seq
       time stamp
       string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
+
 
 ```
 
@@ -48,44 +45,28 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-Class: flyt_python.api.navigation
-
-Function: get_attitude_euler()
-
-Response: attitude_euler_object as described below.
-    class attitude_euler:
-        '''
-        Holds fields for Attitude data in Euler Angles
-        '''
-        roll = 0.0
-        pitch = 0.0
-        yaw = 0.0
-        rollspeed = 0.0
-        pitchspeed = 0.0
-        yawspeed = 0.0
-
-This API support single pole mode only.
+NotImplemented
 ```
 
 ```cpp--ros
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/vfr_hud
-Response Type:
+Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
+
+Response structure: mavros_msgs/VFR_HUD
     std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+        uint32 seq
+        time stamp
+        string frame_id
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
+
+
 
 ```
 
@@ -93,22 +74,19 @@ Response Type:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Topic
-Name: /<namespace>/mavros/vfr_hud
-Response Type:
-    std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+Name: /<namespace>/mavros/mavros_msgs/VFR_HUD
 
+Response structure: mavros_msgs/VFR_HUD
+    std_msgs/Header header
+        uint32 seq
+        time stamp
+        string frame_id
+    float32 airspeed
+    float32 groundspeed
+    int16 heading
+    float32 throttle
+    float32 altitude
+    float32 climb
 ```
 
 ```javascript--REST
@@ -116,15 +94,19 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/mavros/vfr_hud'
+URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
 
 JSON Response:
-{   airspeed: Float,
-    groundspeed: Float,
-    heading: Float,
-    throttle: Float,
-    altitude: Float,
-    climb: Float}
+{  twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}}
 
 ```
 
@@ -135,16 +117,20 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/mavros/vfr_hud',
-messageType: 'mavros_msgs/VFR_HUD'
+name: '/<namespace>/mavros/imu/data_euler',
+messageType: 'geometry_msgs/TwistStamped'
 
 Response:
-{   airspeed: Float,
-    groundspeed: Float,
-    heading: Float,
-    throttle: Float,
-    altitude: Float,
-    climb: Float}
+{   twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
+}}
 
 ```
 
@@ -167,17 +153,7 @@ nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
 ```
 
 ```python
-# create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
-# wait for interface to initialize
-time.sleep(3.0)
-
-# Poll attitude euler data
-att = drone.get_attitude_euler()
-# Print the data
-print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
-
+NotImplemented
 ```
 
 ```cpp--ros
@@ -203,15 +179,15 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from geometry_msgs.msg import TwistStamped
+from mavros_msgs.msgs import VFR_HUD
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/namespace/mavros/vfr_hud"), VFR_HUD, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
-    roll, pitch, yaw = data.twist.linear.x, data.twist.linear.y, data.twist.linear.z
-    print roll, pitch, yaw
+    airspeed = data.airspeed
+    print airspeed
 
 # unsubscribe from a topic
 topic_sub.unregister()  # unregister topic subscription
@@ -221,7 +197,7 @@ topic_sub.unregister()  # unregister topic subscription
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/mavros/vfr_hud",  
+    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
     success: function(data){
            console.log(data);
     }
@@ -231,15 +207,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var hudData = new ROSLIB.Service({
+var imuEulerData = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/mavros/vfr_hud',
-    messageType : 'mavros_msgs/VFR_HUD'
+    name : '/<namespace>/mavros/imu/data_euler',
+    messageType : 'geometry_msgs/TwistStamped'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-hudData.subscribe(request, function(result) {
+imuEulerData.subscribe(request, function(result) {
     console.log(result.data);
 });
 ```
@@ -256,18 +232,7 @@ success: true
 ```
 
 ```python
-instance of class
-class attitude_euler:
-    '''
-    Holds fields for Attitude data in Euler Angles
-    '''
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
-    rollspeed = 0.0
-    pitchspeed = 0.0
-    yawspeed = 0.0
-
+NotImplemented
 ```
 
 ```cpp--ros
@@ -275,43 +240,36 @@ success: True
 ```
 
 ```python--ros
-instance of gemometry_msgs.msg.TwistStamped class
-std_msgs/Header header
-      uint32 seq
-      time stamp
-      string frame_id
-    geometry_msgs/Twist twist
-      geometry_msgs/Vector3 linear
-        float64 x
-        float64 y
-        float64 z
-      geometry_msgs/Vector3 angular
-        float64 x
-        float64 y
-        float64 z
+instance of mavros_msgs.msgs.VFR_HUD class
 
 ```
 
 ```javascript--REST
 {
-    airspeed: Float,
-    groundspeed: Float,
-    heading: Float,
-    throttle: Float,
-    altitude: Float,
-    climb: Float
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
 
 ```
 
 ```javascript--Websocket
 {
-    airspeed: Float,
-    groundspeed: Float,
-    heading: Float,
-    throttle: Float,
-    altitude: Float,
-    climb: Float
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
 
 
@@ -321,7 +279,7 @@ std_msgs/Header header
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
+This API subscribes/poles VFR HUD data.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -331,12 +289,12 @@ This API subscribes/poles attitude data (angle and angular rate) in euler angles
     
     Parameter | type | Description
     ---------- | ---------- | ------------
-    roll | float | roll angle in radians, NED frame.
-    pitch | float | pitch angle in radians, NED frame.
-    yaw | float | yaw angle in radians, NED frame.
-    rollspeed | float | roll rate in radians/sec, NED frame.
-    pitchspeed | float | pitch rate in radians/sec, NED frame.
-    yawspeed | float | yaw rate in radians/sec, NED frame.
+    airspeed | float | airspeed in m/s
+    groundspeed | float | groundspeed in m/s
+    heading | int16 | yaw angle in degrees (NED frame)
+    throttle | float | throttle
+    altitude | float | altitude
+    climb | float | climb
 
 ### ROS endpoint:
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
@@ -348,15 +306,18 @@ All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboar
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/vfr_hud````
+* URL: ````GET http://<ip>/ros/<namespace>/mavros/imu/data_euler````
 * JSON Response:
 {
-    airspeed: Float,
-    groundspeed: Float,
-    heading: Float,
-    throttle: Float,
-    altitude: Float,
-    climb: Float
+    twist:{
+    linear:{
+        x: Float,
+        y: Float,
+        z: FLoat},
+    angular:{
+        x: Float,
+        y: Float,
+        z: FLoat}
 }
 
 
@@ -369,5 +330,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
+* airspeed data is the data from airspeed sensor.

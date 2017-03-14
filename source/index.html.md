@@ -22,6 +22,19 @@ includes:
   - position_setpoint_global
   - velocity_setpoint
   - execute_script
+  - get_attitude_quat
+  - get_attitude_euler
+  - get_local_pos
+  - get_GPS
+  - get_battery_status
+  - get_hud
+  - get_RC
+  - get_adc
+  - get_distance_sensor
+  - get_vehicle_state
+  - actuator_testing
+  - esc_calibration
+  - module_calibration
   - get_waypoints
   - set_waypoints
   - execute_waypoints
@@ -37,15 +50,6 @@ includes:
   - param_create
   - param_delete
   - param_reset
-  - actuator_testing
-  - esc_calibration
-  - module_calibration
-  - get_attitude_quat
-  - get_attitude_euler
-  - get_local_pos
-  - get_GPS
-  - get_battery_status
-  - get_hud
   - video_streaming
   
 
