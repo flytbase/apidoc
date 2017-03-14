@@ -193,24 +193,18 @@ NotImplemented
 
 
 ###Description:
-This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.
+This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.
 
 ###Parameters:
     
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    actuator_id | int | Decide which actuator to trigger.
+    time_s | float | Time in seconds to rotate the actuator
     
     Output:
     
@@ -249,9 +243,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 
 ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
+Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
 
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
 
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 

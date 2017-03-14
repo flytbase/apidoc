@@ -248,13 +248,13 @@ This API returns list of current waypoints on autopilot.
 
 ###Parameters:
     
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt
     yaw | float | Yaw Setpoint in radians
     yaw_valid | bool | Must be set to true, if yaw 
     tolerance | float | Acceptance radius in meters, default value=1.0m 
