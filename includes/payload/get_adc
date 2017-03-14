@@ -66,19 +66,12 @@ Response structure:
     <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
     <span class="nl">namespace</span><span class="p">:</span> <span class="nx">namespace</span> <span class="nx">used</span> <span class="nx">by</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">device</span><span class="p">.</span>
 
-<span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/imu/data_euler'</span>
+<span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/payload_adc'</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>  <span class="nl">twist</span><span class="p">:{</span>
-    <span class="nl">linear</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">},</span>
-    <span class="nx">angular</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">}</span>
-<span class="p">}}</span>
+<span class="p">{</span>   <span class="nl">adc_voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+    <span class="nx">adc_updated</span><span class="p">:</span> <span class="nx">Int</span>
+<span class="p">}</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
 <span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialisng</span> 
@@ -86,20 +79,13 @@ Response structure:
 <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span> <span class="nx">before</span> <span class="nx">calling</span> <span class="nx">the</span> <span class="nx">API</span> 
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
-<span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/imu/data_euler'</span><span class="p">,</span>
-<span class="nx">messageType</span><span class="p">:</span> <span class="s1">'geometry_msgs/TwistStamped'</span>
+<span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/payload_adc'</span><span class="p">,</span>
+<span class="nx">messageType</span><span class="p">:</span> <span class="s1">'mavros_msgs/PayloadADC'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">twist</span><span class="p">:{</span>
-    <span class="nl">linear</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">},</span>
-    <span class="nx">angular</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">}</span>
-<span class="p">}}</span>
+<span class="p">{</span>   <span class="nl">adc_voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+    <span class="nx">adc_updated</span><span class="p">:</span> <span class="nx">Int</span>
+<span class="p">}</span>
 
 </code></pre>
 <blockquote>
@@ -148,22 +134,22 @@ Response structure:
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
     <span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
-    <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/imu/data_euler"</span><span class="p">,</span>  
+    <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/payload_adc"</span><span class="p">,</span>  
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
 
-</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">imuEulerData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">adcData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
-    <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/imu/data_euler'</span><span class="p">,</span>
-    <span class="na">messageType</span> <span class="p">:</span> <span class="s1">'geometry_msgs/TwistStamped'</span>
+    <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/payload_adc'</span><span class="p">,</span>
+    <span class="na">messageType</span> <span class="p">:</span> <span class="s1">'mavros_msgs/PayloadADC'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
 
-<span class="nx">imuEulerData</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">adcData</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
@@ -177,27 +163,13 @@ Response structure:
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">PayloadADC</span> <span class="nb">object</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
-    <span class="nl">twist</span><span class="p">:{</span>
-    <span class="nl">linear</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">},</span>
-    <span class="nx">angular</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">}</span>
+    <span class="nl">adc_voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+    <span class="nx">adc_updated</span><span class="p">:</span> <span class="nx">Int</span>
 <span class="p">}</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="p">{</span>
-    <span class="nl">twist</span><span class="p">:{</span>
-    <span class="nl">linear</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">},</span>
-    <span class="nx">angular</span><span class="p">:{</span>
-        <span class="nl">x</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">y</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="nx">z</span><span class="p">:</span> <span class="nx">FLoat</span><span class="p">}</span>
+    <span class="nl">adc_voltage</span><span class="p">:</span> <span class="nx">Float</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+    <span class="nx">adc_updated</span><span class="p">:</span> <span class="nx">Int</span>
 <span class="p">}</span>
 
 
@@ -246,18 +218,11 @@ Response structure:
 <p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.</p>
 
 <ul>
-<li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/imu/data_euler</code></li>
+<li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/payload_adc</code></li>
 <li>JSON Response:
 {
-twist:{
-linear:{
-    x: Float,
-    y: Float,
-    z: FLoat},
-angular:{
-    x: Float,
-    y: Float,
-    z: FLoat}
+adc_voltage: Float[2],
+adc_updated: Int
 }</li>
 </ul>
 
@@ -267,8 +232,8 @@ angular:{
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/mavros/vfr_hud&rsquo;</br></li>
-<li>messageType: &lsquo;mavros_msgs/VFR_HUD&rsquo;</li>
+<li>name: &lsquo;/namespace/mavros/payload_adc&rsquo;</br></li>
+<li>messageType: &lsquo;mavros_msgs/PayloadADC&rsquo;</li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>

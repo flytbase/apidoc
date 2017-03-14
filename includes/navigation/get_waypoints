@@ -237,7 +237,7 @@ body_frame: false"</span>
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+<p>Following parameters are applicable RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Arguments:</p>
 
@@ -249,9 +249,9 @@ body_frame: false"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>x, y, z</td>
-<td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
+<td>frame</td>
+<td>int</td>
+<td>The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt</td>
 </tr>
 <tr>
 <td>yaw</td>
