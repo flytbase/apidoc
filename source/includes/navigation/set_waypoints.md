@@ -242,19 +242,23 @@ This API replaces current list of waypoints on autopilot with new list passed.
 
 ###Parameters:
     
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Arguments:
+     Arguments:
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt
+    command | int | defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19:Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off
+    is_current | bool | Set it as the first waypoint 
+    autocontinue | bool | continue to the next waypoint as soon as the current waypoint is achieved
+    param1 | float | Time to stay at the location in sec.
+    param2 | float | radius around the waypoint within which the waypoint is marked as done 
+    param3 | float | Orbit radius in meters
+    param4 | float | Yaw/direction in degrees
+    x_lat | float | Latitude
+    y_long | float | Longitude
+    z_alt | float | Relative altitude
     
     Output:
     
@@ -303,10 +307,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * serviceType: 'core_api/WaypointSet'
 
 
-### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 

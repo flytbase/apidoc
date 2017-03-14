@@ -233,13 +233,8 @@ Manually store a location as new home.
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    lat,lat,alt | float | Latitude, longitude and relative altitude
+    set_current | boolean | if true uses current location and altitude of the device else uses the provided values.
     
     Output:
     
@@ -279,10 +274,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * serviceType: 'core_api/SetHome'
 
 
-### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 
