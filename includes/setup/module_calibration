@@ -25,7 +25,7 @@ MsgStructure:
     bool success
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 </span>
-<span class="n">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
 <span class="nb">NotImplemented</span>
@@ -102,9 +102,9 @@ MsgStructure:
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-// Refer to rosservice <span class="nb">command </span>line api documentation <span class="k">for </span>sample service calls. http://wiki.ros.org/rosservice
+<span class="c"># Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice</span>
 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">NotImplemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span>
@@ -143,11 +143,10 @@ MsgStructure:
 <blockquote>
 <p>Example response</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">NotImplemented</span>
+<pre class="highlight shell tab-shell"><code>success: True
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code>
-</code></pre><pre class="highlight python tab-python--ros"><code>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
