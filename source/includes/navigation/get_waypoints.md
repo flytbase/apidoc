@@ -315,11 +315,11 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * name: '/namespace/navigation/waypoint_get'</br>
 * serviceType: 'core_api/WaypointGet'
 
-
+<!-- 
 ### API usage information:
 Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
 Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
 
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
+Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over. -->
 
