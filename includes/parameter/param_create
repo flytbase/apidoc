@@ -89,6 +89,7 @@ string message
 </span>
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="s">"RTL_ALT"</span><span class="p">;</span> 
+
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="s">"5"</span><span class="p">;</span>
 <span class="n">param</span><span class="p">.</span><span class="n">param_create</span><span class="p">(</span><span class="n">param_id</span><span class="p">,</span> <span class="n">param_value</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
@@ -149,12 +150,11 @@ string message
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
+<p>This API creates a new parameter.</p>
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+<p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Arguments:</p>
 
@@ -166,39 +166,14 @@ This command commands the vehicle to go to a specified location and hover. It ov
 </tr>
 </thead><tbody>
 <tr>
-<td>x, y, z</td>
-<td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
+<td>param_id</td>
+<td>string</td>
+<td>Name of the parameter</td>
 </tr>
 <tr>
-<td>yaw</td>
-<td>float</td>
-<td>Yaw Setpoint in radians</td>
-</tr>
-<tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>param_value</td>
+<td>string</td>
+<td>Value for the parameter</td>
 </tr>
 </tbody></table>
 
@@ -256,10 +231,11 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>serviceType: &lsquo;core_api/ParamCreate&rsquo;</li>
 </ul>
 
-<h3 id="api-usage-information">API usage information:</h3>
+<!-- ### API usage information:
+Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
+Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
 
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
+Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
+ -->
