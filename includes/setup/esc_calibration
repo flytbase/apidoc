@@ -155,12 +155,11 @@ ReqStructure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API sends local position setpoint command to the autopilot. Additionally, you can send yaw setpoint (yaw_valid flag must be set true) to the vehicle as well. Some abstract features have been added, such as tolerance/acceptance-radius, synchronous/asynchronous mode, sending setpoints relative to current position (relative flag must be set true), sending setpoints relative to current body frame (body_frame flag must be set true).
-This command commands the vehicle to go to a specified location and hover. It overrides any previous mission being carried out and starts hovering.</p>
+<p>This API helps calibrate ESCs.</p>
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+<p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Arguments:</p>
 
@@ -172,39 +171,24 @@ This command commands the vehicle to go to a specified location and hover. It ov
 </tr>
 </thead><tbody>
 <tr>
-<td>x, y, z</td>
+<td>pwm_min</td>
 <td>float</td>
-<td>Position Setpoint in NED-Frame (in body-frame if body_frame=true)</td>
+<td>Min PWM value to be expected</td>
 </tr>
 <tr>
-<td>yaw</td>
+<td>pwm_max</td>
 <td>float</td>
-<td>Yaw Setpoint in radians</td>
+<td>Max PWM value to be expected</td>
 </tr>
 <tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
+<td>num_of_actuators</td>
+<td>Int</td>
+<td>Number of actuator in the frame.</td>
 </tr>
 <tr>
-<td>tolerance</td>
-<td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
-</tr>
-<tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
-</tr>
-<tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
-</tr>
-<tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>calibration_state</td>
+<td>Int</td>
+<td>1/2/3.</td>
 </tr>
 </tbody></table>
 
@@ -263,10 +247,10 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>serviceType: &lsquo;core_api/EscCalibration&rsquo;</li>
 </ul>
 
-<h3 id="api-usage-information">API usage information:</h3>
+<!-- ### API usage information:
+Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
 
-<p>Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.</p>
+Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
 
-<p>Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</p>
-
-<p>Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</p>
+Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
+ -->
