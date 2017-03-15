@@ -63,8 +63,8 @@ search: true
 
 # Introduction
 
-Welcome to the Flyt API! You can use our API to access Flyt API endpoints.
+Welcome to API reference documentation for FlytOS. Here you can find details of all the FlytAPIs with their description, parameters and usage examples. API bindings are available in several languages and you can select the desired language from the tabs in the right panel.
 
-We have language bindings in Shell, CPP, Python, Javascript and Java! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+To learn more about how to get started with FlytOS and build your first app, please visit the developer <a href='docs.flytbase.com'>documentation</a>.
 
 
