@@ -71,7 +71,7 @@ Response: local_position as described below.
         vy = 0.0
         vz = 0.0
     
-This API support single pole mode only.
+This API support single poll mode only.
 ```
 
 ```cpp--ros
@@ -330,7 +330,7 @@ instance of gemometry_msgs.msg.TwistStamped class
 
 ###Description:
 
-This API subscribes/poles linear position, velocity data in NED frame.  Please check API usage section below before using API.
+This API subscribes/polls linear position, velocity data in NED frame.  Please check API usage section below before using API.
 
 ###Parameters:
     

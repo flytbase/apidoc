@@ -72,7 +72,7 @@ Response: attitude_euler_object as described below.
         pitchspeed = 0.0
         yawspeed = 0.0
 
-This API support single pole mode only.
+This API support single poll mode only.
 ```
 
 ```cpp--ros
@@ -354,7 +354,7 @@ std_msgs/Header header
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
+This API subscribes/polls attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
 
 ###Parameters:
     

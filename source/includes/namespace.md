@@ -93,7 +93,7 @@ Response:
 ```
 
 
-> Example API call
+> Example
 
 ```shell
 rosservice call /get_global_namespace "{}"
@@ -171,7 +171,7 @@ namespace.callService(request, function(result) {
 ```
 
 
-> Example API Response
+> Example
 
 ```shell
 param_info: 

@@ -92,7 +92,7 @@ Response: glob_position as described below.
         lon = 0.0
         alt = 0.0
 
-This API support single pole mode only.
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -329,7 +329,7 @@ instance of sensor_msgs.msg.NavSatFix class
 
 ###Description:
 
-This API subscribes/poles position data in global coordinate system.  Please check API usage section below before using API.
+This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.
 
 ###Parameters:
     

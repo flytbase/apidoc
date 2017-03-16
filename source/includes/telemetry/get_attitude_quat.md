@@ -89,7 +89,7 @@ Response: attitude_quaternion as described below.
         pitchspeed = 0.0
         yawspeed = 0.0
 
-This API supports single pole mode only.
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -382,7 +382,7 @@ instance of sensor_msgs.msg.Imu class
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
+This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
 
 ###Parameters:
     

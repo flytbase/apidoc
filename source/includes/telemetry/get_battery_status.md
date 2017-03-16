@@ -312,7 +312,7 @@ instance of sensor_msgs.msg.BatteryState class
 
 ###Description:
 
-This API subscribes/poles battery status.  Please check API usage section below before using API.
+This API subscribes/polls battery status.  Please check API usage section below before using API.
 
 ###Parameters:
     

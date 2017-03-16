@@ -251,7 +251,7 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 ###Description:
 
-This API subscribes/poles VFR HUD data.  Please check API usage section below before using API.
+This API subscribes/polls VFR HUD data.  Please check API usage section below before using API.
 
 ###Parameters:
     

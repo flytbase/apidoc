@@ -227,7 +227,7 @@ instance of sensor_msgs.msgs.Range object
 
 ###Description:
 
-This API subscribes/poles distance sensor data.  Please check API usage section below before using API.
+This API subscribes/polls distance sensor data.  Please check API usage section below before using API.
 
 ###Parameters:
     
