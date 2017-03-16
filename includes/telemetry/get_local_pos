@@ -26,18 +26,26 @@ Response structure:
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 </span>
-<span class="n">Function</span> <span class="n">Definition</span><span class="o">:</span> <span class="kt">int</span> <span class="n">Navigation</span><span class="o">::</span><span class="n">position_set</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="kt">float</span> <span class="n">z</span><span class="p">,</span> <span class="kt">float</span> <span class="n">yaw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">float</span> <span class="n">tolerance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">relative</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">yaw_valid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">body_frame</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">Function</span> <span class="n">Definition</span><span class="o">:</span> <span class="n">sysSubscribe</span><span class="p">(</span><span class="n">Navigation</span><span class="o">::</span><span class="n">local_position</span><span class="p">,</span><span class="n">lposCb</span><span class="p">);</span>
 
 <span class="n">Arguments</span><span class="o">:</span>
-    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="o">:</span> <span class="n">Position</span> <span class="n">Setpoint</span> <span class="n">in</span> <span class="n">NED</span><span class="o">-</span><span class="n">Frame</span> <span class="p">(</span><span class="n">in</span> <span class="n">body</span><span class="o">-</span><span class="n">frame</span> <span class="k">if</span> <span class="n">body_frame</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
-    <span class="n">yaw</span><span class="o">:</span> <span class="n">Yaw</span> <span class="n">Setpoint</span> <span class="n">in</span> <span class="n">radians</span>
-    <span class="n">yaw_valid</span><span class="o">:</span> <span class="n">Must</span> <span class="n">be</span> <span class="n">set</span> <span class="n">to</span> <span class="nb">true</span><span class="p">,</span> <span class="k">if</span> <span class="n">yaw</span> <span class="n">setpoint</span> <span class="n">is</span> <span class="n">provided</span>
-    <span class="n">tolerance</span><span class="o">:</span> <span class="n">Acceptance</span> <span class="n">radius</span> <span class="n">in</span> <span class="n">meters</span><span class="p">,</span> <span class="k">default</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="n">m</span>
-    <span class="n">relative</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">position</span> <span class="n">setpoints</span> <span class="n">relative</span> <span class="n">to</span> <span class="n">current</span> <span class="n">position</span> <span class="n">is</span> <span class="n">sent</span>
-    <span class="n">async</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">asynchronous</span> <span class="n">mode</span> <span class="n">is</span> <span class="n">set</span>
-    <span class="n">body_frame</span><span class="o">:</span> <span class="n">If</span> <span class="nb">true</span><span class="p">,</span> <span class="n">position</span> <span class="n">setpoints</span> <span class="n">are</span> <span class="n">relative</span> <span class="n">with</span> <span class="n">respect</span> <span class="n">to</span> <span class="n">body</span> <span class="n">frame</span>
+    <span class="n">local_position</span><span class="o">:</span> <span class="n">This</span> <span class="n">argument</span> <span class="n">selects</span> <span class="n">local</span> <span class="n">position</span> <span class="n">topic</span> <span class="n">to</span> <span class="n">be</span> <span class="n">subscribed</span>
+    <span class="n">lposCb</span><span class="o">:</span> <span class="n">Callback</span> <span class="n">function</span> <span class="k">for</span> <span class="n">the</span> <span class="n">subscribed</span> <span class="n">local</span> <span class="n">position</span> <span class="n">messages</span>
 
-<span class="n">Returns</span><span class="o">:</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">reaches</span> <span class="n">given</span> <span class="n">setpoint</span> <span class="n">before</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="n">secs</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
+<span class="n">Returns</span><span class="o">:</span> <span class="n">local</span> <span class="n">position</span> <span class="n">in</span> <span class="n">ros</span> <span class="n">geometry_msgs</span><span class="o">::</span><span class="n">TwistStamped</span> <span class="n">message</span> <span class="n">structure</span>
+    <span class="n">std_msgs</span><span class="o">/</span><span class="n">Header</span> <span class="n">header</span>
+      <span class="n">uint32</span> <span class="n">seq</span>
+      <span class="n">time</span> <span class="n">stamp</span>
+      <span class="n">string</span> <span class="n">frame_id</span>
+    <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">Twist</span> <span class="n">twist</span>
+      <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">Vector3</span> <span class="n">linear</span>
+        <span class="n">float64</span> <span class="n">x</span>
+        <span class="n">float64</span> <span class="n">y</span>
+        <span class="n">float64</span> <span class="n">z</span>
+      <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">Vector3</span> <span class="n">angular</span>
+        <span class="n">float64</span> <span class="n">x</span>
+        <span class="n">float64</span> <span class="n">y</span>
+        <span class="n">float64</span> <span class="n">z</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
 <span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
@@ -143,9 +151,16 @@ Response structure:
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
-<span class="n">nav</span><span class="p">.</span><span class="n">position_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
-<span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
-</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="n">geometry_msgs</span><span class="o">::</span><span class="n">TwistStamped</span> <span class="n">lpos</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">lposCb</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">_lpos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lpos</span> <span class="o">=</span> <span class="o">*</span> <span class="p">(</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">TwistStamped</span><span class="o">*</span><span class="p">)(</span><span class="n">_lpos</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">nav</span><span class="p">.</span><span class="n">sysSubscribe</span><span class="p">(</span><span class="n">Navigation</span><span class="o">::</span><span class="n">local_position</span><span class="p">,</span><span class="n">lposCb</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lpos</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
 <span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
 <span class="c"># wait for interface to initialize</span>
