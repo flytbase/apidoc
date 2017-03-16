@@ -5,7 +5,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/distance_sensor/lidarlite_pub
 ROS-Topic Type: sensor_msgs/Range

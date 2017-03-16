@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_create
 ROS-Service Type: core_api/ParamCreate, below is its description

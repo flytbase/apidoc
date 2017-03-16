@@ -3,7 +3,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/rc/in
 ROS-Topic Type: mavros_msgs/RCIn
