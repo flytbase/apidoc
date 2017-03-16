@@ -20,18 +20,19 @@ Response structure:
 ```cpp
 // CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: sysSubscribe(Navigation::rc_channels,rcChannelCb);
 
 Arguments:
-    x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw: Yaw Setpoint in radians
-    yaw_valid: Must be set to true, if yaw setpoint is provided
-    tolerance: Acceptance radius in meters, default value=1.0m
-    relative: If true, position setpoints relative to current position is sent
-    async: If true, asynchronous mode is set
-    body_frame: If true, position setpoints are relative with respect to body frame
+    rc_channels: This argument selects RC channels topic to be subscribed
+    rcChannelCb: Callback function for the subscribed RC channel messages
 
-Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+Returns: RC channel info in ros mavros_msgs::RCInConstPtr structure
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    uint8 rssi
+    uint16[] channels
 ```
 
 ```python
@@ -110,7 +111,18 @@ rostopic echo /flytpod/mavros/rc/in
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+mavros_msgs::RCIn rc_channel;
+
+void rcChannelCb(void *_rc_channel)
+{
+    rc_channel = * (mavros_msgs::RCIn*)(_rc_channel);
+}
+nav.sysSubscribe(Navigation::rc_channels,rcChannelCb);
+
+std::cout << rc_channel << std::endl;
 ```
 
 ```python

@@ -43,16 +43,37 @@ Response structure:
 
 Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
 
-Arguments:
-    x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw: Yaw Setpoint in radians
-    yaw_valid: Must be set to true, if yaw setpoint is provided
-    tolerance: Acceptance radius in meters, default value=1.0m
-    relative: If true, position setpoints relative to current position is sent
-    async: If true, asynchronous mode is set
-    body_frame: If true, position setpoints are relative with respect to body frame
+Function Definition: sysSubscribe(Navigation::global_position,gposCb);
 
-Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+Arguments:
+    global_position: This argument selects global position topic to be subscribed
+    gposCb: Callback function for the subscribed global position messages
+
+Returns: global position in ros sensor_msgs::NavSatFix message structure
+    uint8 COVARIANCE_TYPE_UNKNOWN=0
+    uint8 COVARIANCE_TYPE_APPROXIMATED=1
+    uint8 COVARIANCE_TYPE_DIAGONAL_KNOWN=2
+    uint8 COVARIANCE_TYPE_KNOWN=3
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    sensor_msgs/NavSatStatus status
+      int8 STATUS_NO_FIX=-1
+      int8 STATUS_FIX=0
+      int8 STATUS_SBAS_FIX=1
+      int8 STATUS_GBAS_FIX=2
+      uint16 SERVICE_GPS=1
+      uint16 SERVICE_GLONASS=2
+      uint16 SERVICE_COMPASS=4
+      uint16 SERVICE_GALILEO=8
+      int8 status
+      uint16 service
+    float64 latitude : latitude
+    float64 longitude : longitude
+    float64 altitude : altitude MSL
+    float64[9] position_covariance
+    uint8 position_covariance_type
 ```
 
 ```python
@@ -181,8 +202,15 @@ rostopic echo /flytpod/mavros/global_position/global
 #include <core_script_bridge/navigation_bridge.h>
 
 Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+sensor_msgs::NavSatFix gpos;
+
+void gposCb(void *_gpos)
+{
+    gpos = * (sensor_msgs::NavSatFix*)(_gpos);
+}
+nav.sysSubscribe(Navigation::global_position,gposCb);
+
+std::cout << gpos << std::endl;
 ```
 
 ```python
