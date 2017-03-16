@@ -65,6 +65,6 @@ search: true
 
 Welcome to API reference documentation for FlytOS. Here you can find details of all the FlytAPIs with their description, parameters and usage examples. API bindings are available in several languages and you can select the desired language from the tabs in the right panel.
 
-To learn more about how to get started with FlytOS and build your first app, please visit the developer <a href='docs.flytbase.com'>documentation</a>.
+To learn more about how to get started with FlytOS and build your first app, please visit the developer <a href='http://docs.flytbase.com/'>documentation</a>.
 
 
