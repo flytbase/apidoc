@@ -126,6 +126,8 @@ success = srv.response.success;
 ```
 
 ```python--ros
+from core_api.srv import *
+
 def arm()
     rospy.wait_for_service('namespace/navigation/arm')
     try:

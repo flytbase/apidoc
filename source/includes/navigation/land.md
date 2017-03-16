@@ -128,6 +128,8 @@ success = srv.response.success;
 ```
 
 ```python--ros
+from core_api.srv import *
+
 def land(async= False):
     rospy.wait_for_service('namespace/navigation/land')
     try:
