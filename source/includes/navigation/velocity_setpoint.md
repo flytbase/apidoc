@@ -189,6 +189,8 @@ success = srv.response.success;
 ```
 
 ```python--ros
+from core_api.srv import *
+
 def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
     rospy.wait_for_service('namespace/navigation/velocity_set')
     try:

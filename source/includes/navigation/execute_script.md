@@ -116,6 +116,8 @@ success = srv.response.success;
 ```
 
 ```python--ros
+from core_api.srv import *
+
 script_name = "sample_script.sh"
 sample_args = "arg1 arg2 arg3"
 def exec_script(script_name, sample_args):
