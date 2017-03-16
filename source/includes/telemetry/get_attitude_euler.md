@@ -31,18 +31,26 @@ Response structure:
 ```cpp
 // CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: sysSubscribe(Navigation::vehicle_attitude_euler,attitudeEulerCb);
 
 Arguments:
-	x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-	yaw: Yaw Setpoint in radians
-	yaw_valid: Must be set to true, if yaw setpoint is provided
-	tolerance: Acceptance radius in meters, default value=1.0m
-	relative: If true, position setpoints relative to current position is sent
-	async: If true, asynchronous mode is set
-	body_frame: If true, position setpoints are relative with respect to body frame
+    vehicle_attitude_euler: This argument selects vehicle attitude euler topic to be subscribed
+    attitudeEulerCb: Callback function for the subscribed attitude messages
 
-Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+Returns: Vehicle attitude in euler notation in ros geometry_msgs::TwistStamped message structure
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    geometry_msgs/Twist twist
+      geometry_msgs/Vector3 linear
+        float64 x
+        float64 y
+        float64 z
+      geometry_msgs/Vector3 angular
+        float64 x
+        float64 y
+        float64 z
 ```
 
 ```python
@@ -167,8 +175,16 @@ rostopic echo /flytpods/mavros/imu/data_euler
 #include <core_script_bridge/navigation_bridge.h>
 
 Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+geometry_msgs::TwistStamped att_euler;
+
+void attitudeEulerCb(void *_att_euler)
+{
+    att_euler = * (geometry_msgs::TwistStamped*)(_att_euler);
+}
+nav.sysSubscribe(Navigation::vehicle_attitude_euler,attitudeEulerCb);
+
+std::cout << att_euler << std::endl;
+
 ```
 
 ```python

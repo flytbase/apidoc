@@ -127,15 +127,8 @@ success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/set_home')
-    try:
-        handle = rospy.ServiceProxy('namespace/navigation/set_home', SetHome)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
-        return resp
-    except rospy.ServiceException, e:
-        rospy.logerr("pos set service call failed %s", e)
+
+# Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 
 ```
 

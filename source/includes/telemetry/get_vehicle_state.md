@@ -25,6 +25,26 @@ Response structure:
 ```
 
 ```cpp
+// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
+
+Function Definition: sysSubscribe(Navigation::vehicle_state,vehicleModeCb);
+
+Arguments:
+    vehicle_state: This argument selects vehicle state topic to be subscribed
+    vehicleModeCb: Callback function for the subscribed vehicle state messages
+
+Returns: Vehicle state in ros mavros_msgs::State message structure
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    bool connected
+    bool armed
+    bool guided
+    string mode
+    uint8 mav_type
+    uint8 mav_autopilot
+    uint8 mav_sys_status
 
 ```
 
@@ -137,7 +157,18 @@ rotopic echo /flytpod/flyt/state
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+mavros_msgs::State vehicle_state;
+
+void attitudeQuatCb(void *_vehicle_state)
+{
+    vehicle_state = * (mavros_msgs::State*)(_vehicle_state);
+}
+nav.sysSubscribe(Navigation::vehicle_state,vehicleModeCb);
+
+std::cout << vehicle_state << std::endl;
 ```
 
 ```python
@@ -218,7 +249,7 @@ mav_sys_status: 0
 ```
 
 ```cpp
-
+Instance of mavros_msgs::State class
 ```
 
 ```python

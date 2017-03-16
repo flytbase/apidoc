@@ -50,6 +50,7 @@ response srv: bool success
 
 Type: Ros Service
 Name: /<namespace>/navigation/takeoff()
+Type: core_api/TakeOff
 call srv: 
     : int takeoff_alt
 response srv: bool success
@@ -128,6 +129,9 @@ success = srv.response.success;
 ```
 
 ```python--ros
+
+from core_api.srv import *
+
 def takeoff(height)
     rospy.wait_for_service('namespace/navigation/take_off')
     try:

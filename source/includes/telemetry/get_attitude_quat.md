@@ -40,18 +40,33 @@ Response structure:
 ```cpp
 // CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-Function Definition: int Navigation::position_set(float x, float y, float z, float yaw=0, float tolerance=0, bool relative=false, bool async=false, bool yaw_valid=false, bool body_frame=false)
+Function Definition: sysSubscribe(Navigation::vehicle_attitude_quat,attitudeQuatCb);
 
 Arguments:
-    x,y,z: Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw: Yaw Setpoint in radians
-    yaw_valid: Must be set to true, if yaw setpoint is provided
-    tolerance: Acceptance radius in meters, default value=1.0m
-    relative: If true, position setpoints relative to current position is sent
-    async: If true, asynchronous mode is set
-    body_frame: If true, position setpoints are relative with respect to body frame
+    vehicle_attitude_quat: This argument selects vehicle attitude quaternion topic to be subscribed
+    attitudeQuatCb: Callback function for the subscribed attitude messages
 
-Returns: For async=true, returns 0 if the command is successfully sent to the vehicle, else returns 1. For async=false, returns 0 if the vehicle reaches given setpoint before timeout=30secs, else returns 1.
+Returns: Vehicle attitude in quaternion notation in ros sensor_msgs::Imu message structure
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    geometry_msgs/Quaternion orientation
+      float64 x
+      float64 y
+      float64 z
+      float64 w
+    float64[9] orientation_covariance
+    geometry_msgs/Vector3 angular_velocity
+      float64 x
+      float64 y
+      float64 z
+    float64[9] angular_velocity_covariance
+    geometry_msgs/Vector3 linear_acceleration
+      float64 x
+      float64 y
+      float64 z
+    float64[9] linear_acceleration_covariance
 ```
 
 ```python
@@ -193,8 +208,18 @@ rostopic echo /flytpod/mavros/imu/data
 ```
 
 ```cpp
+#include <core_script_bridge/navigation_bridge.h>
 
+Navigation nav;
+sensor_msgs::Imu att_quat;
 
+void attitudeQuatCb(void *_att_quat)
+{
+    att_quat = * (sensor_msgs::Imu*)(_att_quat);
+}
+nav.sysSubscribe(Navigation::vehicle_attitude_quat,attitudeQuatCb);
+
+std::cout << att_quat << std::endl;
 ```
 
 ```python
