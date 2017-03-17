@@ -122,14 +122,6 @@
 </tr>
 </tbody></table>
 
-<!-- ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
-
-* Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
-* Service Type: PositionSet
- &ndash;>
-
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
 <p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
