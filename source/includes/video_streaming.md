@@ -156,13 +156,7 @@ This API allows to get the list of video streams avalibale and view the live str
     ---------- | ---------- | ------------
     success | bool | true if action successful
 
-<!-- ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
-* Service Type: PositionSet
- -->
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
