@@ -124,6 +124,8 @@ success = srv.response.success;
 ```
 
 ```python--ros
+from core_api.srv import *
+
 def disarm():
     rospy.wait_for_service('namespace/navigation/disarm')
     try:

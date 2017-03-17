@@ -170,20 +170,26 @@ srv.request.twist.twist.linear.z = 5.0;
 srv.request.tolerance = 2.0;
 srv.request.async = true;
 srv.request.yaw_valid = true;
-srv.request.relative = false;
-srv.request.body_frame = false;
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_global_position(lat, lon, rel_ht, yaw, tolerance= 0.0, async = False, yaw_valid= False):
+from core_api.srv import * 
+
+def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):
     rospy.wait_for_service('namespace/navigation/position_set_global')
     try:
         handle = rospy.ServiceProxy('namespace/navigation/position_set_global', PositionSetGlobal)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lat, 'y': lon, 'z': rel_ht}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, yaw_valid)
+        
+        # build message structure
+        header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
+        twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(lat,lon,alt),geometry_msgs.msg.Vector3(0.0,0.0,yaw))
+        twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
+        req_msg = VelocitySetRequest(twiststamped_msg, tolerance, async, yaw_valid)
+        resp = handle(req_msg)
         return resp
+    
     except rospy.ServiceException, e:
         rospy.logerr("global pos set service call failed %s", e)
 
