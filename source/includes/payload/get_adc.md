@@ -1,6 +1,6 @@
 # Payload APIs
 
-## Get ADC payload
+## Get ADC data
 
 
 
@@ -25,7 +25,7 @@ Response structure:
 ```cpp
 // CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-Not Implemented
+NotImplemented
 ```
 
 ```python
@@ -47,9 +47,6 @@ Response structure:
       string frame_id
     float32[2] adc_voltage
     uint8 adc_updated
-
-
-
 ```
 
 ```python--ros
