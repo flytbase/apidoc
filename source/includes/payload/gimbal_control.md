@@ -219,7 +219,7 @@ For FlytPOD/PRO users:
 
 For Pixhawk users:
 
-* Make sure **vmount** driver gets started in rcS and variables *MIXER_AUX*, *PWM_AUX_OUT* and *PWM_AUX_RATE* are set to *mount*, *123456* and *50* respectively in rcS. For more information refer to [this guide by PX4](https://dev.px4.io/advanced-gimbal-control.html).
+* Make sure **vmount** driver gets started in rcS and variables *MIXER_AUX*, *PWM_AUX_OUT* and *PWM_AUX_RATE* are set to *mount*, *123456* and *50* respectively in rcS OR for strictly testing purposes one can set the parameter: **SYS_AUTOSTART** to 4002. For more information refer to [this guide by PX4](https://dev.px4.io/advanced-gimbal-control.html).
 * Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](https://pixhawk.org/users/status_leds).
 * Make sure the parameter: **MNT_MODE_IN** is set to 3.
 
