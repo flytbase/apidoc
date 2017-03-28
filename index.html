@@ -7940,15 +7940,25 @@ yaw:-0.2"</span>
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API sends gimbal setpoint command to the autopilot via MAVLink and outputs pwm signals in gimbal-dedicated port of FlytPOD/Pixhawk. </p>
+<p>This API sends gimbal attitude setpoint command to the autopilot via MAVLink and outputs pwm signals on gimbal-dedicated port of FlytPOD/Pixhawk. </p>
 
 <h3 id="pre-requisites">Pre-requisites:</h3>
 
 <p>For this API to work, autopilot must fulfill some pre-requisites first:</p>
 
+<p>For FlytPOD/PRO users:</p>
+
 <ul>
 <li>Autopilot <strong>MUST</strong> be in <strong>ready-to-arm</strong> state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to <a href="http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led">this link</a>.</li>
-<li>Make sure the parameter: <strong>MNT_MODE_IN</strong> is set to 3. </li>
+<li>Make sure the parameter: <strong>MNT_MODE_IN</strong> is set to 3.</li>
+</ul>
+
+<p>For Pixhawk users:</p>
+
+<ul>
+<li>Make sure <strong>vmount</strong> driver gets started in rcS and variables <em>MIXER_AUX</em>, <em>PWM_AUX_OUT</em> and <em>PWM_AUX_RATE</em> are set to <em>mount</em>, <em>123456</em> and <em>50</em> respectively in rcS. For more information refer to <a href="https://dev.px4.io/advanced-gimbal-control.html">this guide by PX4</a>.</li>
+<li>Autopilot <strong>MUST</strong> be in <strong>ready-to-arm</strong> state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to <a href="https://pixhawk.org/users/status_leds">this link</a>.</li>
+<li>Make sure the parameter: <strong>MNT_MODE_IN</strong> is set to 3.</li>
 </ul>
 
 <h3 id="parameters">Parameters:</h3>
