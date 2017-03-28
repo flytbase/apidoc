@@ -207,13 +207,22 @@ Success: True
 ```
 
 ###Description:
-This API sends gimbal setpoint command to the autopilot via MAVLink and outputs pwm signals in gimbal-dedicated port of FlytPOD/Pixhawk. 
+This API sends gimbal attitude setpoint command to the autopilot via MAVLink and outputs pwm signals on gimbal-dedicated port of FlytPOD/Pixhawk. 
 
 ###Pre-requisites:
 For this API to work, autopilot must fulfill some pre-requisites first:
 
+For FlytPOD/PRO users:
+
 * Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led).
-* Make sure the parameter: **MNT_MODE_IN** is set to 3. 
+* Make sure the parameter: **MNT_MODE_IN** is set to 3.
+
+For Pixhawk users:
+
+* Make sure **vmount** driver gets started in rcS and variables *MIXER_AUX*, *PWM_AUX_OUT* and *PWM_AUX_RATE* are set to *mount*, *123456* and *50* respectively in rcS. For more information refer to [this guide by PX4](https://dev.px4.io/advanced-gimbal-control.html).
+* Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](https://pixhawk.org/users/status_leds).
+* Make sure the parameter: **MNT_MODE_IN** is set to 3.
+
 
 ###Parameters:
     
