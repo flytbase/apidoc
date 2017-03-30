@@ -191,12 +191,17 @@ success = srv.response.success;
 ```python--ros
 from core_api.srv import *
 
-def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
+def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
     rospy.wait_for_service('namespace/navigation/velocity_set')
     try:
         handle = rospy.ServiceProxy('namespace/navigation/velocity_set', VelocitySet)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': vx, 'y': vy, 'z': vz}, 'angular': {'z': yaw_rate}}}
-        resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
+        # build message structure
+        header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
+        twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(vx,vy,vz),geometry_msgs.msg.Vector3(0.0,0.0,yaw_rate))
+        twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
+        req_msg = VelocitySetRequest(twiststamped_msg, tolerance, async, relative, yaw_rate_valid, body_frame)
+        resp = handle(req_msg)
+        
         return resp
     except rospy.ServiceException, e:
         rospy.logerr("vel set service call failed %s", e)

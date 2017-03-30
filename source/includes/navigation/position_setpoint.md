@@ -189,12 +189,19 @@ success = srv.response.success;
 ```
 
 ```python--ros
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_valid= False, body_frame= False):
+from core_api.srv import *
+
+def setpoint_local_position(lx, ly, lz, yaw, tolerance= 1.0, async = False, relative= False, yaw_valid= False, body_frame= False):
     rospy.wait_for_service('namespace/navigation/position_set')
     try:
         handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
-        twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
-        resp = handle(twist, tolerance, async, relative, yaw_valid, body_frame)
+        
+        # building message structure
+        header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
+        twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(lx,ly,lz),geometry_msgs.msg.Vector3(0.0,0.0,yaw))
+        twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
+        req_msg = VelocitySetRequest(twiststamped_msg, tolerance, async, relative, yaw_valid, body_frame)
+        resp = handle(req_msg)
         return resp
     except rospy.ServiceException, e:
         rospy.logerr("pos set service call failed %s", e)
