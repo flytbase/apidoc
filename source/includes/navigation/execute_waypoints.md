@@ -194,7 +194,7 @@ Exectute / resume current list of waypoints.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/waypoint_execute</br>
+* Name: /\<namespace\>/navigation/waypoint_execute</br>
 * Service Type: WaypointExecute
 
 ### RESTful endpoint:
@@ -211,7 +211,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/waypoint_execute'</br>
+* name: '/\<namespace\>/navigation/waypoint_execute'</br>
 * serviceType: 'core_api/WaypointExecute'
 
 

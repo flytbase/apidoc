@@ -256,7 +256,7 @@ ros::Subscriber sub = nh.subscribe("mavros/imu/data", 1, attCallback);
 from sensor_msgs.msg import Imu
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/imu/data"), Imu, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/mavros/imu/data"), Imu, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -404,7 +404,7 @@ This API subscribes/polls attitude data (angle and angular rate) in quaternion. 
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data</br>
+* Name: /\<namespace\>/mavros/imu/data</br>
 * Response Type: sensor_msgs/Imu
 
 ### RESTful endpoint:
@@ -433,7 +433,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/imu/data'</br>
+* name: '/\<namespace\>/mavros/imu/data'</br>
 * messageType: 'sensor_msgs/Imu'
 
 ### API usage information:

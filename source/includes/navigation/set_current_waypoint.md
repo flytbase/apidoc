@@ -210,7 +210,7 @@ Sets the waypoint Id specified, as the current waypoint from the list of already
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/waypoint_set_current</br>
+* Name: /\<namespace\>/navigation/waypoint_set_current</br>
 * Service Type: WaypointSetCurrent
 
 ### RESTFul endpoint:
@@ -231,7 +231,7 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/waypoint_set_current'</br>
+* name: '/\<namespace\>/navigation/waypoint_set_current'</br>
 * serviceType: 'core_api/WaypointSetCurrent'
 
 

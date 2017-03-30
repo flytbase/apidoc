@@ -138,7 +138,7 @@ NotImplemented
 ```python--ros
 from mavros_msgs.msgs import RCIn
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/rc/in"), State, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/mavros/rc/in"), State, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -239,7 +239,7 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/rc/in</br>
+* Name: /\<namespace\>/mavros/rc/in</br>
 * Response Type: mavros_msgs/RCIn
 
 ### RESTful endpoint:
@@ -257,7 +257,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/rc/in'</br>
+* name: '/\<namespace\>/mavros/rc/in'</br>
 * messageType: 'mavros_msgs/RCIn'
 
 ### API usage information:

@@ -335,7 +335,7 @@ This API commands the vehicle to go to a specified location in local frame and h
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
+* Name: /\<namespace\>/navigation/position_set</br>
 * Service Type: core_api/PositionSet
 
 ### RESTFul endpoint:
@@ -372,7 +372,7 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
+* name: '/\<namespace\>/navigation/position_set'</br>
 * serviceType: 'core_api/PositionSet'
 
 

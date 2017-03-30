@@ -221,7 +221,7 @@ Position hold / hover / loiter at current position.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_hold</br>
+* Name: /\<namespace\>/navigation/position_hold</br>
 * Service Type: core_api/PositionHold
 
 ### RESTful endpoint:
@@ -238,7 +238,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_hold'</br>
+* name: '/\<namespace\>/navigation/position_hold'</br>
 * serviceType: 'core_api/PositionHold'
 
 

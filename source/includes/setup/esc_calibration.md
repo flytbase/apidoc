@@ -243,13 +243,13 @@ This API helps calibrate ESCs.
 APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/setup/esc_calibration</br>
+* Name: /\<namespace\>/setup/esc_calibration</br>
 * Service Type: EscCalibration
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/setup/esc_calibration````
+* URL: ````POST http://<ip>/ros/\<namespace\>/setup/esc_calibration````
 * JSON Request:
 {
     pwm_min: Float,
@@ -267,7 +267,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/setup/esc_calibration'</br>
+* name: '/\<namespace\>/setup/esc_calibration'</br>
 * serviceType: 'core_api/EscCalibration'
 
 

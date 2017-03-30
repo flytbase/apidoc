@@ -219,7 +219,7 @@ ros::Subscriber sub = nh.subscribe("mavros/imu/data_euler", 1, attCallback);
 from geometry_msgs.msg import TwistStamped
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/imu/data_euler"), TwistStamped, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/mavros/imu/data_euler"), TwistStamped, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -375,7 +375,7 @@ This API subscribes/polls attitude data (angle and angular rate) in euler angles
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data_euler</br>
+* Name: /\<namespace\>/mavros/imu/data_euler</br>
 * Response Type: geometry_msgs/TwistStamped
 
 ### RESTful endpoint:
@@ -400,7 +400,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/imu/data_euler'</br>
+* name: '/\<namespace\>/mavros/imu/data_euler'</br>
 * messageType: 'geometry_msgs/TwistStamped'
 
 ### API usage information:

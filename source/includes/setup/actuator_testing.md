@@ -216,7 +216,7 @@ This API allows for testing an actuator by providing actuator ID and time to rot
 APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/setup/actuator_testing</br>
+* Name: /\<namespace\>/setup/actuator_testing</br>
 * Service Type: ActuatorTesting
 
 ### RESTful endpoint:
@@ -238,7 +238,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/setup/actuator_testing'</br>
+* name: '/\<namespace\>/setup/actuator_testing'</br>
 * serviceType: 'core_api/ActuatorTesting'
 
 
