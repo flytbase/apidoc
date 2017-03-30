@@ -137,7 +137,7 @@ rosservice call /flytpod/navigation/position_set_global "{twist: {header: {seq: 
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, false, true, false);

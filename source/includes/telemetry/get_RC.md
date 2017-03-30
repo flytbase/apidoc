@@ -111,7 +111,7 @@ rostopic echo /flytpod/mavros/rc/in
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::RCIn rc_channel;

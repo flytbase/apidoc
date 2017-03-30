@@ -208,7 +208,7 @@ rostopic echo /flytpod/mavros/imu/data
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::Imu att_quat;

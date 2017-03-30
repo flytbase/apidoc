@@ -86,7 +86,7 @@ rosservice call /flytsim/navigation/waypoint_execute "{}"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_execute();

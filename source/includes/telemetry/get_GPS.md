@@ -199,7 +199,7 @@ rostopic echo /flytpod/mavros/global_position/global
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::NavSatFix gpos;

@@ -172,7 +172,7 @@ rostopic echo /flytpod/mavros/local_position/local
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 geometry_msgs::TwistStamped lpos;

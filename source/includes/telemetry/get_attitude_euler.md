@@ -172,7 +172,7 @@ rostopic echo /flytpods/mavros/imu/data_euler
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 geometry_msgs::TwistStamped att_euler;
