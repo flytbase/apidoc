@@ -161,7 +161,8 @@ JSON Response:
 {   orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -188,7 +189,8 @@ Response:
 {   orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -346,7 +348,8 @@ instance of sensor_msgs.msg.Imu class
     orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -364,7 +367,8 @@ instance of sensor_msgs.msg.Imu class
     orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -417,7 +421,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
     orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
