@@ -131,9 +131,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def land(async= False):
-    rospy.wait_for_service('namespace/navigation/land')
+    rospy.wait_for_service(/<namespace>/navigation/land')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/land', Land)
+        handle = rospy.ServiceProxy(/<namespace>/navigation/land', Land)
         resp = handle(async)
         return resp
     except rospy.ServiceException, e:

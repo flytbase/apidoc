@@ -192,9 +192,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 1.0, async = False, relative= False, yaw_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
+    rospy.wait_for_service(/<namespace>/navigation/position_set')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
+        handle = rospy.ServiceProxy(/<namespace>/navigation/position_set', PositionSet)
         
         # building message structure
         header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')

@@ -133,9 +133,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def takeoff(height)
-    rospy.wait_for_service('namespace/navigation/take_off')
+    rospy.wait_for_service(/<namespace>/navigation/take_off')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/take_off', TakeOff)
+        handle = rospy.ServiceProxy(/<namespace>/navigation/take_off', TakeOff)
         resp = handle(takeoff_alt=height)
         return resp
     except rospy.ServiceException, e:

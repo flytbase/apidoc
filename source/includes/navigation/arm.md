@@ -129,9 +129,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def arm()
-    rospy.wait_for_service('namespace/navigation/arm')
+    rospy.wait_for_service(/<namespace>/navigation/arm')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/arm', Arm)
+        handle = rospy.ServiceProxy(/<namespace>/navigation/arm', Arm)
         resp = handle()
         return resp
     except rospy.ServiceException, e:
