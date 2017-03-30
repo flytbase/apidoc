@@ -3,7 +3,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Topic Name: /&lt;namespace&gt;/mavros/battery
 ROS-Topic Type: sensor_msgs/BatteryState, below is its description
@@ -176,7 +176,7 @@ string serial_number
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">BatteryState</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
-<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/mavros/battery"</span><span class="p">),</span> <span class="n">BatteryState</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
+<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/battery"</span><span class="p">),</span> <span class="n">BatteryState</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
 
 <span class="c"># define the callback function which will print the values every time topic is updated</span>
 <span class="k">def</span> <span class="nf">topic_callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -249,7 +249,7 @@ serial_number: <span class="s1">''</span>
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API subscribes/poles battery status.  Please check API usage section below before using API.</p>
+<p>This API subscribes/polls battery status.  Please check API usage section below before using API.</p>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -297,7 +297,7 @@ serial_number: <span class="s1">''</span>
 
 <ul>
 <li>Type: Ros Topic</br> </li>
-<li>Name: /namespace/mavros/battery</br></li>
+<li>Name: /&lt;namespace&gt;/mavros/battery</br></li>
 <li>Response Type: sensor_msgs/BatteryState</li>
 </ul>
 
@@ -321,7 +321,7 @@ remaining: Float
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/mavros/battery&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/mavros/battery&rsquo;</br></li>
 <li>messageType: &lsquo;sensor_msgs/BatteryState&rsquo;</li>
 </ul>
 

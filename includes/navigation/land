@@ -3,7 +3,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/navigation/land
 ROS-Service Type: core_api/Land, below is its description
@@ -71,7 +71,7 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytpod/navigation/land <span class="s2">"async=true"</span> 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">land</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
@@ -98,9 +98,9 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">land</span><span class="p">(</span><span class="n">async</span><span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'namespace/navigation/land'</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">handle</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="s">'namespace/navigation/land'</span><span class="p">,</span> <span class="n">Land</span><span class="p">)</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">land</span><span class="s">')</span><span class="err">
+</span><span class="s">    try:</span><span class="err">
+</span><span class="s">        handle = rospy.ServiceProxy(/&lt;namespace&gt;/navigation/land'</span><span class="p">,</span> <span class="n">Land</span><span class="p">)</span>
         <span class="n">resp</span> <span class="o">=</span> <span class="n">handle</span><span class="p">(</span><span class="n">async</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">resp</span>
     <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
@@ -194,7 +194,7 @@ bool success
 
 <ul>
 <li>Type: Ros Service</br> </li>
-<li>Name: /namespace/navigation/land</br></li>
+<li>Name: /&lt;namespace&gt;/navigation/land</br></li>
 <li>Service Type: core_api/Land</li>
 </ul>
 
@@ -216,7 +216,7 @@ success: Boolean
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/navigation/land&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/navigation/land&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/Land&rsquo;</li>
 </ul>
 

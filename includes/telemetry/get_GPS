@@ -3,7 +3,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Topic Name: /&lt;namespace&gt;/mavros/global_position/global
 ROS-Topic Type: sensor_msgs/NavSatFix, below is its description
@@ -84,7 +84,7 @@ Response structure:
         <span class="n">lon</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">alt</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-<span class="n">This</span> <span class="n">API</span> <span class="n">support</span> <span class="n">single</span> <span class="n">pole</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Topic</span>
@@ -174,7 +174,7 @@ Response structure:
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/global_position/global  
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">sensor_msgs</span><span class="o">::</span><span class="n">NavSatFix</span> <span class="n">gpos</span><span class="p">;</span>
@@ -210,7 +210,7 @@ Response structure:
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">NavSatFix</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
-<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/mavros/global_position/global"</span><span class="p">),</span> <span class="n">NavSatFix</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
+<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/global_position/global"</span><span class="p">),</span> <span class="n">NavSatFix</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
 
 <span class="c"># define the callback function which will print the values every time topic is updated</span>
 <span class="k">def</span> <span class="nf">topic_callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -266,7 +266,7 @@ Response structure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API subscribes/poles position data in global coordinate system.  Please check API usage section below before using API.</p>
+<p>This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.</p>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -304,7 +304,7 @@ Response structure:
 
 <ul>
 <li>Type: Ros Topic</br> </li>
-<li>Name: /namespace/mavros/global_position/global</br></li>
+<li>Name: /&lt;namespace&gt;/mavros/global_position/global</br></li>
 <li>Response Type: sensor_msgs/NavSatFix</li>
 </ul>
 
@@ -328,7 +328,7 @@ altitude: Float
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/mavros/global_position/global&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/mavros/global_position/global&rsquo;</br></li>
 <li>messageType: &lsquo;sensor_msgs/NavSatFix&rsquo;</li>
 </ul>
 

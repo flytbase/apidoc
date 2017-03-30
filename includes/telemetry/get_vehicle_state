@@ -3,7 +3,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Topic Name: /&lt;namespace&gt;/flyt/state
 ROS-Topic Type: mavros_msgs/State
@@ -133,7 +133,7 @@ Response structure:
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rotopic <span class="nb">echo</span> /flytpod/flyt/state
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">mavros_msgs</span><span class="o">::</span><span class="n">State</span> <span class="n">vehicle_state</span><span class="p">;</span>
@@ -158,7 +158,7 @@ Response structure:
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">State</span>
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
-<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/flyt/state"</span><span class="p">),</span> <span class="n">State</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
+<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/flyt/state"</span><span class="p">),</span> <span class="n">State</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
 
 <span class="c"># define the callback function which will print the values every time topic is updated</span>
 <span class="k">def</span> <span class="nf">topic_callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -266,7 +266,7 @@ mav_sys_status: 0
 
 <ul>
 <li>Type: Ros Topic</br> </li>
-<li>Name: /namespace/flyt/state</br></li>
+<li>Name: /&lt;namespace&gt;/flyt/state</br></li>
 <li>Response Type: mavros_msgs/State</li>
 </ul>
 
@@ -294,7 +294,7 @@ mav_sys_status: Int
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/flyt/state&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/flyt/state&rsquo;</br></li>
 <li>messageType: &lsquo;mavros_msgs/State&rsquo;</li>
 </ul>
 

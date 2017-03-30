@@ -3,7 +3,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 
 Type: Ros Service
@@ -198,11 +198,11 @@ MsgStructure:
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
-<li>Name: /namespace/setup/module_calibration</br></li>
+<li>Name: /&lt;namespace&gt;/setup/module_calibration</br></li>
 <li>Service Type: ModuleCalibration</li>
 </ul>
 
@@ -228,7 +228,7 @@ success: Boolean
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/setup/module_calibration&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/setup/module_calibration&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/ModuleCalibration&rsquo;</li>
 </ul>
 

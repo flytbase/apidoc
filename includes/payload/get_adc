@@ -5,7 +5,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Topic Name: /&lt;namespace&gt;/mavros/payload_adc
 ROS-Topic Type: mavros_msgs/PayloadADC
@@ -104,7 +104,7 @@ Response structure:
 <span class="c1">//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">PayloadADC</span>
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
-<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/namespace/mavros/payload_adc"</span><span class="p">),</span> <span class="n">PayloadADC</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
+<span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/payload_adc"</span><span class="p">),</span> <span class="n">PayloadADC</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
 
 <span class="c"># define the callback function which will print the values every time topic is updated</span>
 <span class="k">def</span> <span class="nf">topic_callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -192,7 +192,7 @@ Response structure:
 
 <ul>
 <li>Type: Ros Topic</br> </li>
-<li>Name: /namespace/mavros/payload_adc</br></li>
+<li>Name: /&lt;namespace&gt;/mavros/payload_adc</br></li>
 <li>Response Type: mavros_msgs/PayloadADC</li>
 </ul>
 
@@ -215,7 +215,7 @@ adc_updated: Int
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/mavros/payload_adc&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/mavros/payload_adc&rsquo;</br></li>
 <li>messageType: &lsquo;mavros_msgs/PayloadADC&rsquo;</li>
 </ul>
 

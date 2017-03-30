@@ -250,6 +250,6 @@ success: Boolean
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava</a>.</p>
 
 <ul>
-<li>name: &lsquo;/namespace/payload/gimbal_set&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/payload/gimbal_set&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/GimbalSet&rsquo;</li>
 </ul>

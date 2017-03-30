@@ -5,7 +5,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/param/param_set
 ROS-Service Type: core_api/ParamSet, below is its description
@@ -86,7 +86,7 @@ string message
   param_id: ''
   param_value: ''"</span> 
 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/param_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/param_bridge.h&gt;
 </span>
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="s">"RTL_ALT"</span><span class="p">;</span> 
@@ -194,11 +194,11 @@ string message
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
-<li>Name: /namespace/param/param_set</br></li>
+<li>Name: /&lt;namespace&gt;/param/param_set</br></li>
 <li>Service Type: ParamSet</li>
 </ul>
 
@@ -227,7 +227,7 @@ success: Boolean
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/param/param_set&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/param/param_set&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/ParamSet&rsquo;</li>
 </ul>
 

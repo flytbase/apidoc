@@ -3,7 +3,7 @@
 <blockquote>
 <p>Definition</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/navigation/waypoint_clear
 ROS-Service Type: core_api/WaypointClear, below is its description
@@ -62,7 +62,7 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytpod/navigation/waypoint_clear <span class="s2">"{}"</span>   
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;core_script_bridge/navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_clear</span><span class="p">();</span>
@@ -140,7 +140,7 @@ bool success
 
 <ul>
 <li>Type: Ros Service</br> </li>
-<li>Name: /namespace/navigation/waypoint_clear</br></li>
+<li>Name: /&lt;namespace&gt;/navigation/waypoint_clear</br></li>
 <li>Service Type: WaypointClear</li>
 </ul>
 
@@ -162,6 +162,6 @@ success: Boolean
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/namespace/navigation/waypoint_clear&rsquo;</br></li>
+<li>name: &lsquo;/&lt;namespace&gt;/navigation/waypoint_clear&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/WaypointClear&rsquo;</li>
 </ul>
