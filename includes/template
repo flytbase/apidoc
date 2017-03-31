@@ -149,7 +149,7 @@ body_frame: false"</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>

@@ -84,7 +84,7 @@ yaw:-0.2"</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/GimbalSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"payload/gimbal_set"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/payload/gimbal_set"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">roll</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>

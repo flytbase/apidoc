@@ -345,11 +345,12 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/ParamGetGlobalNamespace.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/get_global_namespace"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/get_global_namespace"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_id</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_value</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">global_namespace</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_value</span><span class="p">;</span>
+
 <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
@@ -578,7 +579,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/Arm.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/arm"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/arm"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
@@ -789,7 +790,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/Disarm.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Disarm</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/disarm"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Disarm</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/disarm"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">Disarm</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
@@ -1012,7 +1013,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/TakeOff.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">TakeOff</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/takeoff"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">TakeOff</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/takeoff"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">TakeOff</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">takeoff_alt</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">;</span>
@@ -1258,7 +1259,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/Land.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Land</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/land"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Land</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/land"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">Land</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">async</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
@@ -1495,7 +1496,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionHold.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionHold</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_hold"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionHold</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_hold"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">PositionHold</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
@@ -1760,7 +1761,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
@@ -2164,7 +2165,7 @@ rosservice call /flytpod/navigation/position_set_global <span class="s2">"{twist
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSetGlobal.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSetGlobal</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set_global"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSetGlobal</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set_global"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">PositionSetGlobal</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
@@ -2555,7 +2556,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
@@ -2906,7 +2907,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/ExecScript.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">ExecScript</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/exec_script"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">ExecScript</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/exec_script"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">ExecScript</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">app_name</span> <span class="o">=</span> <span class="s">"sample_script.sh"</span><span class="p">;</span>
@@ -4310,7 +4311,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/SetHome.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">SetHome</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/set_home"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">SetHome</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/set_home"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">SetHome</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">lat</span> <span class="o">=</span> <span class="mf">73.25564541</span><span class="p">;</span>
@@ -4888,7 +4889,7 @@ Response structure:
 
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
 <span class="n">sensor_msgs</span><span class="o">::</span><span class="n">Imu</span> <span class="n">att_data</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"mavros/imu/data"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">attCallback</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/imu/data"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">attCallback</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Imu</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
@@ -5274,7 +5275,7 @@ Response structure:
 
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
 <span class="n">geometry_msgs</span><span class="o">::</span><span class="n">TwistStamped</span> <span class="n">att_data</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"mavros/imu/data_euler"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">attCallback</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/imu/data_euler"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">attCallback</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">TwistStamped</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
@@ -5661,7 +5662,7 @@ Response structure:
 
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
 <span class="n">geometry_msgs</span><span class="o">::</span><span class="n">TwistStamped</span> <span class="n">lpos_data</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"mavros/local_position/local"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lposCallback</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/local_position/local"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lposCallback</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">TwistStamped</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
@@ -6049,7 +6050,7 @@ Response structure:
 
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
 <span class="n">sensor_msgs</span><span class="o">::</span><span class="n">NavSatFix</span> <span class="n">gpos_data</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"mavros/global_position/global"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gposCallback</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/global_position/global"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gposCallback</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">NavSatFix</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
@@ -7390,7 +7391,7 @@ Response structure:
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rotopic <span class="nb">echo</span> /flytpod/flyt/state
+<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/flyt/state
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
@@ -7652,7 +7653,7 @@ Response structure:
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/position_set"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
@@ -7879,7 +7880,7 @@ yaw:-0.2"</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/GimbalSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"payload/gimbal_set"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/payload/gimbal_set"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">roll</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>

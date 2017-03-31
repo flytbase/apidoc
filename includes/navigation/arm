@@ -88,7 +88,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/Arm.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"navigation/arm"</span><span class="p">);</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/arm"</span><span class="p">);</span>
 <span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
