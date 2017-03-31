@@ -120,7 +120,7 @@ drone.take_off(6.0)
 #include <core_api/TakeOff.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::TakeOff>("navigation/takeoff");
+ros::ServiceClient client = nh.serviceClient<core_api::TakeOff>("/<namespace>/navigation/takeoff");
 core_api::TakeOff srv;
 
 srv.request.takeoff_alt = 3.0;

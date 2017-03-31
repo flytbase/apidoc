@@ -211,7 +211,7 @@ void lposCallback(const geometry_msgs::TwistStampedConstPtr &lpos)
 
 ros::NodeHandle nh;
 geometry_msgs::TwistStamped lpos_data;
-ros::Subscriber sub = nh.subscribe("mavros/local_position/local", 1, lposCallback);
+ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/local_position/local", 1, lposCallback);
 ```
 
 ```python--ros

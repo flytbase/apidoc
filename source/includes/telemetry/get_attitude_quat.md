@@ -251,7 +251,7 @@ void attCallback(const sensor_msgs::ImuConstPtr &att)
 
 ros::NodeHandle nh;
 sensor_msgs::Imu att_data;
-ros::Subscriber sub = nh.subscribe("mavros/imu/data", 1, attCallback);
+ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data", 1, attCallback);
 ```
 
 ```python--ros

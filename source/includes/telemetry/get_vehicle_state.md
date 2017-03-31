@@ -153,7 +153,7 @@ Response:
 > Example
 
 ```shell
-rotopic echo /flytpod/flyt/state
+rostopic echo /flytpod/flyt/state
 ```
 
 ```cpp

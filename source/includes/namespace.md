@@ -117,11 +117,12 @@ namespace = drone.get_global_namespace()
 #include <core_api/ParamGetGlobalNamespace.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamGetGlobalNamespace>("navigation/get_global_namespace");
+ros::ServiceClient client = nh.serviceClient<core_api::ParamGetGlobalNamespace>("/get_global_namespace");
 core_api::ParamGetGlobalNamespace srv;
 client.call(srv);
-std::string param_id = srv.response.param_info.param_id;
-std::string param_value = srv.response.param_info.param_value;
+
+std::string global_namespace = srv.response.param_info.param_value;
+
 bool success = srv.response.success;
 std::string = srv.response.message;
 ```

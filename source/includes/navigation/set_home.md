@@ -115,7 +115,7 @@ NotImplemented
 #include <core_api/SetHome.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("navigation/set_home");
+ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("/<namespace>/navigation/set_home");
 core_api::SetHome srv;
 
 srv.request.lat = 73.25564541;

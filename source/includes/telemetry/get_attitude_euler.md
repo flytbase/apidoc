@@ -212,7 +212,7 @@ void attCallback(const geometry_msgs::TwistStampedConstPtr &att)
 
 ros::NodeHandle nh;
 geometry_msgs::TwistStamped att_data;
-ros::Subscriber sub = nh.subscribe("mavros/imu/data_euler", 1, attCallback);
+ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data_euler", 1, attCallback);
 ```
 
 ```python--ros

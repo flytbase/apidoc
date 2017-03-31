@@ -160,7 +160,7 @@ drone.position_set_global(18.7342124, 73.4323233, 10)
 #include <core_api/PositionSetGlobal.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSetGlobal>("navigation/position_set_global");
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSetGlobal>("/<namespace>/navigation/position_set_global");
 core_api::PositionSetGlobal srv;
 
 srv.request.twist.twist.angular.z = 0.5;

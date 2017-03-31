@@ -119,7 +119,7 @@ drone.land(async=True)
 #include <core_api/Land.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Land>("navigation/land");
+ros::ServiceClient client = nh.serviceClient<core_api::Land>("/<namespace>/navigation/land");
 core_api::Land srv;
 
 srv.request.async = true;
