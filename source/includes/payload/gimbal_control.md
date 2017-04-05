@@ -112,7 +112,7 @@ NotImplemented
 #include <core_api/GimbalSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::GimbalSet>("payload/gimbal_set");
+ros::ServiceClient client = nh.serviceClient<core_api::GimbalSet>("/<namespace>/payload/gimbal_set");
 core_api::GimbalSet srv;
 
 srv.request.roll = 0.0;

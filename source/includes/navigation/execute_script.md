@@ -106,7 +106,7 @@ NotImplemented
 #include <core_api/ExecScript.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("navigation/exec_script");
+ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("/<namespace>/navigation/exec_script");
 core_api::ExecScript srv;
 
 srv.request.app_name = "sample_script.sh";

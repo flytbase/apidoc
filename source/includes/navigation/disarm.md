@@ -117,7 +117,7 @@ drone.disarm()
 #include <core_api/Disarm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Disarm>("navigation/disarm");
+ros::ServiceClient client = nh.serviceClient<core_api::Disarm>("/<namespace>/navigation/disarm");
 core_api::Disarm srv;
 client.call(srv);
 success = srv.response.success;

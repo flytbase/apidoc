@@ -170,7 +170,7 @@ drone.velocity_set(0, +2, 0, body_frame=True)
 #include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
 core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.12;

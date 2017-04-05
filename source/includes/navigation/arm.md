@@ -119,7 +119,7 @@ drone.arm()
 #include <core_api/Arm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Arm>("navigation/arm");
+ros::ServiceClient client = nh.serviceClient<core_api::Arm>("/<namespace>/navigation/arm");
 core_api::Arm srv;
 client.call(srv);
 success = srv.response.success;

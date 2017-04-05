@@ -237,7 +237,7 @@ void gposCallback(const sensor_msgs::NavSatFixConstPtr &gpos)
 
 ros::NodeHandle nh;
 sensor_msgs::NavSatFix gpos_data;
-ros::Subscriber sub = nh.subscribe("mavros/global_position/global", 1, gposCallback);
+ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/global_position/global", 1, gposCallback);
 ```
 
 ```python--ros

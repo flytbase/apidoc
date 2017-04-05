@@ -112,7 +112,7 @@ drone.position_hold()
 #include <core_api/PositionHold.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionHold>("navigation/position_hold");
+ros::ServiceClient client = nh.serviceClient<core_api::PositionHold>("/<namespace>/navigation/position_hold");
 core_api::PositionHold srv;
 client.call(srv);
 success = srv.response.success;
