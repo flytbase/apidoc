@@ -33,6 +33,9 @@ This is a REST call for the API. Make sure to replace
 
 URL: 'http://<ip>/list_streams'
 
+JSON Request:
+{   namespace: String}
+
 JSON Response:
 {   stream1: String,
     stream2: String,.... }
@@ -71,13 +74,16 @@ NotImplemented
 ```
 
 ```javascript--REST
+var msgdata=[];
+msgdata['namespace']='flytpod';
+// Use getnamespace API to know the namespace
 
 $.ajax({
-    type: "GET",
+    type: "POST",
     dataType: "json",
     url: "http://<ip>/list_streams",  
     success: function(data){
-           console.log(data);
+           console.log(data['stream1']+" "+data['stream2']);
     }
 };
 
@@ -143,24 +149,27 @@ This API allows to get the list of video streams avalibale and view the live str
     
     Argument | Type | Description
     -------------- | -------------- | --------------
+    namespace | string | namespace used in FlytOS   
+    
+    Output:
+    
+    Parameter | type | Description
+    ---------- | ---------- | ------------
     stream1 | string | link of the video stream1
     stream2 | string | link of the video stream2
     stream3 | string | link of the video stream3
     .
     .
     .
-    
-    Output:
-    
-    Parameter | type | Description
-    ---------- | ---------- | ------------
-    success | bool | true if action successful
 
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/list_streams````
+* URL: ````POST http://<ip>/list_streams````
+* JSON Request:
+{   namespace: \<namespace of FlytOS\>}
+
 * JSON Response:
 {
     stream1: \<link to stream1\>,
