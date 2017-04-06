@@ -17,6 +17,9 @@
 
 <span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/list_streams'</span>
 
+<span class="nx">JSON</span> <span class="nx">Request</span><span class="p">:</span>
+<span class="p">{</span>   <span class="nl">namespace</span><span class="p">:</span> <span class="nb">String</span><span class="p">}</span>
+
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">stream1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="nx">stream2</span><span class="p">:</span> <span class="nb">String</span><span class="p">,....</span> <span class="p">}</span>
@@ -35,13 +38,16 @@
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code>
 </code></pre><pre class="highlight python tab-python--ros"><code>
 
-</code></pre><pre class="highlight javascript tab-javascript--REST"><code>
+</code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span> <span class="nx">msgdata</span><span class="o">=</span><span class="p">[];</span>
+<span class="nx">msgdata</span><span class="p">[</span><span class="s1">'namespace'</span><span class="p">]</span><span class="o">=</span><span class="s1">'flytpod'</span><span class="p">;</span>
+<span class="c1">// Use getnamespace API to know the namespace</span>
+
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
     <span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/list_streams"</span><span class="p">,</span>  
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s1">'stream1'</span><span class="p">]</span><span class="o">+</span><span class="s2">" "</span><span class="o">+</span><span class="nx">data</span><span class="p">[</span><span class="s1">'stream2'</span><span class="p">]);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
@@ -86,6 +92,22 @@
 </tr>
 </thead><tbody>
 <tr>
+<td>namespace</td>
+<td>string</td>
+<td>namespace used in FlytOS</td>
+</tr>
+</tbody></table>
+
+<p>Output:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
 <td>stream1</td>
 <td>string</td>
 <td>link of the video stream1</td>
@@ -106,29 +128,15 @@
     .
     .</p>
 
-<p>Output:</p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>success</td>
-<td>bool</td>
-<td>true if action successful</td>
-</tr>
-</tbody></table>
-
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
 <p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
-<li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/list_streams</code></li>
-<li>JSON Response:
+<li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/list_streams</code></li>
+<li><p>JSON Request:
+{   namespace: &lt;namespace of FlytOS&gt;}</p></li>
+<li><p>JSON Response:
 {
 stream1: &lt;link to stream1&gt;,
 stream2: &lt;link to stream2&gt;,
@@ -138,7 +146,7 @@ stream5: &lt;link to stream5&gt;,
 .
 .
 .<br>
-}</li>
+}</p></li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>
