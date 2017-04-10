@@ -137,7 +137,7 @@ NotImplemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 ```
 
 ```python--ros

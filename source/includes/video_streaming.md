@@ -52,11 +52,11 @@ NA
 > Example
 
 ```shell
-
+Not Implemented
 ```
 
 ```cpp
-
+Not Implemented
 ```
 
 ```python
@@ -65,12 +65,11 @@ NotImplemented
 ```
 
 ```cpp--ros
-
+Not Implemented
 ```
 
 ```python--ros
-
-
+Not Implemented
 ```
 
 ```javascript--REST
@@ -97,11 +96,11 @@ NA
 > Example response
 
 ```shell
-success: true
+Not Implemented
 ```
 
 ```cpp
-0
+Not Implemented
 ```
 
 ```python
@@ -109,11 +108,11 @@ NotImplemented
 ```
 
 ```cpp--ros
-success: True
+Not Implemented
 ```
 
 ```python--ros
-Success: True
+Not Implemented
 ```
 
 ```javascript--REST

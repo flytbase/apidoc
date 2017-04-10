@@ -128,7 +128,7 @@ success = srv.response.success;
 
 ```python--ros
 
-# Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
+# Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 
 ```
 

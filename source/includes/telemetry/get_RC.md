@@ -126,13 +126,11 @@ std::cout << rc_channel << std::endl;
 ```
 
 ```python
-# create flyt_python navigation class instance
-
 NotImplemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 ```
 
 ```python--ros
@@ -189,7 +187,7 @@ instance of mavros_msgs::RCIn
 ```
 
 ```python
-[1001,999,1400,1234,1764,1900]
+NotImplemented
 ```
 
 ```cpp--ros
@@ -197,7 +195,7 @@ success: True
 ```
 
 ```python--ros
-NotImplemented
+[1001,999,1400,1234,1764,1900]
 ```
 
 ```javascript--REST
