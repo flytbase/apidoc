@@ -101,7 +101,7 @@ Response structure:
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/distance_sensor/lidarlite_pub
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msgs</span> <span class="kn">import</span> <span class="n">Range</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>

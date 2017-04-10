@@ -125,9 +125,9 @@ uint32 wp_transfered
 <span class="n">waypoints_array</span><span class="p">.</span><span class="n">pushback</span><span class="p">(</span><span class="n">waypoint</span><span class="p">)</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_set</span><span class="p">(</span><span class="n">waypoints_array</span><span class="p">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
-<span class="c"># Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
+<span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span>  <span class="nx">msgdata</span><span class="o">=</span><span class="p">[];</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">{};</span>

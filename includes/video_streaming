@@ -31,13 +31,12 @@
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>
-</code></pre><pre class="highlight cpp tab-cpp"><code>
+<pre class="highlight shell tab-shell"><code>Not Implemented
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
 
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code>
-</code></pre><pre class="highlight python tab-python--ros"><code>
-
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span> <span class="nx">msgdata</span><span class="o">=</span><span class="p">[];</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="s1">'namespace'</span><span class="p">]</span><span class="o">=</span><span class="s1">'flytpod'</span><span class="p">;</span>
 <span class="c1">// Use getnamespace API to know the namespace</span>
@@ -56,11 +55,11 @@
 <blockquote>
 <p>Example response</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
+<pre class="highlight shell tab-shell"><code>Not Implemented
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
-</code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">stream1</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">link</span> <span class="nx">to</span> <span class="nx">stream1</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="nx">stream2</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">link</span> <span class="nx">to</span> <span class="nx">stream2</span><span class="o">&gt;</span><span class="p">,</span>
