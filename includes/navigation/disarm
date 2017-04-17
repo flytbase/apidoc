@@ -93,9 +93,9 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">disarm</span><span class="p">():</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">disarm</span><span class="s">')</span><span class="err">
-</span><span class="s">    try:</span><span class="err">
-</span><span class="s">        handle = rospy.ServiceProxy(/&lt;namespace&gt;/navigation/disarm'</span><span class="p">,</span> <span class="n">Disarm</span><span class="p">)</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'/&lt;namespace&gt;/navigation/disarm'</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">handle</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="s">'/&lt;namespace&gt;/navigation/disarm'</span><span class="p">,</span> <span class="n">Disarm</span><span class="p">)</span>
         <span class="n">resp</span> <span class="o">=</span> <span class="n">handle</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">resp</span>
     <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
