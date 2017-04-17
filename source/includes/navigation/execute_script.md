@@ -121,9 +121,9 @@ from core_api.srv import *
 script_name = "sample_script.sh"
 sample_args = "arg1 arg2 arg3"
 def exec_script(script_name, sample_args):
-    rospy.wait_for_service(/<namespace>/navigation/exec_script')
+    rospy.wait_for_service('/<namespace>/navigation/exec_script')
     try:
-        handle = rospy.ServiceProxy(/<namespace>/navigation/exec_script', ExecScript)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/exec_script', ExecScript)
         resp = handle(app_name=script_name, arguments= sample_args)
         return resp
     except rospy.ServiceException, e:

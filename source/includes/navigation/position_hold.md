@@ -120,9 +120,9 @@ success = srv.response.success;
 
 ```python--ros
 def position_hold():
-    rospy.wait_for_service(/<namespace>/navigation/position_hold')
+    rospy.wait_for_service('/<namespace>/navigation/position_hold')
     try:
-        handle = rospy.ServiceProxy(/<namespace>/navigation/position_hold', PositionHold)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/position_hold', PositionHold)
         resp = handle()
         return resp
     except rospy.ServiceException, e:

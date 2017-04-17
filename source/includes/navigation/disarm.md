@@ -127,9 +127,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def disarm():
-    rospy.wait_for_service(/<namespace>/navigation/disarm')
+    rospy.wait_for_service('/<namespace>/navigation/disarm')
     try:
-        handle = rospy.ServiceProxy(/<namespace>/navigation/disarm', Disarm)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/disarm', Disarm)
         resp = handle()
         return resp
     except rospy.ServiceException, e:

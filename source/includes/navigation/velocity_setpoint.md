@@ -192,9 +192,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service(/<namespace>/navigation/velocity_set')
+    rospy.wait_for_service('/<namespace>/navigation/velocity_set')
     try:
-        handle = rospy.ServiceProxy(/<namespace>/navigation/velocity_set', VelocitySet)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/velocity_set', VelocitySet)
         # build message structure
         header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
         twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(vx,vy,vz),geometry_msgs.msg.Vector3(0.0,0.0,yaw_rate))

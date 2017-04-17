@@ -178,9 +178,9 @@ success = srv.response.success;
 from core_api.srv import * 
 
 def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):
-    rospy.wait_for_service(/<namespace>/navigation/position_set_global')
+    rospy.wait_for_service('/<namespace>/navigation/position_set_global')
     try:
-        handle = rospy.ServiceProxy(/<namespace>/navigation/position_set_global', PositionSetGlobal)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/position_set_global', PositionSetGlobal)
         
         # build message structure
         header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
