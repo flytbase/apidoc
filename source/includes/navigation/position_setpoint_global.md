@@ -186,7 +186,7 @@ def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, 
         header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
         twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(lat,lon,alt),geometry_msgs.msg.Vector3(0.0,0.0,yaw))
         twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
-        req_msg = VelocitySetRequest(twiststamped_msg, tolerance, async, yaw_valid)
+        req_msg = PositionSetGlobalRequest(twiststamped_msg, tolerance, async, yaw_valid)
         resp = handle(req_msg)
         return resp
     
