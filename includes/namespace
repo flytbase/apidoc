@@ -20,12 +20,7 @@ string message
 </span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">global_namespace</span>
 
 <span class="c1">//No API call required. Global namespace already available in private variable: std::string global_namespace
-</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
-
-<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
-<span class="n">Function</span> <span class="n">Definition</span><span class="p">:</span> <span class="n">get_global_namespace</span><span class="p">()</span>
-<span class="n">Arguments</span><span class="p">:</span> <span class="bp">None</span>
-<span class="k">return</span><span class="p">:</span> <span class="n">string</span>
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Not Implemented as global namespace is not required for any Python API</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -78,13 +73,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /get_global_namespace <span class="s2">"{}"</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//No API call required. Global namespace already available in private variable: std::string global_namespace
-</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
-
-<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
-<span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
-<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
-<span class="n">namespace</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_global_namespace</span><span class="p">()</span>
-
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Not Implemented as global namespace is not required for any Python API</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/ParamGetGlobalNamespace.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
@@ -142,7 +131,7 @@ string message
 success: True
 message: Parameter Get Global Namespace Successful  flytpod
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//No API call required. Global namespace already available in private variable: std::string global_namespace
-</span></code></pre><pre class="highlight python tab-python"><code><span class="n">flytpod</span>
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Not Implemented as global namespace is not required for any Python API</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_id</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_value</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
