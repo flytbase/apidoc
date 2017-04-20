@@ -180,11 +180,21 @@ geometry_msgs::TwistStamped att_euler;
 void attitudeEulerCb(void *_att_euler)
 {
     att_euler = * (geometry_msgs::TwistStamped*)(_att_euler);
+    std::cout<<"\nroll \t\tpitch \t\tyaw \t\trollspeed \tpitchspeed \tyawspeed";
+    std::cout<<"\n"<<att_euler.twist.linear.x<<"\t"<<att_euler.twist.linear.y<<"\t"<<att_euler.twist.linear.z;
+    std::cout<<"\t"<<att_euler.twist.angular.x<<"\t"<<att_euler.twist.angular.y<<"\t"<<att_euler.twist.angular.z;
+    fflush(stdout);
 }
-nav.sysSubscribe(Navigation::vehicle_attitude_euler,attitudeEulerCb);
 
-std::cout << att_euler << std::endl;
-
+int main(int argc, char *argv[])
+{
+	nav.sysSubscribe(Navigation::vehicle_attitude_euler,attitudeEulerCb);
+  while(1){
+		if(!ros::ok())
+		  exit(0);
+		sleep(0.1);
+  }
+}
 ```
 
 ```python
@@ -206,12 +216,13 @@ print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
 
 void attCallback(const geometry_msgs::TwistStampedConstPtr &att)
 {
-  att_data.twist.linear = att->twist.linear;
-  att_data.twist.angular = att->twist.angular;
+  std::cout<<"\nroll \t\tpitch \t\tyaw \t\trollspeed \tpitchspeed \tyawspeed";
+  std::cout<<"\n"<<att->twist.linear.x<<"\t"<<att->twist.linear.y<<"\t"<<att->twist.linear.z;
+  std::cout<<"\t"<<att->twist.angular.x<<"\t"<<att->twist.angular.y<<"\t"<<att->twist.angular.z;
+  fflush(stdout);
 }
 
 ros::NodeHandle nh;
-geometry_msgs::TwistStamped att_data;
 ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data_euler", 1, attCallback);
 ```
 
@@ -239,8 +250,6 @@ $.ajax({
            console.log(data);
     }
 };
-
-
 ```
 
 ```javascript--Websocket
@@ -280,6 +289,22 @@ twist:
 
 ```cpp
 instance of geometry_msgs::TwistStamped class
+
+header: 
+  seq: 2041
+  stamp: 
+    secs: 1492705227
+    nsecs: 960368337
+  frame_id: fcu
+twist: 
+  linear: 
+    x: -0.00561133073643
+    y: -0.00531742209569
+    z: -0.0351081602275
+  angular: 
+    x: 0.00158157129772
+    y: 0.001551638823
+    z: 0.00154603447299
 ```
 
 ```python
@@ -299,10 +324,27 @@ class attitude_euler:
 
 ```cpp--ros
 instance of geometry_msgs::TwistStamped class
+
+header: 
+  seq: 2041
+  stamp: 
+    secs: 1492705227
+    nsecs: 960368337
+  frame_id: fcu
+twist: 
+  linear: 
+    x: -0.00561133073643
+    y: -0.00531742209569
+    z: -0.0351081602275
+  angular: 
+    x: 0.00158157129772
+    y: 0.001551638823
+    z: 0.00154603447299
 ```
 
 ```python--ros
 instance of gemometry_msgs.msg.TwistStamped class
+
 std_msgs/Header header
       uint32 seq
       time stamp
@@ -316,7 +358,6 @@ std_msgs/Header header
         float64 x
         float64 y
         float64 z
-
 ```
 
 ```javascript--REST
@@ -331,7 +372,6 @@ std_msgs/Header header
         y: Float,
         z: FLoat}
 }
-
 ```
 
 ```javascript--Websocket
@@ -346,8 +386,6 @@ std_msgs/Header header
         y: Float,
         z: FLoat}
 }
-
-
 ```
 
 
