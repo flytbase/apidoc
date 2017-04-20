@@ -195,7 +195,7 @@ flytpod
 std::string param_id = srv.response.param_info.param_id;
 std::string param_value = srv.response.param_info.param_value;
 bool success = srv.response.success;
-std::string = srv.response.message;
+std::string message = srv.response.message;
 ```
 
 ```python--ros
