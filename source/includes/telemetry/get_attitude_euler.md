@@ -212,7 +212,7 @@ print att.roll, att.pitch, att.yaw, att.rollspeed, att.pitchspeed, att.yawspeed
 ```
 
 ```cpp--ros
-#include <geometry_msgs/TwistStamped>
+#include <geometry_msgs/TwistStamped.h>
 
 void attCallback(const geometry_msgs::TwistStampedConstPtr &att)
 {
@@ -222,8 +222,14 @@ void attCallback(const geometry_msgs::TwistStampedConstPtr &att)
   fflush(stdout);
 }
 
-ros::NodeHandle nh;
-ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data_euler", 1, attCallback);
+int main(int argc, char **argv)
+{
+    ros::init(argc, argv, "att_euler_cb");
+		ros::NodeHandle nh;
+		ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data_euler", 1, attCallback);
+		ros::spin();
+		return 0;
+}
 ```
 
 ```python--ros
