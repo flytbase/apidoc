@@ -278,7 +278,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/</span><span class="n">get_global_namespace</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/</span><span class="n">get_global_namespace</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -287,7 +287,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/</span><span class="n">get_global_namespce</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/</span><span class="n">get_global_namespace</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="n">ParamGetGlobalNamespace</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">REST</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">to</span> <span class="nx">replace</span> 
     <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
@@ -434,7 +434,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <h3 id="api-usage-information">API usage information:</h3>
 
 <ul>
-<li>Global namespce is required when calling onboard/remote APIs except cpp/python APIs.</li>
+<li>Global namespace is required when calling onboard/remote APIs except cpp/python APIs.</li>
 <li>All the core nodes of FlytOS run inside this namespace.</li>
 <li>Make sure that your custom ROS packages are not launched inside this namespace.</li>
 </ul>
@@ -470,13 +470,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">arm</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">arm</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">arm</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">arm</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -681,13 +681,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">disarm</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">disarm</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">disarm</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">disarm</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -902,14 +902,14 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">takeoff</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">takeoff</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span> <span class="kt">int</span> <span class="n">takeoff_alt</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">takeoff</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">takeoff</span>
 <span class="n">Type</span><span class="p">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">TakeOff</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> 
     <span class="p">:</span> <span class="nb">int</span> <span class="n">takeoff_alt</span>
@@ -1149,14 +1149,14 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">land</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">land</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="n">async</span><span class="o">=</span><span class="nb">false</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">land</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">land</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> 
     <span class="n">async</span><span class="o">=</span><span class="bp">False</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
@@ -1391,13 +1391,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_hold</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_hold</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_hold</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_hold</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -1614,7 +1614,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">geometry_msgs</span><span class="o">/</span><span class="n">TwistStamped</span> <span class="n">twist</span>
     <span class="o">:</span><span class="n">float32</span> <span class="n">tolerance</span>
@@ -1626,7 +1626,7 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">geometry_msgs</span><span class="o">/</span><span class="n">TwistStamped</span> <span class="n">twist</span>
     <span class="p">:</span><span class="n">float32</span> <span class="n">tolerance</span>
@@ -2022,7 +2022,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set_global</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set_global</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">geometry_msgs</span><span class="o">/</span><span class="n">TwistStamped</span> <span class="n">twist</span>
     <span class="o">:</span><span class="n">float32</span> <span class="n">tolerance</span>
@@ -2033,7 +2033,7 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set_global</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">position_set_global</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">geometry_msgs</span><span class="o">/</span><span class="n">TwistStamped</span> <span class="n">twist</span>
     <span class="p">:</span><span class="n">float32</span> <span class="n">tolerance</span>
@@ -2408,7 +2408,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">velocity_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">velocity_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">geometry_msgs</span><span class="o">/</span><span class="n">TwistStamped</span> <span class="n">twist</span>
     <span class="o">:</span><span class="n">float32</span> <span class="n">tolerance</span>
@@ -2420,7 +2420,7 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">velocity_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">velocity_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">geometry_msgs</span><span class="o">/</span><span class="n">TwistStamped</span> <span class="n">twist</span>
     <span class="p">:</span><span class="n">float32</span> <span class="n">tolerance</span>
@@ -2802,7 +2802,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">exec_script</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">exec_script</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">string</span> <span class="n">app_name</span>
     <span class="o">:</span><span class="n">string</span> <span class="n">arguments</span>
@@ -2810,7 +2810,7 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">exec_script</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">exec_script</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">string</span> <span class="n">app_name</span>
     <span class="p">:</span><span class="n">string</span> <span class="n">arguments</span>
@@ -3043,7 +3043,7 @@ mavros_msgs/Waypoint[] waypoints
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_get</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_get</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -3052,7 +3052,7 @@ mavros_msgs/Waypoint[] waypoints
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_get</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_get</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
@@ -3358,7 +3358,7 @@ uint32 wp_transfered
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">mavros_msgs</span><span class="o">/</span><span class="n">Waypoint</span><span class="p">[]</span> <span class="n">waypoints</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
@@ -3367,7 +3367,7 @@ uint32 wp_transfered
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">mavros_msgs</span><span class="o">/</span><span class="n">Waypoint</span><span class="p">[]</span> <span class="n">waypoints</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
@@ -3691,13 +3691,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_execute</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_execute</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_execute</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_execute</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -3863,13 +3863,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_clear</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_clear</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_clear</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_clear</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -4031,13 +4031,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_pause</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_pause</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_pause</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_pause</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -4200,7 +4200,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">set_home</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">set_home</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">float64</span> <span class="n">lat</span>
     <span class="o">:</span><span class="n">float64</span> <span class="n">lon</span>
@@ -4210,7 +4210,7 @@ bool success
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">set_home</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">set_home</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">float64</span> <span class="n">lat</span>
     <span class="p">:</span><span class="n">float64</span> <span class="n">lon</span>
@@ -4438,13 +4438,13 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set_current</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set_current</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="n">uint16</span> <span class="n">wp_seq</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set_current</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">navigation</span><span class="o">/</span><span class="n">waypoint_set_current</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">uint16</span> <span class="n">wp_seq</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
 
@@ -7769,7 +7769,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">payload</span><span class="o">/</span><span class="n">gimbal_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">payload</span><span class="o">/</span><span class="n">gimbal_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">float64</span> <span class="n">roll</span>
     <span class="o">:</span><span class="n">float64</span> <span class="n">pitch</span>
@@ -7779,7 +7779,7 @@ bool success
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">payload</span><span class="o">/</span><span class="n">gimbal_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">payload</span><span class="o">/</span><span class="n">gimbal_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">float64</span> <span class="n">roll</span>
     <span class="p">:</span><span class="n">float64</span> <span class="n">pitch</span>
@@ -8481,7 +8481,7 @@ Tip: Synchronous mode - The API call would wait for the function to return, whic
 
 
 Type: Ros Service
-Name: /&lt;namespace&gt;/setup/module_calibration<span class="o">()</span>
+Name: /&lt;namespace&gt;/setup/module_calibration
 MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP <span class="o">=</span> 0
@@ -8506,7 +8506,7 @@ MsgStructure:
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">module_calibration</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">module_calibration</span>
 <span class="n">MsgType</span><span class="o">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">ModuleCalibration</span>
 <span class="n">MsgStructure</span><span class="o">:</span>
     <span class="n">uint8</span> <span class="n">STOP</span> <span class="o">=</span> <span class="mi">0</span>
@@ -8526,7 +8526,7 @@ MsgStructure:
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">module_calibration</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">module_calibration</span>
 <span class="n">MsgType</span><span class="p">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">ModuleCalibration</span>
 <span class="n">MsgStructure</span><span class="p">:</span>
     <span class="n">uint8</span> <span class="n">STOP</span> <span class="o">=</span> <span class="mi">0</span>
@@ -8743,7 +8743,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span> <span class="n">param_info</span>
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -8751,7 +8751,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_set</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_set</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span> <span class="n">param_info</span>
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
@@ -8982,7 +8982,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get_all</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get_all</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="kt">bool</span> <span class="n">fresh_pull</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span>
@@ -8992,7 +8992,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get_all</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get_all</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="nb">bool</span> <span class="n">fresh_pull</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span>
@@ -9204,7 +9204,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">string</span> <span class="n">param_id</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
@@ -9214,7 +9214,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_get</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">string</span> <span class="n">param_id</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
@@ -9438,7 +9438,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_save</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_save</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -9446,7 +9446,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_save</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_save</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
@@ -9621,7 +9621,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_load</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_load</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -9629,7 +9629,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_load</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_load</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
@@ -9807,7 +9807,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_create</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_create</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span> <span class="n">param_info</span>
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -9815,7 +9815,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_create</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_create</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span> <span class="n">param_info</span>
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
@@ -10048,7 +10048,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_delete</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_delete</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="n">string</span> <span class="n">param_id</span>
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -10056,7 +10056,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_delete</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_delete</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="n">string</span> <span class="n">param_id</span>
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
@@ -10264,7 +10264,7 @@ string message
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_reset</span><span class="p">()</span>
+<span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_reset</span>
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
@@ -10272,7 +10272,7 @@ string message
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
-<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_reset</span><span class="p">()</span>
+<span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">param</span><span class="o">/</span><span class="n">param_reset</span>
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span> <span class="n">Null</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
