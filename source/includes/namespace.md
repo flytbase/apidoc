@@ -206,7 +206,7 @@ message: FlytOS namespace is  flytpod
 
 ###Description:
 
-This API returns the global namespace under which FlytOS's instance in running. Calling this API is a must if using RESTful, Websocket or ROS APIs as the value of this namespace is required to call other APIs. For users, writing their code in simple CPP and Python, need not call this API.
+This API returns the global namespace under which FlytOS's instance in running. Calling this API is a must if using RESTful, Websocket or ROS APIs as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever *<namespace>* is mentioned, must be replaced by the output of this API call. For users, writing their code in simple CPP and Python, need not call this API.
 
 ### ROS endpoint:
 
