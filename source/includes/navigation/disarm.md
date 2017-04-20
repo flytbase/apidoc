@@ -38,7 +38,7 @@ Function: disarm():
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/disarm()
+Name: /<namespace>/navigation/disarm
 call srv: NULL
 response srv: bool success
 ```
@@ -47,7 +47,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/disarm()
+Name: /<namespace>/navigation/disarm
 call srv: NULL
 response srv: bool success
 

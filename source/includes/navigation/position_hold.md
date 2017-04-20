@@ -37,7 +37,7 @@ Function: position_hold():
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_hold()
+Name: /<namespace>/navigation/position_hold
 call srv: NULL
 response srv: bool success
 ```
@@ -46,7 +46,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_hold()
+Name: /<namespace>/navigation/position_hold
 call srv: NULL
 response srv: bool success
 

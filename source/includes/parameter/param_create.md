@@ -39,7 +39,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_create()
+Name: /<namespace>/param/param_create
 call srv:
     :core_api/ParamInfo param_info
     :bool success
@@ -50,7 +50,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_create()
+Name: /<namespace>/param/param_create
 call srv:
     :core_api/ParamInfo param_info
     :bool success

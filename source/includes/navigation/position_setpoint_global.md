@@ -47,7 +47,7 @@ Function: position_set_global(self, lat, lon, rel_ht, yaw=0.0, tolerance=0.0, as
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set_global()
+Name: /<namespace>/navigation/position_set_global
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -61,7 +61,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set_global()
+Name: /<namespace>/navigation/position_set_global
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance

@@ -34,7 +34,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/set_home()
+Name: /<namespace>/navigation/set_home
 call srv:
     :float64 lat
     :float64 lon
@@ -47,7 +47,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/set_home()
+Name: /<namespace>/navigation/set_home
 call srv:
     :float64 lat
     :float64 lon

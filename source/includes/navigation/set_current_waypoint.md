@@ -36,7 +36,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_set_current()
+Name: /<namespace>/navigation/waypoint_set_current
 call srv: uint16 wp_seq
 response srv: bool success
 ```
@@ -45,7 +45,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_set_current()
+Name: /<namespace>/navigation/waypoint_set_current
 call srv: uint16 wp_seq
 response srv: bool success
 

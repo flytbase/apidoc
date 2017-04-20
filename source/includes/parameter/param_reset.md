@@ -36,7 +36,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_reset()
+Name: /<namespace>/param/param_reset
 call srv: Null
 response srv: 
     :bool success
@@ -47,7 +47,7 @@ response srv:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_reset()
+Name: /<namespace>/param/param_reset
 call srv: Null
 response srv: 
     :bool success

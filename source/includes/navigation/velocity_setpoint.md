@@ -52,7 +52,7 @@ Function: velocity_set(self,vx, vy, vz, yaw_rate=0.0, tolerance=0.0, relative=Fa
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/velocity_set()
+Name: /<namespace>/navigation/velocity_set
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -67,7 +67,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/velocity_set()
+Name: /<namespace>/navigation/velocity_set
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance

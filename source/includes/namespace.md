@@ -30,7 +30,7 @@ string message
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /get_global_namespace()
+Name: /get_global_namespace
 call srv: NULL
 response srv: 
     :bool success
@@ -42,7 +42,7 @@ response srv:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /get_global_namespce()
+Name: /get_global_namespace
 response srv: ParamGetGlobalNamespace
 ```
 
@@ -235,6 +235,6 @@ Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava
 
 ### API usage information:
 
-* Global namespce is required when calling onboard/remote APIs except cpp/python APIs.
+* Global namespace is required when calling onboard/remote APIs except cpp/python APIs.
 * All the core nodes of FlytOS run inside this namespace.
 * Make sure that your custom ROS packages are not launched inside this namespace.

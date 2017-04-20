@@ -39,7 +39,7 @@ Function: take_off(self, takeoff_alt=5.0):
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/takeoff()
+Name: /<namespace>/navigation/takeoff
 call srv: 
     : int takeoff_alt
 response srv: bool success
@@ -49,7 +49,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/takeoff()
+Name: /<namespace>/navigation/takeoff
 Type: core_api/TakeOff
 call srv: 
     : int takeoff_alt

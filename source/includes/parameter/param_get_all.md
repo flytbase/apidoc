@@ -43,7 +43,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_get_all()
+Name: /<namespace>/param/param_get_all
 call srv:
     :bool fresh_pull
 response srv:
@@ -56,7 +56,7 @@ response srv:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_get_all()
+Name: /<namespace>/param/param_get_all
 call srv:
     :bool fresh_pull
 response srv:

@@ -31,7 +31,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/exec_script()
+Name: /<namespace>/navigation/exec_script
 call srv:
     :string app_name
     :string arguments
@@ -42,7 +42,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/exec_script()
+Name: /<namespace>/navigation/exec_script
 call srv:
     :string app_name
     :string arguments

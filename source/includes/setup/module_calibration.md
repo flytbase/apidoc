@@ -8,7 +8,7 @@
 
 
 Type: Ros Service
-Name: /<namespace>/setup/module_calibration()
+Name: /<namespace>/setup/module_calibration
 MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
@@ -42,7 +42,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/setup/module_calibration()
+Name: /<namespace>/setup/module_calibration
 MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
@@ -65,7 +65,7 @@ MsgStructure:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/setup/module_calibration()
+Name: /<namespace>/setup/module_calibration
 MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0

@@ -40,7 +40,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_set()
+Name: /<namespace>/navigation/waypoint_set
 call srv:
     :mavros_msgs/Waypoint[] waypoints
 response srv: 
@@ -52,7 +52,7 @@ response srv:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_set()
+Name: /<namespace>/navigation/waypoint_set
 call srv:
     :mavros_msgs/Waypoint[] waypoints
 response srv: 

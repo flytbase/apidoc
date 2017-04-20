@@ -38,7 +38,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_delete()
+Name: /<namespace>/param/param_delete
 call srv:
     :string param_id
     :bool success
@@ -49,7 +49,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/param/param_delete()
+Name: /<namespace>/param/param_delete
 call srv:
     :string param_id
     :bool success

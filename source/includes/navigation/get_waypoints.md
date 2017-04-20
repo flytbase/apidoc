@@ -38,7 +38,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_get()
+Name: /<namespace>/navigation/waypoint_get
 call srv: Null
 response srv: 
     :bool success
@@ -50,7 +50,7 @@ response srv:
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/waypoint_get()
+Name: /<namespace>/navigation/waypoint_get
 call srv: Null
 response srv: 
     :bool success

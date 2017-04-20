@@ -34,7 +34,7 @@ NotImplemented
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/payload/gimbal_set()
+Name: /<namespace>/payload/gimbal_set
 call srv:
     :float64 roll
     :float64 pitch
@@ -47,7 +47,7 @@ response srv: bool success
 
 Type: Ros Service
 Type: Ros Service
-Name: /<namespace>/payload/gimbal_set()
+Name: /<namespace>/payload/gimbal_set
 call srv:
     :float64 roll
     :float64 pitch

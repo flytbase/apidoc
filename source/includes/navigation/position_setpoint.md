@@ -53,7 +53,7 @@ Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, as
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/position_set
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance
@@ -68,7 +68,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/position_set()
+Name: /<namespace>/navigation/position_set
 call srv:
     :geometry_msgs/TwistStamped twist
     :float32 tolerance

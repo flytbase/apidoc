@@ -39,7 +39,7 @@ Function: land(async=False):
 // ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/land()
+Name: /<namespace>/navigation/land
 call srv: 
     async=false
 response srv: bool success
@@ -49,7 +49,7 @@ response srv: bool success
 # ROS services and topics are accessible from onboard scripts only.
 
 Type: Ros Service
-Name: /<namespace>/navigation/land()
+Name: /<namespace>/navigation/land
 call srv: 
     async=False
 response srv: bool success
