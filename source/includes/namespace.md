@@ -19,10 +19,7 @@ string message
 ```
 
 ```cpp
-// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
-std::string global_namespace
-
-//No API call required. Global namespace already available in private variable: std::string global_namespace
+# Not Implemented as global namespace is not required for any CPP API
 ```
 
 ```python
@@ -47,7 +44,6 @@ response srv:
 Type: Ros Service
 Name: /get_global_namespce()
 response srv: ParamGetGlobalNamespace
-
 ```
 
 ```javascript--REST
@@ -64,7 +60,6 @@ JSON Response:
 			param_value: String
 		}
 	}
-
 ```
 
 ```javascript--Websocket
@@ -83,8 +78,6 @@ Response:
             param_value: String
         }
 }
-
-
 ```
 
 
@@ -95,7 +88,7 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```cpp
-//No API call required. Global namespace already available in private variable: std::string global_namespace
+# Not Implemented as global namespace is not required for any CPP API
 ```
 
 ```python
@@ -113,7 +106,7 @@ client.call(srv);
 std::string global_namespace = srv.response.param_info.param_value;
 
 bool success = srv.response.success;
-std::string = srv.response.message;
+std::string message = srv.response.message;
 ```
 
 ```python--ros
@@ -128,7 +121,6 @@ def get_global_namespace():
     except rospy.ServiceException, e:
         rospy.logerr("global namespace service not available", e)
         return None
-
 ```
 
 
@@ -141,8 +133,6 @@ def get_global_namespace():
 	        console.log(data.param_info.param_value);
 	    }
 	});
-
-
 ```
 
 ```javascript--Websocket
@@ -163,18 +153,18 @@ namespace.callService(request, function(result) {
 ```
 
 
-> Example
+> Example response
 
 ```shell
 param_info: 
   param_id: global_namespace
   param_value: flytpod
 success: True
-message: Parameter Get Global Namespace Successful  flytpod
+message: FlytOS namespace is  flytpod
 ```
 
 ```cpp
-//No API call required. Global namespace already available in private variable: std::string global_namespace
+# Not Implemented as global namespace is not required for any CPP API
 ```
 
 ```python
@@ -182,19 +172,13 @@ message: Parameter Get Global Namespace Successful  flytpod
 ```
 
 ```cpp--ros
-std::string param_id = srv.response.param_info.param_id;
-std::string param_value = srv.response.param_info.param_value;
-bool success = srv.response.success;
-std::string message = srv.response.message;
+success : true
+message : FlytOS namespace is  flytpod
 ```
 
 ```python--ros
-Response object with following structure.
-param_info: 
-  param_id: global_namespace
-  param_value: flytpod
 success: True
-message: Parameter Get Global Namespace Successful	flytpod
+message: FlytOS namespace is  flytpod
 ```
 
 
@@ -205,7 +189,6 @@ message: Parameter Get Global Namespace Successful	flytpod
 		param_value:'flytpod'
 	}
 }
-
 ```
 
 ```javascript--Websocket
@@ -223,20 +206,9 @@ message: Parameter Get Global Namespace Successful	flytpod
 
 ###Description:
 
-This API returns the global namespace.
-
-###Parameters:
-    
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
-    
-    Output:
-    
-    Parameter | type | Description
-    ---------- | ---------- | ------------
-    namespace | string | global namespace name
+This API returns the global namespace under which FlytOS's instance in running. Calling this API is a must if using RESTful, Websocket or ROS APIs as the value of this namespace is required to call other APIs. For users, writing their code in simple CPP and Python, need not call this API.
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /get_global_namespace</br>
@@ -254,8 +226,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 
 
 ### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
-Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
+Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
+Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/get_global_namespace'</br>
 * serviceType: 'core_api/ParamGetGlobalNamespace'
@@ -263,6 +235,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Global namespce is required when calling onboard/remote APIs except python APIs.
+* Global namespce is required when calling onboard/remote APIs except cpp/python APIs.
 * All the core nodes of FlytOS run inside this namespace.
 * Make sure that your custom ROS packages are not launched inside this namespace.
