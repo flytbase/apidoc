@@ -5,7 +5,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/disarm
 ROS-Service Type: core_api/Disarm, below is its description
@@ -94,7 +94,7 @@ rosservice call /flytpod/navigation/disarm "{}"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 if(!nav.disarm())
@@ -117,7 +117,7 @@ drone.disarm()
 #include <core_api/Disarm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Disarm>("navigation/disarm");
+ros::ServiceClient client = nh.serviceClient<core_api::Disarm>("/<namespace>/navigation/disarm");
 core_api::Disarm srv;
 client.call(srv);
 success = srv.response.success;
@@ -127,9 +127,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def disarm():
-    rospy.wait_for_service('namespace/navigation/disarm')
+    rospy.wait_for_service('/<namespace>/navigation/disarm')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/disarm', Disarm)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/disarm', Disarm)
         resp = handle()
         return resp
     except rospy.ServiceException, e:
@@ -225,7 +225,7 @@ This API disarms the motors. Read API desciption below before you use it. Callin
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/disarm</br>
+* Name: /\<namespace\>/navigation/disarm</br>
 * Service Type: core_api/Disarm
 
 ### RESTful endpoint:
@@ -242,7 +242,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/disarm'</br>
+* name: '/\<namespace\>/navigation/disarm'</br>
 * serviceType: 'core_api/Disarm'
 
 

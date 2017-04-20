@@ -7,7 +7,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/payload_adc
 ROS-Topic Type: mavros_msgs/PayloadADC
@@ -117,7 +117,7 @@ NotImplemented
 #include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
 core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.12;
@@ -138,7 +138,7 @@ success = srv.response.success;
 ```python--ros
 from mavros_msgs.msgs import PayloadADC
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/payload_adc"), PayloadADC, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/mavros/payload_adc"), PayloadADC, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -240,7 +240,7 @@ This API subscribes/polls the ADC payload data. This API is limited to FlytPOD o
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/payload_adc</br>
+* Name: /\<namespace\>/mavros/payload_adc</br>
 * Response Type: mavros_msgs/PayloadADC
 
 ### RESTful endpoint:
@@ -258,7 +258,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/payload_adc'</br>
+* name: '/\<namespace\>/mavros/payload_adc'</br>
 * messageType: 'mavros_msgs/PayloadADC'
 
 ### API usage information:

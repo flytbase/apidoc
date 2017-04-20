@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_set_current
 ROS-Service Type: core_api/WaypointSetCurrent, below is its description
@@ -93,7 +93,7 @@ rosservice call /flytsim/navigation/waypoint_set_current "wp_seq: 1"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 int waypoint_no = 2;
@@ -106,12 +106,12 @@ NotImplemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 ```
 
 ```python--ros
 
-# Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
+# Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 
 ```
 
@@ -210,7 +210,7 @@ Sets the waypoint Id specified, as the current waypoint from the list of already
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/waypoint_set_current</br>
+* Name: /\<namespace\>/navigation/waypoint_set_current</br>
 * Service Type: WaypointSetCurrent
 
 ### RESTFul endpoint:
@@ -231,7 +231,7 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/waypoint_set_current'</br>
+* name: '/\<namespace\>/navigation/waypoint_set_current'</br>
 * serviceType: 'core_api/WaypointSetCurrent'
 
 

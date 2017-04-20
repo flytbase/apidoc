@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/exec_script
 ROS-Service Type: core_api/ExecScript, below is its description
@@ -106,7 +106,7 @@ NotImplemented
 #include <core_api/ExecScript.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("navigation/exec_script");
+ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("/<namespace>/navigation/exec_script");
 core_api::ExecScript srv;
 
 srv.request.app_name = "sample_script.sh";
@@ -121,9 +121,9 @@ from core_api.srv import *
 script_name = "sample_script.sh"
 sample_args = "arg1 arg2 arg3"
 def exec_script(script_name, sample_args):
-    rospy.wait_for_service('namespace/navigation/exec_script')
+    rospy.wait_for_service('/<namespace>/navigation/exec_script')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/exec_script', ExecScript)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/exec_script', ExecScript)
         resp = handle(app_name=script_name, arguments= sample_args)
         return resp
     except rospy.ServiceException, e:
@@ -233,7 +233,7 @@ This API can run onboard executable scripts in python, shell, etc.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/exec_script</br>
+* Name: /\<namespace\>/navigation/exec_script</br>
 * Service Type: ExecScript
 
 ### RESTFul endpoint:
@@ -255,7 +255,7 @@ FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/exec_script'</br>
+* name: '/\<namespace\>/navigation/exec_script'</br>
 * serviceType: 'core_api/ExecScript'
 
 

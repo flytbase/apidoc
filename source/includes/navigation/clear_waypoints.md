@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_clear
 ROS-Service Type: core_api/WaypointClear, below is its description
@@ -86,7 +86,7 @@ rosservice call /flytpod/navigation/waypoint_clear "{}"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_clear();
@@ -98,12 +98,12 @@ NotImplemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 ```
 
 ```python--ros
 
-# Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
+# Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 
 ```
 
@@ -191,7 +191,7 @@ Clear list of waypoints on autopilot.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/waypoint_clear</br>
+* Name: /\<namespace\>/navigation/waypoint_clear</br>
 * Service Type: WaypointClear
 
 ### RESTful endpoint:
@@ -208,7 +208,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/waypoint_clear'</br>
+* name: '/\<namespace\>/navigation/waypoint_clear'</br>
 * serviceType: 'core_api/WaypointClear'
 
 

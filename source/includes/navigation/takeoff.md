@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/takeoff
 ROS-Service Type: core_api/TakeOff, below is its description
@@ -99,7 +99,7 @@ rosservice call /flytpod/navigation/take_off "takeoff_alt: 3.0"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.take_off(3.0);
@@ -120,7 +120,7 @@ drone.take_off(6.0)
 #include <core_api/TakeOff.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::TakeOff>("navigation/takeoff");
+ros::ServiceClient client = nh.serviceClient<core_api::TakeOff>("/<namespace>/navigation/takeoff");
 core_api::TakeOff srv;
 
 srv.request.takeoff_alt = 3.0;
@@ -133,9 +133,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def takeoff(height)
-    rospy.wait_for_service('namespace/navigation/take_off')
+    rospy.wait_for_service('/<namespace>/navigation/take_off')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/take_off', TakeOff)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/take_off', TakeOff)
         resp = handle(takeoff_alt=height)
         return resp
     except rospy.ServiceException, e:
@@ -242,7 +242,7 @@ Takeoff and reach to specified height from current location.
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/takeoff</br>
+* Name: /\<namespace\>/navigation/takeoff</br>
 * Service Type: core_api/TakeOff
 
 ### RESTful endpoint:
@@ -263,7 +263,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/take_off'</br>
+* name: '/\<namespace\>/navigation/take_off'</br>
 * serviceType: 'core_api/TakeOff'
 
 

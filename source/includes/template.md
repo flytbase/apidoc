@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/position_set
 ROS-Service Type: core_api/PositionSet, below is its description
@@ -156,7 +156,7 @@ body_frame: false"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
@@ -179,7 +179,7 @@ drone.position_set(-5, 0, 0, relative=True)
 #include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
 core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.5;
@@ -197,9 +197,9 @@ success = srv.response.success;
 
 ```python--ros
 def setpoint_local_position(lx, ly, lz, yaw, tolerance= 0.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/position_set')
+    rospy.wait_for_service('/<namespace>/navigation/position_set')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/position_set', PositionSet)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/position_set', PositionSet)
         twist = {'header': {'seq': seq, 'stamp': {'secs': sec, 'nsecs': nsec}, 'frame_id': f_id}, 'twist': {'linear': {'x': lx, 'y': ly, 'z': lz}, 'angular': {'z': yaw}}}
         resp = handle(twist, tolerance, async, relative, yaw_rate_valid, body_frame)
         return resp
@@ -337,7 +337,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/position_set</br>
+* Name: /\<namespace\>/navigation/position_set</br>
 * Service Type: PositionSet
 
 ### RESTful endpoint:
@@ -374,7 +374,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/position_set'</br>
+* name: '/\<namespace\>/navigation/position_set'</br>
 * serviceType: 'core_api/PositionSet'
 
 

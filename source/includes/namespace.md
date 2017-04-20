@@ -3,7 +3,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login. 
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login. 
 
 ROS-Service Name: /get_global_namespace
 ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
@@ -26,12 +26,7 @@ std::string global_namespace
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
-
-Class: flyt_python.api.navigation
-Function Definition: get_global_namespace()
-Arguments: None
-return: string
+# Not Implemented as global namespace is not required for any Python API
 ```
 
 ```cpp--ros
@@ -93,7 +88,7 @@ Response:
 ```
 
 
-> Example API call
+> Example
 
 ```shell
 rosservice call /get_global_namespace "{}"
@@ -104,24 +99,19 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```python
-# create flyt_python navigation class instance
-
-from flyt_python import api
-drone = api.navigation()
-time.sleep(3.0)
-namespace = drone.get_global_namespace()
-
+# Not Implemented as global namespace is not required for any Python API
 ```
 
 ```cpp--ros
 #include <core_api/ParamGetGlobalNamespace.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ParamGetGlobalNamespace>("navigation/get_global_namespace");
+ros::ServiceClient client = nh.serviceClient<core_api::ParamGetGlobalNamespace>("/get_global_namespace");
 core_api::ParamGetGlobalNamespace srv;
 client.call(srv);
-std::string param_id = srv.response.param_info.param_id;
-std::string param_value = srv.response.param_info.param_value;
+
+std::string global_namespace = srv.response.param_info.param_value;
+
 bool success = srv.response.success;
 std::string = srv.response.message;
 ```
@@ -173,7 +163,7 @@ namespace.callService(request, function(result) {
 ```
 
 
-> Example API Response
+> Example
 
 ```shell
 param_info: 
@@ -188,7 +178,7 @@ message: Parameter Get Global Namespace Successful  flytpod
 ```
 
 ```python
-flytpod
+# Not Implemented as global namespace is not required for any Python API
 ```
 
 ```cpp--ros

@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_get_all
 ROS-Service Type: core_api/ParamGetAll, below is its description
@@ -107,7 +107,7 @@ rosservice call /flytpod/param/param_get_all "fresh_pull: false"
 ```
 
 ```cpp
-#include <core_script_bridge/param_bridge.h>
+#include <cpp_api/param_bridge.h>
 
 Param param;
 bool fresh_pull = false;
@@ -123,12 +123,12 @@ NotImplemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 ```
 
 ```python--ros
 
-# Please refer to Rospy documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
+# Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
 
 ```
 
@@ -222,10 +222,10 @@ This API gets all the parameters available in FlytOS with their values.
     param_value | string | value of the parameter
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/param/param_get_all</br>
+* Name: /\<namespace\>/param/param_get_all</br>
 * Service Type: ParamGetAll
 
 ### RESTful endpoint:
@@ -246,7 +246,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/param/param_get_all'</br>
+* name: '/\<namespace\>/param/param_get_all'</br>
 * serviceType: 'core_api/ParamGetAll'
 
 

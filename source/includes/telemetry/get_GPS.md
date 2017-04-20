@@ -5,7 +5,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/global_position/global
 ROS-Topic Type: sensor_msgs/NavSatFix, below is its description
@@ -92,7 +92,7 @@ Response: glob_position as described below.
         lon = 0.0
         alt = 0.0
 
-This API support single pole mode only.
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -199,7 +199,7 @@ rostopic echo /flytpod/mavros/global_position/global
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::NavSatFix gpos;
@@ -221,7 +221,7 @@ drone = api.navigation()
 time.sleep(3.0)
 
 # Poll data
-gpos = drone.get_global_position
+gpos = drone.get_global_position()
 # Print the data
 print gpos.lat, gpos.lon, gpos.alt
 ```
@@ -237,14 +237,14 @@ void gposCallback(const sensor_msgs::NavSatFixConstPtr &gpos)
 
 ros::NodeHandle nh;
 sensor_msgs::NavSatFix gpos_data;
-ros::Subscriber sub = nh.subscribe("mavros/global_position/global", 1, gposCallback);
+ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/global_position/global", 1, gposCallback);
 ```
 
 ```python--ros
 from sensor_msgs.msg import NavSatFix
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/global_position/global"), NavSatFix, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/mavros/global_position/global"), NavSatFix, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -329,7 +329,7 @@ instance of sensor_msgs.msg.NavSatFix class
 
 ###Description:
 
-This API subscribes/poles position data in global coordinate system.  Please check API usage section below before using API.
+This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -347,7 +347,7 @@ This API subscribes/poles position data in global coordinate system.  Please che
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/global_position/global</br>
+* Name: /\<namespace\>/mavros/global_position/global</br>
 * Response Type: sensor_msgs/NavSatFix
 
 ### RESTful endpoint:
@@ -366,7 +366,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/global_position/global'</br>
+* name: '/\<namespace\>/mavros/global_position/global'</br>
 * messageType: 'sensor_msgs/NavSatFix'
 
 ### API usage information:

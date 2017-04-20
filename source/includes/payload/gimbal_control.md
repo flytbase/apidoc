@@ -112,7 +112,7 @@ NotImplemented
 #include <core_api/GimbalSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::GimbalSet>("payload/gimbal_set");
+ros::ServiceClient client = nh.serviceClient<core_api::GimbalSet>("/<namespace>/payload/gimbal_set");
 core_api::GimbalSet srv;
 
 srv.request.roll = 0.0;
@@ -267,6 +267,6 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
-* name: '/namespace/payload/gimbal_set'</br>
+* name: '/\<namespace\>/payload/gimbal_set'</br>
 * serviceType: 'core_api/GimbalSet'
 

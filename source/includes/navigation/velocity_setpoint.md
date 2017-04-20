@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/velocity
 ROS-Service Type: core_api/VelocitySet, below is its description
@@ -147,7 +147,7 @@ rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.velocity_set(1.0, 0.5, -1.0, 0.12, 0.5, false, false, true, false);
@@ -170,7 +170,7 @@ drone.velocity_set(0, +2, 0, body_frame=True)
 #include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("navigation/position_set");
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
 core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.12;
@@ -192,9 +192,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
-    rospy.wait_for_service('namespace/navigation/velocity_set')
+    rospy.wait_for_service('/<namespace>/navigation/velocity_set')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/velocity_set', VelocitySet)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/velocity_set', VelocitySet)
         # build message structure
         header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
         twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(vx,vy,vz),geometry_msgs.msg.Vector3(0.0,0.0,yaw_rate))
@@ -337,7 +337,7 @@ This API gives linear (x,y,z) and angular (yaw) velocity setpoint to vehicle. Pl
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/velocity_set</br>
+* Name: /\<namespace\>/navigation/velocity_set</br>
 * Service Type: core_api/VelocitySet
 
 ### RESTful endpoint:
@@ -374,7 +374,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/velocity_set'</br>
+* name: '/\<namespace\>/navigation/velocity_set'</br>
 * serviceType: 'core_api/VelocitySet'
 
 

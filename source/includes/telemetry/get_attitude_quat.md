@@ -7,7 +7,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/mavros/imu/data
 ROS-Topic Type: sensor_msgs/Imu, below is its description
@@ -89,7 +89,7 @@ Response: attitude_quaternion as described below.
         pitchspeed = 0.0
         yawspeed = 0.0
 
-This API supports single pole mode only.
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -161,7 +161,8 @@ JSON Response:
 {   orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -188,7 +189,8 @@ Response:
 {   orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -208,7 +210,7 @@ rostopic echo /flytpod/mavros/imu/data
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::Imu att_quat;
@@ -249,14 +251,14 @@ void attCallback(const sensor_msgs::ImuConstPtr &att)
 
 ros::NodeHandle nh;
 sensor_msgs::Imu att_data;
-ros::Subscriber sub = nh.subscribe("mavros/imu/data", 1, attCallback);
+ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data", 1, attCallback);
 ```
 
 ```python--ros
 from sensor_msgs.msg import Imu
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/mavros/imu/data"), Imu, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/mavros/imu/data"), Imu, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -346,7 +348,8 @@ instance of sensor_msgs.msg.Imu class
     orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -364,7 +367,8 @@ instance of sensor_msgs.msg.Imu class
     orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -382,7 +386,7 @@ instance of sensor_msgs.msg.Imu class
 
 ###Description:
 
-This API subscribes/poles attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
+This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -404,7 +408,7 @@ This API subscribes/poles attitude data (angle and angular rate) in quaternion. 
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/mavros/imu/data</br>
+* Name: /\<namespace\>/mavros/imu/data</br>
 * Response Type: sensor_msgs/Imu
 
 ### RESTful endpoint:
@@ -417,7 +421,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
     orientation:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float,
+        w: Float},
     angular_velocity:{
         x: Float,
         y: Float,
@@ -433,7 +438,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/mavros/imu/data'</br>
+* name: '/\<namespace\>/mavros/imu/data'</br>
 * messageType: 'sensor_msgs/Imu'
 
 ### API usage information:

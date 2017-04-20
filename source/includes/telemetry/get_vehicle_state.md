@@ -4,7 +4,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Topic Name: /<namespace>/flyt/state
 ROS-Topic Type: mavros_msgs/State
@@ -153,11 +153,11 @@ Response:
 > Example
 
 ```shell
-rotopic echo /flytpod/flyt/state
+rostopic echo /flytpod/flyt/state
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::State vehicle_state;
@@ -185,13 +185,13 @@ print drone.get_vehicle_mode()
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documenation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 ```
 
 ```python--ros
 from mavros_msgs.msgs import State
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
-topic_sub = rospy.Subscriber("/namespace/flyt/state"), State, topic_callback)
+topic_sub = rospy.Subscriber("/<namespace>/flyt/state"), State, topic_callback)
 
 # define the callback function which will print the values every time topic is updated
 def topic_callback(data):
@@ -314,7 +314,7 @@ This API subscribes/polls the vehicle state data. Please see usage information s
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
 * Type: Ros Topic</br> 
-* Name: /namespace/flyt/state</br>
+* Name: /\<namespace\>/flyt/state</br>
 * Response Type: mavros_msgs/State
 
 ### RESTful endpoint:
@@ -337,7 +337,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/flyt/state'</br>
+* name: '/\<namespace\>/flyt/state'</br>
 * messageType: 'mavros_msgs/State'
 
 ### API usage information:

@@ -7,7 +7,7 @@
 > Definition
 
 ```shell
-# API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
+# API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/arm
 ROS-Service Type: core_api/Arm, below is its description
@@ -96,7 +96,7 @@ rosservice call /flytpod/navigation/arm "{}"
 ```
 
 ```cpp
-#include <core_script_bridge/navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 if(!nav.arm())
@@ -119,7 +119,7 @@ drone.arm()
 #include <core_api/Arm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Arm>("navigation/arm");
+ros::ServiceClient client = nh.serviceClient<core_api::Arm>("/<namespace>/navigation/arm");
 core_api::Arm srv;
 client.call(srv);
 success = srv.response.success;
@@ -129,9 +129,9 @@ success = srv.response.success;
 from core_api.srv import *
 
 def arm()
-    rospy.wait_for_service('namespace/navigation/arm')
+    rospy.wait_for_service('/<namespace>/navigation/arm')
     try:
-        handle = rospy.ServiceProxy('namespace/navigation/arm', Arm)
+        handle = rospy.ServiceProxy('/<namespace>/navigation/arm', Arm)
         resp = handle()
         return resp
     except rospy.ServiceException, e:
@@ -227,7 +227,7 @@ This API arms the motors. If arm fails then check debug messages for arming erro
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
 
 * Type: Ros Service</br> 
-* Name: /namespace/navigation/arm</br>
+* Name: /\<namespace\>/navigation/arm</br>
 * Service Type: core_api/Arm
 
 ### RESTful endpoint:
@@ -244,7 +244,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/namespace/navigation/arm'</br>
+* name: '/\<namespace\>/navigation/arm'</br>
 * serviceType: 'core_api/Arm'
 
 
