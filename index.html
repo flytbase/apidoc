@@ -392,7 +392,7 @@ message: Parameter Get Global Namespace Successful  flytpod
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_id</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_value</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">message</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Response</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">following</span> <span class="n">structure</span><span class="o">.</span>
 <span class="n">param_info</span><span class="p">:</span> 
   <span class="n">param_id</span><span class="p">:</span> <span class="n">global_namespace</span>
@@ -7949,7 +7949,7 @@ yaw:-0.2"</span>
 <p>For Pixhawk users:</p>
 
 <ul>
-<li>Make sure <strong>vmount</strong> driver gets started in rcS and variables <em>MIXER_AUX</em>, <em>PWM_AUX_OUT</em> and <em>PWM_AUX_RATE</em> are set to <em>mount</em>, <em>123456</em> and <em>50</em> respectively in rcS OR for strictly testing purposes one can set the parameter: <strong>SYS_AUTOSTART</strong> to 4002. For more information refer to <a href="https://dev.px4.io/advanced-gimbal-control.html">this guide by PX4</a>.</li>
+<li>Make sure <strong>vmount</strong> driver gets started in rcS and variables <em>MIXER_AUX</em>, <em>PWM_AUX_OUT</em> and <em>PWM_AUX_RATE</em> are set to <em>mount</em>, <em>123456</em> and <em>50</em> respectively in rc.mc_defaults OR for strictly testing purposes one can set the parameter: <strong>SYS_AUTOSTART</strong> to 4002. For more information refer to <a href="https://dev.px4.io/advanced-gimbal-control.html">this guide by PX4</a>.</li>
 <li>Autopilot <strong>MUST</strong> be in <strong>ready-to-arm</strong> state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to <a href="https://pixhawk.org/users/status_leds">this link</a>.</li>
 <li>Make sure the parameter: <strong>MNT_MODE_IN</strong> is set to 3.</li>
 </ul>
