@@ -221,7 +221,7 @@ drone = api.navigation()
 time.sleep(3.0)
 
 # Poll data
-gpos = drone.get_global_position
+gpos = drone.get_global_position()
 # Print the data
 print gpos.lat, gpos.lon, gpos.alt
 ```

@@ -26,12 +26,7 @@ std::string global_namespace
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
-
-Class: flyt_python.api.navigation
-Function Definition: get_global_namespace()
-Arguments: None
-return: string
+# Not Implemented as global namespace is not required for any Python API
 ```
 
 ```cpp--ros
@@ -104,13 +99,7 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```python
-# create flyt_python navigation class instance
-
-from flyt_python import api
-drone = api.navigation()
-time.sleep(3.0)
-namespace = drone.get_global_namespace()
-
+# Not Implemented as global namespace is not required for any Python API
 ```
 
 ```cpp--ros
@@ -189,7 +178,7 @@ message: Parameter Get Global Namespace Successful  flytpod
 ```
 
 ```python
-flytpod
+# Not Implemented as global namespace is not required for any Python API
 ```
 
 ```cpp--ros
