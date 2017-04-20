@@ -19,7 +19,7 @@ string message
 ```
 
 ```cpp
-# Not Implemented as global namespace is not required for any CPP API
+// Not Implemented as global namespace is not required for any CPP API
 ```
 
 ```python
@@ -88,7 +88,7 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```cpp
-# Not Implemented as global namespace is not required for any CPP API
+// Not Implemented as global namespace is not required for any CPP API
 ```
 
 ```python
@@ -164,7 +164,7 @@ message: FlytOS namespace is  flytpod
 ```
 
 ```cpp
-# Not Implemented as global namespace is not required for any CPP API
+// Not Implemented as global namespace is not required for any CPP API
 ```
 
 ```python
