@@ -206,14 +206,12 @@ NotImplemented
 {
     success:True
 }
-
 ```
 
 ```javascript--Websocket
 {
     success:True
 }
-
 ```
 
 
@@ -221,6 +219,11 @@ NotImplemented
 
 
 ###Description:
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>
+
 This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.
 
 ###Parameters:

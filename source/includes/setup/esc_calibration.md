@@ -218,6 +218,11 @@ NotImplemented
 
 
 ###Description:
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO.
+</aside>
+
 This API helps calibrate ESCs.
 
 ###Parameters:

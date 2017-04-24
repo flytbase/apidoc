@@ -207,6 +207,11 @@ Success: True
 ```
 
 ###Description:
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>
+
 This API sends gimbal attitude setpoint command to the autopilot via MAVLink and outputs pwm signals on gimbal-dedicated port of FlytPOD/Pixhawk. 
 
 ###Pre-requisites:

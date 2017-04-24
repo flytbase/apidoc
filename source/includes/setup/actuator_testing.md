@@ -178,14 +178,12 @@ NotImplemented
 {
     success:True
 }
-
 ```
 
 ```javascript--Websocket
 {
     success:True
 }
-
 ```
 
 
@@ -193,6 +191,11 @@ NotImplemented
 
 
 ###Description:
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running APM.
+</aside>
+
 This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.
 
 ###Parameters:

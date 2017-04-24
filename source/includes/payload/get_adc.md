@@ -198,7 +198,6 @@ success: True
 
 ```python--ros
 instance of mavros_msgs.msgs.PayloadADC object
-
 ```
 
 ```javascript--REST
@@ -206,7 +205,6 @@ instance of mavros_msgs.msgs.PayloadADC object
     adc_voltage: Float[2],
     adc_updated: Int
 }
-
 ```
 
 ```javascript--Websocket
@@ -214,13 +212,15 @@ instance of mavros_msgs.msgs.PayloadADC object
     adc_voltage: Float[2],
     adc_updated: Int
 }
-
-
 ```
 
 
 
 ###Description:
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO.
+</aside>
 
 This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.
 
