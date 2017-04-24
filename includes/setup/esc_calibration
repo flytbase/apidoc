@@ -155,6 +155,10 @@ ReqStructure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO.
+</aside>
+
 <p>This API helps calibrate ESCs.</p>
 
 <h3 id="parameters">Parameters:</h3>
