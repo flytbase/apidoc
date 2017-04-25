@@ -1,4 +1,4 @@
-# Parameter Management APIs
+# Parameter APIs
 
 ## Parameter Set
 
