@@ -228,7 +228,7 @@ Land vehicle at current position. Check API usage section below before using thi
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

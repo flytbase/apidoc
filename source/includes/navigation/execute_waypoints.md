@@ -186,7 +186,7 @@ Exectute / resume current list of waypoints.
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

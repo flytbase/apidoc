@@ -202,7 +202,7 @@ Sets the waypoint Id specified, as the current waypoint from the list of already
 
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

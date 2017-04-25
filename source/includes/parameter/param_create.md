@@ -228,7 +228,7 @@ This API creates a new parameter.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

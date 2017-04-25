@@ -210,7 +210,7 @@ This API deletes a parameter from FlytOS.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

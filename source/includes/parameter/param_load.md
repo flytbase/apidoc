@@ -190,7 +190,7 @@ This API loads parameters from a file where parameters were saved before or a ne
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

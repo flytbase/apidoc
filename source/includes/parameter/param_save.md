@@ -191,7 +191,7 @@ This API saves the parameters to a file which allows data retention on reboot of
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

@@ -329,7 +329,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

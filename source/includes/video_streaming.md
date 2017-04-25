@@ -152,7 +152,7 @@ This API allows to get the list of video streams avalibale and view the live str
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     stream1 | string | link of the video stream1
     stream2 | string | link of the video stream2

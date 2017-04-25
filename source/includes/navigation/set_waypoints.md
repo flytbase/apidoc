@@ -288,7 +288,7 @@ This API replaces current list of waypoints on autopilot with new list passed.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

@@ -335,7 +335,7 @@ This API subscribes/polls position data in global coordinate system.  Please che
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     lat | float | latitude in global coordinate system WGS84
     lon | float | longitude in global coordinate system WGS84

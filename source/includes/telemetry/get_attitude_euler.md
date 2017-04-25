@@ -406,7 +406,7 @@ This API subscribes/polls attitude data (angle and angular rate) in euler angles
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     roll | float | roll angle in radians, NED frame.
     pitch | float | pitch angle in radians, NED frame.

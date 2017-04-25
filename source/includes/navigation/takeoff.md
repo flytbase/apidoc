@@ -234,7 +234,7 @@ Takeoff and reach to specified height from current location.
     takeoff_alt | float32 | takeoff to given height at current location. (minimum 3 meters)
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

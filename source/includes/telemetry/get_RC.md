@@ -227,7 +227,7 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     channels | Array of unit16 | Array of PWM data values for channels.
     

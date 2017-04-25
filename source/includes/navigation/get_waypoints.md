@@ -274,7 +274,7 @@ This API returns list of current waypoints on autopilot.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

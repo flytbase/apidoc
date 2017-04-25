@@ -211,7 +211,7 @@ This API allows for testing an actuator by providing actuator ID and time to rot
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

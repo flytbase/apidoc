@@ -235,7 +235,7 @@ This API subscribes/polls distance sensor data.  Please check API usage section 
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     range | float | distance to ground in meters
     

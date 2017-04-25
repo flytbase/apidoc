@@ -320,7 +320,7 @@ This API subscribes/polls battery status.  Please check API usage section below 
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     voltage | float | total voltage, Volts
     current | float | instantaneous current consumption, Amperes

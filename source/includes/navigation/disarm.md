@@ -217,7 +217,7 @@ This API disarms the motors. Read API desciption below before you use it. Callin
         
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

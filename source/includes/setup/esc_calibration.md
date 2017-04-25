@@ -240,7 +240,7 @@ This API helps calibrate ESCs.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

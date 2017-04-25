@@ -225,7 +225,7 @@ This API can run onboard executable scripts in python, shell, etc.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

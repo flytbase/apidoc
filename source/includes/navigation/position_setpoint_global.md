@@ -313,7 +313,7 @@ This API sets a desired position setpoint in global coordinate system (WGS84). P
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

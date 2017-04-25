@@ -202,7 +202,7 @@ This API resets all the parameter value to the last save parameter state.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

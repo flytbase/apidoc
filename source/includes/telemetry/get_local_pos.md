@@ -338,7 +338,7 @@ This API subscribes/polls linear position, velocity data in NED frame.  Please c
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     x | float | x position in local NED frame.
     y | float | y position in local NED frame.

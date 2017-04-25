@@ -227,7 +227,7 @@ This API sets the value of a desired parameter
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

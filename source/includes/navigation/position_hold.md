@@ -213,7 +213,7 @@ Position hold / hover / loiter at current position.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

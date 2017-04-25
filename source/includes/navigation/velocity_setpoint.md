@@ -329,7 +329,7 @@ This API gives linear (x,y,z) and angular (yaw) velocity setpoint to vehicle. Pl
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

@@ -238,7 +238,7 @@ This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

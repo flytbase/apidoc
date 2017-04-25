@@ -228,7 +228,7 @@ This API gets the value of a particular parameter specified.
 
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
     param_value | string | value of the parameter

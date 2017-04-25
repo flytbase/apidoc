@@ -185,7 +185,7 @@ This API pauses ongoing waypoint mission.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

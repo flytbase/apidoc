@@ -230,7 +230,7 @@ This API subscribes/polls the ADC payload data. This API is limited to FlytPOD o
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     adc_voltage | array (2*1) of floats | array of adc voltage readings in volts.
     adc_updated | uint8 | Bitmask indicating updated channel. possible values: [0,1,2,3]

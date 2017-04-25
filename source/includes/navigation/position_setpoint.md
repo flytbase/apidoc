@@ -327,7 +327,7 @@ This API commands the vehicle to go to a specified location in local frame and h
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 

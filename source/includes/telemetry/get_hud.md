@@ -259,7 +259,7 @@ This API subscribes/polls VFR HUD data.  Please check API usage section below be
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     airspeed | float | airspeed in m/s
     groundspeed | float | groundspeed in m/s

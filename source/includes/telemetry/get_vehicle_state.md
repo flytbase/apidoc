@@ -303,7 +303,7 @@ This API subscribes/polls the vehicle state data. Please see usage information s
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     mode | string | autopilot flight mode e.g. MANUAL, APICTL
     armed | boolean | Vehicle arm status. Armed if True and disarmed if False.

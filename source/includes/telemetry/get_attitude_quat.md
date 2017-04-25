@@ -394,7 +394,7 @@ This API subscribes/polls attitude data (angle and angular rate) in quaternion. 
     
     Response:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     x | float | x vector.
     y | float | y vector.

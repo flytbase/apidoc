@@ -215,7 +215,7 @@ This API gets all the parameters available in FlytOS with their values.
     
     Output:
     
-    Parameter | type | Description
+    Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
     param_id | string | Name of the parameter
