@@ -303,7 +303,7 @@ This command commands the vehicle to go to a specified location and hover. It ov
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>type</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>

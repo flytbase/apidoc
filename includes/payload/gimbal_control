@@ -210,7 +210,7 @@ This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>type</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>

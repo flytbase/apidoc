@@ -332,7 +332,7 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>type</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>

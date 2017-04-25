@@ -286,7 +286,7 @@ rosservice call /flytpod/navigation/position_set_global <span class="s2">"{twist
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>type</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
