@@ -1,4 +1,4 @@
-# Video Streaming
+# Video Streaming API
 
 
 > Definition

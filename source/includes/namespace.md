@@ -1,4 +1,4 @@
-# Namespace
+# Namespace API
 
 > Definition
 
