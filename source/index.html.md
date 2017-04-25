@@ -2,13 +2,13 @@
 title: FlytAPI Reference
 
 language_tabs:
-  - shell: ros-CLI
   - cpp: C++
   - python: Python
-  - cpp--ros: roscpp
-  - python--ros: rospy
   - javascript--REST: JS REST
   - javascript--Websocket: JS Websocket
+  - shell: ros-CLI
+  - cpp--ros: roscpp
+  - python--ros: rospy
 
 
 includes:
