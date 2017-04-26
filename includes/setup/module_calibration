@@ -156,10 +156,6 @@ MsgStructure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
-</aside>
-
 <p>This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.</p>
 
 <h3 id="parameters">Parameters:</h3>
@@ -237,3 +233,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <h3 id="api-usage-information">API usage information:</h3>
 
 <p>Note: Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.</p>
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>

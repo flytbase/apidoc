@@ -155,10 +155,6 @@ Response structure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO.
-</aside>
-
 <p>This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.</p>
 
 <h3 id="parameters">Parameters:</h3>
@@ -226,3 +222,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
 <li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
 </ul>
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO.
+</aside>
