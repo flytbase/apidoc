@@ -208,10 +208,6 @@ Success: True
 
 ###Description:
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
-</aside>
-
 This API sends gimbal attitude setpoint command to the autopilot via MAVLink and outputs pwm signals on gimbal-dedicated port of FlytPOD/Pixhawk. 
 
 ###Pre-requisites:
@@ -257,7 +253,7 @@ Payload APIs in FlytOS are derived from / wrapped around the core services avail
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/payload/gimbal_set````
+* URL: ``POST http://<ip>/ros/<namespace>/payload/gimbal_set``
 * JSON Request:
 {   roll: Float,
     pitch: Float,
@@ -275,3 +271,6 @@ Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava
 * name: '/\<namespace\>/payload/gimbal_set'</br>
 * serviceType: 'core_api/GimbalSet'
 
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>

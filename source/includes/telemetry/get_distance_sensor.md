@@ -250,7 +250,7 @@ All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboar
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/distance_sensor/lidarlite_pub````
+* URL: ``GET http://<ip>/ros/<namespace>/mavros/distance_sensor/lidarlite_pub``
 * JSON Response:
 {
     radiation_type: Int,

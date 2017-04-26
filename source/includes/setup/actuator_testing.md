@@ -192,10 +192,6 @@ NotImplemented
 
 ###Description:
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running APM.
-</aside>
-
 This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.
 
 ###Parameters:
@@ -225,7 +221,7 @@ APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboa
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/setup/actuator_testing````
+* URL: ``POST http://<ip>/ros/<namespace>/setup/actuator_testing``
 * JSON Request:
 {
     actuator_id: Int,
@@ -248,5 +244,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 ### API usage information:
 Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
 
-
-
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running APM.
+</aside>

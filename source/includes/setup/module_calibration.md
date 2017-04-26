@@ -220,10 +220,6 @@ NotImplemented
 
 ###Description:
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
-</aside>
-
 This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.
 
 ###Parameters:
@@ -252,7 +248,7 @@ APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboa
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/setup/module_calibration````
+* URL: ``POST http://<ip>/ros/<namespace>/setup/module_calibration``
 * JSON Request:
 {
     module_calibrate: Int
@@ -274,3 +270,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 ### API usage information:
 Note: Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
 
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>

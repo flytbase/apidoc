@@ -216,7 +216,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 ### RESTFul endpoint:
 FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/waypoint_set_current````
+* URL: ``POST http://<ip>/ros/<namespace>/navigation/waypoint_set_current``
 * JSON Request:
 {
     wp_seq: Int

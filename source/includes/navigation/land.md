@@ -242,7 +242,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 ### RESTFul endpoint:
 FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/<namespace>/navigation/land````
+* URL: ``GET http://<ip>/ros/<namespace>/navigation/land``
 * JSON Response:
 {
     success: Boolean

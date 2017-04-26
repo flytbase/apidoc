@@ -218,10 +218,6 @@ instance of mavros_msgs.msgs.PayloadADC object
 
 ###Description:
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO.
-</aside>
-
 This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.
 
 ###Parameters:
@@ -246,7 +242,7 @@ All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboar
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ````GET http://<ip>/ros/<namespace>/mavros/payload_adc````
+* URL: ``GET http://<ip>/ros/<namespace>/mavros/payload_adc``
 * JSON Response:
 {
     adc_voltage: Float[2],
@@ -266,3 +262,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * This API works only on FlytPOD.  
 * There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.
 * ADC channel operational input voltage range is 0 to 3.3 V.
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO.
+</aside>

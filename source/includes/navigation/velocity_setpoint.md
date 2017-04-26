@@ -343,7 +343,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/<namespace>/navigation/velocity_set````
+* URL: ``POST http://<ip>/ros/<namespace>/navigation/velocity_set``
 * JSON Request:
 {
     twist:{

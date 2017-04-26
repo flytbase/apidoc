@@ -217,7 +217,7 @@ This API returns the global namespace under which FlytOS's instance in running. 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````GET http://<ip>/ros/get_global_namespace````
+* URL: ``GET http://<ip>/ros/get_global_namespace``
 * JSON Response:
 {
     success: Boolean,

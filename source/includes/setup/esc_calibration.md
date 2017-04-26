@@ -219,9 +219,6 @@ NotImplemented
 
 ###Description:
 
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO.
-</aside>
 
 This API helps calibrate ESCs.
 
@@ -254,7 +251,7 @@ APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboa
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/ros/\<namespace\>/setup/esc_calibration````
+* URL: ``POST http://<ip>/ros/\<namespace\>/setup/esc_calibration``
 * JSON Request:
 {
     pwm_min: Float,
@@ -283,3 +280,7 @@ Tip: Asynchronous mode - The API call would return as soon as the command has be
 
 Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
  -->
+
+<aside class="warning">
+This API will ONLY work with FlytPOD/PRO.
+</aside>

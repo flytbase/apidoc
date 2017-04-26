@@ -165,7 +165,7 @@ This API allows to get the list of video streams avalibale and view the live str
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ````POST http://<ip>/list_streams````
+* URL: ``POST http://<ip>/list_streams``
 * JSON Request:
 {   namespace: \<namespace of FlytOS\>}
 
@@ -186,7 +186,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 ### API usage information:
 Note: To view the video of a particular stream from the list of streams you need to create an **img** tag add the link to its source.
 
-````<img src='http://<ip>/stream?topic=<link to stream1>' > ````
+``<img src='http://<ip>/stream?topic=<link to stream1>' > ``
 
 Tip: You can add the following parameters as query string to the link for lighter or better resolution video quality.
 width, height, quality, rate:1/2/3
@@ -197,7 +197,7 @@ Tip: To stop the video stream you need to delete the **img** tag completely.
 
 Tip: To take a snapshot of the stream replace the word stream with snapshot in the link.
 
-````<img src='http://<ip>/snapshot?topic=<link to stream1>' >````
+``<img src='http://<ip>/snapshot?topic=<link to stream1>' >``
 
 
 Note: **Keep an eye out, for this API needs a port at the end of the IP set to :8080.**
