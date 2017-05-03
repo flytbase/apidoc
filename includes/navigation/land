@@ -226,7 +226,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>This API can be used only in OFFBOARD/API_CTL mode.</li>
-<li>If in synchronous mode and another navigation API is called then land call be overridden by that API call. </li>
+<li>If any other navigation API is called during landing, then land call be overridden by that API call. </li>
 <li>Automatic land flow can be configured with following parameters.
 
 <ul>
