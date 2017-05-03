@@ -81,19 +81,16 @@ This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
-URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
+URL: 'http://<ip>/ros/<namespace>/mavros/vfr_hud'
 
 JSON Response:
-{  twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
-}}
+{   airspeed:Float,
+    groundspeed: Float,
+    heading: Integer,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
+}
 
 ```
 
@@ -104,20 +101,17 @@ API and and replace namespace with the namespace of
 the FlytOS running device before calling the API 
 with websocket.
 
-name: '/<namespace>/mavros/imu/data_euler',
-messageType: 'geometry_msgs/TwistStamped'
+name: '/<namespace>/mavros/vfr_hud',
+messageType: 'mavros_msgs/VFR_HUD'
 
 Response:
-{   twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
-}}
+{   airspeed:Float,
+    groundspeed: Float,
+    heading: Integer,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
+}
 
 ```
 
@@ -159,7 +153,7 @@ topic_sub.unregister()  # unregister topic subscription
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://<ip>/ros/<namespace>/mavros/imu/data_euler",  
+    url: "http://<ip>/ros/<namespace>/mavros/vfr_hud",  
     success: function(data){
            console.log(data);
     }
@@ -169,15 +163,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var imuEulerData = new ROSLIB.Service({
+var vfrHUDData = new ROSLIB.Service({
     ros : ros,
-    name : '/<namespace>/mavros/imu/data_euler',
-    messageType : 'geometry_msgs/TwistStamped'
+    name : '/<namespace>/mavros/vfr_hud',
+    messageType : 'mavros_msgs/VFR_HUD'
 });
 
 var request = new ROSLIB.ServiceRequest({});
 
-imuEulerData.subscribe(request, function(result) {
+vfrHUDData.subscribe(request, function(result) {
     console.log(result.data);
 });
 ```
@@ -218,30 +212,24 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 ```javascript--REST
 {
-    twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
+    airspeed:Float,
+    groundspeed: Float,
+    heading: Integer,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
 }
 
 ```
 
 ```javascript--Websocket
 {
-    twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
+    airspeed:Float,
+    groundspeed: Float,
+    heading: Integer,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
 }
 
 
@@ -278,18 +266,15 @@ All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboar
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/imu/data_euler``
+* URL: ``GET http://<ip>/ros/<namespace>/mavros/vfr_hud``
 * JSON Response:
 {
-    twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: FLoat},
-    angular:{
-        x: Float,
-        y: Float,
-        z: FLoat}
+    airspeed:Float,
+    groundspeed: Float,
+    heading: Integer,
+    throttle: Float,
+    altitude: Float,
+    climb: Float
 }
 
 
