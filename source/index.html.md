@@ -27,8 +27,9 @@ includes:
   - navigation/execute_waypoints
   - navigation/clear_waypoints
   - navigation/pause_waypoints
-  - navigation/set_home
   - navigation/set_current_waypoint
+  - navigation/set_home
+  - navigation/rtl
   - telemetry/get_attitude_quat
   - telemetry/get_attitude_euler
   - telemetry/get_local_pos
@@ -69,3 +70,4 @@ Welcome to API reference documentation for FlytOS. Here you can find details of 
 
 To learn more about how to get started with FlytOS and build your first app, please visit the developer <a href='http://docs.flytbase.com/'>documentation</a>.
 
+In case, you find any bug/issue in this documentation, please help us rectify it by raising an issue in our <a href='https://github.com/flytbase/flytdocs-slate'>github repository</a>.

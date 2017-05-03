@@ -262,7 +262,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 This API will land the vehicle at current location. 
 
 * This API can be used only in OFFBOARD/API_CTL mode.
-* If in synchronous mode and another navigation API is called then land call be overridden by that API call. 
+* If any other navigation API is called during landing, then land call be overridden by that API call. 
 * Automatic land flow can be configured with following parameters.
   * LNDMC_Z_VEL_MAX : Maximum velocity in vertical direction when landing (ideal value 0.8 m/s to 1.5 m/s)
   * LNDMC_XY_VEL_MAX: Maximum velocity in horizontal direction when landing (ideal value 1 m/s to 2 m/s)
