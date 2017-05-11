@@ -91,7 +91,7 @@ JSON Response:
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
 initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
