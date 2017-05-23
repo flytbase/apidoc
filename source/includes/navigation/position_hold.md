@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/position_hold
-ROS-Service Type: core_api/PositionHold, below is its description
+ROS-Service Type: core_API/PositionHold, below is its description
 
 #Request : NULL
 
@@ -28,7 +28,7 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.api.navigation
+Class: flyt_python.API.navigation
 
 Function: position_hold():
 ```
@@ -74,7 +74,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/position_hold',
-serviceType: 'core_api/PositionHold'
+serviceType: 'core_API/PositionHold'
 
 Response:
 {   success: Boolean, }
@@ -90,7 +90,7 @@ rosservice call /<namespace>/navigation/position_hold "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.position_hold();
@@ -98,8 +98,8 @@ nav.position_hold();
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
+from flyt_python import API
+drone = API.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
@@ -109,11 +109,11 @@ drone.position_hold()
 ```
 
 ```cpp--ros
-#include <core_api/PositionHold.h>
+#include <core_API/PositionHold.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionHold>("/<namespace>/navigation/position_hold");
-core_api::PositionHold srv;
+ros::ServiceClient client = nh.serviceClient<core_API::PositionHold>("/<namespace>/navigation/position_hold");
+core_API::PositionHold srv;
 client.call(srv);
 success = srv.response.success;
 ```
@@ -147,7 +147,7 @@ $.ajax({
 var positionHold = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/position_hold',
-    serviceType : 'core_api/PositionHold'
+    serviceType : 'core_API/PositionHold'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -218,11 +218,11 @@ Position hold / hover / loiter at current position.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/position_hold</br>
-* Service Type: core_api/PositionHold
+* Service Type: core_API/PositionHold
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -239,7 +239,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/position_hold'</br>
-* serviceType: 'core_api/PositionHold'
+* serviceType: 'core_API/PositionHold'
 
 
 ### API usage information:

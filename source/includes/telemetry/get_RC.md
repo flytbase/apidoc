@@ -38,7 +38,7 @@ Returns: RC channel info in ros mavros_msgs::RCInConstPtr structure
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -111,7 +111,7 @@ rostopic echo /flytpod/mavros/rc/in
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::RCIn rc_channel;
@@ -126,7 +126,7 @@ std::cout << rc_channel << std::endl;
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -187,7 +187,7 @@ instance of mavros_msgs::RCIn
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -223,7 +223,7 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

@@ -7,10 +7,10 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_create
-ROS-Service Type: core_api/ParamCreate, below is its description
+ROS-Service Type: core_API/ParamCreate, below is its description
 
 #Request : Info of parameter to be created
-core_api/ParamInfo param_info
+core_API/ParamInfo param_info
 
 #Response : success=true if command is successful.  
 bool success
@@ -32,7 +32,7 @@ Returns: returns 0 if the command is successfull
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -41,7 +41,7 @@ NotImplemented
 Type: Ros Service
 Name: /<namespace>/param/param_create
 call srv:
-    :core_api/ParamInfo param_info
+    :core_API/ParamInfo param_info
     :bool success
 response srv: bool success
 ```
@@ -52,7 +52,7 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/param/param_create
 call srv:
-    :core_api/ParamInfo param_info
+    :core_API/ParamInfo param_info
     :bool success
 response srv: bool success
 
@@ -84,7 +84,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/param/param_create',
-serviceType: 'core_api/ParamCreate'
+serviceType: 'core_API/ParamCreate'
 
 Request:
 {   param_info:{
@@ -109,7 +109,7 @@ rosservice call /flytpod/param/param_create "param_info:
 ```
 
 ```cpp
-#include <cpp_api/param_bridge.h>
+#include <cpp_API/param_bridge.h>
 
 Param param;
 std::string param_id = "RTL_ALT"; 
@@ -119,7 +119,7 @@ param.param_create(param_id, param_value);
 ```
 
 ```python
-NotImplemented
+Not Implemented
 
 ```
 
@@ -155,7 +155,7 @@ $.ajax({
 var paramCreate = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_create',
-    serviceType : 'core_api/ParamCreate'
+    serviceType : 'core_API/ParamCreate'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -185,7 +185,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -233,7 +233,7 @@ This API creates a new parameter.
     success | bool | true if action successful
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/param/param_create</br>
@@ -260,7 +260,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_create'</br>
-* serviceType: 'core_api/ParamCreate'
+* serviceType: 'core_API/ParamCreate'
 
 
 <!-- ### API usage information:

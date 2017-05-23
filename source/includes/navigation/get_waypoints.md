@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_get
-ROS-Service Type: core_api/WaypointGet, below is its description
+ROS-Service Type: core_API/WaypointGet, below is its description
 
 # Request: NULL
 
@@ -31,7 +31,7 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -92,7 +92,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/waypoint_get',
-serviceType: 'core_api/WaypointGet'
+serviceType: 'core_API/WaypointGet'
 
 Response:
 {   success: Boolean, 
@@ -121,7 +121,7 @@ rosservice call /flytpod/navigation/waypoint_get "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_get();
@@ -129,7 +129,7 @@ nav.waypoint_get();
 
 ```python
 
-NotImplemented
+Not Implemented
 
 ```
 
@@ -160,7 +160,7 @@ $.ajax({
 var waypointGet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/waypoint_get',
-    serviceType : 'core_api/WaypointGet'
+    serviceType : 'core_API/WaypointGet'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -199,7 +199,7 @@ waypoints:
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -264,7 +264,7 @@ This API returns list of current waypoints on autopilot.
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt
+    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt
     yaw | float | Yaw Setpoint in radians
     yaw_valid | bool | Must be set to true, if yaw 
     tolerance | float | Acceptance radius in meters, default value=1.0m 
@@ -279,11 +279,11 @@ This API returns list of current waypoints on autopilot.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/waypoint_get</br>
-* Service Type: core_api/WaypointGet
+* Service Type: core_API/WaypointGet
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -313,7 +313,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/waypoint_get'</br>
-* serviceType: 'core_api/WaypointGet'
+* serviceType: 'core_API/WaypointGet'
 
 <!-- 
 ### API usage information:

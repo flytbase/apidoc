@@ -10,7 +10,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/arm
-ROS-Service Type: core_api/Arm, below is its description
+ROS-Service Type: core_API/Arm, below is its description
 
 #Request : NULL
 
@@ -31,7 +31,7 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.api.navigation
+Class: flyt_python.API.navigation
 
 Function: arm()
 ```
@@ -77,7 +77,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/arm',
-serviceType: 'core_api/Arm'
+serviceType: 'core_API/Arm'
 
 Request:
 {}
@@ -96,7 +96,7 @@ rosservice call /flytpod/navigation/arm "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 if(!nav.arm())
@@ -107,8 +107,8 @@ else
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
+from flyt_python import API
+drone = API.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
@@ -116,17 +116,17 @@ drone.arm()
 ```
 
 ```cpp--ros
-#include <core_api/Arm.h>
+#include <core_API/Arm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Arm>("/<namespace>/navigation/arm");
-core_api::Arm srv;
+ros::ServiceClient client = nh.serviceClient<core_API::Arm>("/<namespace>/navigation/arm");
+core_API::Arm srv;
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-from core_api.srv import *
+from core_API.srv import *
 
 def arm()
     rospy.wait_for_service('/<namespace>/navigation/arm')
@@ -156,7 +156,7 @@ $.ajax({
 var arm = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/arm',
-    serviceType : 'core_api/Arm'
+    serviceType : 'core_API/Arm'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -209,7 +209,7 @@ Success: True
 
 
 ###Description:
-This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are unclaibrated sensors, misconfiguration.
+This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are uncalibrated sensors, misconfiguration.
 
 ###Parameters:
     
@@ -224,11 +224,11 @@ This API arms the motors. If arm fails then check debug messages for arming erro
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/arm</br>
-* Service Type: core_api/Arm
+* Service Type: core_API/Arm
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -245,7 +245,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/arm'</br>
-* serviceType: 'core_api/Arm'
+* serviceType: 'core_API/Arm'
 
 
 ### API usage information:

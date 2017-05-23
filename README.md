@@ -13,7 +13,7 @@
 Features
 ------------
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [Paypal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/API) and [Paypal's](https://developer.paypal.com/webapps/developer/docs/API/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
 
 * **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
 
@@ -65,21 +65,21 @@ If you'd prefer to use Docker, instructions are available [in the wiki](https://
 Companies Using Slate
 ---------------------------------
 
-* [NASA](https://api.nasa.gov)
-* [IBM](https://docs.cloudant.com/api.html)
+* [NASA](https://API.nasa.gov)
+* [IBM](https://docs.cloudant.com/API.html)
 * [Sony](http://developers.cimediacloud.com)
 * [Mozilla](http://localforage.github.io/localForage/)
-* [Best Buy](https://bestbuyapis.github.io/api-documentation/)
-* [Travis-CI](https://docs.travis-ci.com/api/)
+* [Best Buy](https://bestbuyAPIs.github.io/API-documentation/)
+* [Travis-CI](https://docs.travis-ci.com/API/)
 * [Greenhouse](https://developers.greenhouse.io/harvest.html)
-* [Woocommerce](http://woocommerce.github.io/woocommerce-rest-api-docs/)
+* [Woocommerce](http://woocommerce.github.io/woocommerce-rest-API-docs/)
 * [Appium](http://appium.io/slate/en/master)
 * [Dwolla](https://docs.dwolla.com/)
 * [Clearbit](https://clearbit.com/docs)
-* [Coinbase](https://developers.coinbase.com/api)
+* [Coinbase](https://developers.coinbase.com/API)
 * [Parrot Drones](http://developer.parrot.com/docs/bebop/)
 * [Fidor Bank](http://docs.fidor.de/)
-* [Scale](https://docs.scaleapi.com/)
+* [Scale](https://docs.scaleAPI.com/)
 
 You can view more in [the list on the wiki](https://github.com/lord/slate/wiki/Slate-in-the-Wild).
 

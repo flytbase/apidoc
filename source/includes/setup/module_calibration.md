@@ -9,7 +9,7 @@
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
-MsgType: core_api/ModuleCalibration
+MsgType: core_API/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
     uint8 ACCELEROMETER = 1
@@ -35,7 +35,7 @@ Not Implemented
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -43,7 +43,7 @@ NotImplemented
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
-MsgType: core_api/ModuleCalibration
+MsgType: core_API/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
     uint8 ACCELEROMETER = 1
@@ -66,7 +66,7 @@ MsgStructure:
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
-MsgType: core_api/ModuleCalibration
+MsgType: core_API/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
     uint8 ACCELEROMETER = 1
@@ -107,7 +107,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/setup/module_calibration',
-serviceType: 'core_api/ModuleCalibration'
+serviceType: 'core_API/ModuleCalibration'
 
 Request:
 {   module_calibrate: Int }
@@ -123,7 +123,7 @@ Response:
 
 ```shell
 
-# Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice
+# Refer to rosservice command line API documentation for sample service calls. http://wiki.ros.org/rosservice
     
 ```
 
@@ -132,7 +132,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -165,7 +165,7 @@ $.ajax({
 var moduleCalibration = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/setup/module_calibration',
-    serviceType : 'core_api/ModuleCalibration'
+    serviceType : 'core_API/ModuleCalibration'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -192,7 +192,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -239,7 +239,7 @@ This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.
     success | bool | true if action successful
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/setup/module_calibration</br>
@@ -264,7 +264,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/setup/module_calibration'</br>
-* serviceType: 'core_api/ModuleCalibration'
+* serviceType: 'core_API/ModuleCalibration'
 
 
 ### API usage information:

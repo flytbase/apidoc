@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_clear
-ROS-Service Type: core_api/WaypointClear, below is its description
+ROS-Service Type: core_API/WaypointClear, below is its description
 
 #Request : Null
 
@@ -28,7 +28,7 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -70,7 +70,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/waypoint_clear',
-serviceType: 'core_api/WaypointClear'
+serviceType: 'core_API/WaypointClear'
 
 Response:
 {   success: Boolean, }
@@ -86,14 +86,14 @@ rosservice call /flytpod/navigation/waypoint_clear "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_clear();
 ```
 
 ```python
-NotImplemented
+Not Implemented
 
 ```
 
@@ -124,7 +124,7 @@ $.ajax({
 var waypointClear = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/waypoint_clear',
-    serviceType : 'core_api/WaypointClear'
+    serviceType : 'core_API/WaypointClear'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -149,7 +149,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -188,7 +188,7 @@ Clear list of waypoints on autopilot.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/waypoint_clear</br>
@@ -209,7 +209,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/waypoint_clear'</br>
-* serviceType: 'core_api/WaypointClear'
+* serviceType: 'core_API/WaypointClear'
 
 
 

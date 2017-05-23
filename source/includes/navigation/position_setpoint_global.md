@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/position_set_global
-ROS-Service Type: core_api/PositionSetGlobal, below is its description
+ROS-Service Type: core_API/PositionSetGlobal, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z which corresponds respectively to the desired Latitude, longitude and altitude 
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -38,7 +38,7 @@ Arguments:
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.api.navigation
+Class: flyt_python.API.navigation
 
 Function: position_set_global(self, lat, lon, rel_ht, yaw=0.0, tolerance=0.0, async=False, yaw_valid=False):
 ```
@@ -104,7 +104,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/position_set_global',
-serviceType: 'core_api/PositionSetGlobal'
+serviceType: 'core_API/PositionSetGlobal'
 
 Request:
 {   twist:{twist:{  linear:{
@@ -137,7 +137,7 @@ rosservice call /flytpod/navigation/position_set_global "{twist: {header: {seq: 
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, false, true, false);
@@ -146,8 +146,8 @@ nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, false, tr
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
+from flyt_python import API
+drone = API.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
@@ -157,11 +157,11 @@ drone.position_set_global(18.7342124, 73.4323233, 10)
 ```
 
 ```cpp--ros
-#include <core_api/PositionSetGlobal.h>
+#include <core_API/PositionSetGlobal.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSetGlobal>("/<namespace>/navigation/position_set_global");
-core_api::PositionSetGlobal srv;
+ros::ServiceClient client = nh.serviceClient<core_API::PositionSetGlobal>("/<namespace>/navigation/position_set_global");
+core_API::PositionSetGlobal srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -175,7 +175,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_api.srv import * 
+from core_API.srv import * 
 
 def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):
     rospy.wait_for_service('/<namespace>/navigation/position_set_global')
@@ -226,7 +226,7 @@ $.ajax({
 var positionSetGlobal = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/position_set_global',
-    serviceType : 'core_api/PositionSetGlobal'
+    serviceType : 'core_API/PositionSetGlobal'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -318,7 +318,7 @@ This API sets a desired position setpoint in global coordinate system (WGS84). P
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/position_set_global</br>
@@ -358,7 +358,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/position_set_global'</br>
-* serviceType: 'core_api/PositionSetGlobal'
+* serviceType: 'core_API/PositionSetGlobal'
 
 
 ### API usage information:
@@ -376,7 +376,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * For yaw setpoint to be effective the yaw_valid argument must be set to true.
 * This API overrides any previous mission / navigation API being carried out.
 * This API requires global position lock. So using a GPS receiver is must for this API to work.
-* * Following parameters need to be manually configured according to vehicle frame.
+* Following parameters need to be manually configured according to vehicle frame.
   * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.

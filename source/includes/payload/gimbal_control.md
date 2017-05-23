@@ -6,7 +6,7 @@
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/payload/gimbal_set
-ROS-Service Type: core_api/GimbalSet, below is its description
+ROS-Service Type: core_API/GimbalSet, below is its description
 
 #Request : expects gimbal attitude setpoint in radians via roll, pitch, yaw in NED Frame
 #Response : return success=true if command is successfully sent
@@ -21,13 +21,13 @@ bool success
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-NotImplemented
+Not Implemented
 ```
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -79,7 +79,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/payload/gimbal_set',
-serviceType: 'core_api/GimbalSet'
+serviceType: 'core_API/GimbalSet'
 
 Request:
 {   roll: Float,
@@ -101,19 +101,19 @@ yaw:-0.2"
 ```
 
 ```cpp
-NotImplemented
+Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
-#include <core_api/GimbalSet.h>
+#include <core_API/GimbalSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::GimbalSet>("/<namespace>/payload/gimbal_set");
-core_api::GimbalSet srv;
+ros::ServiceClient client = nh.serviceClient<core_API::GimbalSet>("/<namespace>/payload/gimbal_set");
+core_API::GimbalSet srv;
 
 srv.request.roll = 0.0;
 srv.request.pitch = 0.5;
@@ -154,7 +154,7 @@ $.ajax({
 var gimbalSet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/payload/gimbal_set',
-    serviceType : 'core_api/GimbalSet'
+    serviceType : 'core_API/GimbalSet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -179,11 +179,11 @@ success: true
 ```
 
 ```cpp
-NotImplemented
+Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -215,7 +215,7 @@ For this API to work, autopilot must fulfill some pre-requisites first:
 
 For FlytPOD/PRO users:
 
-* Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led).
+* Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGB led patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led).
 * Make sure the parameter: **MNT_MODE_IN** is set to 3.
 
 For Pixhawk users:
@@ -244,7 +244,7 @@ For Pixhawk users:
     success | bool | true if action successful
 
 ### ROS endpoint:
-Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/payload/gimbal_set</br>
@@ -269,7 +269,7 @@ Websocket APIs can be called from javascript using [roslibjs library](https://gi
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/\<namespace\>/payload/gimbal_set'</br>
-* serviceType: 'core_api/GimbalSet'
+* serviceType: 'core_API/GimbalSet'
 
 <aside class="warning">
 This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.

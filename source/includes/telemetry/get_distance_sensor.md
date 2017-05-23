@@ -33,7 +33,7 @@ Not Implemented
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -128,7 +128,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -189,7 +189,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -231,7 +231,7 @@ This API subscribes/polls distance sensor data.  Please check API usage section 
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

@@ -56,7 +56,7 @@ Returns: Vehicle attitude in euler notation in ros geometry_msgs::TwistStamped m
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-Class: flyt_python.api.navigation
+Class: flyt_python.API.navigation
 
 Function: get_attitude_euler()
 
@@ -131,11 +131,11 @@ JSON Response:
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
@@ -155,11 +155,11 @@ Response:
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
@@ -172,7 +172,7 @@ rostopic echo /flytpods/mavros/imu/data_euler
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 geometry_msgs::TwistStamped att_euler;
@@ -199,8 +199,8 @@ int main(int argc, char *argv[])
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
+from flyt_python import API
+drone = API.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
@@ -372,11 +372,11 @@ std_msgs/Header header
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }
 ```
 
@@ -386,11 +386,11 @@ std_msgs/Header header
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }
 ```
 
@@ -402,7 +402,7 @@ This API subscribes/polls attitude data (angle and angular rate) in euler angles
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     
@@ -432,11 +432,11 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }
 
 

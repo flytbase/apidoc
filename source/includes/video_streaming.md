@@ -14,7 +14,7 @@
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -60,7 +60,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 
 ```
 
@@ -104,7 +104,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros

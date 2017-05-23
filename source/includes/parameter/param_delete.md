@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_delete
-ROS-Service Type: core_api/ParamDelete, below is its description
+ROS-Service Type: core_API/ParamDelete, below is its description
 
 #Request : Info of parameter to be deleted
 string param_id
@@ -31,7 +31,7 @@ Returns: returns 0 if the command is successfull
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -80,7 +80,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/param/param_delete',
-serviceType: 'core_api/ParamDelete'
+serviceType: 'core_API/ParamDelete'
 
 Request:
 {   param_id: String }
@@ -99,7 +99,7 @@ rosservice call /flytpod/param/param_delete "param_id: ''"
 ```
 
 ```cpp
-#include <cpp_api/param_bridge.h>
+#include <cpp_API/param_bridge.h>
 
 Param param;
 std::string param_id = "RTL_ALT"; 
@@ -107,7 +107,7 @@ param.param_delete(param_id);
 ```
 
 ```python
-NotImplemented
+Not Implemented
 
 ```
 
@@ -141,7 +141,7 @@ $.ajax({
 var paramDelete = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_delete',
-    serviceType : 'core_api/ParamDelete'
+    serviceType : 'core_API/ParamDelete'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -168,7 +168,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -215,7 +215,7 @@ This API deletes a parameter from FlytOS.
     success | bool | true if action successful
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/param/param_delete</br>
@@ -240,7 +240,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_delete'</br>
-* serviceType: 'core_api/ParamDelete'
+* serviceType: 'core_API/ParamDelete'
 
 
 <!-- ### API usage information:

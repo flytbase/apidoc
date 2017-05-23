@@ -7,13 +7,13 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_get_all
-ROS-Service Type: core_api/ParamGetAll, below is its description
+ROS-Service Type: core_API/ParamGetAll, below is its description
 
 #Request : fresh pull true or false
 bool fresh_pull
 
 #Response: ParamInfo list of all parameters
-core_api/ParamInfo[] param_list
+core_API/ParamInfo[] param_list
 #Response : success=true if command is successful.  
 bool success
 #Response : error message, if any
@@ -23,7 +23,7 @@ string message
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: bool Param::param_get_all(std::vector<core_api::ParamInfo> &param_list, bool fresh_pull)
+Function Definition: bool Param::param_get_all(std::vector<core_API::ParamInfo> &param_list, bool fresh_pull)
 
 Arguments:
     fresh_pull: Whether to fresh pull from autopilot or not
@@ -36,7 +36,7 @@ Returns:
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -47,7 +47,7 @@ Name: /<namespace>/param/param_get_all
 call srv:
     :bool fresh_pull
 response srv:
-    :core_api/ParamInfo[] param_list
+    :core_API/ParamInfo[] param_list
     :bool success
     :string message
 ```
@@ -60,7 +60,7 @@ Name: /<namespace>/param/param_get_all
 call srv:
     :bool fresh_pull
 response srv:
-    :core_api/ParamInfo[] param_list
+    :core_API/ParamInfo[] param_list
     :bool success
     :string message
 
@@ -89,7 +89,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/param/param_get_all',
-serviceType: 'core_api/ParamGetAll'
+serviceType: 'core_API/ParamGetAll'
 
 Response:
 {   success: Boolean,
@@ -107,18 +107,18 @@ rosservice call /flytpod/param/param_get_all "fresh_pull: false"
 ```
 
 ```cpp
-#include <cpp_api/param_bridge.h>
+#include <cpp_API/param_bridge.h>
 
 Param param;
 bool fresh_pull = false;
-core_api/ParamInfo[] param_list;
+core_API/ParamInfo[] param_list;
 
 param.param_get_all(param_list, fresh_pull);
 std::cout << "Parameter list: " << param_list << std::endl;
 ```
 
 ```python
-NotImplemented
+Not Implemented
 
 ```
 
@@ -150,7 +150,7 @@ $.ajax({
 var paramGetAll = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_get_all',
-    serviceType : 'core_api/ParamGetAll'
+    serviceType : 'core_API/ParamGetAll'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -177,7 +177,7 @@ param_list is populated with all the received parameters
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -222,7 +222,7 @@ This API gets all the parameters available in FlytOS with their values.
     param_value | string | value of the parameter
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/param/param_get_all</br>
@@ -247,7 +247,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_get_all'</br>
-* serviceType: 'core_api/ParamGetAll'
+* serviceType: 'core_API/ParamGetAll'
 
 
 <!-- ### API usage information:

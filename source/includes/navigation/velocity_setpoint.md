@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/velocity
-ROS-Service Type: core_api/VelocitySet, below is its description
+ROS-Service Type: core_API/VelocitySet, below is its description
 
 #Request : expects velocity setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw_rate setpoint via twist.twist.angular.z (send yaw_rate_valid=true)
@@ -42,7 +42,7 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.api.navigation
+Class: flyt_python.API.navigation
 
 Function: velocity_set(self,vx, vy, vz, yaw_rate=0.0, tolerance=0.0, relative=False, async=False, yaw_rate_valid=False, body_frame=False):
         
@@ -114,7 +114,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/velocity_set',
-serviceType: 'core_api/VelocitySet'
+serviceType: 'core_API/VelocitySet'
 
 Request:
 {   twist:{twist:{  linear:{
@@ -147,7 +147,7 @@ rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.velocity_set(1.0, 0.5, -1.0, 0.12, 0.5, false, false, true, false);
@@ -156,8 +156,8 @@ nav.velocity_set(1.0, 0.5, -1.0, 0.12, 0.5, false, false, true, false);
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
+from flyt_python import API
+drone = API.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
@@ -167,11 +167,11 @@ drone.velocity_set(0, +2, 0, body_frame=True)
 ```
 
 ```cpp--ros
-#include <core_api/PositionSet.h>
+#include <core_API/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
-core_api::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_API::PositionSet>("/<namespace>/navigation/position_set");
+core_API::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.12;
 srv.request.twist.twist.linear.x = 1.0;
@@ -189,7 +189,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_api.srv import *
+from core_API.srv import *
 
 def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
     rospy.wait_for_service('/<namespace>/navigation/velocity_set')
@@ -240,7 +240,7 @@ $.ajax({
 var velocitySet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/velocity_set',
-    serviceType : 'core_api/VelocitySet'
+    serviceType : 'core_API/VelocitySet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -334,11 +334,11 @@ This API gives linear (x,y,z) and angular (yaw) velocity setpoint to vehicle. Pl
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/velocity_set</br>
-* Service Type: core_api/VelocitySet
+* Service Type: core_API/VelocitySet
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -375,7 +375,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/velocity_set'</br>
-* serviceType: 'core_api/VelocitySet'
+* serviceType: 'core_API/VelocitySet'
 
 
 ### API usage information:
@@ -389,23 +389,23 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
      * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has achieved the given velocity.
      * False: The API call would wait for the function to return, which happens when either the velocity setpoint is reached or timeout=30secs is over.
   * Relative: 
-     * True: All setpoints (vx,vy,vz, yaw_rate) are calculated relative to current velocity. E.g. if vehicle is already flying in X direction with 1 m/s and a velcity call is placed for 2 m/s with relative= True then vehicle velocity target will change to 1+2 = 3 m/s.
+     * True: All setpoints (vx,vy,vz, yaw_rate) are calculated relative to current velocity. E.g. if vehicle is already flying in X direction with 1 m/s and a velocity call is placed for 2 m/s with relative= True then vehicle velocity target will change to 1+2 = 3 m/s.
      * False: All setpoints (vx,vy,vz, yaw) are used as absolute velocity setpoints.  
   * Body_frame 
      * True: All the setpoints are converted to body frame. 
         * Front of vehicle : +vx
         * Right of vehicle : +vy
-        * down: +vz
-        * yaw is calculated from front of vehicle. 
+        * Down: +vz
+        * Yaw is calculated from front of vehicle. 
      * False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. 
 * Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.
 * For yaw rate_ setpoint to be effective the yaw_rate_valid argument must be set to true.
 * This API overrides any previous mission / navigation API being carried out.
 * This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
 * To provide only Yaw_rate setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True
-* Vehicle will keep flying in the direction specified by API if async= True. If async is False vehicle will stop after achiving target velocities in all directions. Make sure that you are handling such cases where vehicle might keep flying infinitely.
+* Vehicle will keep flying in the direction specified by API if async= True. If async is False vehicle will stop after achieving target velocities in all directions. Make sure that you are handling such cases where vehicle might keep flying infinitely.
 * Following parameters need to be manually configured according to vehicle frame.
   * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
-  * In any case vehicle will not exceed these velocity limits. So velcity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.
+  * In any case vehicle will not exceed these velocity limits. So velocity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.
   

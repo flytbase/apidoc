@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/set_home
-ROS-Service Type: core_api/SetHome, below is its description
+ROS-Service Type: core_API/SetHome, below is its description
 
 #Request : Expects home position to be set by specifying Latitude, Longitude and altitude
 #Request: If set_current is true, the current location of craft is set as home position
@@ -27,7 +27,7 @@ No CPP API available.
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -83,7 +83,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/set_home',
-serviceType: 'core_api/SetHome'
+serviceType: 'core_API/SetHome'
 
 Request:
 {   lat: Float,
@@ -108,15 +108,15 @@ rosservice call /flytsim/navigation/set_home "{lat: 73.25564541, lon: 18.2165632
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
-#include <core_api/SetHome.h>
+#include <core_API/SetHome.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("/<namespace>/navigation/set_home");
-core_api::SetHome srv;
+ros::ServiceClient client = nh.serviceClient<core_API::SetHome>("/<namespace>/navigation/set_home");
+core_API::SetHome srv;
 
 srv.request.lat = 73.25564541;
 srv.request.lon = 18.2165632;
@@ -156,7 +156,7 @@ $.ajax({
 var setHome = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/set_home',
-    serviceType : 'core_api/SetHome'
+    serviceType : 'core_API/SetHome'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -185,7 +185,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -236,7 +236,7 @@ Manually store a location as new home.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/set_home</br>
@@ -264,7 +264,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/set_home'</br>
-* serviceType: 'core_api/SetHome'
+* serviceType: 'core_API/SetHome'
 
 
 

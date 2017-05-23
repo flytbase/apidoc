@@ -58,7 +58,7 @@ Not Implemented
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
-NotImplemented
+Not Implemented
 
 ```
 
@@ -199,7 +199,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -278,7 +278,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -316,7 +316,7 @@ This API subscribes/polls battery status.  Please check API usage section below 
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     
@@ -357,5 +357,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
+* This API provides voltage, current, remaining battery information.

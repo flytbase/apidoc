@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/exec_script
-ROS-Service Type: core_api/ExecScript, below is its description
+ROS-Service Type: core_API/ExecScript, below is its description
 
 #Request : Expects name of the application to execute and the arguments to be passed to it
 string app_name
@@ -24,7 +24,7 @@ No CPP API is available for execution of onboard scripts.
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -74,7 +74,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/exec_script',
-serviceType: 'core_api/ExecScript'
+serviceType: 'core_API/ExecScript'
 
 Request:
 {   app_name : String,
@@ -98,16 +98,16 @@ rosservice call /<namespace>/navigation/exec_script "{}"
 
 ```python
 
-NotImplemented
+Not Implemented
 
 ```
 
 ```cpp--ros
-#include <core_api/ExecScript.h>
+#include <core_API/ExecScript.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("/<namespace>/navigation/exec_script");
-core_api::ExecScript srv;
+ros::ServiceClient client = nh.serviceClient<core_API::ExecScript>("/<namespace>/navigation/exec_script");
+core_API::ExecScript srv;
 
 srv.request.app_name = "sample_script.sh";
 srv.request.arguments = "arg1 arg2 arg3";
@@ -116,7 +116,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_api.srv import *
+from core_API.srv import *
 
 script_name = "sample_script.sh"
 sample_args = "arg1 arg2 arg3"
@@ -152,7 +152,7 @@ $.ajax({
 var execScript = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/exec_script',
-    serviceType : 'core_api/ExecScript'
+    serviceType : 'core_API/ExecScript'
 });
 
 var request = new ROSLIB.ServiceRequest({    
@@ -179,7 +179,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -214,7 +214,7 @@ This API can run onboard executable scripts in python, shell, etc.
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -230,14 +230,14 @@ This API can run onboard executable scripts in python, shell, etc.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/exec_script</br>
 * Service Type: ExecScript
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
 * URL: ``POST http://<ip>/ros/<namespace>/navigation/exec_script``
 * JSON Request:
@@ -256,7 +256,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/exec_script'</br>
-* serviceType: 'core_api/ExecScript'
+* serviceType: 'core_API/ExecScript'
 
 
 ### API usage information:

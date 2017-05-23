@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/rtl
-ROS-Service Type: core_api/RTL, below is its description
+ROS-Service Type: core_API/RTL, below is its description
 
 #Request : NULL
 
@@ -28,7 +28,7 @@ Returns:    0 if the rtl command is successfully sent to the vehicle, else retur
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-# Not implemented in python yet
+Not Implemented
 ```
 
 ```python--ros
@@ -61,7 +61,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/rtl',
-serviceType: 'core_api/RTL'
+serviceType: 'core_API/RTL'
 
 Request:
 {  }
@@ -80,29 +80,29 @@ rosservice call /flytpod/navigation/rtl "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.rtl();
 ```
 
 ```python
-# Not implemented in python yet
+Not Implemented
 ```
 
 ```cpp--ros
-#include <core_api/RTL.h>
+#include <core_API/RTL.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::RTL>("/<namespace>/navigation/rtl");
-core_api::RTL srv;
+ros::ServiceClient client = nh.serviceClient<core_API::RTL>("/<namespace>/navigation/rtl");
+core_API::RTL srv;
 
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-from core_api.srv import *
+from core_API.srv import *
 
 def rtl():
     rospy.wait_for_service('/<namespace>/navigation/rtl')
@@ -132,7 +132,7 @@ $.ajax({
 var rtl = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/rtl',
-    serviceType : 'core_api/RTL'
+    serviceType : 'core_API/RTL'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -192,7 +192,7 @@ Trigger RTL mode transition of the vehicle. Check API usage section below before
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments: None
     
@@ -203,14 +203,14 @@ Trigger RTL mode transition of the vehicle. Check API usage section below before
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/rtl</br>
-* Service Type: core_api/RTL
+* Service Type: core_API/RTL
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
 * URL: ``GET http://<ip>/ros/<namespace>/navigation/rtl``
 * JSON Response:
@@ -224,7 +224,7 @@ Websocket APIs can be called from javascript using [roslibjs library](https://gi
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/\<namespace\>/navigation/rtl'</br>
-* serviceType: 'core_api/RTL'
+* serviceType: 'core_API/RTL'
 
 
 ### API usage information:

@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/land
-ROS-Service Type: core_api/Land, below is its description
+ROS-Service Type: core_API/Land, below is its description
 
 #Request : expects async variable to be set/reset
 bool async
@@ -30,7 +30,7 @@ Returns:    0 if the land command is successfully sent to the vehicle, else retu
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-Class: flyt_python.api.navigation
+Class: flyt_python.API.navigation
 
 Function: land(async=False):
 ```
@@ -76,7 +76,7 @@ the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/land',
-serviceType: 'core_api/Land'
+serviceType: 'core_API/Land'
 
 Request:
 {  }
@@ -95,7 +95,7 @@ rosservice call /flytpod/navigation/land "async=true"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_API/navigation_bridge.h>
 
 Navigation nav;
 nav.land(true);
@@ -103,8 +103,8 @@ nav.land(true);
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import api
-drone = api.navigation()
+from flyt_python import API
+drone = API.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
@@ -116,11 +116,11 @@ drone.land(async=True)
 ```
 
 ```cpp--ros
-#include <core_api/Land.h>
+#include <core_API/Land.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_api::Land>("/<namespace>/navigation/land");
-core_api::Land srv;
+ros::ServiceClient client = nh.serviceClient<core_API::Land>("/<namespace>/navigation/land");
+core_API::Land srv;
 
 srv.request.async = true;
 client.call(srv);
@@ -128,7 +128,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_api.srv import *
+from core_API.srv import *
 
 def land(async= False):
     rospy.wait_for_service('/<namespace>/navigation/land')
@@ -158,7 +158,7 @@ $.ajax({
 var land = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/land',
-    serviceType : 'core_api/Land'
+    serviceType : 'core_API/Land'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -218,7 +218,7 @@ Land vehicle at current position. Check API usage section below before using thi
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -233,14 +233,14 @@ Land vehicle at current position. Check API usage section below before using thi
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/land</br>
-* Service Type: core_api/Land
+* Service Type: core_API/Land
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
 * URL: ``GET http://<ip>/ros/<namespace>/navigation/land``
 * JSON Response:
@@ -254,7 +254,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/land'</br>
-* serviceType: 'core_api/Land'
+* serviceType: 'core_API/Land'
 
 
 ### API usage information:

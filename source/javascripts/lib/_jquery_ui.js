@@ -22,7 +22,7 @@
    * Released under the MIT license.
    * http://jquery.org/license
    *
-   * http://api.jqueryui.com/jQuery.widget/
+   * http://API.jqueryui.com/jQuery.widget/
    */
 
 
