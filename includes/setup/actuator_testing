@@ -8,7 +8,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/setup/actuator_testing
-ROS-Service Type: core_api/ActuatorTesting, below is its description
+ROS-Service Type: core_API/ActuatorTesting, below is its description
 
 ReqStructure:
     uint8 actuator_id
@@ -20,11 +20,11 @@ ReqStructure:
 <span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">ROS</span><span class="o">-</span><span class="n">Service</span> <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">actuator_testing</span>
-<span class="n">ROS</span><span class="o">-</span><span class="n">Service</span> <span class="n">Type</span><span class="o">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">ActuatorTesting</span><span class="p">,</span> <span class="n">below</span> <span class="n">is</span> <span class="n">its</span> <span class="n">description</span>
+<span class="n">ROS</span><span class="o">-</span><span class="n">Service</span> <span class="n">Type</span><span class="o">:</span> <span class="n">core_API</span><span class="o">/</span><span class="n">ActuatorTesting</span><span class="p">,</span> <span class="n">below</span> <span class="n">is</span> <span class="n">its</span> <span class="n">description</span>
 
 <span class="n">ReqStructure</span><span class="o">:</span>
     <span class="n">uint8</span> <span class="n">actuator_id</span>
@@ -34,7 +34,7 @@ ReqStructure:
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">ROS</span><span class="o">-</span><span class="n">Service</span> <span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">actuator_testing</span>
-<span class="n">ROS</span><span class="o">-</span><span class="n">Service</span> <span class="n">Type</span><span class="p">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">ActuatorTesting</span><span class="p">,</span> <span class="n">below</span> <span class="ow">is</span> <span class="n">its</span> <span class="n">description</span>
+<span class="n">ROS</span><span class="o">-</span><span class="n">Service</span> <span class="n">Type</span><span class="p">:</span> <span class="n">core_API</span><span class="o">/</span><span class="n">ActuatorTesting</span><span class="p">,</span> <span class="n">below</span> <span class="ow">is</span> <span class="n">its</span> <span class="n">description</span>
 
 <span class="n">ReqStructure</span><span class="p">:</span>
     <span class="n">uint8</span> <span class="n">actuator_id</span>
@@ -61,7 +61,7 @@ ReqStructure:
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/setup/actuator_testing'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/ActuatorTesting'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/ActuatorTesting'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">actuator_id</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
@@ -75,9 +75,9 @@ ReqStructure:
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># Refer to rosservice command line API documentation for sample service calls. http://wiki.ros.org/rosservice</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span>  <span class="nx">msgdata</span><span class="o">=</span><span class="p">{};</span>
@@ -97,7 +97,7 @@ ReqStructure:
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">actuatorTesting</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/setup/actuator_testing'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/ActuatorTesting'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/ActuatorTesting'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({</span>
@@ -117,7 +117,7 @@ ReqStructure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code>
 </code></pre><pre class="highlight python tab-python--ros"><code>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -174,7 +174,7 @@ ReqStructure:
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
@@ -206,7 +206,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/setup/actuator_testing&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ActuatorTesting&rsquo;</li>
+<li>serviceType: &lsquo;core_API/ActuatorTesting&rsquo;</li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>

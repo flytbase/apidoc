@@ -6,7 +6,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device using desktop or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/payload/gimbal_set
-ROS-Service Type: core_api/GimbalSet, below is its description
+ROS-Service Type: core_API/GimbalSet, below is its description
 
 <span class="c">#Request : expects gimbal attitude setpoint in radians via roll, pitch, yaw in NED Frame</span>
 <span class="c">#Response : return success=true if command is successfully sent</span>
@@ -18,10 +18,10 @@ float64 yaw
 bool success
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 </span>
-<span class="n">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -61,7 +61,7 @@ bool success
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/payload/gimbal_set'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/GimbalSet'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/GimbalSet'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">roll</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
@@ -79,13 +79,13 @@ pitch:0.5
 yaw:-0.2"</span>
 
 <span class="c">#sends (roll,pitch,yaw)=(0,0.5,-0.2)(rad)</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">NotImplemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/GimbalSet.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_API/GimbalSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/payload/gimbal_set"</span><span class="p">);</span>
-<span class="n">core_api</span><span class="o">::</span><span class="n">GimbalSet</span> <span class="n">srv</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">GimbalSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/payload/gimbal_set"</span><span class="p">);</span>
+<span class="n">core_API</span><span class="o">::</span><span class="n">GimbalSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">roll</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
@@ -117,7 +117,7 @@ yaw:-0.2"</span>
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">gimbalSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/payload/gimbal_set'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/GimbalSet'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/GimbalSet'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({</span>
@@ -137,8 +137,8 @@ yaw:-0.2"</span>
 <p>Example response</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">NotImplemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -159,7 +159,7 @@ yaw:-0.2"</span>
 <p>For FlytPOD/PRO users:</p>
 
 <ul>
-<li>Autopilot <strong>MUST</strong> be in <strong>ready-to-arm</strong> state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to <a href="http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led">this link</a>.</li>
+<li>Autopilot <strong>MUST</strong> be in <strong>ready-to-arm</strong> state. Typically it would be reflected by RGB led patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to <a href="http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led">this link</a>.</li>
 <li>Make sure the parameter: <strong>MNT_MODE_IN</strong> is set to 3.</li>
 </ul>
 
@@ -219,7 +219,7 @@ yaw:-0.2"</span>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
@@ -251,7 +251,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/payload/gimbal_set&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/GimbalSet&rsquo;</li>
+<li>serviceType: &lsquo;core_API/GimbalSet&rsquo;</li>
 </ul>
 
 <aside class="warning">

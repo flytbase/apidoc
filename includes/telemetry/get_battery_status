@@ -50,7 +50,7 @@ string location
 string serial_number
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
@@ -171,7 +171,7 @@ string serial_number
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/battery
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">BatteryState</span>
 
@@ -230,7 +230,7 @@ cell_voltage: <span class="o">[]</span>
 location: id0
 serial_number: <span class="s1">''</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">BatteryState</span> <span class="k">class</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -253,7 +253,7 @@ serial_number: <span class="s1">''</span>
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+<p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Response:</p>
 
@@ -328,6 +328,5 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <h3 id="api-usage-information">API usage information:</h3>
 
 <ul>
-<li>This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.</li>
-<li>Data returned is in NED frame.</li>
+<li>This API provides voltage, current, remaining battery information.</li>
 </ul>

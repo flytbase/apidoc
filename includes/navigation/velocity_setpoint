@@ -6,7 +6,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/navigation/velocity
-ROS-Service Type: core_api/VelocitySet, below is its description
+ROS-Service Type: core_API/VelocitySet, below is its description
 
 <span class="c">#Request : expects velocity setpoint via twist.twist.linear.x,linear.y,linear.z</span>
 <span class="c">#Request : expects yaw_rate setpoint via twist.twist.angular.z (send yaw_rate_valid=true)</span>
@@ -35,7 +35,7 @@ bool success
 <span class="n">Returns</span><span class="o">:</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">reaches</span> <span class="n">given</span> <span class="n">setpoint</span> <span class="n">before</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="n">secs</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
 <span class="n">Function</span><span class="p">:</span> <span class="n">velocity_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">vz</span><span class="p">,</span> <span class="n">yaw_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">async</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">yaw_rate_valid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">body_frame</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 
@@ -95,7 +95,7 @@ bool success
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/velocity_set'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/VelocitySet'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/VelocitySet'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">twist</span><span class="p">:{</span><span class="nl">twist</span><span class="p">:{</span>  <span class="nl">linear</span><span class="p">:{</span>
@@ -123,25 +123,25 @@ bool success
 
 <span class="c">#sends (vx,vy,vz)=(0.5,0.2,-0.1)(m/s), yaw_rate=0.1rad/s,  relative=false, async=false, yaw_rate_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m/s if left at 0  </span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_API/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">velocity_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
 <span class="c1">//sends (vx,vy,vz)=(1.0,0.5,-1.0)(m/s), yaw_rate=0.12rad/s, tolerance=0.5m/s, relative=false, async=false, yaw_rate_valid=true, body_frame=false
 </span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
-<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
-<span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
 <span class="c"># wait for interface to initialize</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
 <span class="c"># fly towards right ( with respect to vehicle current heading) </span>
 <span class="n">drone</span><span class="o">.</span><span class="n">velocity_set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">body_frame</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_API/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
-<span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
+<span class="n">core_API</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
@@ -156,7 +156,7 @@ bool success
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
 
 <span class="c1">//sends (vx,vy,vz)=(1.0,0.5,-1.0)(m/s), yaw_rate=0.12rad/s, tolerance=0.5m/s, relative=false, async=false, yaw_rate_valid=true, body_frame=false
-</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_API.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">setpoint_velocity</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">vz</span><span class="p">,</span> <span class="n">yaw_rate</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">async</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">yaw_rate_valid</span><span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">body_frame</span><span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'/&lt;namespace&gt;/navigation/velocity_set'</span><span class="p">)</span>
@@ -201,7 +201,7 @@ bool success
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">velocitySet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/velocity_set'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/VelocitySet'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/VelocitySet'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({</span>
@@ -315,12 +315,12 @@ bool success
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
 <li>Name: /&lt;namespace&gt;/navigation/velocity_set</br></li>
-<li>Service Type: core_api/VelocitySet</li>
+<li>Service Type: core_API/VelocitySet</li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -362,7 +362,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/navigation/velocity_set&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/VelocitySet&rsquo;</li>
+<li>serviceType: &lsquo;core_API/VelocitySet&rsquo;</li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>
@@ -384,7 +384,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>Relative: 
 
 <ul>
-<li>True: All setpoints (vx,vy,vz, yaw_rate) are calculated relative to current velocity. E.g. if vehicle is already flying in X direction with 1 m/s and a velcity call is placed for 2 m/s with relative= True then vehicle velocity target will change to 1+2 = 3 m/s.</li>
+<li>True: All setpoints (vx,vy,vz, yaw_rate) are calculated relative to current velocity. E.g. if vehicle is already flying in X direction with 1 m/s and a velocity call is placed for 2 m/s with relative= True then vehicle velocity target will change to 1+2 = 3 m/s.</li>
 <li>False: All setpoints (vx,vy,vz, yaw) are used as absolute velocity setpoints.<br></li>
 </ul></li>
 <li>Body_frame 
@@ -393,8 +393,8 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>True: All the setpoints are converted to body frame. </li>
 <li>Front of vehicle : +vx</li>
 <li>Right of vehicle : +vy</li>
-<li>down: +vz</li>
-<li>yaw is calculated from front of vehicle. </li>
+<li>Down: +vz</li>
+<li>Yaw is calculated from front of vehicle. </li>
 <li>False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. </li>
 </ul></li>
 </ul></li>
@@ -403,12 +403,12 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <li>This API overrides any previous mission / navigation API being carried out.</li>
 <li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
 <li>To provide only Yaw_rate setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True</li>
-<li>Vehicle will keep flying in the direction specified by API if async= True. If async is False vehicle will stop after achiving target velocities in all directions. Make sure that you are handling such cases where vehicle might keep flying infinitely.</li>
+<li>Vehicle will keep flying in the direction specified by API if async= True. If async is False vehicle will stop after achieving target velocities in all directions. Make sure that you are handling such cases where vehicle might keep flying infinitely.</li>
 <li>Following parameters need to be manually configured according to vehicle frame.
 
 <ul>
 <li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
 <li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>In any case vehicle will not exceed these velocity limits. So velcity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.</li>
+<li>In any case vehicle will not exceed these velocity limits. So velocity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.</li>
 </ul></li>
 </ul>

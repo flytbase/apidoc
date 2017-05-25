@@ -8,7 +8,7 @@
 
 Type: Ros Service
 Name: /&lt;namespace&gt;/setup/module_calibration
-MsgType: core_api/ModuleCalibration
+MsgType: core_API/ModuleCalibration
 MsgStructure:
     uint8 STOP <span class="o">=</span> 0
     uint8 ACCELEROMETER <span class="o">=</span> 1
@@ -28,12 +28,12 @@ MsgStructure:
 <span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
 <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">module_calibration</span>
-<span class="n">MsgType</span><span class="o">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">ModuleCalibration</span>
+<span class="n">MsgType</span><span class="o">:</span> <span class="n">core_API</span><span class="o">/</span><span class="n">ModuleCalibration</span>
 <span class="n">MsgStructure</span><span class="o">:</span>
     <span class="n">uint8</span> <span class="n">STOP</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">uint8</span> <span class="n">ACCELEROMETER</span> <span class="o">=</span> <span class="mi">1</span>
@@ -53,7 +53,7 @@ MsgStructure:
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
 <span class="n">Name</span><span class="p">:</span> <span class="o">/&lt;</span><span class="n">namespace</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">/</span><span class="n">module_calibration</span>
-<span class="n">MsgType</span><span class="p">:</span> <span class="n">core_api</span><span class="o">/</span><span class="n">ModuleCalibration</span>
+<span class="n">MsgType</span><span class="p">:</span> <span class="n">core_API</span><span class="o">/</span><span class="n">ModuleCalibration</span>
 <span class="n">MsgStructure</span><span class="p">:</span>
     <span class="n">uint8</span> <span class="n">STOP</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">uint8</span> <span class="n">ACCELEROMETER</span> <span class="o">=</span> <span class="mi">1</span>
@@ -88,7 +88,7 @@ MsgStructure:
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/setup/module_calibration'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/ModuleCalibration'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/ModuleCalibration'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">module_calibrate</span><span class="p">:</span> <span class="nx">Int</span> <span class="p">}</span>
@@ -102,10 +102,10 @@ MsgStructure:
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-<span class="c"># Refer to rosservice command line api documentation for sample service calls. http://wiki.ros.org/rosservice</span>
+<span class="c"># Refer to rosservice command line API documentation for sample service calls. http://wiki.ros.org/rosservice</span>
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span>
 </code></pre><pre class="highlight python tab-python--ros"><code>
@@ -126,7 +126,7 @@ MsgStructure:
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">moduleCalibration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/setup/module_calibration'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/ModuleCalibration'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/ModuleCalibration'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({</span>
@@ -145,7 +145,7 @@ MsgStructure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: True
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
@@ -196,7 +196,7 @@ MsgStructure:
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
@@ -227,7 +227,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/setup/module_calibration&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ModuleCalibration&rsquo;</li>
+<li>serviceType: &lsquo;core_API/ModuleCalibration&rsquo;</li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>

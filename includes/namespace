@@ -6,12 +6,12 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login. </span>
 
 ROS-Service Name: /get_global_namespace
-ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
+ROS-Service Type: core_API/ParamGetGlobalNamespace, below is its description
 
 <span class="c">#Request : None</span>
 
 <span class="c">#Response : Paramter info</span>
-core_api/ParamInfo param_info
+core_API/ParamInfo param_info
 <span class="c">#Response : success=true if parameter get was successfull.</span>
 bool success
 <span class="c">#Response : Returns error message/success message if any.</span>
@@ -25,7 +25,7 @@ string message
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span> <span class="nb">NULL</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
-    <span class="o">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span> <span class="n">param_info</span>
+    <span class="o">:</span><span class="n">core_API</span><span class="o">/</span><span class="n">ParamInfo</span> <span class="n">param_info</span>
     <span class="o">:</span><span class="n">string</span> <span class="n">message</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
@@ -52,7 +52,7 @@ string message
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/get_global_namespace'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/ParamGetGlobalNamespace'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/ParamGetGlobalNamespace'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
@@ -67,18 +67,18 @@ string message
 <pre class="highlight shell tab-shell"><code>rosservice call /get_global_namespace <span class="s2">"{}"</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// Not Implemented as global namespace is not required for any CPP API
 </span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Not Implemented as global namespace is not required for any Python API</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/ParamGetGlobalNamespace.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_API/ParamGetGlobalNamespace.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/get_global_namespace"</span><span class="p">);</span>
-<span class="n">core_api</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span> <span class="n">srv</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/get_global_namespace"</span><span class="p">);</span>
+<span class="n">core_API</span><span class="o">::</span><span class="n">ParamGetGlobalNamespace</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">global_namespace</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">param_info</span><span class="p">.</span><span class="n">param_value</span><span class="p">;</span>
 
 <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">message</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_API.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">get_global_namespace</span><span class="p">():</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'/get_global_namespace'</span><span class="p">)</span>
@@ -100,7 +100,7 @@ string message
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">namespace</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/get_global_namespace'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/ParamGetGlobalNamespace'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/ParamGetGlobalNamespace'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
@@ -141,7 +141,7 @@ message: FlytOS namespace is  flytpod
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API returns the global namespace under which FlytOS&rsquo;s instance in running. For users using RESTful, Websocket or ROS APIs, calling this API is a <strong>MUST</strong>, as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever <em>&lt;namespace&gt;</em> is mentioned in API call definition, it must be replaced by the output of this API call. Users writing their code in simple CPP and Python need not call this API.</p>
+<p>This API returns the global namespace under which FlytOS&rsquo;s instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a <strong>MUST</strong>, as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever <em>&lt;namespace&gt;</em> is mentioned in API call definition, it must be replaced by the output of this API call. Users writing their code in simple CPP and Python need not call this API.</p>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -171,7 +171,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/get_global_namespace&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ParamGetGlobalNamespace&rsquo;</li>
+<li>serviceType: &lsquo;core_API/ParamGetGlobalNamespace&rsquo;</li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>

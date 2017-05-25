@@ -20,10 +20,10 @@ Response structure:
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 </span>
-<span class="n">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">payload_adc</span>
@@ -82,12 +82,12 @@ Response structure:
 <span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m if left at 0    </span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_API/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
-<span class="n">core_api</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">PositionSet</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/position_set"</span><span class="p">);</span>
+<span class="n">core_API</span><span class="o">::</span><span class="n">PositionSet</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
@@ -141,7 +141,7 @@ Response structure:
 <pre class="highlight shell tab-shell"><code>    adc_voltage: Float[2],
     adc_updated: Int
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">PayloadADC</span> <span class="nb">object</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -159,7 +159,7 @@ Response structure:
 
 <h3 id="parameters">Parameters:</h3>
 
-<p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
+<p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
 
 <p>Response:</p>
 

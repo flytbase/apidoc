@@ -7,7 +7,7 @@
 </code></pre><pre class="highlight cpp tab-cpp"><code>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code>
 </code></pre><pre class="highlight python tab-python--ros"><code>
 
@@ -33,7 +33,7 @@
 </blockquote>
 <pre class="highlight shell tab-shell"><code>Not Implemented
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
@@ -57,7 +57,7 @@
 </blockquote>
 <pre class="highlight shell tab-shell"><code>Not Implemented
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>

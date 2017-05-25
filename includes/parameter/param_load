@@ -6,7 +6,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/param/param_load
-ROS-Service Type: core_api/ParamLoad, below is its description
+ROS-Service Type: core_API/ParamLoad, below is its description
 
 <span class="c">#Request : Null</span>
 
@@ -22,7 +22,7 @@ string message
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -55,7 +55,7 @@ string message
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/param/param_load'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/ParamLoad'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/ParamLoad'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
@@ -66,12 +66,12 @@ string message
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytpod/param/param_load <span class="s2">"{}"</span> 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/param_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_API/param_bridge.h&gt;
 </span>
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_load</span><span class="p">()</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
@@ -90,7 +90,7 @@ string message
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">paramLoad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/param/param_load'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/ParamLoad'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/ParamLoad'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
@@ -107,7 +107,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -143,7 +143,7 @@ string message
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
@@ -170,7 +170,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/param/param_load&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ParamLoad&rsquo;</li>
+<li>serviceType: &lsquo;core_API/ParamLoad&rsquo;</li>
 </ul>
 
 <!-- ### API usage information:

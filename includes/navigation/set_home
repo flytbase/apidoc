@@ -6,7 +6,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/navigation/set_home
-ROS-Service Type: core_api/SetHome, below is its description
+ROS-Service Type: core_API/SetHome, below is its description
 
 <span class="c">#Request : Expects home position to be set by specifying Latitude, Longitude and altitude</span>
 <span class="c">#Request: If set_current is true, the current location of craft is set as home position</span>
@@ -20,7 +20,7 @@ bool success
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">No</span> <span class="n">CPP</span> <span class="n">API</span> <span class="n">available</span><span class="p">.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -64,7 +64,7 @@ bool success
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/set_home'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/SetHome'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/SetHome'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">lat</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
@@ -81,12 +81,12 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytsim/navigation/set_home <span class="s2">"{lat: 73.25564541, lon: 18.2165632, alt: 2.0, set_current: false}"</span>  
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/SetHome.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_API/SetHome.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">SetHome</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/set_home"</span><span class="p">);</span>
-<span class="n">core_api</span><span class="o">::</span><span class="n">SetHome</span> <span class="n">srv</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">SetHome</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/set_home"</span><span class="p">);</span>
+<span class="n">core_API</span><span class="o">::</span><span class="n">SetHome</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">lat</span> <span class="o">=</span> <span class="mf">73.25564541</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">lon</span> <span class="o">=</span> <span class="mf">18.2165632</span><span class="p">;</span>
@@ -117,7 +117,7 @@ bool success
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">setHome</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/set_home'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/SetHome'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/SetHome'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({</span>
@@ -138,7 +138,7 @@ bool success
 <p>Example response</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -197,7 +197,7 @@ bool success
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
@@ -231,5 +231,5 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/navigation/set_home&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/SetHome&rsquo;</li>
+<li>serviceType: &lsquo;core_API/SetHome&rsquo;</li>
 </ul>

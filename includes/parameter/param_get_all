@@ -6,20 +6,20 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/param/param_get_all
-ROS-Service Type: core_api/ParamGetAll, below is its description
+ROS-Service Type: core_API/ParamGetAll, below is its description
 
 <span class="c">#Request : fresh pull true or false</span>
 bool fresh_pull
 
 <span class="c">#Response: ParamInfo list of all parameters</span>
-core_api/ParamInfo[] param_list
+core_API/ParamInfo[] param_list
 <span class="c">#Response : success=true if command is successful.  </span>
 bool success
 <span class="c">#Response : error message, if any</span>
 string message
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 </span>
-<span class="n">Function</span> <span class="n">Definition</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">Param</span><span class="o">::</span><span class="n">param_get_all</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">ParamInfo</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">param_list</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">fresh_pull</span><span class="p">)</span>
+<span class="n">Function</span> <span class="n">Definition</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">Param</span><span class="o">::</span><span class="n">param_get_all</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">ParamInfo</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">param_list</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">fresh_pull</span><span class="p">)</span>
 
 <span class="n">Arguments</span><span class="o">:</span>
     <span class="n">fresh_pull</span><span class="o">:</span> <span class="n">Whether</span> <span class="n">to</span> <span class="n">fresh</span> <span class="n">pull</span> <span class="n">from</span> <span class="n">autopilot</span> <span class="n">or</span> <span class="n">not</span>
@@ -29,7 +29,7 @@ string message
     <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="nb">NotImplemented</span>
+<span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -37,7 +37,7 @@ string message
 <span class="n">call</span> <span class="n">srv</span><span class="o">:</span>
     <span class="o">:</span><span class="kt">bool</span> <span class="n">fresh_pull</span>
 <span class="n">response</span> <span class="n">srv</span><span class="o">:</span>
-    <span class="o">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span><span class="p">[]</span> <span class="n">param_list</span>
+    <span class="o">:</span><span class="n">core_API</span><span class="o">/</span><span class="n">ParamInfo</span><span class="p">[]</span> <span class="n">param_list</span>
     <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
     <span class="o">:</span><span class="n">string</span> <span class="n">message</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
@@ -47,7 +47,7 @@ string message
 <span class="n">call</span> <span class="n">srv</span><span class="p">:</span>
     <span class="p">:</span><span class="nb">bool</span> <span class="n">fresh_pull</span>
 <span class="n">response</span> <span class="n">srv</span><span class="p">:</span>
-    <span class="p">:</span><span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span><span class="p">[]</span> <span class="n">param_list</span>
+    <span class="p">:</span><span class="n">core_API</span><span class="o">/</span><span class="n">ParamInfo</span><span class="p">[]</span> <span class="n">param_list</span>
     <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
     <span class="p">:</span><span class="n">string</span> <span class="n">message</span>
 
@@ -70,7 +70,7 @@ string message
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/param/param_get_all'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/ParamGetAll'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/ParamGetAll'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
@@ -83,15 +83,15 @@ string message
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytpod/param/param_get_all <span class="s2">"fresh_pull: false"</span> 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/param_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_API/param_bridge.h&gt;
 </span>
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">fresh_pull</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-<span class="n">core_api</span><span class="o">/</span><span class="n">ParamInfo</span><span class="p">[]</span> <span class="n">param_list</span><span class="p">;</span>
+<span class="n">core_API</span><span class="o">/</span><span class="n">ParamInfo</span><span class="p">[]</span> <span class="n">param_list</span><span class="p">;</span>
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_get_all</span><span class="p">(</span><span class="n">param_list</span><span class="p">,</span> <span class="n">fresh_pull</span><span class="p">);</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Parameter list: "</span> <span class="o">&lt;&lt;</span> <span class="n">param_list</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
@@ -111,7 +111,7 @@ string message
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">paramGetAll</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/param/param_get_all'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/ParamGetAll'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/ParamGetAll'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
@@ -130,7 +130,7 @@ string message
     param_list:[<span class="o">{}</span>,<span class="o">{}</span>,<span class="o">{}</span>,....]
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Function</span> <span class="n">returns</span> <span class="mi">0</span>
 <span class="n">param_list</span> <span class="n">is</span> <span class="n">populated</span> <span class="n">with</span> <span class="n">all</span> <span class="n">the</span> <span class="n">received</span> <span class="n">parameters</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="nb">NotImplemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span><span class="p">,</span>
     <span class="nx">param_list</span><span class="p">:[{},{},{},....]</span>
@@ -178,7 +178,7 @@ string message
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
 <li>Type: Ros Service</br> </li>
@@ -209,7 +209,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/param/param_get_all&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ParamGetAll&rsquo;</li>
+<li>serviceType: &lsquo;core_API/ParamGetAll&rsquo;</li>
 </ul>
 
 <!-- ### API usage information:
