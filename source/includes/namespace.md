@@ -6,12 +6,12 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login. 
 
 ROS-Service Name: /get_global_namespace
-ROS-Service Type: core_API/ParamGetGlobalNamespace, below is its description
+ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
 
 #Request : None
 
 #Response : Paramter info
-core_API/ParamInfo param_info
+core_api/ParamInfo param_info
 #Response : success=true if parameter get was successfull.
 bool success
 #Response : Returns error message/success message if any.
@@ -34,7 +34,7 @@ Name: /get_global_namespace
 call srv: NULL
 response srv: 
     :bool success
-    :core_API/ParamInfo param_info
+    :core_api/ParamInfo param_info
     :string message
 ```
 
@@ -64,13 +64,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/get_global_namespace',
-serviceType: 'core_API/ParamGetGlobalNamespace'
+serviceType: 'core_api/ParamGetGlobalNamespace'
 
 Response:
 {   success: Boolean,
@@ -96,11 +96,11 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```cpp--ros
-#include <core_API/ParamGetGlobalNamespace.h>
+#include <core_api/ParamGetGlobalNamespace.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::ParamGetGlobalNamespace>("/get_global_namespace");
-core_API::ParamGetGlobalNamespace srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ParamGetGlobalNamespace>("/get_global_namespace");
+core_api::ParamGetGlobalNamespace srv;
 client.call(srv);
 
 std::string global_namespace = srv.response.param_info.param_value;
@@ -110,7 +110,7 @@ std::string message = srv.response.message;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 def get_global_namespace():
     rospy.wait_for_service('/get_global_namespace')
@@ -139,7 +139,7 @@ def get_global_namespace():
 var namespace = new ROSLIB.Service({
     ros : ros,
     name : '/get_global_namespace',
-    serviceType : 'core_API/ParamGetGlobalNamespace'
+    serviceType : 'core_api/ParamGetGlobalNamespace'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -230,7 +230,7 @@ Websocket APIs can be called from javascript using [roslibjs library](https://gi
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/get_global_namespace'</br>
-* serviceType: 'core_API/ParamGetGlobalNamespace'
+* serviceType: 'core_api/ParamGetGlobalNamespace'
 
 
 ### API usage information:

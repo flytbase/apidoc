@@ -9,10 +9,10 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_set
-ROS-Service Type: core_API/ParamSet, below is its description
+ROS-Service Type: core_api/ParamSet, below is its description
 
 #Request : Info of parameter to be set
-core_API/ParamInfo param_info
+core_api/ParamInfo param_info
 
 #Response : success=true if command is successful.  
 bool success
@@ -43,7 +43,7 @@ Not Implemented
 Type: Ros Service
 Name: /<namespace>/param/param_set
 call srv:
-    :core_API/ParamInfo param_info
+    :core_api/ParamInfo param_info
     :bool success
 response srv: bool success
 ```
@@ -54,7 +54,7 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/param/param_set
 call srv:
-    :core_API/ParamInfo param_info
+    :core_api/ParamInfo param_info
     :bool success
 response srv: bool success
 
@@ -80,13 +80,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/param/param_set',
-serviceType: 'core_API/ParamSet'
+serviceType: 'core_api/ParamSet'
 
 Request:
 {   param_info:{
@@ -155,7 +155,7 @@ $.ajax({
 var paramSet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_set',
-    serviceType : 'core_API/ParamSet'
+    serviceType : 'core_api/ParamSet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -260,7 +260,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_set'</br>
-* serviceType: 'core_API/ParamSet'
+* serviceType: 'core_api/ParamSet'
 
 
 ### API usage information:

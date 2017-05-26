@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/setup/esc_calibration
-ROS-Service Type: core_API/EscCalibration, below is its description
+ROS-Service Type: core_api/EscCalibration, below is its description
 ReqStructure: 
     int8 CALIBRATION_STATE_SET_PWM_MAX = 1
     int8 CALIBRATION_STATE_SET_PWM_MIN = 2
@@ -37,7 +37,7 @@ Not Implemented
 // ROS services and topics are accessible from onboard scripts only.
 
 ROS-Service Name: /<namespace>/setup/esc_calibration
-ROS-Service Type: core_API/EscCalibration, below is its description
+ROS-Service Type: core_api/EscCalibration, below is its description
 ReqStructure: 
     int8 CALIBRATION_STATE_SET_PWM_MAX = 1
     int8 CALIBRATION_STATE_SET_PWM_MIN = 2
@@ -55,7 +55,7 @@ ReqStructure:
 # ROS services and topics are accessible from onboard scripts only.
 
 ROS-Service Name: /<namespace>/setup/esc_calibration
-ROS-Service Type: core_API/EscCalibration, below is its description
+ROS-Service Type: core_api/EscCalibration, below is its description
 ReqStructure: 
     int8 CALIBRATION_STATE_SET_PWM_MAX = 1
     int8 CALIBRATION_STATE_SET_PWM_MIN = 2
@@ -89,13 +89,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/setup/esc_calibration',
-serviceType: 'core_API/EscCalibration'
+serviceType: 'core_api/EscCalibration'
 
 Request:
 {   pwm_min: Float,
@@ -158,7 +158,7 @@ $.ajax({
 var escCalibration = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/setup/esc_calibration',
-    serviceType : 'core_API/EscCalibration'
+    serviceType : 'core_api/EscCalibration'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -270,7 +270,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/setup/esc_calibration'</br>
-* serviceType: 'core_API/EscCalibration'
+* serviceType: 'core_api/EscCalibration'
 
 
 <!-- ### API usage information:

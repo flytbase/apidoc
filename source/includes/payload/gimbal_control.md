@@ -6,7 +6,7 @@
 # API call described below requires shell access, either login to the device using desktop or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/payload/gimbal_set
-ROS-Service Type: core_API/GimbalSet, below is its description
+ROS-Service Type: core_api/GimbalSet, below is its description
 
 #Request : expects gimbal attitude setpoint in radians via roll, pitch, yaw in NED Frame
 #Response : return success=true if command is successfully sent
@@ -73,13 +73,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/payload/gimbal_set',
-serviceType: 'core_API/GimbalSet'
+serviceType: 'core_api/GimbalSet'
 
 Request:
 {   roll: Float,
@@ -109,11 +109,11 @@ Not Implemented
 ```
 
 ```cpp--ros
-#include <core_API/GimbalSet.h>
+#include <core_api/GimbalSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::GimbalSet>("/<namespace>/payload/gimbal_set");
-core_API::GimbalSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::GimbalSet>("/<namespace>/payload/gimbal_set");
+core_api::GimbalSet srv;
 
 srv.request.roll = 0.0;
 srv.request.pitch = 0.5;
@@ -154,7 +154,7 @@ $.ajax({
 var gimbalSet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/payload/gimbal_set',
-    serviceType : 'core_API/GimbalSet'
+    serviceType : 'core_api/GimbalSet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -269,7 +269,7 @@ Websocket APIs can be called from javascript using [roslibjs library](https://gi
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/\<namespace\>/payload/gimbal_set'</br>
-* serviceType: 'core_API/GimbalSet'
+* serviceType: 'core_api/GimbalSet'
 
 <aside class="warning">
 This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.

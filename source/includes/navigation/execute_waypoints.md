@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_execute
-ROS-Service Type: core_API/waypointExecute, below is its description
+ROS-Service Type: core_api/waypointExecute, below is its description
 
 #Request : Null
 
@@ -64,13 +64,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/waypoint_execute',
-serviceType: 'core_API/WaypointExecute'
+serviceType: 'core_api/WaypointExecute'
 
 Response:
 {   success: Boolean, }
@@ -125,7 +125,7 @@ $.ajax({
 var waypointExecute = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/waypoint_execute',
-    serviceType : 'core_API/WaypointExecute'
+    serviceType : 'core_api/WaypointExecute'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -212,7 +212,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/waypoint_execute'</br>
-* serviceType: 'core_API/WaypointExecute'
+* serviceType: 'core_api/WaypointExecute'
 
 
 ### API usage information:

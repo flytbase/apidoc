@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/set_home
-ROS-Service Type: core_API/SetHome, below is its description
+ROS-Service Type: core_api/SetHome, below is its description
 
 #Request : Expects home position to be set by specifying Latitude, Longitude and altitude
 #Request: If set_current is true, the current location of craft is set as home position
@@ -77,13 +77,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/set_home',
-serviceType: 'core_API/SetHome'
+serviceType: 'core_api/SetHome'
 
 Request:
 {   lat: Float,
@@ -112,11 +112,11 @@ Not Implemented
 ```
 
 ```cpp--ros
-#include <core_API/SetHome.h>
+#include <core_api/SetHome.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::SetHome>("/<namespace>/navigation/set_home");
-core_API::SetHome srv;
+ros::ServiceClient client = nh.serviceClient<core_api::SetHome>("/<namespace>/navigation/set_home");
+core_api::SetHome srv;
 
 srv.request.lat = 73.25564541;
 srv.request.lon = 18.2165632;
@@ -156,7 +156,7 @@ $.ajax({
 var setHome = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/set_home',
-    serviceType : 'core_API/SetHome'
+    serviceType : 'core_api/SetHome'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -264,7 +264,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/set_home'</br>
-* serviceType: 'core_API/SetHome'
+* serviceType: 'core_api/SetHome'
 
 
 

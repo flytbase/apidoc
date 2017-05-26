@@ -10,7 +10,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/arm
-ROS-Service Type: core_API/Arm, below is its description
+ROS-Service Type: core_api/Arm, below is its description
 
 #Request : NULL
 
@@ -71,13 +71,13 @@ JSON Response:
 ```javascript--Websocket
 This is a Websocket call for the API to arm the 
 FlytOS running device. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/arm',
-serviceType: 'core_API/Arm'
+serviceType: 'core_api/Arm'
 
 Request:
 {}
@@ -116,17 +116,17 @@ drone.arm()
 ```
 
 ```cpp--ros
-#include <core_API/Arm.h>
+#include <core_api/Arm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::Arm>("/<namespace>/navigation/arm");
-core_API::Arm srv;
+ros::ServiceClient client = nh.serviceClient<core_api::Arm>("/<namespace>/navigation/arm");
+core_api::Arm srv;
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 def arm()
     rospy.wait_for_service('/<namespace>/navigation/arm')
@@ -156,7 +156,7 @@ $.ajax({
 var arm = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/arm',
-    serviceType : 'core_API/Arm'
+    serviceType : 'core_api/Arm'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -228,7 +228,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/arm</br>
-* Service Type: core_API/Arm
+* Service Type: core_api/Arm
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -245,7 +245,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/arm'</br>
-* serviceType: 'core_API/Arm'
+* serviceType: 'core_api/Arm'
 
 
 ### API usage information:

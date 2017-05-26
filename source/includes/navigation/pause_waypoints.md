@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_pause
-ROS-Service Type: core_API/WaypointPause, below is its description
+ROS-Service Type: core_api/WaypointPause, below is its description
 
 #Request : Null
 
@@ -64,13 +64,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/waypoint_pause',
-serviceType: 'core_API/WaypointPause'
+serviceType: 'core_api/WaypointPause'
 
 Response:
 {   success: Boolean, }
@@ -124,7 +124,7 @@ $.ajax({
 var waypointPause = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/waypoint_pause',
-    serviceType : 'core_API/WaypointPause'
+    serviceType : 'core_api/WaypointPause'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -211,7 +211,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/waypoint_pause'</br>
-* serviceType: 'core_API/WaypointPause'
+* serviceType: 'core_api/WaypointPause'
 
 
 

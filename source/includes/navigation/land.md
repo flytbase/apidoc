@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/land
-ROS-Service Type: core_API/Land, below is its description
+ROS-Service Type: core_api/Land, below is its description
 
 #Request : expects async variable to be set/reset
 bool async
@@ -70,13 +70,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API to land. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/land',
-serviceType: 'core_API/Land'
+serviceType: 'core_api/Land'
 
 Request:
 {  }
@@ -116,11 +116,11 @@ drone.land(async=True)
 ```
 
 ```cpp--ros
-#include <core_API/Land.h>
+#include <core_api/Land.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::Land>("/<namespace>/navigation/land");
-core_API::Land srv;
+ros::ServiceClient client = nh.serviceClient<core_api::Land>("/<namespace>/navigation/land");
+core_api::Land srv;
 
 srv.request.async = true;
 client.call(srv);
@@ -128,7 +128,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 def land(async= False):
     rospy.wait_for_service('/<namespace>/navigation/land')
@@ -158,7 +158,7 @@ $.ajax({
 var land = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/land',
-    serviceType : 'core_API/Land'
+    serviceType : 'core_api/Land'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -237,7 +237,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/land</br>
-* Service Type: core_API/Land
+* Service Type: core_api/Land
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -254,7 +254,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/land'</br>
-* serviceType: 'core_API/Land'
+* serviceType: 'core_api/Land'
 
 
 ### API usage information:

@@ -8,7 +8,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/disarm
-ROS-Service Type: core_API/Disarm, below is its description
+ROS-Service Type: core_api/Disarm, below is its description
 
 #Request : NULL
 
@@ -69,13 +69,13 @@ JSON Response:
 ```javascript--Websocket
 This is a Websocket call for the API to disarm the 
 FlytOS running device. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/disarm',
-serviceType: 'core_API/Disarm'
+serviceType: 'core_api/Disarm'
 
 Request:
 {}
@@ -114,17 +114,17 @@ drone.disarm()
 ```
 
 ```cpp--ros
-#include <core_API/Disarm.h>
+#include <core_api/Disarm.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::Disarm>("/<namespace>/navigation/disarm");
-core_API::Disarm srv;
+ros::ServiceClient client = nh.serviceClient<core_api::Disarm>("/<namespace>/navigation/disarm");
+core_api::Disarm srv;
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 def disarm():
     rospy.wait_for_service('/<namespace>/navigation/disarm')
@@ -154,7 +154,7 @@ $.ajax({
 var disarm = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/disarm',
-    serviceType : 'core_API/Disarm'
+    serviceType : 'core_api/Disarm'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -226,7 +226,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/disarm</br>
-* Service Type: core_API/Disarm
+* Service Type: core_api/Disarm
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -243,7 +243,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/disarm'</br>
-* serviceType: 'core_API/Disarm'
+* serviceType: 'core_api/Disarm'
 
 
 ### API usage information:

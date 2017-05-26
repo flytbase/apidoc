@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_load
-ROS-Service Type: core_API/ParamLoad, below is its description
+ROS-Service Type: core_api/ParamLoad, below is its description
 
 #Request : Null
 
@@ -68,13 +68,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/param/param_load',
-serviceType: 'core_API/ParamLoad'
+serviceType: 'core_api/ParamLoad'
 
 Response:
 {   success: Boolean, }
@@ -129,7 +129,7 @@ $.ajax({
 var paramLoad = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_load',
-    serviceType : 'core_API/ParamLoad'
+    serviceType : 'core_api/ParamLoad'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -216,7 +216,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_load'</br>
-* serviceType: 'core_API/ParamLoad'
+* serviceType: 'core_api/ParamLoad'
 
 
 <!-- ### API usage information:

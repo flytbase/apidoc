@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_set
-ROS-Service Type: core_API/WaypointSet, below is its description
+ROS-Service Type: core_api/WaypointSet, below is its description
 
 # Request: Waypoints to be sent to device
 mavros_msgs/Waypoint[] waypoints
@@ -90,13 +90,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/waypoint_set',
-serviceType: 'core_API/WaypointSet'
+serviceType: 'core_api/WaypointSet'
 
 Request:
 {   waypoints:[{
@@ -195,7 +195,7 @@ $.ajax({
 var waypointSet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/waypoint_set',
-    serviceType : 'core_API/WaypointSet'
+    serviceType : 'core_api/WaypointSet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -330,7 +330,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/waypoint_set'</br>
-* serviceType: 'core_API/WaypointSet'
+* serviceType: 'core_api/WaypointSet'
 
 
 

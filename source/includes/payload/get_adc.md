@@ -80,7 +80,7 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
@@ -114,11 +114,11 @@ Not Implemented
 ```
 
 ```cpp--ros
-#include <core_API/PositionSet.h>
+#include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::PositionSet>("/<namespace>/navigation/position_set");
-core_API::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
+core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.12;
 srv.request.twist.twist.linear.x = 1.0;

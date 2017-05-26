@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/takeoff
-ROS-Service Type: core_API/TakeOff, below is its description
+ROS-Service Type: core_api/TakeOff, below is its description
 
 #Request : expects take off altitude in metres
 float32 takeoff_alt
@@ -50,7 +50,7 @@ response srv: bool success
 
 Type: Ros Service
 Name: /<namespace>/navigation/takeoff
-Type: core_API/TakeOff
+Type: core_api/TakeOff
 call srv: 
     : int takeoff_alt
 response srv: bool success
@@ -74,13 +74,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API to takeoff. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/take_off',
-serviceType: 'core_API/TakeOff'
+serviceType: 'core_api/TakeOff'
 
 Request:
 {   takeoff_alt: Float }
@@ -117,11 +117,11 @@ drone.take_off(6.0)
 ```
 
 ```cpp--ros
-#include <core_API/TakeOff.h>
+#include <core_api/TakeOff.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::TakeOff>("/<namespace>/navigation/takeoff");
-core_API::TakeOff srv;
+ros::ServiceClient client = nh.serviceClient<core_api::TakeOff>("/<namespace>/navigation/takeoff");
+core_api::TakeOff srv;
 
 srv.request.takeoff_alt = 3.0;
 client.call(srv);
@@ -130,7 +130,7 @@ success = srv.response.success;
 
 ```python--ros
 
-from core_API.srv import *
+from core_api.srv import *
 
 def takeoff(height)
     rospy.wait_for_service('/<namespace>/navigation/take_off')
@@ -163,7 +163,7 @@ $.ajax({
 var takeoff = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/take_off',
-    serviceType : 'core_API/TakeOff'
+    serviceType : 'core_api/TakeOff'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -243,7 +243,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/takeoff</br>
-* Service Type: core_API/TakeOff
+* Service Type: core_api/TakeOff
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -264,7 +264,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/take_off'</br>
-* serviceType: 'core_API/TakeOff'
+* serviceType: 'core_api/TakeOff'
 
 
 ### API usage information:

@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_delete
-ROS-Service Type: core_API/ParamDelete, below is its description
+ROS-Service Type: core_api/ParamDelete, below is its description
 
 #Request : Info of parameter to be deleted
 string param_id
@@ -74,13 +74,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/param/param_delete',
-serviceType: 'core_API/ParamDelete'
+serviceType: 'core_api/ParamDelete'
 
 Request:
 {   param_id: String }
@@ -141,7 +141,7 @@ $.ajax({
 var paramDelete = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_delete',
-    serviceType : 'core_API/ParamDelete'
+    serviceType : 'core_api/ParamDelete'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -240,7 +240,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_delete'</br>
-* serviceType: 'core_API/ParamDelete'
+* serviceType: 'core_api/ParamDelete'
 
 
 <!-- ### API usage information:

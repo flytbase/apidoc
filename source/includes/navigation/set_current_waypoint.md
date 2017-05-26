@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/waypoint_set_current
-ROS-Service Type: core_API/WaypointSetCurrent, below is its description
+ROS-Service Type: core_api/WaypointSetCurrent, below is its description
 
 # Request: set current waypoint to index ( wp_seq ) in waypoint array
 uint16 wp_seq
@@ -68,13 +68,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/waypoint_set_current',
-serviceType: 'core_API/WaypointSetCurrent'
+serviceType: 'core_api/WaypointSetCurrent'
 
 Request:
 {   wp_seq: Int }
@@ -135,7 +135,7 @@ $.ajax({
 var waypointSetCurrent = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/waypoint_set_current',
-    serviceType : 'core_API/WaypointSetCurrent'
+    serviceType : 'core_api/WaypointSetCurrent'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -232,7 +232,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/waypoint_set_current'</br>
-* serviceType: 'core_API/WaypointSetCurrent'
+* serviceType: 'core_api/WaypointSetCurrent'
 
 
 ### API usage information:

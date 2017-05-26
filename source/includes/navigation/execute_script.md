@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/exec_script
-ROS-Service Type: core_API/ExecScript, below is its description
+ROS-Service Type: core_api/ExecScript, below is its description
 
 #Request : Expects name of the application to execute and the arguments to be passed to it
 string app_name
@@ -68,13 +68,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/exec_script',
-serviceType: 'core_API/ExecScript'
+serviceType: 'core_api/ExecScript'
 
 Request:
 {   app_name : String,
@@ -103,11 +103,11 @@ Not Implemented
 ```
 
 ```cpp--ros
-#include <core_API/ExecScript.h>
+#include <core_api/ExecScript.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::ExecScript>("/<namespace>/navigation/exec_script");
-core_API::ExecScript srv;
+ros::ServiceClient client = nh.serviceClient<core_api::ExecScript>("/<namespace>/navigation/exec_script");
+core_api::ExecScript srv;
 
 srv.request.app_name = "sample_script.sh";
 srv.request.arguments = "arg1 arg2 arg3";
@@ -116,7 +116,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 script_name = "sample_script.sh"
 sample_args = "arg1 arg2 arg3"
@@ -152,7 +152,7 @@ $.ajax({
 var execScript = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/exec_script',
-    serviceType : 'core_API/ExecScript'
+    serviceType : 'core_api/ExecScript'
 });
 
 var request = new ROSLIB.ServiceRequest({    
@@ -256,7 +256,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/exec_script'</br>
-* serviceType: 'core_API/ExecScript'
+* serviceType: 'core_api/ExecScript'
 
 
 ### API usage information:

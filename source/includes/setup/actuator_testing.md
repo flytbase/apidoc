@@ -8,7 +8,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/setup/actuator_testing
-ROS-Service Type: core_API/ActuatorTesting, below is its description
+ROS-Service Type: core_api/ActuatorTesting, below is its description
 
 ReqStructure:
     uint8 actuator_id
@@ -33,7 +33,7 @@ Not Implemented
 // ROS services and topics are accessible from onboard scripts only.
 
 ROS-Service Name: /<namespace>/setup/actuator_testing
-ROS-Service Type: core_API/ActuatorTesting, below is its description
+ROS-Service Type: core_api/ActuatorTesting, below is its description
 
 ReqStructure:
     uint8 actuator_id
@@ -46,7 +46,7 @@ ReqStructure:
 # ROS services and topics are accessible from onboard scripts only.
 
 ROS-Service Name: /<namespace>/setup/actuator_testing
-ROS-Service Type: core_API/ActuatorTesting, below is its description
+ROS-Service Type: core_api/ActuatorTesting, below is its description
 
 ReqStructure:
     uint8 actuator_id
@@ -73,13 +73,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/setup/actuator_testing',
-serviceType: 'core_API/ActuatorTesting'
+serviceType: 'core_api/ActuatorTesting'
 
 Request:
 {   actuator_id: Int,
@@ -135,7 +135,7 @@ $.ajax({
 var actuatorTesting = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/setup/actuator_testing',
-    serviceType : 'core_API/ActuatorTesting'
+    serviceType : 'core_api/ActuatorTesting'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -238,7 +238,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/setup/actuator_testing'</br>
-* serviceType: 'core_API/ActuatorTesting'
+* serviceType: 'core_api/ActuatorTesting'
 
 
 ### API usage information:

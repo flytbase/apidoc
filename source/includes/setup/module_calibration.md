@@ -9,7 +9,7 @@
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
-MsgType: core_API/ModuleCalibration
+MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
     uint8 ACCELEROMETER = 1
@@ -43,7 +43,7 @@ Not Implemented
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
-MsgType: core_API/ModuleCalibration
+MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
     uint8 ACCELEROMETER = 1
@@ -66,7 +66,7 @@ MsgStructure:
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
-MsgType: core_API/ModuleCalibration
+MsgType: core_api/ModuleCalibration
 MsgStructure:
     uint8 STOP = 0
     uint8 ACCELEROMETER = 1
@@ -101,13 +101,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/setup/module_calibration',
-serviceType: 'core_API/ModuleCalibration'
+serviceType: 'core_api/ModuleCalibration'
 
 Request:
 {   module_calibrate: Int }
@@ -165,7 +165,7 @@ $.ajax({
 var moduleCalibration = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/setup/module_calibration',
-    serviceType : 'core_API/ModuleCalibration'
+    serviceType : 'core_api/ModuleCalibration'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -264,7 +264,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/setup/module_calibration'</br>
-* serviceType: 'core_API/ModuleCalibration'
+* serviceType: 'core_api/ModuleCalibration'
 
 
 ### API usage information:

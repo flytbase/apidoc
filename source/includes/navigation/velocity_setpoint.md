@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/velocity
-ROS-Service Type: core_API/VelocitySet, below is its description
+ROS-Service Type: core_api/VelocitySet, below is its description
 
 #Request : expects velocity setpoint via twist.twist.linear.x,linear.y,linear.z
 #Request : expects yaw_rate setpoint via twist.twist.angular.z (send yaw_rate_valid=true)
@@ -108,13 +108,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API to give velocity setpoints.
- Make sure you initialise the websocket using websocket initialisng 
+ Make sure you initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/velocity_set',
-serviceType: 'core_API/VelocitySet'
+serviceType: 'core_api/VelocitySet'
 
 Request:
 {   twist:{twist:{  linear:{
@@ -167,11 +167,11 @@ drone.velocity_set(0, +2, 0, body_frame=True)
 ```
 
 ```cpp--ros
-#include <core_API/PositionSet.h>
+#include <core_api/PositionSet.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::PositionSet>("/<namespace>/navigation/position_set");
-core_API::PositionSet srv;
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
+core_api::PositionSet srv;
 
 srv.request.twist.twist.angular.z = 0.12;
 srv.request.twist.twist.linear.x = 1.0;
@@ -189,7 +189,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):
     rospy.wait_for_service('/<namespace>/navigation/velocity_set')
@@ -240,7 +240,7 @@ $.ajax({
 var velocitySet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/velocity_set',
-    serviceType : 'core_API/VelocitySet'
+    serviceType : 'core_api/VelocitySet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -338,7 +338,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/velocity_set</br>
-* Service Type: core_API/VelocitySet
+* Service Type: core_api/VelocitySet
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -375,7 +375,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/velocity_set'</br>
-* serviceType: 'core_API/VelocitySet'
+* serviceType: 'core_api/VelocitySet'
 
 
 ### API usage information:

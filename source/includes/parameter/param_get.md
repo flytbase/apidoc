@@ -7,13 +7,13 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/param/param_get
-ROS-Service Type: core_API/ParamGet, below is its description
+ROS-Service Type: core_api/ParamGet, below is its description
 
 #Request : Param id to get
 string param_id
 
 #Response: Param info of requested param
-core_API/ParamInfo param_info
+core_api/ParamInfo param_info
 #Response : success=true if command is successful.  
 bool success
 #Response : error message, if any
@@ -47,7 +47,7 @@ Name: /<namespace>/param/param_get
 call srv:
     :string param_id
 response srv: 
-    :core_API/ParamInfo param_info
+    :core_api/ParamInfo param_info
     :bool success
     :string message
 ```
@@ -60,7 +60,7 @@ Name: /<namespace>/param/param_get
 call srv:
     :string param_id
 response srv: 
-    :core_API/ParamInfo param_info
+    :core_api/ParamInfo param_info
     :bool success
     :string message
 
@@ -84,13 +84,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/param/param_get',
-serviceType: 'core_API/ParamGet'
+serviceType: 'core_api/ParamGet'
 
 Request:
 {   param_id: String }
@@ -155,7 +155,7 @@ $.ajax({
 var paramGet = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/param/param_get',
-    serviceType : 'core_API/ParamGet'
+    serviceType : 'core_api/ParamGet'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -260,7 +260,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/param/param_get'</br>
-* serviceType: 'core_API/ParamGet'
+* serviceType: 'core_api/ParamGet'
 
 
 <!-- ### API usage information:

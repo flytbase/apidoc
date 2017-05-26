@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/position_set_global
-ROS-Service Type: core_API/PositionSetGlobal, below is its description
+ROS-Service Type: core_api/PositionSetGlobal, below is its description
 
 #Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z which corresponds respectively to the desired Latitude, longitude and altitude 
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
@@ -98,13 +98,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/position_set_global',
-serviceType: 'core_API/PositionSetGlobal'
+serviceType: 'core_api/PositionSetGlobal'
 
 Request:
 {   twist:{twist:{  linear:{
@@ -157,11 +157,11 @@ drone.position_set_global(18.7342124, 73.4323233, 10)
 ```
 
 ```cpp--ros
-#include <core_API/PositionSetGlobal.h>
+#include <core_api/PositionSetGlobal.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::PositionSetGlobal>("/<namespace>/navigation/position_set_global");
-core_API::PositionSetGlobal srv;
+ros::ServiceClient client = nh.serviceClient<core_api::PositionSetGlobal>("/<namespace>/navigation/position_set_global");
+core_api::PositionSetGlobal srv;
 
 srv.request.twist.twist.angular.z = 0.5;
 srv.request.twist.twist.linear.x = 4,0;
@@ -175,7 +175,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import * 
+from core_api.srv import * 
 
 def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):
     rospy.wait_for_service('/<namespace>/navigation/position_set_global')
@@ -226,7 +226,7 @@ $.ajax({
 var positionSetGlobal = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/position_set_global',
-    serviceType : 'core_API/PositionSetGlobal'
+    serviceType : 'core_api/PositionSetGlobal'
 });
 
 var request = new ROSLIB.ServiceRequest({
@@ -358,7 +358,7 @@ Websocket APIs can be called from javascript using  [roslibjs library.](https://
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/position_set_global'</br>
-* serviceType: 'core_API/PositionSetGlobal'
+* serviceType: 'core_api/PositionSetGlobal'
 
 
 ### API usage information:

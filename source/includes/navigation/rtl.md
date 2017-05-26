@@ -7,7 +7,7 @@
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
 
 ROS-Service Name: /<namespace>/navigation/rtl
-ROS-Service Type: core_API/RTL, below is its description
+ROS-Service Type: core_api/RTL, below is its description
 
 #Request : NULL
 
@@ -55,13 +55,13 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API to transition the vehicle to RTL mode. Make sure you 
-initialise the websocket using websocket initialisng 
+initialise the websocket using websocket initialising 
 API and and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
 name: '/<namespace>/navigation/rtl',
-serviceType: 'core_API/RTL'
+serviceType: 'core_api/RTL'
 
 Request:
 {  }
@@ -91,18 +91,18 @@ Not Implemented
 ```
 
 ```cpp--ros
-#include <core_API/RTL.h>
+#include <core_api/RTL.h>
 
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<core_API::RTL>("/<namespace>/navigation/rtl");
-core_API::RTL srv;
+ros::ServiceClient client = nh.serviceClient<core_api::RTL>("/<namespace>/navigation/rtl");
+core_api::RTL srv;
 
 client.call(srv);
 success = srv.response.success;
 ```
 
 ```python--ros
-from core_API.srv import *
+from core_api.srv import *
 
 def rtl():
     rospy.wait_for_service('/<namespace>/navigation/rtl')
@@ -132,7 +132,7 @@ $.ajax({
 var rtl = new ROSLIB.Service({
     ros : ros,
     name : '/<namespace>/navigation/rtl',
-    serviceType : 'core_API/RTL'
+    serviceType : 'core_api/RTL'
 });
 
 var request = new ROSLIB.ServiceRequest({});
@@ -207,7 +207,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/rtl</br>
-* Service Type: core_API/RTL
+* Service Type: core_api/RTL
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
@@ -224,7 +224,7 @@ Websocket APIs can be called from javascript using [roslibjs library](https://gi
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/\<namespace\>/navigation/rtl'</br>
-* serviceType: 'core_API/RTL'
+* serviceType: 'core_api/RTL'
 
 
 ### API usage information:
