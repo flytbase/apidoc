@@ -6,7 +6,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.</span>
 
 ROS-Service Name: /&lt;namespace&gt;/navigation/land
-ROS-Service Type: core_API/Land, below is its description
+ROS-Service Type: core_api/Land, below is its description
 
 <span class="c">#Request : expects async variable to be set/reset</span>
 bool async
@@ -51,13 +51,13 @@ bool success
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span> <span class="nx">to</span> <span class="nx">land</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
-<span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialisng</span> 
+<span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialising</span> 
 <span class="nx">API</span> <span class="nx">and</span> <span class="nx">replace</span> <span class="nx">namespace</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">namespace</span> <span class="nx">of</span> 
 <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span> <span class="nx">before</span> <span class="nx">calling</span> <span class="nx">the</span> <span class="nx">API</span> 
 <span class="kd">with</span> <span class="nx">websocket</span><span class="p">.</span>
 
 <span class="nl">name</span><span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/land'</span><span class="p">,</span>
-<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_API/Land'</span>
+<span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/Land'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
 <span class="p">{</span>  <span class="p">}</span>
@@ -86,16 +86,16 @@ bool success
 
 <span class="c"># land at current location. Function returns immediately and land action finishes asynchronously.  </span>
 <span class="n">drone</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">async</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_API/Land.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/Land.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
-<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_API</span><span class="o">::</span><span class="n">Land</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/land"</span><span class="p">);</span>
-<span class="n">core_API</span><span class="o">::</span><span class="n">Land</span> <span class="n">srv</span><span class="p">;</span>
+<span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">core_api</span><span class="o">::</span><span class="n">Land</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/navigation/land"</span><span class="p">);</span>
+<span class="n">core_api</span><span class="o">::</span><span class="n">Land</span> <span class="n">srv</span><span class="p">;</span>
 
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">async</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_API.srv</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">land</span><span class="p">(</span><span class="n">async</span><span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'/&lt;namespace&gt;/navigation/land'</span><span class="p">)</span>
@@ -119,7 +119,7 @@ bool success
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">land</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/navigation/land'</span><span class="p">,</span>
-    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_API/Land'</span>
+    <span class="na">serviceType</span> <span class="p">:</span> <span class="s1">'core_api/Land'</span>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
@@ -195,7 +195,7 @@ bool success
 <ul>
 <li>Type: Ros Service</br> </li>
 <li>Name: /&lt;namespace&gt;/navigation/land</br></li>
-<li>Service Type: core_API/Land</li>
+<li>Service Type: core_api/Land</li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -217,7 +217,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/navigation/land&rsquo;</br></li>
-<li>serviceType: &lsquo;core_API/Land&rsquo;</li>
+<li>serviceType: &lsquo;core_api/Land&rsquo;</li>
 </ul>
 
 <h3 id="api-usage-information">API usage information:</h3>
