@@ -283,17 +283,16 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var imuData = new ROSLIB.Service({
+var imuData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/imu/data',
     messageType : 'sensor_msgs/Imu',
     throttle_rate: 200
 });
 
-var request = new ROSLIB.ServiceRequest({});
 
-imuData.subscribe(request, function(result) {
-    console.log(result.data);
+imuData.subscribe( function(message) {
+    console.log(message.data);
 });
 ```
 

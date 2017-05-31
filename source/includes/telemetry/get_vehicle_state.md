@@ -216,16 +216,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var stateData = new ROSLIB.Service({
+var stateData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/flyt/state',
     messageType : 'mavros_msgs/State'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-stateData.subscribe(request, function(result) {
-    console.log(result.data);
+stateData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 

@@ -164,16 +164,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var distanceData = new ROSLIB.Service({
+var distanceData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/distance_sensor/lidarlite_pub',
     messageType : 'sensor_msgs/Range'
 });
 
-var request = new ROSLIB.ServiceRequest({});
 
-distanceData.subscribe(request, function(result) {
-    console.log(result.data);
+distanceData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 

@@ -162,16 +162,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var rcData = new ROSLIB.Service({
+var rcData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/rc/in',
     messageType : 'mavros_msgs/RCIn'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-rcData.subscribe(request, function(result) {
-    console.log(result.data);
+rcData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 

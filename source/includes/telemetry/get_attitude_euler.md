@@ -259,16 +259,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var imuEulerData = new ROSLIB.Service({
+var imuEulerData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/imu/data_euler',
     messageType : 'geometry_msgs/TwistStamped'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-imuEulerData.subscribe(request, function(result) {
-    console.log(result.data);
+imuEulerData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 

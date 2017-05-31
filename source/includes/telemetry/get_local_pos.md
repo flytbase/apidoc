@@ -242,17 +242,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var lpos = new ROSLIB.Service({
+var lpos = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/local_position/local',
     messageType : 'geometry_msgs/TwistStamped',
     throttle_rate: 200
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-lpos.subscribe(request, function(result) {
-    console.log(result.twist);
+lpos.subscribe(function(message) {
+    console.log(message.twist);
 });
 ```
 

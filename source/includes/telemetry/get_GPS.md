@@ -267,16 +267,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var gpsData = new ROSLIB.Service({
+var gpsData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/global_position/global',
     messageType : 'sensor_msgs/NavSatFix'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-gpsData.subscribe(request, function(result) {
-    console.log(result.data);
+gpsData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 

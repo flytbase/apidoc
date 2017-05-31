@@ -163,16 +163,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var vfrHUDData = new ROSLIB.Service({
+var vfrHUDData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/vfr_hud',
     messageType : 'mavros_msgs/VFR_HUD'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-vfrHUDData.subscribe(request, function(result) {
-    console.log(result.data);
+vfrHUDData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 

@@ -235,16 +235,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var batteryData = new ROSLIB.Service({
+var batteryData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/battery',
     messageType : 'sensor_msgs/BatteryState'
 });
 
-var request = new ROSLIB.ServiceRequest({});
 
-batteryData.subscribe(request, function(result) {
-    console.log(result.data);
+batteryData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 
