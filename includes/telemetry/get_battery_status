@@ -195,16 +195,15 @@ string serial_number
 <span class="p">};</span>
 
 
-</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">batteryData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
+</code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">batteryData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Topic</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s1">'/&lt;namespace&gt;/mavros/battery'</span><span class="p">,</span>
     <span class="na">messageType</span> <span class="p">:</span> <span class="s1">'sensor_msgs/BatteryState'</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">ServiceRequest</span><span class="p">({});</span>
 
-<span class="nx">batteryData</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="nx">batteryData</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
 <blockquote>
