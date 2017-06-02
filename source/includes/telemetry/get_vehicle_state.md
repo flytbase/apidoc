@@ -54,13 +54,13 @@ Returns: Vehicle state in ros mavros_msgs::State message structure
 # Python API for vehicle state is split into two APIs
 
 # Check arm status
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 Function Definition: is_armed()
 Arguments: None
 return: Boolean
 
 # Check vehicle mode
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 Function Definition: get_vehicle_mode()
 Arguments: None
 return: string
@@ -157,7 +157,7 @@ rostopic echo /flytpod/flyt/state
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::State vehicle_state;
@@ -174,8 +174,8 @@ std::cout << vehicle_state << std::endl;
 ```python
 # create flyt_python navigation class instance
 
-from flyt_python import API
-drone = API.navigation()
+from flyt_python import api
+drone = api.navigation()
 time.sleep(3.0)
 
 # get arm status

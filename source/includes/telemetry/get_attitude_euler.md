@@ -56,7 +56,7 @@ Returns: Vehicle attitude in euler notation in ros geometry_msgs::TwistStamped m
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 
 Function: get_attitude_euler()
 
@@ -172,7 +172,7 @@ rostopic echo /flytpods/mavros/imu/data_euler
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 geometry_msgs::TwistStamped att_euler;
@@ -199,8 +199,8 @@ int main(int argc, char *argv[])
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import API
-drone = API.navigation()
+from flyt_python import api
+drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 

@@ -38,7 +38,7 @@ Arguments:
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 
 Function: position_set_global(self, lat, lon, rel_ht, yaw=0.0, tolerance=0.0, async=False, yaw_valid=False):
 ```
@@ -137,7 +137,7 @@ rosservice call /flytpod/navigation/position_set_global "{twist: {header: {seq: 
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, false, true, false);
@@ -146,8 +146,8 @@ nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, false, tr
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import API
-drone = API.navigation()
+from flyt_python import api
+drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 

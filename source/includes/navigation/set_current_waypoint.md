@@ -93,7 +93,7 @@ rosservice call /flytsim/navigation/waypoint_set_current "wp_seq: 1"
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 int waypoint_no = 2;

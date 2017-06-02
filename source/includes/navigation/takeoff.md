@@ -30,7 +30,7 @@ Returns: 0 if the vehicle reaches takeoff_alt before timeout=30sec, else returns
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 
 Function: take_off(self, takeoff_alt=5.0):
 ```
@@ -99,7 +99,7 @@ rosservice call /flytpod/navigation/take_off "takeoff_alt: 3.0"
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.take_off(3.0);
@@ -107,8 +107,8 @@ nav.take_off(3.0);
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import API
-drone = API.navigation()
+from flyt_python import api
+drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 

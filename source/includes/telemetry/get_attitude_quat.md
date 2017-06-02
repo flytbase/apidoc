@@ -72,7 +72,7 @@ Returns: Vehicle attitude in quaternion notation in ros sensor_msgs::Imu message
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 
 Function: get_attitude_quaternion()
 
@@ -210,7 +210,7 @@ rostopic echo /flytpod/mavros/imu/data
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::Imu att_quat;
@@ -226,8 +226,8 @@ std::cout << att_quat << std::endl;
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import API
-drone = API.navigation()
+from flyt_python import api
+drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 

@@ -42,7 +42,7 @@ Returns: For async=true, returns 0 if the command is successfully sent to the ve
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Class: flyt_python.API.navigation
+Class: flyt_python.api.navigation
 
 Function: velocity_set(self,vx, vy, vz, yaw_rate=0.0, tolerance=0.0, relative=False, async=False, yaw_rate_valid=False, body_frame=False):
         
@@ -147,7 +147,7 @@ rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.velocity_set(1.0, 0.5, -1.0, 0.12, 0.5, false, false, true, false);
@@ -156,8 +156,8 @@ nav.velocity_set(1.0, 0.5, -1.0, 0.12, 0.5, false, false, true, false);
 
 ```python
 # create flyt_python navigation class instance
-from flyt_python import API
-drone = API.navigation()
+from flyt_python import api
+drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 

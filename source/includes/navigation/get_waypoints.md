@@ -121,7 +121,7 @@ rosservice call /flytpod/navigation/waypoint_get "{}"
 ```
 
 ```cpp
-#include <cpp_API/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_get();
