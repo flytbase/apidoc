@@ -35,7 +35,7 @@ bool success
 <span class="n">Returns</span><span class="o">:</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span> <span class="n">For</span> <span class="n">async</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">reaches</span> <span class="n">given</span> <span class="n">setpoint</span> <span class="n">before</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="n">secs</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
 
 <span class="n">Function</span><span class="p">:</span> <span class="n">velocity_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">vz</span><span class="p">,</span> <span class="n">yaw_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">async</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">yaw_rate_valid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">body_frame</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 
@@ -123,14 +123,14 @@ bool success
 
 <span class="c">#sends (vx,vy,vz)=(0.5,0.2,-0.1)(m/s), yaw_rate=0.1rad/s,  relative=false, async=false, yaw_rate_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m/s if left at 0  </span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_API/navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api.navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">velocity_set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
 <span class="c1">//sends (vx,vy,vz)=(1.0,0.5,-1.0)(m/s), yaw_rate=0.12rad/s, tolerance=0.5m/s, relative=false, async=false, yaw_rate_valid=true, body_frame=false
 </span></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
-<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
-<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
 <span class="c"># wait for interface to initialize</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
