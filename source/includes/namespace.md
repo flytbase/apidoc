@@ -64,8 +64,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -206,7 +206,7 @@ message: FlytOS namespace is  flytpod
 
 ###Description:
 
-This API returns the global namespace under which FlytOS's instance in running. For users using RESTful, Websocket or ROS APIs, calling this API is a **MUST**, as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever *\<namespace\>* is mentioned in API call definition, it must be replaced by the output of this API call. Users writing their code in simple CPP and Python need not call this API.
+This API returns the global namespace under which FlytOS's instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a **MUST**, as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever *\<namespace\>* is mentioned in API call definition, it must be replaced by the output of this API call. Users writing their code in simple CPP and Python need not call this API.
 
 ### ROS endpoint:
 

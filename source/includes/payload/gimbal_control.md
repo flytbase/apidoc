@@ -21,13 +21,13 @@ bool success
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-NotImplemented
+Not Implemented
 ```
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -73,8 +73,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -101,11 +101,11 @@ yaw:-0.2"
 ```
 
 ```cpp
-NotImplemented
+Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -179,11 +179,11 @@ success: true
 ```
 
 ```cpp
-NotImplemented
+Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -215,7 +215,7 @@ For this API to work, autopilot must fulfill some pre-requisites first:
 
 For FlytPOD/PRO users:
 
-* Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGBled patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led).
+* Autopilot **MUST** be in **ready-to-arm** state. Typically it would be reflected by RGB led patterns marked by either blue-breathing or green-breathing. For more information about autopilot RGBled patterns refer to [this link](http://docs.flytbase.com/docs/FlytPOD/Hardware_specifications.html#rgb-led).
 * Make sure the parameter: **MNT_MODE_IN** is set to 3.
 
 For PX4 users using Pixhawk:
@@ -246,7 +246,7 @@ For APM users using Pixhawk:
     success | bool | true if action successful
 
 ### ROS endpoint:
-Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/payload/gimbal_set</br>

@@ -25,13 +25,13 @@ Response structure:
 ```cpp
 // CPP API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from cpp.
 
-NotImplemented
+Not Implemented
 ```
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -80,8 +80,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -110,7 +110,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -189,7 +189,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -222,7 +222,7 @@ This API subscribes/polls the ADC payload data. This API is limited to FlytPOD o
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

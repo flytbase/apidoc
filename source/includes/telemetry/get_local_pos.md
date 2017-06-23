@@ -130,19 +130,19 @@ JSON Response:
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -154,11 +154,11 @@ Response:
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 
@@ -172,7 +172,7 @@ rostopic echo /flytpod/mavros/local_position/local
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 geometry_msgs::TwistStamped lpos;
@@ -242,17 +242,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var lpos = new ROSLIB.Service({
+var lpos = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/local_position/local',
     messageType : 'geometry_msgs/TwistStamped',
     throttle_rate: 200
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-lpos.subscribe(request, function(result) {
-    console.log(result.twist);
+lpos.subscribe(function(message) {
+    console.log(message.twist);
 });
 ```
 
@@ -302,11 +300,11 @@ instance of gemometry_msgs.msg.TwistStamped class
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
@@ -317,11 +315,11 @@ instance of gemometry_msgs.msg.TwistStamped class
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
@@ -334,7 +332,7 @@ This API subscribes/polls linear position, velocity data in NED frame.  Please c
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     
@@ -365,11 +363,11 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 
@@ -382,7 +380,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* This API provides linear position and lienar velocity.
+* This API provides linear position and linear velocity.
 * Data returned is in NED frame.
 * Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
 

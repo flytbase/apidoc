@@ -131,19 +131,19 @@ JSON Response:
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -155,11 +155,11 @@ Response:
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }}
 
 ```
@@ -172,7 +172,7 @@ rostopic echo /flytpods/mavros/imu/data_euler
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 geometry_msgs::TwistStamped att_euler;
@@ -259,16 +259,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var imuEulerData = new ROSLIB.Service({
+var imuEulerData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/imu/data_euler',
     messageType : 'geometry_msgs/TwistStamped'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-imuEulerData.subscribe(request, function(result) {
-    console.log(result.data);
+imuEulerData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 
@@ -372,11 +370,11 @@ std_msgs/Header header
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }
 ```
 
@@ -386,11 +384,11 @@ std_msgs/Header header
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }
 ```
 
@@ -402,7 +400,7 @@ This API subscribes/polls attitude data (angle and angular rate) in euler angles
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     
@@ -432,11 +430,11 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
     linear:{
         x: Float,
         y: Float,
-        z: FLoat},
+        z: Float},
     angular:{
         x: Float,
         y: Float,
-        z: FLoat}
+        z: Float}
 }
 
 

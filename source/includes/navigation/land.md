@@ -70,8 +70,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API to land. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -95,7 +95,7 @@ rosservice call /flytpod/navigation/land "async=true"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.land(true);
@@ -218,7 +218,7 @@ Land vehicle at current position. Check API usage section below before using thi
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -233,14 +233,14 @@ Land vehicle at current position. Check API usage section below before using thi
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/land</br>
 * Service Type: core_api/Land
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
 * URL: ``GET http://<ip>/ros/<namespace>/navigation/land``
 * JSON Response:

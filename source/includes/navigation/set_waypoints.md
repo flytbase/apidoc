@@ -33,7 +33,7 @@ Returns:    0 if the land command is successfully sent to the vehicle, else retu
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -90,8 +90,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -130,7 +130,7 @@ Response:
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::Waypoint waypoint;
@@ -151,7 +151,7 @@ nav.waypoint_set(waypoints_array);
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -235,7 +235,7 @@ wp_transfered: 0
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -274,8 +274,8 @@ This API replaces current list of waypoints on autopilot with new list passed.
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt
-    command | int | defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19:Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off
+    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt
+    command | int | defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19: Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off
     is_current | bool | Set it as the first waypoint 
     autocontinue | bool | continue to the next waypoint as soon as the current waypoint is achieved
     param1 | float | Time to stay at the location in sec.
@@ -293,7 +293,7 @@ This API replaces current list of waypoints on autopilot with new list passed.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/waypoint_set</br>

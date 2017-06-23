@@ -33,7 +33,7 @@ Not Implemented
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -98,8 +98,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -128,7 +128,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -164,16 +164,15 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var distanceData = new ROSLIB.Service({
+var distanceData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/distance_sensor/lidarlite_pub',
     messageType : 'sensor_msgs/Range'
 });
 
-var request = new ROSLIB.ServiceRequest({});
 
-distanceData.subscribe(request, function(result) {
-    console.log(result.data);
+distanceData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 
@@ -189,7 +188,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -231,7 +230,7 @@ This API subscribes/polls distance sensor data.  Please check API usage section 
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

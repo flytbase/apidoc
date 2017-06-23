@@ -69,8 +69,8 @@ JSON Response:
 ```javascript--Websocket
 This is a Websocket call for the API to disarm the 
 FlytOS running device. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -94,7 +94,7 @@ rosservice call /flytpod/navigation/disarm "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 if(!nav.disarm())
@@ -207,7 +207,7 @@ Success: True
 
 
 ###Description:
-This API disarms the motors. Read API desciption below before you use it. Calling this API during flight will cause the motors to stall and may result in crash.
+This API disarms the motors. Read API description below before you use it. Calling this API during flight will cause the motors to stall and may result in crash.
 
 ###Parameters:
     
@@ -222,7 +222,7 @@ This API disarms the motors. Read API desciption below before you use it. Callin
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/disarm</br>
@@ -251,7 +251,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * This API will work regardless of what flight mode vehicle is in.
 * Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.
 * To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 --> ground,  2 --> air/flying.  
-* If land API is used then the vehicle will automatically disrm after some time. 
+* If land API is used then the vehicle will automatically disarm after some time. 
 * Land API with auto diarm on landing feature is preferred over calling disarm API specifically.
 * To configure auto disarm on landing set following parameters. 
   * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. 

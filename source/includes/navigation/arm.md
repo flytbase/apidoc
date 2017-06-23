@@ -71,8 +71,8 @@ JSON Response:
 ```javascript--Websocket
 This is a Websocket call for the API to arm the 
 FlytOS running device. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -96,7 +96,7 @@ rosservice call /flytpod/navigation/arm "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 if(!nav.arm())
@@ -209,7 +209,7 @@ Success: True
 
 
 ###Description:
-This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are unclaibrated sensors, misconfiguration.
+This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are uncalibrated sensors, misconfiguration.
 
 ###Parameters:
     
@@ -224,7 +224,7 @@ This API arms the motors. If arm fails then check debug messages for arming erro
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/arm</br>

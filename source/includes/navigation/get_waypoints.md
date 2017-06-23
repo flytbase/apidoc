@@ -31,7 +31,7 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -86,8 +86,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -121,7 +121,7 @@ rosservice call /flytpod/navigation/waypoint_get "{}"
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_get();
@@ -129,7 +129,7 @@ nav.waypoint_get();
 
 ```python
 
-NotImplemented
+Not Implemented
 
 ```
 
@@ -199,7 +199,7 @@ waypoints:
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -264,7 +264,7 @@ This API returns list of current waypoints on autopilot.
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1:Local NED<br>2: Mission<br>3:Global Rel Alt
+    frame | int | The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt
     yaw | float | Yaw Setpoint in radians
     yaw_valid | bool | Must be set to true, if yaw 
     tolerance | float | Acceptance radius in meters, default value=1.0m 
@@ -279,7 +279,7 @@ This API returns list of current waypoints on autopilot.
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/waypoint_get</br>

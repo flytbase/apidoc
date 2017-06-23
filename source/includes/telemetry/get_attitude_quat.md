@@ -177,8 +177,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -210,7 +210,7 @@ rostopic echo /flytpod/mavros/imu/data
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::Imu att_quat;
@@ -283,17 +283,16 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var imuData = new ROSLIB.Service({
+var imuData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/imu/data',
     messageType : 'sensor_msgs/Imu',
     throttle_rate: 200
 });
 
-var request = new ROSLIB.ServiceRequest({});
 
-imuData.subscribe(request, function(result) {
-    console.log(result.data);
+imuData.subscribe( function(message) {
+    console.log(message.data);
 });
 ```
 
@@ -390,7 +389,7 @@ This API subscribes/polls attitude data (angle and angular rate) in quaternion. 
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

@@ -108,8 +108,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -147,7 +147,7 @@ rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
@@ -161,7 +161,7 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# command vehicle towards 5 meteres WEST from current location regardless of heading
+# command vehicle towards 5 meteres SOUTH from current location regardless of heading
 drone.position_set(-5, 0, 0, relative=True)
 
 ```
@@ -311,7 +311,7 @@ This API commands the vehicle to go to a specified location in local frame and h
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments:
     
@@ -332,14 +332,14 @@ This API commands the vehicle to go to a specified location in local frame and h
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/navigation/position_set</br>
 * Service Type: core_api/PositionSet
 
-### RESTFul endpoint:
-FlytOS hosts a RESTFul server which listens on port 80. RESTFul APIs can be called from remote platform of your choice.
+### RESTful endpoint:
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
 * URL: ``POST http://<ip>/ros/<namespace>/navigation/position_set``
 * JSON Request:
@@ -393,15 +393,15 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
      * True: All the setpoints are converted to body frame. 
         * Front of vehicle : +x
         * Right of vehicle : +y
-        * down: +z
-        * yaw is calculated from front of vehicle. 
+        * Down: +z
+        * Yaw is calculated from front of vehicle. 
      * False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. 
 * Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.
 * For yaw setpoint to be effective the yaw_valid argument must be set to true.
 * This API overrides any previous mission / navigation API being carried out.
 * This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
 * To provide only Yaw setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True
-* * Following parameters need to be manually configured according to vehicle frame.
+* Following parameters need to be manually configured according to vehicle frame.
   * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.

@@ -32,7 +32,7 @@ Returns: returns 0 if the command is successfull
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -78,8 +78,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -109,7 +109,7 @@ rosservice call /flytpod/param/param_create "param_info:
 ```
 
 ```cpp
-#include <cpp_api/param_bridge.h>
+#include <cpp_API/param_bridge.h>
 
 Param param;
 std::string param_id = "RTL_ALT"; 
@@ -119,7 +119,7 @@ param.param_create(param_id, param_value);
 ```
 
 ```python
-NotImplemented
+Not Implemented
 
 ```
 
@@ -185,7 +185,7 @@ success: true
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -233,7 +233,7 @@ This API creates a new parameter.
     success | bool | true if action successful
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy api definition for message structure. 
+APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
 * Type: Ros Service</br> 
 * Name: /\<namespace\>/param/param_create</br>

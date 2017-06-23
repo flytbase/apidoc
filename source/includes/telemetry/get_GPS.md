@@ -174,8 +174,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -197,7 +197,7 @@ rostopic echo /flytpod/mavros/global_position/global
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 sensor_msgs::NavSatFix gpos;
@@ -267,16 +267,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var gpsData = new ROSLIB.Service({
+var gpsData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/global_position/global',
     messageType : 'sensor_msgs/NavSatFix'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-gpsData.subscribe(request, function(result) {
-    console.log(result.data);
+gpsData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 
@@ -331,7 +329,7 @@ This API subscribes/polls position data in global coordinate system.  Please che
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

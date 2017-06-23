@@ -32,7 +32,7 @@ Not Implemented
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -96,8 +96,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -127,7 +127,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -163,16 +163,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var vfrHUDData = new ROSLIB.Service({
+var vfrHUDData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/mavros/vfr_hud',
     messageType : 'mavros_msgs/VFR_HUD'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-vfrHUDData.subscribe(request, function(result) {
-    console.log(result.data);
+vfrHUDData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 
@@ -199,7 +197,7 @@ Not Implemented
 ```
 
 ```python
-NotImplemented
+Not Implemented
 ```
 
 ```cpp--ros
@@ -243,7 +241,7 @@ This API subscribes/polls VFR HUD data.  Please check API usage section below be
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     

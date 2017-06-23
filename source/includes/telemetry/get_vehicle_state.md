@@ -129,8 +129,8 @@ JSON Response:
 
 ```javascript--Websocket
 This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialisng 
-API and and replace namespace with the namespace of 
+initialise the websocket using websocket initialising 
+API and replace namespace with the namespace of 
 the FlytOS running device before calling the API 
 with websocket.
 
@@ -157,7 +157,7 @@ rostopic echo /flytpod/flyt/state
 ```
 
 ```cpp
-#include <cpp_api/navigation_bridge.h>
+#include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::State vehicle_state;
@@ -216,16 +216,14 @@ $.ajax({
 ```
 
 ```javascript--Websocket
-var stateData = new ROSLIB.Service({
+var stateData = new ROSLIB.Topic({
     ros : ros,
     name : '/<namespace>/flyt/state',
     messageType : 'mavros_msgs/State'
 });
 
-var request = new ROSLIB.ServiceRequest({});
-
-stateData.subscribe(request, function(result) {
-    console.log(result.data);
+stateData.subscribe(function(message) {
+    console.log(message.data);
 });
 ```
 
@@ -299,7 +297,7 @@ This API subscribes/polls the vehicle state data. Please see usage information s
 
 ###Parameters:
     
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTFul, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Response:
     
