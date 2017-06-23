@@ -38,7 +38,6 @@ Type: Ros Service
 Name: /<namespace>/navigation/rtl
 call srv: NULL
 response srv: bool success
-
 ```
 
 ```javascript--REST
@@ -50,7 +49,6 @@ URL: 'http://<ip>/ros/<namespace>/navigation/rtl'
 
 JSON Response:
 {   success: Boolean, }
-
 ```
 
 ```javascript--Websocket
@@ -68,8 +66,6 @@ Request:
 
 Response:
 {   success: Boolean, }
-
-
 ```
 
 
@@ -112,11 +108,9 @@ def rtl():
         return resp
     except rospy.ServiceException, e:
         rospy.logerr("service call failed %s", e)
-
 ```
 
 ```javascript--REST
-
 $.ajax({
     type: "GET",
     dataType: "json",
@@ -125,7 +119,6 @@ $.ajax({
            console.log(data.success);
     }
 };
-
 ```
 
 ```javascript--Websocket
@@ -172,14 +165,12 @@ Success: True
 {
     success:True
 }
-
 ```
 
 ```javascript--Websocket
 {
     success:True
 }
-
 ```
 
 
