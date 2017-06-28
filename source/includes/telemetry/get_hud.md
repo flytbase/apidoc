@@ -31,8 +31,22 @@ Not Implemented
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+Class: flyt_python.API.navigation
+Function: get_vfr_hud()
 
-Not Implemented
+Response: vfr_hud as described below.
+    class vfr_hud:
+    	'''
+   	 Holds data for VFR HUD
+   	 '''
+    	airspeed = 0.0
+   	groundspeed = 0.0
+    	heading = 0.0
+    	throttle = 0.0
+    	altitude = 0.0
+    	climb = 0.0
+
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -127,7 +141,16 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+# Poll data
+vfr = drone.get_vfr_hud()
+# Print the data
+print vfr.throttle, vfr.groundspeed, vfr.airspeed, vfr.altitude, vfr.climb, vfr.heading
 ```
 
 ```cpp--ros
@@ -197,7 +220,7 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+instance of class vfr_hud
 ```
 
 ```cpp--ros

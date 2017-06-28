@@ -32,8 +32,10 @@ Returns:    0 if the land command is successfully sent to the vehicle, else retu
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+Class: flyt_python.API.navigation
 
-Not Implemented
+Function: waypoint_set(waypoints)
+
 ```
 
 ```cpp--ros
@@ -151,7 +153,81 @@ nav.waypoint_set(waypoints_array);
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+#for multiple waypoints
+#list of waypoints to be constructed
+wp4 =  [{'frame': 0,
+       'command': 16,
+       'is_current': True,
+       'autocontinue': True,
+       'param1': 10.2,
+       'param2': 10.2,
+       'param3': 10.2,
+       'param4': 10.2,
+       'x_lat': x - 0.0002,
+       'y_long': y - 0.0002,
+       'z_alt': z + 10
+       },
+      {'frame': 0,
+       'command': 16,
+       'is_current': True,
+       'autocontinue': True,
+       'param1': 10.2,
+       'param2': 10.2,
+       'param3': 10.2,
+       'param4': 10.2,
+       'x_lat': x+0.0001,
+       'y_long': y + 0.0001,
+       'z_alt': z + 10
+       },
+      {'frame': 0,
+       'command': 16,
+       'is_current': True,
+       'autocontinue': True,
+       'param1': 10.2,
+       'param2': 10.2,
+       'param3': 10.2,
+       'param4': 10.2,
+       'x_lat': x,
+       'y_long': y,
+       'z_alt': z + 10
+       },
+       {'frame': 0,
+        'command': 16,
+        'is_current': True,
+        'autocontinue': True,
+        'param1': 10.2,
+        'param2': 10.2,
+        'param3': 10.2,
+        'param4': 10.2,
+        'x_lat': x + 0.0001,
+        'y_long': y + 0.0001,
+        'z_alt': z + 10
+       }]
+
+# set list of current waypoints  
+drone.waypoint_set(wp4)
+
+#for single waypoint
+wp1 = {'frame': 0,
+       'command': 16,
+       'is_current': True,
+       'autocontinue': True,
+       'param1': 10.2,
+       'param2': 10.2,
+       'param3': 10.2,
+       'param4': 10.2,
+       'x_lat': x - 0.0002,
+       'y_long': y - 0.0002,
+       'z_alt': z + 10
+       }
+#set list of current waypoints
+drone.waypoint_set(wp1)
 ```
 
 ```cpp--ros
@@ -235,7 +311,12 @@ wp_transfered: 0
 ```
 
 ```python
-Not Implemented
+{'message': '[INFO] Waypoint set Successful', 'wp_transfered': 4, 'success': True}
+
+
+wp_transfered (int): Number of waypoints transfered
+message (string): Contains error message
+success (bool): true if action successful
 ```
 
 ```cpp--ros
