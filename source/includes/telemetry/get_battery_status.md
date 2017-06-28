@@ -58,7 +58,19 @@ Not Implemented
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
-Not Implemented
+Class: flyt_python.API.navigation
+Function: get_battery_status()
+
+Response: battery_status as described below.
+    class battery_status:
+    	'''
+   	 Holds data for battery status
+    	'''
+    	voltage = 0.0
+   	 current = 0.0
+  	  remaining = 0.0
+
+This API supports single poll mode only.
 
 ```
 
@@ -199,7 +211,16 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+# Poll data
+bat = drone.get_battery_status()
+# Print the data
+print bat.remaining, bat.current, bat.voltage
 ```
 
 ```cpp--ros
@@ -277,7 +298,7 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+instance of class battery_status
 ```
 
 ```cpp--ros

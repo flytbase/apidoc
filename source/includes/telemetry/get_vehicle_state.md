@@ -51,7 +51,25 @@ Returns: Vehicle state in ros mavros_msgs::State message structure
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
 
-# Python API for vehicle state is split into two APIs
+# Python API for vehicle state is split into three APIs
+
+# Get full vehicle state data
+Class: flyt_python.API.navigation
+Function: get_vehicle_state()
+Response: vehicle_state as described below.
+class vehicle_state:
+    """
+    Holds vehicle state data
+    """
+    connected = False
+    armed = False
+    guided = False
+    mode = 'String'
+    mav_type = 0
+    mav_autopilot = 0
+    mav_sys_status = 0
+ 
+This API supports single poll mode only.
 
 # Check arm status
 Class: flyt_python.api.navigation
@@ -177,6 +195,11 @@ std::cout << vehicle_state << std::endl;
 from flyt_python import api
 drone = api.navigation()
 time.sleep(3.0)
+# Poll data
+st = drone.get_vehicle_state()
+
+# Print the data
+print st.connected, st.armed, st.guided, st.mode, st.mav_type, st.mav_autopilot, st.mav_sys_status
 
 # get arm status
 print drone.is_armed()
@@ -251,6 +274,7 @@ Instance of mavros_msgs::State class
 ```
 
 ```python
+instance of class vehicle_state
 True
 MANUAL
 ```

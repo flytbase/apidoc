@@ -26,8 +26,9 @@ Not Implemented
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+Class: flyt_python.API.navigation
 
-Not Implemented
+Function: gimbal_control( roll, pitch, yaw)
 ```
 
 ```cpp--ros
@@ -105,7 +106,14 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+#send gimbal attitude set
+drone.gimbal_control(2.2,1.4, 1.5)
 ```
 
 ```cpp--ros
@@ -183,7 +191,10 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+{'message': '[INFO] Vehicle accepted gimbal set call', 'success': True}
+
+message (string): Contains error message
+success (bool): true if action successful
 ```
 
 ```cpp--ros

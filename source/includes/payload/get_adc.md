@@ -30,8 +30,17 @@ Not Implemented
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
-
-Not Implemented
+Class: flyt_python.API.navigation
+Function: get_adc_data()
+Response: adc_data as described below.
+class adc_data:
+    """
+    Holds ADC data
+    """
+    adc_voltage = []
+    adc_updated = 0
+ 
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -110,7 +119,17 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+# Poll data
+adc = drone.get_adc_data()
+
+# Print the data 
+print adc.adc_voltage, adc.adc_updated
 ```
 
 ```cpp--ros
@@ -189,7 +208,7 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+instance of class adc_data
 ```
 
 ```cpp--ros

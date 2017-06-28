@@ -30,8 +30,9 @@ Returns:    returns 0 if the command is successfully sent to the vehicle
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+Class: flyt_python.API.navigation
 
-Not Implemented
+Function: waypoint_get()
 ```
 
 ```cpp--ros
@@ -128,8 +129,14 @@ nav.waypoint_get();
 ```
 
 ```python
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
 
-Not Implemented
+# get list of current waypoints  
+wp = drone.waypoint_get()
 
 ```
 
@@ -199,7 +206,13 @@ waypoints:
 ```
 
 ```python
-Not Implemented
+{'wp_received': 2, 'message': '[INFO] Waypoint get Successful', 'success': True, 'waypoints': [{'autocontinue': True, 'frame': 0, 'command': 16, 'param4': 10.199999809265137, 'is_current': True, 'param2': 10.199999809265137, 'param1': 10.199999809265137, 'y_long': -122.08358764648438, 'param3': 0.0, 'x_lat': 7.429123401641846, 'z_alt': 112.61199951171875}, {'autocontinue': True, 'frame': 0, 'command': 16, 'param4': 10.199999809265137, 'is_current': False, 'param2': 10.199999809265137, 'param1': 10.199999809265137, 'y_long': -122.08329010009766, 'param3': 0.0, 'x_lat': 7.4294233322143555, 'z_alt': 112.61199951171875}]}
+
+
+wp_received (int): Number of waypoints received
+message (string): Contains error message
+success (bool): true if action successful
+waypoints (list): consists a list of dictionary, the dictionary consists of (frame, command, is_current, autocontinue, param1, param2, param3, param4, x_lat, y_long, z_alt)
 ```
 
 ```cpp--ros
