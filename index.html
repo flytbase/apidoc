@@ -2799,8 +2799,9 @@ string arguments
 bool success
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">No</span> <span class="n">CPP</span> <span class="n">API</span> <span class="n">is</span> <span class="n">available</span> <span class="k">for</span> <span class="n">execution</span> <span class="n">of</span> <span class="n">onboard</span> <span class="n">scripts</span><span class="p">.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">exec_script</span><span class="p">(</span><span class="n">app_name</span><span class="p">,</span> <span class="n">arguments</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -2853,8 +2854,14 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /&lt;namespace&gt;/navigation/exec_script <span class="s2">"{}"</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code>
-<span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># execute onboard script with name in app_name and arguments to be passed with it as arguments  </span>
+<span class="n">drone</span><span class="o">.</span><span class="n">exec_script</span><span class="p">(</span><span class="err">‘</span><span class="n">script</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">args</span><span class="err">’</span><span class="p">)</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/ExecScript.h&gt;
 </span>
@@ -2915,7 +2922,10 @@ bool success
 <p>Example response</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">''</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span>  <span class="n">Contains</span> <span class="n">the</span> <span class="n">error</span> <span class="n">message</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">run</span> <span class="n">the</span> <span class="n">script</span><span class="o">.</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -3040,8 +3050,9 @@ mavros_msgs/Waypoint[] waypoints
 
 <span class="n">Returns</span><span class="o">:</span>    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">waypoint_get</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -3118,8 +3129,14 @@ mavros_msgs/Waypoint[] waypoints
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_get</span><span class="p">();</span>
-</code></pre><pre class="highlight python tab-python"><code>
-<span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># get list of current waypoints  </span>
+<span class="n">wp</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">waypoint_get</span><span class="p">()</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
@@ -3169,7 +3186,13 @@ waypoints:
     y_long: 73.903465271
     z_alt: 50.0
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'wp_received'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Waypoint get Successful'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">'waypoints'</span><span class="p">:</span> <span class="p">[{</span><span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.199999809265137</span><span class="p">,</span> <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.199999809265137</span><span class="p">,</span> <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.199999809265137</span><span class="p">,</span> <span class="s">'y_long'</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.08358764648438</span><span class="p">,</span> <span class="s">'param3'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s">'x_lat'</span><span class="p">:</span> <span class="mf">7.429123401641846</span><span class="p">,</span> <span class="s">'z_alt'</span><span class="p">:</span> <span class="mf">112.61199951171875</span><span class="p">},</span> <span class="p">{</span><span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.199999809265137</span><span class="p">,</span> <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.199999809265137</span><span class="p">,</span> <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.199999809265137</span><span class="p">,</span> <span class="s">'y_long'</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.08329010009766</span><span class="p">,</span> <span class="s">'param3'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s">'x_lat'</span><span class="p">:</span> <span class="mf">7.4294233322143555</span><span class="p">,</span> <span class="s">'z_alt'</span><span class="p">:</span> <span class="mf">112.61199951171875</span><span class="p">}]}</span>
+
+
+<span class="n">wp_received</span> <span class="p">(</span><span class="nb">int</span><span class="p">):</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">waypoints</span> <span class="n">received</span>
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
+<span class="n">waypoints</span> <span class="p">(</span><span class="nb">list</span><span class="p">):</span> <span class="n">consists</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">the</span> <span class="n">dictionary</span> <span class="n">consists</span> <span class="n">of</span> <span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">is_current</span><span class="p">,</span> <span class="n">autocontinue</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="n">param3</span><span class="p">,</span> <span class="n">param4</span><span class="p">,</span> <span class="n">x_lat</span><span class="p">,</span> <span class="n">y_long</span><span class="p">,</span> <span class="n">z_alt</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span> <span class="nx">True</span><span class="p">,</span> 
     <span class="nx">wp_recieved</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -3355,8 +3378,10 @@ uint32 wp_transfered
 <span class="n">Returns</span><span class="o">:</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">land</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
 
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">waypoint_set</span><span class="p">(</span><span class="n">waypoints</span><span class="p">)</span>
+
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -3454,7 +3479,81 @@ uint32 wp_transfered
 <span class="n">waypoint</span><span class="p">.</span><span class="n">z_alt</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="n">waypoints_array</span><span class="p">.</span><span class="n">pushback</span><span class="p">(</span><span class="n">waypoint</span><span class="p">)</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_set</span><span class="p">(</span><span class="n">waypoints_array</span><span class="p">);</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c">#for multiple waypoints</span>
+<span class="c">#list of waypoints to be constructed</span>
+<span class="n">wp4</span> <span class="o">=</span>  <span class="p">[{</span><span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+       <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param3'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'x_lat'</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.0002</span><span class="p">,</span>
+       <span class="s">'y_long'</span><span class="p">:</span> <span class="n">y</span> <span class="o">-</span> <span class="mf">0.0002</span><span class="p">,</span>
+       <span class="s">'z_alt'</span><span class="p">:</span> <span class="n">z</span> <span class="o">+</span> <span class="mi">10</span>
+       <span class="p">},</span>
+      <span class="p">{</span><span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+       <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param3'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'x_lat'</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mf">0.0001</span><span class="p">,</span>
+       <span class="s">'y_long'</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.0001</span><span class="p">,</span>
+       <span class="s">'z_alt'</span><span class="p">:</span> <span class="n">z</span> <span class="o">+</span> <span class="mi">10</span>
+       <span class="p">},</span>
+      <span class="p">{</span><span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+       <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param3'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'x_lat'</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+       <span class="s">'y_long'</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+       <span class="s">'z_alt'</span><span class="p">:</span> <span class="n">z</span> <span class="o">+</span> <span class="mi">10</span>
+       <span class="p">},</span>
+       <span class="p">{</span><span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+        <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+        <span class="s">'param3'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+        <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+        <span class="s">'x_lat'</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.0001</span><span class="p">,</span>
+        <span class="s">'y_long'</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.0001</span><span class="p">,</span>
+        <span class="s">'z_alt'</span><span class="p">:</span> <span class="n">z</span> <span class="o">+</span> <span class="mi">10</span>
+       <span class="p">}]</span>
+
+<span class="c"># set list of current waypoints  </span>
+<span class="n">drone</span><span class="o">.</span><span class="n">waypoint_set</span><span class="p">(</span><span class="n">wp4</span><span class="p">)</span>
+
+<span class="c">#for single waypoint</span>
+<span class="n">wp1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'frame'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="s">'command'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+       <span class="s">'is_current'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'autocontinue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+       <span class="s">'param1'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param2'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param3'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'param4'</span><span class="p">:</span> <span class="mf">10.2</span><span class="p">,</span>
+       <span class="s">'x_lat'</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.0002</span><span class="p">,</span>
+       <span class="s">'y_long'</span><span class="p">:</span> <span class="n">y</span> <span class="o">-</span> <span class="mf">0.0002</span><span class="p">,</span>
+       <span class="s">'z_alt'</span><span class="p">:</span> <span class="n">z</span> <span class="o">+</span> <span class="mi">10</span>
+       <span class="p">}</span>
+<span class="c">#set list of current waypoints</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">waypoint_set</span><span class="p">(</span><span class="n">wp1</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -3518,7 +3617,12 @@ uint32 wp_transfered
 <pre class="highlight shell tab-shell"><code>success: True
 wp_transfered: 0
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Waypoint set Successful'</span><span class="p">,</span> <span class="s">'wp_transfered'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+
+<span class="n">wp_transfered</span> <span class="p">(</span><span class="nb">int</span><span class="p">):</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">waypoints</span> <span class="n">transfered</span>
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -3688,8 +3792,9 @@ bool success
 
 <span class="n">Returns</span><span class="o">:</span>    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">drone</span><span class="o">.</span><span class="n">waypoint_execute</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -3734,8 +3839,14 @@ bool success
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_execute</span><span class="p">();</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#execute the waypoints</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">waypoint_execute</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -3770,7 +3881,10 @@ bool success
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Waypoint Execution initiated'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -3860,8 +3974,9 @@ bool success
 
 <span class="n">Returns</span><span class="o">:</span>    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span>  <span class="n">waypoint_clear</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -3906,8 +4021,14 @@ bool success
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_clear</span><span class="p">();</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#clear the currently set waypoints</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">waypoint_clear</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -3942,7 +4063,11 @@ bool success
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Waypoint clear Successful'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
+
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -4029,7 +4154,9 @@ bool success
 <span class="n">Returns</span><span class="o">:</span>    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span>  <span class="n">waypoint_pause</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -4074,8 +4201,14 @@ bool success
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_pause</span><span class="p">();</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#pause the waypoints mission</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">waypoint_pause</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -4110,7 +4243,10 @@ bool success
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Waypoint Paused'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -4200,7 +4336,9 @@ bool success
 <span class="n">Returns</span><span class="o">:</span>    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span>  <span class="n">waypoint_set_current</span><span class="p">(</span><span class="n">wp_seq</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -4252,8 +4390,14 @@ bool success
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">waypoint_no</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">waypoint_set_current</span><span class="p">(</span><span class="n">waypoint_no</span><span class="p">);</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#setting the 2nd waypoint as the current waypoint</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">waypoint_set_current</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -4293,7 +4437,10 @@ bool success
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Waypoint set_current Successful'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -4404,8 +4551,9 @@ bool set_current
 bool success
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">No</span> <span class="n">CPP</span> <span class="n">API</span> <span class="n">available</span><span class="p">.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">set_home</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">alt</span><span class="p">,</span> <span class="n">set_current</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -4466,7 +4614,17 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytsim/navigation/set_home <span class="s2">"{lat: 73.25564541, lon: 18.2165632, alt: 2.0, set_current: false}"</span>  
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c">#set given location as home </span>
+<span class="n">drone</span><span class="o">.</span><span class="n">set_home</span><span class="p">(</span><span class="mf">10.2</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">)</span>
+
+<span class="c">#set current location as home</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">set_home</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/SetHome.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
@@ -4523,7 +4681,10 @@ bool success
 <p>Example response</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code></code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Home Position successfully sent to vehicle'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -4642,7 +4803,9 @@ bool success
 <span class="n">Returns</span><span class="o">:</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">rtl</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfully</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">vehicle</span><span class="p">,</span> <span class="k">else</span> <span class="n">returns</span> <span class="mf">1.</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">rtl</span><span class="p">()</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -4680,7 +4843,14 @@ bool success
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">rtl</span><span class="p">();</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c">#trigger RTL mode </span>
+<span class="n">drone</span><span class="o">.</span><span class="n">rtl</span><span class="p">()</span> 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/RTL.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
@@ -4727,7 +4897,10 @@ bool success
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="bp">True</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] RTL Triggered by FlytAPI'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -6416,7 +6589,19 @@ string location
 string serial_number
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_battery_status</span><span class="p">()</span>
+
+<span class="n">Response</span><span class="p">:</span> <span class="n">battery_status</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+    <span class="k">class</span> <span class="nc">battery_status</span><span class="p">:</span>
+        <span class="s">'''
+     Holds data for battery status
+        '''</span>
+        <span class="n">voltage</span> <span class="o">=</span> <span class="mf">0.0</span>
+     <span class="n">current</span> <span class="o">=</span> <span class="mf">0.0</span>
+      <span class="n">remaining</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
@@ -6537,7 +6722,16 @@ string serial_number
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/battery
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># Poll data</span>
+<span class="n">bat</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_battery_status</span><span class="p">()</span>
+<span class="c"># Print the data</span>
+<span class="k">print</span> <span class="n">bat</span><span class="o">.</span><span class="n">remaining</span><span class="p">,</span> <span class="n">bat</span><span class="o">.</span><span class="n">current</span><span class="p">,</span> <span class="n">bat</span><span class="o">.</span><span class="n">voltage</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">BatteryState</span>
 
@@ -6595,7 +6789,7 @@ cell_voltage: <span class="o">[]</span>
 location: id0
 serial_number: <span class="s1">''</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">battery_status</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">BatteryState</span> <span class="k">class</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -6721,8 +6915,22 @@ Response structure:
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_vfr_hud</span><span class="p">()</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Response</span><span class="p">:</span> <span class="n">vfr_hud</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+    <span class="k">class</span> <span class="nc">vfr_hud</span><span class="p">:</span>
+        <span class="s">'''
+     Holds data for VFR HUD
+     '''</span>
+        <span class="n">airspeed</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">groundspeed</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">heading</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">throttle</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">altitude</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">climb</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Topic</span>
@@ -6797,7 +7005,16 @@ Response structure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/mavros_msgs/vfr_hud
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># Poll data</span>
+<span class="n">vfr</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_vfr_hud</span><span class="p">()</span>
+<span class="c"># Print the data</span>
+<span class="k">print</span> <span class="n">vfr</span><span class="o">.</span><span class="n">throttle</span><span class="p">,</span> <span class="n">vfr</span><span class="o">.</span><span class="n">groundspeed</span><span class="p">,</span> <span class="n">vfr</span><span class="o">.</span><span class="n">airspeed</span><span class="p">,</span> <span class="n">vfr</span><span class="o">.</span><span class="n">altitude</span><span class="p">,</span> <span class="n">vfr</span><span class="o">.</span><span class="n">climb</span><span class="p">,</span> <span class="n">vfr</span><span class="o">.</span><span class="n">heading</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">VFR_HUD</span>
 
@@ -6847,7 +7064,7 @@ throttle: 0.0
 altitude: 601.289001465
 climb: -0.0
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">vfr_hud</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">VFR_HUD</span> <span class="k">class</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -6996,7 +7213,19 @@ Response structure:
     <span class="n">uint16</span><span class="p">[]</span> <span class="n">channels</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_rc_data</span><span class="p">()</span>
+
+<span class="n">Response</span><span class="p">:</span> <span class="n">rc_data</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+   <span class="k">class</span> <span class="nc">rc_data</span><span class="p">:</span>
+    <span class="s">"""
+    Holds the input rc channel data
+    """</span>
+    <span class="n">rssi</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">rc</span><span class="o">/</span><span class="n">in</span>
@@ -7064,7 +7293,17 @@ Response structure:
 <span class="n">nav</span><span class="p">.</span><span class="n">sysSubscribe</span><span class="p">(</span><span class="n">Navigation</span><span class="o">::</span><span class="n">rc_channels</span><span class="p">,</span><span class="n">rcChannelCb</span><span class="p">);</span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">rc_channel</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># Poll data</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_rc_data</span><span class="p">()</span>
+
+<span class="c"># Print the data</span>
+<span class="k">print</span> <span class="n">rc</span><span class="o">.</span><span class="n">rssi</span><span class="p">,</span> <span class="n">rc</span><span class="o">.</span><span class="n">channels</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">RCIn</span>
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
@@ -7103,7 +7342,7 @@ Response structure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>instance of mavros_msgs/RCIn
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">::</span><span class="n">RCIn</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">rc_data</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="p">[</span><span class="mi">1001</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">1400</span><span class="p">,</span><span class="mi">1234</span><span class="p">,</span><span class="mi">1764</span><span class="p">,</span><span class="mi">1900</span><span class="p">]</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -7207,8 +7446,20 @@ Response structure:
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_distance_sensor</span><span class="p">()</span>
+<span class="n">Response</span><span class="p">:</span> <span class="n">dist_sensor</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+ <span class="k">class</span> <span class="nc">dist_sensor</span><span class="p">:</span>
+    <span class="s">"""
+    Holds distance sensor data
+    """</span>
+    <span class="n">radiation_type</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">field_of_view</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">min_range</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">max_range</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">distance_sensor</span><span class="o">/</span><span class="n">lidarlite_pub</span>
@@ -7283,7 +7534,17 @@ Response structure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/distance_sensor/lidarlite_pub
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># Poll data</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_distance_sensor</span><span class="p">()</span>
+
+<span class="c"># Print the data</span>
+<span class="k">print</span> <span class="n">dist</span><span class="o">.</span><span class="nb">range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">max_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">min_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">field_of_view</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">radiation_type</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 </span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msgs</span> <span class="kn">import</span> <span class="n">Range</span>
 
@@ -7323,7 +7584,7 @@ Response structure:
 </blockquote>
 <pre class="highlight shell tab-shell"><code>instance of sensor_msgs/Range
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">dist_sensor</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">Range</span> <span class="nb">object</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -7459,7 +7720,25 @@ Response structure:
 
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="c"># Python API for vehicle state is split into two APIs</span>
+<span class="c"># Python API for vehicle state is split into three APIs</span>
+
+<span class="c"># Get full vehicle state data</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_vehicle_state</span><span class="p">()</span>
+<span class="n">Response</span><span class="p">:</span> <span class="n">vehicle_state</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+<span class="k">class</span> <span class="nc">vehicle_state</span><span class="p">:</span>
+    <span class="s">"""
+    Holds vehicle state data
+    """</span>
+    <span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">armed</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">guided</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s">'String'</span>
+    <span class="n">mav_type</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mav_autopilot</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mav_sys_status</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 
 <span class="c"># Check arm status</span>
 <span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
@@ -7565,6 +7844,11 @@ Response structure:
 <span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="c"># Poll data</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_vehicle_state</span><span class="p">()</span>
+
+<span class="c"># Print the data</span>
+<span class="k">print</span> <span class="n">st</span><span class="o">.</span><span class="n">connected</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">armed</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">guided</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mav_type</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mav_autopilot</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mav_sys_status</span>
 
 <span class="c"># get arm status</span>
 <span class="k">print</span> <span class="n">drone</span><span class="o">.</span><span class="n">is_armed</span><span class="p">()</span>
@@ -7619,7 +7903,8 @@ mav_type: 2
 mav_autopilot: 12
 mav_sys_status: 0
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">::</span><span class="n">State</span> <span class="k">class</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="bp">True</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">vehicle_state</span>
+<span class="bp">True</span>
 <span class="n">MANUAL</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="bp">True</span> <span class="n">MANUAL</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -7743,8 +8028,17 @@ Response structure:
 </span>
 <span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_adc_data</span><span class="p">()</span>
+<span class="n">Response</span><span class="p">:</span> <span class="n">adc_data</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+<span class="k">class</span> <span class="nc">adc_data</span><span class="p">:</span>
+    <span class="s">"""
+    Holds ADC data
+    """</span>
+    <span class="n">adc_voltage</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">adc_updated</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">ROS</span><span class="o">-</span><span class="n">Topic</span> <span class="n">Name</span><span class="o">:</span> <span class="o">/&lt;</span><span class="k">namespace</span><span class="o">&gt;/</span><span class="n">mavros</span><span class="o">/</span><span class="n">payload_adc</span>
@@ -7803,7 +8097,17 @@ Response structure:
 <span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m if left at 0    </span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c"># Poll data</span>
+<span class="n">adc</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_adc_data</span><span class="p">()</span>
+
+<span class="c"># Print the data </span>
+<span class="k">print</span> <span class="n">adc</span><span class="o">.</span><span class="n">adc_voltage</span><span class="p">,</span> <span class="n">adc</span><span class="o">.</span><span class="n">adc_updated</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/PositionSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
@@ -7862,7 +8166,7 @@ Response structure:
 <pre class="highlight shell tab-shell"><code>    adc_voltage: Float[2],
     adc_updated: Int
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">adc_data</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">.</span><span class="n">msgs</span><span class="o">.</span><span class="n">PayloadADC</span> <span class="nb">object</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -7970,8 +8274,9 @@ bool success
 </span>
 <span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">gimbal_control</span><span class="p">(</span> <span class="n">roll</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">yaw</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -8030,7 +8335,14 @@ yaw:-0.2"</span>
 
 <span class="c">#sends (roll,pitch,yaw)=(0,0.5,-0.2)(rad)</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c">#send gimbal attitude set</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">gimbal_control</span><span class="p">(</span><span class="mf">2.2</span><span class="p">,</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="cp">#include &lt;core_api/GimbalSet.h&gt;
 </span>
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
@@ -8088,7 +8400,10 @@ yaw:-0.2"</span>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'message'</span><span class="p">:</span> <span class="s">'[INFO] Vehicle accepted gimbal set call'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">message</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="nl">success:</span> <span class="n">True</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="n">Success</span><span class="p">:</span> <span class="bp">True</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
@@ -8955,8 +9270,9 @@ string message
     <span class="n">param_value</span><span class="o">:</span> <span class="n">Value</span> <span class="n">of</span> <span class="n">param</span> <span class="n">to</span> <span class="n">be</span> <span class="n">set</span>
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_set</span><span class="p">(</span><span class="n">param_id</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -9022,8 +9338,14 @@ string message
 
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="s">"5"</span><span class="p">;</span>
 <span class="n">param</span><span class="p">.</span><span class="n">param_set</span><span class="p">(</span><span class="n">param_id</span><span class="p">,</span> <span class="n">param_value</span><span class="p">);</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Set parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_set</span><span class="p">(</span><span class="s">'walk'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -9066,7 +9388,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="nb">bool</span> <span class="p">:</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -9194,8 +9516,9 @@ string message
     <span class="n">returns</span> <span class="n">parameter</span> <span class="n">info</span> <span class="n">list</span> <span class="n">in</span> <span class="n">param_list</span> 
     <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_get_all</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -9257,8 +9580,14 @@ string message
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_get_all</span><span class="p">(</span><span class="n">param_list</span><span class="p">,</span> <span class="n">fresh_pull</span><span class="p">);</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Parameter list: "</span> <span class="o">&lt;&lt;</span> <span class="n">param_list</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get all parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_get_all</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -9296,7 +9625,11 @@ string message
     param_list:[<span class="o">{}</span>,<span class="o">{}</span>,<span class="o">{}</span>,....]
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Function</span> <span class="n">returns</span> <span class="mi">0</span>
 <span class="n">param_list</span> <span class="n">is</span> <span class="n">populated</span> <span class="n">with</span> <span class="n">all</span> <span class="n">the</span> <span class="n">received</span> <span class="n">parameters</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="p">{</span><span class="s">'param_list'</span><span class="p">:</span> <span class="p">[{</span><span class="s">'param_value'</span><span class="p">:</span> <span class="s">'0.200000'</span><span class="p">,</span> <span class="s">'param_id'</span><span class="p">:</span> <span class="s">'ATT_VIBE_THRESH'</span><span class="p">},</span> <span class="p">{</span><span class="s">'param_value'</span><span class="p">:</span> <span class="s">'15.391030'</span><span class="p">,</span> <span class="s">'param_id'</span><span class="p">:</span> <span class="s">'BAT_A_PER_V'</span><span class="p">}],</span> <span class="s">'message'</span><span class="p">:</span> <span class="s">'Received 2 parameters'</span><span class="p">,</span> <span class="s">'success'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="n">param_list</span> <span class="p">(</span><span class="nb">list</span><span class="p">):</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">each</span> <span class="n">dictionary</span> <span class="n">consists</span> <span class="n">of</span> <span class="n">param_value</span> <span class="ow">and</span> <span class="n">param_id</span>
+<span class="n">message</span> <span class="p">(</span><span class="n">String</span><span class="p">):</span> <span class="n">Contains</span> <span class="n">error</span><span class="o">/</span><span class="n">success</span> <span class="n">message</span>
+<span class="n">success</span> <span class="p">(</span><span class="nb">bool</span><span class="p">):</span> <span class="n">true</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span><span class="p">,</span>
     <span class="nx">param_list</span><span class="p">:[{},{},{},....]</span>
@@ -9417,7 +9750,9 @@ string message
     <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_get</span><span class="p">(</span><span class="n">param_id</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -9482,8 +9817,14 @@ string message
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_get</span><span class="p">(</span><span class="n">param_id</span><span class="p">,</span> <span class="n">param_value</span><span class="p">);</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Parameter value: "</span> <span class="o">&lt;&lt;</span> <span class="n">param_value</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get value of a specific parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_get</span><span class="p">(</span><span class="s">'walk'</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -9525,7 +9866,7 @@ string message
     param_info:<span class="o">{</span> param_value: <span class="s1">'6.00'</span><span class="o">}</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">param_value</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">String</span> <span class="o">-</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">param</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span><span class="p">,</span>
     <span class="nx">param_info</span><span class="p">:{</span> <span class="nl">param_value</span><span class="p">:</span> <span class="s1">'6.00'</span><span class="p">}</span>
@@ -9651,7 +9992,9 @@ string message
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_save</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -9701,8 +10044,14 @@ string message
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_save</span><span class="p">()</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get value of a specific parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_save</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -9737,7 +10086,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Bool</span> <span class="o">-</span> <span class="bp">True</span><span class="p">,</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -9834,7 +10183,9 @@ string message
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_load</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -9883,8 +10234,14 @@ string message
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_load</span><span class="p">()</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get value of a specific parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_load</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -9919,7 +10276,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Bool</span> <span class="o">-</span> <span class="bp">True</span><span class="p">,</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -10020,7 +10377,9 @@ string message
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_create</span><span class="p">(</span><span class="n">param_id</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -10087,8 +10446,14 @@ string message
 
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_value</span> <span class="o">=</span> <span class="s">"5"</span><span class="p">;</span>
 <span class="n">param</span><span class="p">.</span><span class="n">param_create</span><span class="p">(</span><span class="n">param_id</span><span class="p">,</span> <span class="n">param_value</span><span class="p">);</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get value of a specific parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_create</span><span class="p">(</span><span class="s">'walk'</span><span class="p">,</span> <span class="s">'off'</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -10133,7 +10498,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Bool</span> <span class="o">-</span> <span class="bp">True</span><span class="p">,</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -10261,7 +10626,9 @@ string message
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_delete</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -10317,8 +10684,14 @@ string message
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param_id</span> <span class="o">=</span> <span class="s">"RTL_ALT"</span><span class="p">;</span> 
 <span class="n">param</span><span class="p">.</span><span class="n">param_delete</span><span class="p">(</span><span class="n">param_id</span><span class="p">);</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get value of a specific parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_delete</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -10358,7 +10731,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Bool</span> <span class="o">-</span> <span class="bp">True</span><span class="p">,</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -10477,7 +10850,9 @@ string message
 <span class="n">Returns</span><span class="o">:</span> <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 
-<span class="n">Not</span> <span class="n">Implemented</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+
+<span class="n">Function</span><span class="p">:</span> <span class="n">param_reset</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// ROS services and topics are accessible from onboard scripts only.
 </span>
 <span class="n">Type</span><span class="o">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -10527,8 +10902,14 @@ string message
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>
 
 <span class="n">param</span><span class="p">.</span><span class="n">param_reset</span><span class="p">()</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
+<span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="n">drone</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
+<span class="c"># wait for interface to initialize</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 
+<span class="c">#Get value of a specific parameter</span>
+<span class="n">drone</span><span class="o">.</span><span class="n">param_reset</span><span class="p">()</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
 </span></code></pre><pre class="highlight python tab-python--ros"><code>
 <span class="c"># Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)</span>
@@ -10562,7 +10943,7 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="mi">0</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">Not</span> <span class="n">Implemented</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">Bool</span> <span class="o">-</span> <span class="bp">True</span><span class="p">,</span> <span class="k">if</span> <span class="n">action</span> <span class="n">successful</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code></code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>

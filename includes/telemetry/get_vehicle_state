@@ -44,7 +44,25 @@ Response structure:
 
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 
-<span class="c"># Python API for vehicle state is split into two APIs</span>
+<span class="c"># Python API for vehicle state is split into three APIs</span>
+
+<span class="c"># Get full vehicle state data</span>
+<span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">get_vehicle_state</span><span class="p">()</span>
+<span class="n">Response</span><span class="p">:</span> <span class="n">vehicle_state</span> <span class="k">as</span> <span class="n">described</span> <span class="n">below</span><span class="o">.</span>
+<span class="k">class</span> <span class="nc">vehicle_state</span><span class="p">:</span>
+    <span class="s">"""
+    Holds vehicle state data
+    """</span>
+    <span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">armed</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">guided</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s">'String'</span>
+    <span class="n">mav_type</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mav_autopilot</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mav_sys_status</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">This</span> <span class="n">API</span> <span class="n">supports</span> <span class="n">single</span> <span class="n">poll</span> <span class="n">mode</span> <span class="n">only</span><span class="o">.</span>
 
 <span class="c"># Check arm status</span>
 <span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">navigation</span>
@@ -150,6 +168,11 @@ Response structure:
 <span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">drone</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">navigation</span><span class="p">()</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="c"># Poll data</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">drone</span><span class="o">.</span><span class="n">get_vehicle_state</span><span class="p">()</span>
+
+<span class="c"># Print the data</span>
+<span class="k">print</span> <span class="n">st</span><span class="o">.</span><span class="n">connected</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">armed</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">guided</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mav_type</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mav_autopilot</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">mav_sys_status</span>
 
 <span class="c"># get arm status</span>
 <span class="k">print</span> <span class="n">drone</span><span class="o">.</span><span class="n">is_armed</span><span class="p">()</span>
@@ -204,7 +227,8 @@ mav_type: 2
 mav_autopilot: 12
 mav_sys_status: 0
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Instance</span> <span class="n">of</span> <span class="n">mavros_msgs</span><span class="o">::</span><span class="n">State</span> <span class="k">class</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="bp">True</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">instance</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">vehicle_state</span>
+<span class="bp">True</span>
 <span class="n">MANUAL</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code></code></pre><pre class="highlight python tab-python--ros"><code><span class="bp">True</span> <span class="n">MANUAL</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
