@@ -86,7 +86,7 @@ Response structure:
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/payload_adc
+<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytos/mavros/payload_adc
 
 <span class="c">#sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m if left at 0    </span>

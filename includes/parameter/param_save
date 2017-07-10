@@ -70,7 +70,7 @@ string message
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/param/param_save <span class="s2">"{}"</span>
+<pre class="highlight shell tab-shell"><code>rosservice call /flytos/param/param_save <span class="s2">"{}"</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/param_bridge.h&gt;
 </span>
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>

@@ -85,7 +85,7 @@ string message
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/param/param_get_all <span class="s2">"fresh_pull: false"</span> 
+<pre class="highlight shell tab-shell"><code>rosservice call /flytos/param/param_get_all <span class="s2">"fresh_pull: false"</span> 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/param_bridge.h&gt;
 </span>
 <span class="n">Param</span> <span class="n">param</span><span class="p">;</span>

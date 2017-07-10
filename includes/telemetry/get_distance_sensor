@@ -110,7 +110,7 @@ Response structure:
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/distance_sensor/lidarlite_pub
+<pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytos/mavros/distance_sensor/lidarlite_pub
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># create flyt_python navigation class instance</span>
 <span class="kn">from</span> <span class="nn">flyt_python</span> <span class="kn">import</span> <span class="n">API</span>

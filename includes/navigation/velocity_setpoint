@@ -136,7 +136,7 @@ string message
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/navigation/velocity_set <span class="s2">"{vx: 0.5, vy: 0.2, vz: -0.1, yaw_rate: 0.1, tolerance: 0.0, async: false, relative: false, yaw_rate_valid: true, body_frame: false}"</span>          
+<pre class="highlight shell tab-shell"><code>rosservice call /flytos/navigation/velocity_set <span class="s2">"{vx: 0.5, vy: 0.2, vz: -0.1, yaw_rate: 0.1, tolerance: 0.0, async: false, relative: false, yaw_rate_valid: true, body_frame: false}"</span>          
 
 <span class="c">#sends (vx,vy,vz)=(0.5,0.2,-0.1)(m/s), yaw_rate=0.1rad/s,  relative=false, async=false, yaw_rate_valid=true, body_frame=false</span>
 <span class="c">#default value of tolerance=1.0m/s if left at 0  </span>

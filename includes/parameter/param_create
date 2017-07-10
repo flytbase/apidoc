@@ -87,7 +87,7 @@ string message
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>rosservice call /flytpod/param/param_create <span class="s2">"param_info:
+<pre class="highlight shell tab-shell"><code>rosservice call /flytos/param/param_create <span class="s2">"param_info:
   param_id: ''
   param_value: ''"</span> 
 

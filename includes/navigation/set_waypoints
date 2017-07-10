@@ -107,7 +107,7 @@ uint32 wp_transfered
 <blockquote>
 <p>Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>  rosservice call /flytpod/navigation/waypoint_set <span class="s2">"waypoints:
+<pre class="highlight shell tab-shell"><code>  rosservice call /flytos/navigation/waypoint_set <span class="s2">"waypoints:
 - {frame: 0, command: 0, is_current: false, autocontinue: false, param1: 0.0, param2: 0.0,
   param3: 0.0, param4: 0.0, x_lat: 0.0, y_long: 0.0, z_alt: 0.0}"</span> 
 
