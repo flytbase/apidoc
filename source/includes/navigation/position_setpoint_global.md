@@ -312,6 +312,7 @@ This API sets a desired position setpoint in global coordinate system (WGS84). P
     Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
+    message | string | debug message
 
 ### ROS endpoint:
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure.

@@ -239,6 +239,7 @@ This API gets the value of a particular parameter specified.
     Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
+    message | string | debug message
     param_value | string | value of the parameter
 
 ### ROS endpoint:

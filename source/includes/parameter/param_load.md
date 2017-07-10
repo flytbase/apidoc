@@ -201,6 +201,7 @@ This API loads parameters from a file where parameters were saved before or a ne
     Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
+    message | string | debug message
 
 ### ROS endpoint:
 APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
