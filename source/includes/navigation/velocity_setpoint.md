@@ -1,7 +1,11 @@
 ## Velocity Setpoint
 
-
 > Definition
+
+<aside class="warning">
+This API is not supported for Fixed Wing.
+</aside>
+
 
 ```shell
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
