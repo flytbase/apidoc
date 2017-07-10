@@ -122,7 +122,8 @@ ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<core_api::PositionHold>("/<namespace>/navigation/position_hold");
 core_api::PositionHold srv;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

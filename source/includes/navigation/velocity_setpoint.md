@@ -200,7 +200,8 @@ srv.request.yaw_rate_valid = true;
 srv.request.relative = false;
 srv.request.body_frame = false;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 
 //sends (vx,vy,vz)=(1.0,0.5,-1.0)(m/s), yaw_rate=0.12rad/s, tolerance=0.5m/s, relative=false, async=false, yaw_rate_valid=true, body_frame=false
 ```

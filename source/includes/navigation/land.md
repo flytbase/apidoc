@@ -131,7 +131,8 @@ core_api::Land srv;
 
 srv.request.async = true;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

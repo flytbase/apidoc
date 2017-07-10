@@ -149,7 +149,8 @@ srv.request.yaw_valid = true;
 srv.request.relative = false;
 srv.request.body_frame = false;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 
 //sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```

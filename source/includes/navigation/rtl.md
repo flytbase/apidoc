@@ -108,7 +108,8 @@ ros::ServiceClient client = nh.serviceClient<core_api::RTL>("/<namespace>/naviga
 core_api::RTL srv;
 
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

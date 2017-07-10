@@ -127,7 +127,8 @@ ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<core_api::Disarm>("/<namespace>/navigation/disarm");
 core_api::Disarm srv;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

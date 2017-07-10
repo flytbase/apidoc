@@ -182,7 +182,8 @@ srv.request.tolerance = 2.0;
 srv.request.async = true;
 srv.request.yaw_valid = true;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

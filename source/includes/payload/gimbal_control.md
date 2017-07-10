@@ -134,7 +134,8 @@ srv.request.roll = 0.0;
 srv.request.pitch = 0.5;
 srv.request.yaw = -0.2;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

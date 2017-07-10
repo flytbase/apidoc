@@ -132,7 +132,8 @@ core_api::TakeOff srv;
 
 srv.request.takeoff_alt = 3.0;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

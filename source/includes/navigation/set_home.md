@@ -141,7 +141,8 @@ srv.request.lon = 18.2165632;
 srv.request.alt = 2.00;
 srv.request.set_current = false;
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros

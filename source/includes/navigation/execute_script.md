@@ -126,7 +126,8 @@ core_api::ExecScript srv;
 srv.request.app_name = "sample_script.sh";
 srv.request.arguments = "arg1 arg2 arg3";
 client.call(srv);
-success = srv.response.success;
+bool success = srv.response.success;
+std::string message = srv.response.message;
 ```
 
 ```python--ros
