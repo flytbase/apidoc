@@ -43,7 +43,9 @@ Type: Ros Service
 Name: /<namespace>/navigation/land
 call srv: 
     async=false
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -53,7 +55,9 @@ Type: Ros Service
 Name: /<namespace>/navigation/land
 call srv: 
     async=False
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 
 ```
 

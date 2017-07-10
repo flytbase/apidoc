@@ -43,7 +43,9 @@ Type: Ros Service
 Name: /<namespace>/navigation/takeoff
 call srv: 
     : int takeoff_alt
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -54,7 +56,9 @@ Name: /<namespace>/navigation/takeoff
 Type: core_api/TakeOff
 call srv: 
     : int takeoff_alt
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 
 ```
 

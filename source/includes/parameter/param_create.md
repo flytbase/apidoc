@@ -44,8 +44,9 @@ Type: Ros Service
 Name: /<namespace>/param/param_create
 call srv:
     :core_api/ParamInfo param_info
+response srv: 
     :bool success
-response srv: bool success
+    :string message
 ```
 
 ```python--ros
@@ -55,8 +56,9 @@ Type: Ros Service
 Name: /<namespace>/param/param_create
 call srv:
     :core_api/ParamInfo param_info
+response srv: 
     :bool success
-response srv: bool success
+    :string message
 
 ```
 

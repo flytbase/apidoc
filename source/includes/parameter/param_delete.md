@@ -25,7 +25,7 @@ Function Definition: bool Param::param_delete(std::string param_id)
 
 Arguments:
     param_id: ID of param to be deleted
-Returns: returns 0 if the command is successfull
+Returns: returns 0 if the command is successful
 ```
 
 ```python
@@ -43,8 +43,9 @@ Type: Ros Service
 Name: /<namespace>/param/param_delete
 call srv:
     :string param_id
+response srv: 
     :bool success
-response srv: bool success
+    :string message
 ```
 
 ```python--ros
@@ -54,8 +55,9 @@ Type: Ros Service
 Name: /<namespace>/param/param_delete
 call srv:
     :string param_id
+response srv: 
     :bool success
-response srv: bool success
+    :string message
 
 ```
 

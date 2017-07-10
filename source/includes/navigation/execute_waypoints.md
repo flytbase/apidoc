@@ -39,7 +39,9 @@ Function: drone.waypoint_execute()
 Type: Ros Service
 Name: /<namespace>/navigation/waypoint_execute
 call srv: NULL
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -48,7 +50,9 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/navigation/waypoint_execute
 call srv: NULL
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 
 ```
 

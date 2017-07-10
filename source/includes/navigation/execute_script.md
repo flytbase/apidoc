@@ -37,7 +37,9 @@ Name: /<namespace>/navigation/exec_script
 call srv:
     :string app_name
     :string arguments
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -48,7 +50,9 @@ Name: /<namespace>/navigation/exec_script
 call srv:
     :string app_name
     :string arguments
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 
 ```
 

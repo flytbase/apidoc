@@ -208,7 +208,6 @@ String - the value of the param
     success:True,
     param_info:{ param_value: '6.00'}
 }
-
 ```
 
 ```javascript--Websocket
@@ -216,12 +215,7 @@ String - the value of the param
     success:True,
     param_info:{ param_value: '6.00'}
 }
-
 ```
-
-
-
-
 
 ###Description:
 This API gets the value of a particular parameter specified.
@@ -267,8 +261,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 
 
 ### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
-Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
+Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
+Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/\<namespace\>/param/param_get'</br>
 * serviceType: 'core_api/ParamGet'

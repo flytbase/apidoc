@@ -40,7 +40,9 @@ Function: rtl()
 Type: Ros Service
 Name: /<namespace>/navigation/rtl
 call srv: NULL
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```javascript--REST

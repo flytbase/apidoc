@@ -42,7 +42,9 @@ call srv:
     :float64 lon
     :float64 alt
     :bool set_current
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -55,7 +57,9 @@ call srv:
     :float64 lon
     :float64 alt
     :bool set_current
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 
 ```
 

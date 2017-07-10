@@ -41,7 +41,9 @@ Function:  waypoint_set_current(wp_seq)
 Type: Ros Service
 Name: /<namespace>/navigation/waypoint_set_current
 call srv: uint16 wp_seq
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -50,7 +52,9 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/navigation/waypoint_set_current
 call srv: uint16 wp_seq
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 
 ```
 

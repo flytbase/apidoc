@@ -62,7 +62,9 @@ call srv:
     :bool async
     :bool yaw_valid
 
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros

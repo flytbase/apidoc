@@ -71,7 +71,9 @@ call srv:
     :bool relative
     :bool yaw_valid
     :bool body_frame
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```python--ros
@@ -89,7 +91,9 @@ call srv:
     :bool relative
     :bool yaw_valid
     :bool body_frame
-response srv: bool success
+response srv: 
+    :bool success
+    :string message
 ```
 
 ```javascript--REST
