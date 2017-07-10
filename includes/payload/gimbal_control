@@ -16,6 +16,7 @@ float64 pitch
 float64 yaw
 ---
 bool success
+string message
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 </span>
 <span class="n">Not</span> <span class="n">Implemented</span>
@@ -31,7 +32,9 @@ bool success
     <span class="o">:</span><span class="n">float64</span> <span class="n">roll</span>
     <span class="o">:</span><span class="n">float64</span> <span class="n">pitch</span>
     <span class="o">:</span><span class="n">float64</span> <span class="n">yaw</span>
-<span class="n">response</span> <span class="n">srv</span><span class="o">:</span> <span class="kt">bool</span> <span class="n">success</span>
+<span class="n">response</span> <span class="n">srv</span><span class="o">:</span> 
+    <span class="o">:</span><span class="kt">bool</span> <span class="n">success</span>
+    <span class="o">:</span><span class="n">string</span> <span class="n">message</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># ROS services and topics are accessible from onboard scripts only.</span>
 
 <span class="n">Type</span><span class="p">:</span> <span class="n">Ros</span> <span class="n">Service</span>
@@ -41,7 +44,9 @@ bool success
     <span class="p">:</span><span class="n">float64</span> <span class="n">roll</span>
     <span class="p">:</span><span class="n">float64</span> <span class="n">pitch</span>
     <span class="p">:</span><span class="n">float64</span> <span class="n">yaw</span>
-<span class="n">response</span> <span class="n">srv</span><span class="p">:</span> <span class="nb">bool</span> <span class="n">success</span>
+<span class="n">response</span> <span class="n">srv</span><span class="p">:</span> 
+    <span class="p">:</span><span class="nb">bool</span> <span class="n">success</span>
+    <span class="p">:</span><span class="n">string</span> <span class="n">message</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">REST</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">to</span> <span class="nx">replace</span> 
     <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
     <span class="nl">namespace</span><span class="p">:</span> <span class="nx">namespace</span> <span class="nx">used</span> <span class="nx">by</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">device</span><span class="p">.</span>
@@ -54,7 +59,8 @@ bool success
     <span class="nx">yaw</span><span class="p">:</span> <span class="nx">Float</span>     <span class="p">}</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
 <span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialising</span> 
 <span class="nx">API</span> <span class="nx">and</span> <span class="nx">replace</span> <span class="nx">namespace</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">namespace</span> <span class="nx">of</span> 
@@ -70,7 +76,8 @@ bool success
     <span class="nx">yaw</span><span class="p">:</span> <span class="nx">Float</span> <span class="p">}</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Example</p>
@@ -99,7 +106,8 @@ yaw:-0.2"</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">yaw</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
-<span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">message</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
@@ -123,6 +131,7 @@ yaw:-0.2"</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/payload/gimbal_set"</span><span class="p">,</span>  
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
+           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">gimbalSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
@@ -141,7 +150,9 @@ yaw:-0.2"</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Result for service call on '</span>
       <span class="o">+</span> <span class="nx">gimbalSet</span><span class="p">.</span><span class="nx">name</span>
       <span class="o">+</span> <span class="s1">': '</span>
-      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
+      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">success</span>
+      <span class="o">+</span><span class="s1">': '</span>
+      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
 <blockquote>
@@ -232,6 +243,11 @@ yaw:-0.2"</span>
 <td>bool</td>
 <td>true if action successful</td>
 </tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>debug message</td>
+</tr>
 </tbody></table>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
@@ -258,6 +274,7 @@ yaw: Float
 <li>JSON Response:
 {
 success: Boolean
+message: String
 }</li>
 </ul>
 

@@ -26,7 +26,7 @@ string message
     <span class="n">param_list</span><span class="o">:</span> <span class="n">Variable</span> <span class="n">to</span> <span class="n">store</span> <span class="n">parameter</span> <span class="n">list</span>
 <span class="n">Returns</span><span class="o">:</span>
     <span class="n">returns</span> <span class="n">parameter</span> <span class="n">info</span> <span class="n">list</span> <span class="n">in</span> <span class="n">param_list</span> 
-    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successfull</span>
+    <span class="n">returns</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">the</span> <span class="n">command</span> <span class="n">is</span> <span class="n">successful</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.</span>
 <span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
 
@@ -60,6 +60,7 @@ string message
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="nx">param_list</span><span class="p">:</span> <span class="p">[{</span> <span class="na">param_id</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span>
         <span class="na">param_value</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]},{},{},...]</span>
 <span class="p">}</span>
@@ -75,6 +76,7 @@ string message
 
 <span class="nl">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="nx">param_list</span><span class="p">:</span> <span class="p">[{</span> <span class="na">param_id</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span>
         <span class="na">param_value</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]},{},{},...]</span> <span class="p">}</span>
 
@@ -176,6 +178,11 @@ string message
 <td>true if action successful</td>
 </tr>
 <tr>
+<td>message</td>
+<td>string</td>
+<td>debug message</td>
+</tr>
+<tr>
 <td>param_id</td>
 <td>string</td>
 <td>Name of the parameter</td>
@@ -206,6 +213,7 @@ string message
 <li>JSON Response:
 {
 success: Boolean,
+message: String,
 param_list:[{
     param_id: String,
     param_value: String

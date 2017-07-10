@@ -12,7 +12,7 @@ ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
 
 <span class="c">#Response : Paramter info</span>
 core_api/ParamInfo param_info
-<span class="c">#Response : success=true if parameter get was successfull.</span>
+<span class="c">#Response : success=true if parameter get was successful.</span>
 bool success
 <span class="c">#Response : Returns error message/success message if any.</span>
 string message
@@ -41,6 +41,7 @@ string message
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
     <span class="p">{</span>
         <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
         <span class="nx">param_info</span><span class="p">:{</span>
             <span class="nl">param_value</span><span class="p">:</span> <span class="nb">String</span>
         <span class="p">}</span>
@@ -56,6 +57,7 @@ string message
 
 <span class="nl">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="nx">param_info</span><span class="p">:{</span>
             <span class="nl">param_value</span><span class="p">:</span> <span class="nb">String</span>
         <span class="p">}</span>
@@ -161,6 +163,7 @@ message: FlytOS namespace is  flytpod
 <li>JSON Response:
 {
 success: Boolean,
+message: String,
 param_info:{param_value: String}
 }</li>
 </ul>

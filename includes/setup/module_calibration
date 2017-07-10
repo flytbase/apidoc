@@ -9,20 +9,23 @@
 Type: Ros Service
 Name: /&lt;namespace&gt;/setup/module_calibration
 MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP <span class="o">=</span> 0
-    uint8 ACCELEROMETER <span class="o">=</span> 1
-    uint8 GYROSCOPE <span class="o">=</span> 2
-    uint8 MAGNETOMETER <span class="o">=</span> 3
-    uint8 RC <span class="o">=</span> 4
-    uint8 RC_TRIM <span class="o">=</span> 5
-    uint8 RC_STOP <span class="o">=</span> 6
-    uint8 LEVEL <span class="o">=</span> 7
-    uint8 AIRSPEED <span class="o">=</span> 8
 
-    int8 module_calibrate
-    ---
-    bool success
+<span class="c">#request</span>
+uint8 STOP <span class="o">=</span> 0
+uint8 ACCELEROMETER <span class="o">=</span> 1
+uint8 GYROSCOPE <span class="o">=</span> 2
+uint8 MAGNETOMETER <span class="o">=</span> 3
+uint8 RC <span class="o">=</span> 4
+uint8 RC_TRIM <span class="o">=</span> 5
+uint8 RC_STOP <span class="o">=</span> 6
+uint8 LEVEL <span class="o">=</span> 7
+uint8 AIRSPEED <span class="o">=</span> 8
+
+int8 module_calibrate
+
+<span class="c">#response</span>
+bool success
+string message
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//Not Implemented
 </span></code></pre><pre class="highlight python tab-python"><code><span class="c">#Not Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">//Not Recommended
@@ -37,7 +40,8 @@ MsgStructure:
 <span class="p">{</span>   <span class="nl">module_calibrate</span><span class="p">:</span> <span class="nx">Int</span> <span class="p">}</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
 <span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialising</span> 
@@ -52,7 +56,8 @@ MsgStructure:
 <span class="p">{</span>   <span class="nl">module_calibrate</span><span class="p">:</span> <span class="nx">Int</span> <span class="p">}</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 
 
 </code></pre>
@@ -76,6 +81,7 @@ MsgStructure:
     <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/setup/module_calibration"</span><span class="p">,</span>  
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
+           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
@@ -93,7 +99,9 @@ MsgStructure:
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Result for service call on '</span>
       <span class="o">+</span> <span class="nx">moduleCalibration</span><span class="p">.</span><span class="nx">name</span>
       <span class="o">+</span> <span class="s1">': '</span>
-      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
+      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">success</span>
+      <span class="o">+</span><span class="s1">': '</span>
+      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
 <blockquote>
@@ -149,6 +157,11 @@ MsgStructure:
 <td>bool</td>
 <td>true if action successful</td>
 </tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>debug message</td>
+</tr>
 </tbody></table>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
@@ -174,6 +187,7 @@ module_calibrate: Int
 <li>JSON Response:
 {
 success: Boolean
+message: String
 }</li>
 </ul>
 

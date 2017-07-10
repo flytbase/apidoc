@@ -83,7 +83,8 @@ bool success
     <span class="nx">body_frame</span> <span class="p">:</span> <span class="nb">Boolean</span> <span class="p">}</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
 <span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialising</span> 
@@ -109,7 +110,8 @@ bool success
     <span class="nx">body_frame</span> <span class="p">:</span> <span class="nb">Boolean</span> <span class="p">}</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 
 
 </code></pre>
@@ -162,7 +164,8 @@ body_frame: false"</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">relative</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body_frame</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
-<span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">message</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
 </code></pre><pre class="highlight python tab-python--ros"><code><span class="k">def</span> <span class="nf">setpoint_local_position</span><span class="p">(</span><span class="n">lx</span><span class="p">,</span> <span class="n">ly</span><span class="p">,</span> <span class="n">lz</span><span class="p">,</span> <span class="n">yaw</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">async</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">yaw_rate_valid</span><span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">body_frame</span><span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'/&lt;namespace&gt;/navigation/position_set'</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
@@ -195,6 +198,7 @@ body_frame: false"</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_set"</span><span class="p">,</span>  
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
+           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
@@ -223,7 +227,9 @@ body_frame: false"</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Result for service call on '</span>
       <span class="o">+</span> <span class="nx">positionSet</span><span class="p">.</span><span class="nx">name</span>
       <span class="o">+</span> <span class="s1">': '</span>
-      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
+      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">success</span>
+      <span class="o">+</span><span class="s1">': '</span>
+      <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
 <blockquote>
@@ -312,6 +318,11 @@ This command commands the vehicle to go to a specified location and hover. It ov
 <td>bool</td>
 <td>true if action successful</td>
 </tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>debug message</td>
+</tr>
 </tbody></table>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
@@ -353,6 +364,7 @@ body_frame : Boolean
 <li>JSON Response:
 {
 success: Boolean
+message: String
 }</li>
 </ul>
 
