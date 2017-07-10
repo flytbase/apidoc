@@ -19,11 +19,11 @@ string message
 ```
 
 ```cpp
-// Not Implemented as global namespace is not required for any CPP API
+// global namespace is not required for any CPP API
 ```
 
 ```python
-# Not Implemented as global namespace is not required for any Python API
+# global namespace is not required for any Python API
 ```
 
 ```cpp--ros
@@ -88,11 +88,11 @@ rosservice call /get_global_namespace "{}"
 ```
 
 ```cpp
-// Not Implemented as global namespace is not required for any CPP API
+// global namespace is not required for any CPP API
 ```
 
 ```python
-# Not Implemented as global namespace is not required for any Python API
+# global namespace is not required for any Python API
 ```
 
 ```cpp--ros
@@ -110,6 +110,7 @@ std::string message = srv.response.message;
 ```
 
 ```python--ros
+import rospy
 from core_api.srv import *
 
 def get_global_namespace():
@@ -164,11 +165,11 @@ message: FlytOS namespace is  flytpod
 ```
 
 ```cpp
-// Not Implemented as global namespace is not required for any CPP API
+// global namespace is not required for any CPP API
 ```
 
 ```python
-# Not Implemented as global namespace is not required for any Python API
+# global namespace is not required for any Python API
 ```
 
 ```cpp--ros
