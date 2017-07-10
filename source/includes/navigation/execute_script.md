@@ -181,7 +181,9 @@ execScript.callService(request, function(result) {
     console.log('Result for service call on '
       + execScript.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

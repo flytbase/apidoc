@@ -179,7 +179,9 @@ waypointGet.callService(request, function(result) {
     console.log('Result for service call on '
       + waypointGet.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

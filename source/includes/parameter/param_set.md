@@ -180,7 +180,9 @@ paramSet.callService(request, function(result) {
     console.log('Result for service call on '
       + paramSet.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

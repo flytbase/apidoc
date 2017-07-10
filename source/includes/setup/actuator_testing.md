@@ -129,7 +129,9 @@ actuatorTesting.callService(request, function(result) {
     console.log('Result for service call on '
       + actuatorTesting.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

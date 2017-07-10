@@ -168,7 +168,9 @@ positionHold.callService(request, function(result) {
     console.log('Result for service call on '
       + positionHold.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

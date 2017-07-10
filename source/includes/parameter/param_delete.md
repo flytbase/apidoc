@@ -165,7 +165,9 @@ paramDelete.callService(request, function(result) {
     console.log('Result for service call on '
       + paramDelete.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

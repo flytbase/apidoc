@@ -177,7 +177,9 @@ land.callService(request, function(result) {
     console.log('Result for service call on '
       + land.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

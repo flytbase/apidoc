@@ -149,7 +149,9 @@ waypointPause.callService(request, function(result) {
     console.log('Result for service call on '
       + waypointPause.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

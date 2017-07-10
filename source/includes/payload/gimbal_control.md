@@ -187,7 +187,9 @@ gimbalSet.callService(request, function(result) {
     console.log('Result for service call on '
       + gimbalSet.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

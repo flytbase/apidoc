@@ -149,7 +149,9 @@ paramReset.callService(request, function(result) {
     console.log('Result for service call on '
       + paramReset.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

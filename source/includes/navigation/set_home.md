@@ -190,7 +190,9 @@ setHome.callService(request, function(result) {
     console.log('Result for service call on '
       + setHome.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

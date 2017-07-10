@@ -173,7 +173,9 @@ disarm.callService(request, function(result) {
     console.log('Result for service call on '
       + disarm.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

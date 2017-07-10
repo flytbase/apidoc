@@ -298,7 +298,9 @@ waypointSet.callService(request, function(result) {
     console.log('Result for service call on '
       + waypointSet.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 

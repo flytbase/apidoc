@@ -151,7 +151,9 @@ rtl.callService(request, function(result) {
     console.log('Result for service call on '
       + rtl.name
       + ': '
-      + result.success);
+      + result.success
+      +': '
+      + result.message);
 });
 ```
 
