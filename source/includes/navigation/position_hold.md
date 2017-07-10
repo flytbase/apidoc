@@ -90,7 +90,7 @@ rosservice call /<namespace>/navigation/position_hold "{}"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.position_hold();
@@ -249,7 +249,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 This API can be used to stop the vehicle at current location. 
 
-* This API requires vehicle to be in OFFBOARD / API_CTL mode.
+* This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.
 * Thia API will override current mission / navigation commmands. 
 * This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
 * Vehicle may take few seconds to come to rest depending on current linear velocity.

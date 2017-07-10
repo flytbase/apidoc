@@ -99,7 +99,7 @@ rosservice call /flytpod/navigation/take_off "takeoff_alt: 3.0"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.take_off(3.0);

@@ -94,7 +94,7 @@ rosservice call /flytpod/navigation/disarm "{}"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 if(!nav.disarm())

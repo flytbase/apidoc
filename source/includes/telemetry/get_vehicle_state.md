@@ -175,7 +175,7 @@ rostopic echo /flytpod/flyt/state
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::State vehicle_state;

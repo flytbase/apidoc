@@ -9,9 +9,13 @@
 ROS-Service Name: /<namespace>/navigation/position_set_global
 ROS-Service Type: core_api/PositionSetGlobal, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z which corresponds respectively to the desired Latitude, longitude and altitude
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
+#Request : expects position setpoint via lat_x, long_y, rel_alt_z(altitude from home)
+#Request : expects yaw setpoint via yaw (send yaw_valid=true)
+geometry_msgs/TwistStamped twist #deprecated, instead use lat_x,long_y,rel_alt_z,yaw
+float32 lat_x
+float32 long_y
+float32 rel_alt_z
+float32 yaw
 float32 tolerance
 bool async
 bool yaw_valid
@@ -23,11 +27,11 @@ bool success
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition:     int position_set_global(float lat, float lon, float alt, float yaw=0, float tolerance=0, bool async=false, bool yaw_valid=false);
+Function Definition:     int position_set_global(float lat_x, float long_y, float rel_alt_z, float yaw=0, float tolerance=0, bool async=false, bool yaw_valid=false);
 Arguments:
-    :lat: Latitude
-    :lon: Longitude
-    :alt: Altitue (Positive distance upwards from home position)
+    :lat_x: Latitude
+    :long_y: Longitude
+    :rel_alt_z: Altitue (Positive distance upwards from home position)
     :yaw: Yaw Setpoint in radians
     :yaw_valid: Must be set to true, if yaw setpoint is provided
     :tolerance: Acceptance radius in meters, default value=1.0m
@@ -49,8 +53,11 @@ Function: position_set_global(self, lat, lon, rel_ht, yaw=0.0, tolerance=0.0, as
 Type: Ros Service
 Name: /<namespace>/navigation/position_set_global
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
+    :float lat_x
+    :float long_y
+    :float rel_alt_z
+    :float yaw
+    :float tolerance
     :bool async
     :bool yaw_valid
 
@@ -63,8 +70,11 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/navigation/position_set_global
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
+    :float lat_x
+    :float long_y
+    :float rel_alt_z
+    :float yaw
+    :float tolerance
     :bool async
     :bool yaw_valid
 
@@ -78,13 +88,11 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set_global'
 
 JSON Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
+{   
+    lat_x: Float,
+    long_y: Float,
+    rel_alt_z: Float,
+    yaw: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -107,13 +115,11 @@ name: '/<namespace>/navigation/position_set_global',
 serviceType: 'core_api/PositionSetGlobal'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
+{       
+    lat_x: Float,
+    long_y: Float,
+    rel_alt_z: Float,
+    yaw: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -130,18 +136,18 @@ Response:
 
 ```shell
 
-rosservice call /flytpod/navigation/position_set_global "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 18.5204303, y:  73.8567437, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, yaw_valid: true}"
+rosservice call /flytpod/navigation/position_set_global "{ lat_x: 8.04303, long_y: 43.57437, rel_alt_z: 5.0, yaw: 0.12 ,tolerance: 0.0, async: false, yaw_valid: true}"
 
-#sends (Lat,Lon,Alt)=(18.5204303, 73.8567437,5.0)(m), yaw=0.12rad, async=false, yaw_valid=true
+#sends (Lat,Lon,relAlt)=(8.04303, 43.57437,5.0)(m), yaw=0.12rad, async=false, yaw_valid=true
 #default value of tolerance=1.0m if left at 0    
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
-nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, true);
-//sends (x,y,z)=(18.7342124, 73.4323233, 5.0)(m), yaw=0.12rad, tolerance=2.0m, async=false, yaw_valid=true
+nav.position_set_global(10.342124, 13.4323233, 5.0, 0.12, 2.0, false, true);
+//sends (Lat,Lon,relAlt)=(10.342124, 13.4323233, 5.0)(m), yaw=0.12rad, tolerance=2.0m, async=false, yaw_valid=true
 ```
 
 ```python
@@ -151,8 +157,8 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# send vehicle to GPS coordinate with height 10 meters above current height.
-drone.position_set_global(18.7342124, 73.4323233, 10)
+# send vehicle to GPS coordinate with height 10 meters above home position.
+drone.position_set_global(10.342124, 13.4323233, 10)
 
 ```
 
@@ -163,10 +169,10 @@ ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<core_api::PositionSetGlobal>("/<namespace>/navigation/position_set_global");
 core_api::PositionSetGlobal srv;
 
-srv.request.twist.twist.angular.z = 0.5;
-srv.request.twist.twist.linear.x = 4,0;
-srv.request.twist.twist.linear.y = 3.0;
-srv.request.twist.twist.linear.z = 5.0;
+srv.lat_x = 10.342124;
+srv.long_y = 13.4323233;
+srv.rel_alt_z = 5.0;
+srv.yaw = 0.5;
 srv.request.tolerance = 2.0;
 srv.request.async = true;
 srv.request.yaw_valid = true;
@@ -178,16 +184,13 @@ success = srv.response.success;
 import rospy
 from core_api.srv import *
 
-def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):
+def setpoint_global_position(lat_x, long_y, rel_alt_z, yaw, tolerance= 0.0, async = False, yaw_valid= False):
     rospy.wait_for_service('/<namespace>/navigation/position_set_global')
     try:
         handle = rospy.ServiceProxy('/<namespace>/navigation/position_set_global', PositionSetGlobal)
 
         # build message structure
-        header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
-        twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(lat,lon,alt),geometry_msgs.msg.Vector3(0.0,0.0,yaw))
-        twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
-        req_msg = PositionSetGlobalRequest(twiststamped_msg, tolerance, async, yaw_valid)
+        req_msg = PositionSetGlobalRequest(lat_x=lat_x, long_y=long_y, rel_alt_z=rel_alt_z, yaw=yaw, tolerance=tolerance, async=async, yaw_valid=yaw_valid)
         resp = handle(req_msg)
         return resp
 
@@ -197,14 +200,10 @@ def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, 
 
 ```javascript--REST
 var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=18.594061;
-msgdata.twist.twist.linear["y"]=73.911037;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
+msgdata["lat_x"]=10.342124;
+msgdata["long_y"]=13.4323233;
+msgdata["rel_alt_z"]=5.00;
+msgdata["yaw"]=1.00;
 msgdata["tolerance"]=2.00;
 msgdata["async"]=true;
 msgdata["relative"]=false;
@@ -230,13 +229,10 @@ var positionSetGlobal = new ROSLIB.Service({
 });
 
 var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 18.594061,
-                y: 73.911037,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
+    lat_x: 10.342124,
+    long_y: 13.4323233,
+    rel_alt_z: 5.00,
+    yaw: 1.00,
     tolerance: 2.00,
     async: true,
     relative: false,
@@ -303,9 +299,9 @@ This API sets a desired position setpoint in global coordinate system (WGS84). P
 
     Argument | Type | Description
     -------------- | -------------- | --------------
-    lat | float | Latitude
-    lon | float | Longitude
-    rel_ht | float | relative height from current location in meters
+    lat_x | float | Latitude
+    long_y | float | Longitude
+    rel_alt_z | float | relative height from current location in meters
     yaw | float | Yaw Setpoint in radians
     yaw_valid | bool | Must be set to true, if yaw
     tolerance | float | Acceptance radius in meters, default value=1.0m
@@ -330,18 +326,10 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * URL: ``POST http://<ip>/ros/<namespace>/navigation/position_set_global``
 * JSON Request:
 {
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
+    lat_x: Float,
+    long_y: Float,
+    rel_alt_z: Float,
+    yaw: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -363,12 +351,12 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Vehicle should be in OFFBOARD/API_CTL mode for this API to work.
+* Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.
 * Vehicle should be armed for this API to work.
 * Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
 * Right hand notation is used to find positive yaw direction.
-* rel_ht parameter is always positive.
-* rel_ht parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_ht should be 10+5=15.
+* rel_alt_z parameter is always positive.
+* rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.
 * Effect of parameters:
   * Async:
      * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.

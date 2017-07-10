@@ -272,4 +272,4 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Note that the executable should be present in /flyt/flytapps/onboard/install directory.
+* Note that the executable should be present in /flyt/userapps/onboard_user/install directory.

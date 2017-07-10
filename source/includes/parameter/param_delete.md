@@ -101,7 +101,7 @@ rosservice call /flytpod/param/param_delete "param_id: ''"
 ```
 
 ```cpp
-#include <cpp_API/param_bridge.h>
+#include <cpp_api/param_bridge.h>
 
 Param param;
 std::string param_id = "RTL_ALT"; 

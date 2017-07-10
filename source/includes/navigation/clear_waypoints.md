@@ -87,7 +87,7 @@ rosservice call /flytpod/navigation/waypoint_clear "{}"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_clear();

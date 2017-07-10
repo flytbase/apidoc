@@ -132,7 +132,7 @@ Response:
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 mavros_msgs::Waypoint waypoint;

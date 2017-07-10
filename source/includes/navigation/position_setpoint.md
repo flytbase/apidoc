@@ -10,9 +10,13 @@
 ROS-Service Name: /<namespace>/navigation/position_set
 ROS-Service Type: core_api/PositionSet, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
-geometry_msgs/TwistStamped twist
+#Request : expects position setpoint via x, y, z
+#Request : expects yaw setpoint via yaw (send yaw_valid=true)
+geometry_msgs/TwistStamped twist #deprecated, instead use x,y,z,yaw
+float32 x
+float32 y
+float32 z
+float32 yaw
 float32 tolerance
 bool async
 bool relative
@@ -55,8 +59,11 @@ Function: position_set(self, x, y, z, yaw=0.0, tolerance=0.0, relative=False, as
 Type: Ros Service
 Name: /<namespace>/navigation/position_set
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
+    :float x
+    :float y
+    :float z
+    :float yaw
+    :float tolerance
     :bool async
     :bool relative
     :bool yaw_valid
@@ -70,14 +77,16 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/navigation/position_set
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
+    :float x
+    :float y
+    :float z
+    :float yaw
+    :float tolerance
     :bool async
     :bool relative
     :bool yaw_valid
     :bool body_frame
 response srv: bool success
-
 ```
 
 ```javascript--REST
@@ -88,22 +97,19 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/position_set'
 
 JSON Request:
-{   twist:{twist:{	linear:{
-				x: Float,
-				y: Float,
-				z: Float
-			},angular:{
-				z: Float
-	}}},
-    tolerance: Float,
+{   
+	x: Float,
+	y: Float,
+	z: Float,
+	yaw: Float,
+	tolerance: Float,
 	async: Boolean,
 	relative: Boolean,
-    yaw_valid : Boolean,
+	yaw_valid : Boolean,
 	body_frame : Boolean }
 
 JSON Response:
 {	success: Boolean, }
-
 ```
 
 ```javascript--Websocket
@@ -117,13 +123,11 @@ name: '/<namespace>/navigation/position_set',
 serviceType: 'core_api/PositionSet'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
+{   
+    x: Float,
+    y: Float,
+    z: Float,
+    yaw: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -132,26 +136,24 @@ Request:
 
 Response:
 {   success: Boolean, }
-
-
 ```
 
 
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 1.0, y: 3.5, z: -5.0}, angular: {x: 0.0, y: 0.0, z: 0.12}}}, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
+rosservice call /flytpod/navigation/position_set "{x: 1.0, y: 3.5, z: -5.0, yaw: 0.12, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
 
 #sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
 #default value of tolerance=1.0m if left at 0    
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
-nav.position_set(1.0, 3.5, -5.0, 0.12, 5.0, false, false, true, false);
-//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=5.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+nav.position_set(1.0, 3.5, -5.0, 0.12, 2.0, false, false, true, false);
+//sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, tolerance=2.0m, relative=false, async=false, yaw_valid=true, body_frame=false
 ```
 
 ```python
@@ -161,9 +163,8 @@ drone = api.navigation()
 # wait for interface to initialize
 time.sleep(3.0)
 
-# command vehicle towards 5 meteres SOUTH from current location regardless of heading
+# command vehicle towards 5 metres SOUTH from current location regardless of heading
 drone.position_set(-5, 0, 0, relative=True)
-
 ```
 
 ```cpp--ros
@@ -173,10 +174,10 @@ ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
 core_api::PositionSet srv;
 
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 3.5;
-srv.request.twist.twist.linear.z = -5.0;
+srv.request.x = 1.0;
+srv.request.y = 3.5;
+srv.request.z = -5.0;
+srv.request.yaw = 0.12;
 srv.request.tolerance = 5.0;
 srv.request.async = false;
 srv.request.yaw_valid = true;
@@ -192,16 +193,13 @@ success = srv.response.success;
 import rospy
 from core_api.srv import *
 
-def setpoint_local_position(lx, ly, lz, yaw, tolerance= 1.0, async = False, relative= False, yaw_valid= False, body_frame= False):
+def setpoint_local_position(lx, ly, lz, yaw, tolerance = 2.0, async = False, relative= False, yaw_valid= False, body_frame= False):
     rospy.wait_for_service('/<namespace>/navigation/position_set')
     try:
         handle = rospy.ServiceProxy('/<namespace>/navigation/position_set', PositionSet)
         
         # building message structure
-        header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
-        twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(lx,ly,lz),geometry_msgs.msg.Vector3(0.0,0.0,yaw))
-        twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
-        req_msg = PositionSetRequest(twiststamped_msg, tolerance, async, relative, yaw_valid, body_frame)
+        req_msg = PositionSetRequest(x=lx, y=ly, z=lz, yaw=yaw, tolerance=tolerance, async=async, relative=relative, yaw_valid=yaw_valid, body_frame=body_frame)
         resp = handle(req_msg)
         return resp
     except rospy.ServiceException, e:
@@ -211,14 +209,10 @@ def setpoint_local_position(lx, ly, lz, yaw, tolerance= 1.0, async = False, rela
 
 ```javascript--REST
 var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
+msgdata["x"]=2.00;
+msgdata["y"]=3.00;
+msgdata["z"]=-1.00;
+msgdata["yaw"]=1.00;
 msgdata["tolerance"]=2.00;
 msgdata["async"]=true;
 msgdata["relative"]=false;
@@ -245,13 +239,10 @@ var positionSet = new ROSLIB.Service({
 });
 
 var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
+    x: 2.00,
+    y: 3.00,
+    z: -1.00,
+    yaw: 1.00,
     tolerance: 2.00,
     async: true,
     relative: false,
@@ -294,14 +285,12 @@ Success: True
 {
     success:True
 }
-
 ```
 
 ```javascript--Websocket
 {
     success:True
 }
-
 ```
 
 
@@ -345,18 +334,10 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * URL: ``POST http://<ip>/ros/<namespace>/navigation/position_set``
 * JSON Request:
 {
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
+    x: Float,
+    y: Float,
+    z: Float,
+    yaw: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -379,7 +360,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Vehicle should be in OFFBOARD/API_CTL mode for this API to work.
+* Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.
 * Vehicle should be armed for this API to work.
 * Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
 * X,Y,Z are position setpoints in 3 linear axes. Yaw is angular rotation around Z axis. Right hand notation is used to find positive yaw direction.

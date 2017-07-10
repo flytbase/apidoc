@@ -96,7 +96,7 @@ rosservice call /flytpod/navigation/arm "{}"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 if(!nav.arm())
@@ -251,6 +251,6 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* ARM API will only work when device is in OFFBOARD / API CTL mode.
+* ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.
 * All navigation setpoint API's except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.
 * It is safer to use take_off command instead of arm command. 

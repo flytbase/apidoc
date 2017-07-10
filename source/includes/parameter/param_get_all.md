@@ -108,7 +108,7 @@ rosservice call /flytpod/param/param_get_all "fresh_pull: false"
 ```
 
 ```cpp
-#include <cpp_API/param_bridge.h>
+#include <cpp_api/param_bridge.h>
 
 Param param;
 bool fresh_pull = false;

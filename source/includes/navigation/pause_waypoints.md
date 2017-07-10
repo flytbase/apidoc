@@ -88,7 +88,7 @@ rosservice call /flytpod/navigation/waypoint_pause "{}"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.waypoint_pause();

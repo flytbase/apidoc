@@ -78,7 +78,7 @@ rosservice call /flytpod/navigation/rtl "{}"
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.rtl();

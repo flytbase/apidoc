@@ -9,9 +9,13 @@
 ROS-Service Name: /<namespace>/navigation/velocity
 ROS-Service Type: core_api/VelocitySet, below is its description
 
-#Request : expects velocity setpoint via twist.twist.linear.x,linear.y,linear.z
-#Request : expects yaw_rate setpoint via twist.twist.angular.z (send yaw_rate_valid=true)
-geometry_msgs/TwistStamped twist
+#Request : expects velocity setpoint via vx,vy,vz
+#Request : expects yaw_rate setpoint via yaw_rate (send yaw_rate_valid=true)
+geometry_msgs/TwistStamped twist #deprecated, instead use vx,vy,vz,yaw_rate
+float32 vx
+float32 vy
+float32 vz
+float32 yaw_rate
 float32 tolerance
 bool async
 bool relative
@@ -54,12 +58,15 @@ Function: velocity_set(self,vx, vy, vz, yaw_rate=0.0, tolerance=0.0, relative=Fa
 Type: Ros Service
 Name: /<namespace>/navigation/velocity_set
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
-    :bool async
-    :bool relative
-    :bool yaw_rate_valid
-    :bool body_frame
+		:float vx
+		:float vy
+		:float vz
+		:float yaw_rate
+		:float tolerance
+		:bool async
+		:bool relative
+		:bool yaw_rate_valid
+		:bool body_frame
 response srv: bool success
 ```
 
@@ -69,8 +76,11 @@ response srv: bool success
 Type: Ros Service
 Name: /<namespace>/navigation/velocity_set
 call srv:
-    :geometry_msgs/TwistStamped twist
-    :float32 tolerance
+		:float vx
+		:float vy
+		:float vz
+		:float yaw_rate
+		:float tolerance
     :bool async
     :bool relative
     :bool yaw_rate_valid
@@ -88,13 +98,11 @@ This is a REST call for the API to give velocity setpoints.
 URL: 'http://<ip>/ros/<namespace>/navigation/velocity_set'
 
 JSON Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
+{   
+    vx: Float,
+    vy: Float,
+    vz: Float,
+    yaw_rate: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -117,13 +125,11 @@ name: '/<namespace>/navigation/velocity_set',
 serviceType: 'core_api/VelocitySet'
 
 Request:
-{   twist:{twist:{  linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },angular:{
-                z: Float
-    }}},
+{       
+    vx: Float,
+    vy: Float,
+    vz: Float,
+    yaw_rate: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -140,14 +146,14 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/velocity_set "{twist: {header: {seq: 0,stamp: {secs: 0, nsecs: 0}, frame_id: ''},twist: {linear: {x: 0.5, y: 0.2, z: -0.1}, angular: {x: 0.0, y: 0.0, z: 0.1}}}, tolerance: 0.0, async: false, relative: false, yaw_rate_valid: true, body_frame: false}"          
+rosservice call /flytpod/navigation/velocity_set "{vx: 0.5, vy: 0.2, vz: -0.1, yaw_rate: 0.1, tolerance: 0.0, async: false, relative: false, yaw_rate_valid: true, body_frame: false}"          
 
 #sends (vx,vy,vz)=(0.5,0.2,-0.1)(m/s), yaw_rate=0.1rad/s,  relative=false, async=false, yaw_rate_valid=true, body_frame=false
 #default value of tolerance=1.0m/s if left at 0  
 ```
 
 ```cpp
-#include <cpp_api.navigation_bridge.h>
+#include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
 nav.velocity_set(1.0, 0.5, -1.0, 0.12, 0.5, false, false, true, false);
@@ -173,10 +179,10 @@ ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<core_api::PositionSet>("/<namespace>/navigation/position_set");
 core_api::PositionSet srv;
 
-srv.request.twist.twist.angular.z = 0.12;
-srv.request.twist.twist.linear.x = 1.0;
-srv.request.twist.twist.linear.y = 0.5;
-srv.request.twist.twist.linear.z = -1.0;
+srv.vx = 1.0;
+srv.vy = 0.5;
+srv.vz = -1.0;
+srv.yaw_rate = 0.12;
 srv.request.tolerance = 0.5;
 srv.request.async = false;
 srv.request.yaw_rate_valid = true;
@@ -197,10 +203,7 @@ def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relat
     try:
         handle = rospy.ServiceProxy('/<namespace>/navigation/velocity_set', VelocitySet)
         # build message structure
-        header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
-        twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(vx,vy,vz),geometry_msgs.msg.Vector3(0.0,0.0,yaw_rate))
-        twiststamped_msg= geometry_msgs.msg.TwistStamped(header_msg, twist)
-        req_msg = VelocitySetRequest(twiststamped_msg, tolerance, async, relative, yaw_rate_valid, body_frame)
+        req_msg = VelocitySetRequest(vx=vx, vy=vy, vz=vz, yaw_rate=yaw_rate, tolerance=tolerance, async=async, relative=relative, yaw_rate_valid=yaw_rate_valid, body_frame=body_frame)
         resp = handle(req_msg)
         
         return resp
@@ -211,14 +214,10 @@ def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relat
 
 ```javascript--REST
 var  msgdata={};
-msgdata["twist"]={};
-msgdata.twist["twist"]={};
-masdata.twist.twist["linear"]={};
-msgdata.twist.twist.linear["x"]=2.00;
-msgdata.twist.twist.linear["y"]=3.00;
-msgdata.twist.twist.linear["z"]=-1.00;
-msgdata.twist.twist["angular"]={};
-msgdata.twist.twist.angular["z"]=1.00;
+msgdata["vx"]=2.00;
+msgdata["vy"]=3.00;
+msgdata["vz"]=-1.00;
+msgdata["yaw_rate"]=1.00;
 msgdata["tolerance"]=2.00;
 msgdata["async"]=true;
 msgdata["relative"]=false;
@@ -245,13 +244,10 @@ var velocitySet = new ROSLIB.Service({
 });
 
 var request = new ROSLIB.ServiceRequest({
-    twist:{twist:{  linear:{
-                x: 2.00,
-                y: 3.00,
-                z: -1.00
-            },angular:{
-                z: 1.00
-    }}},
+    vx: 2.00,
+    vy: 3.00,
+    vz: -1.00,
+    yaw_rate: 1.00,
     tolerance: 2.00,
     async: true,
     relative: false,
@@ -310,7 +306,7 @@ Success: True
 
 ###Description:
 
-This API gives linear (x,y,z) and angular (yaw) velocity setpoint to vehicle. Please check API usage section below before using API.
+This API gives linear (vx,vy,vz) and angular (yaw_rate) velocity setpoint to vehicle. Please check API usage section below before using API.
 
 ###Parameters:
     
@@ -347,18 +343,10 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * URL: ``POST http://<ip>/ros/<namespace>/navigation/velocity_set``
 * JSON Request:
 {
-    twist:{
-        twist:{
-            linear:{
-                x: Float,
-                y: Float,
-                z: Float
-            },
-            angular:{
-                z: Float
-            }
-        }
-    },
+    vx: Float,
+    vy: Float,
+    vz: Float,
+    yaw_rate: Float,
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
@@ -381,7 +369,7 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 ### API usage information:
 
-* Vehicle should be in OFFBOARD/API_CTL mode for this API to work.
+* Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.
 * Vehicle should be armed for this API to work.
 * Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
 * vx,vy,vz are velocity setpoints in 3 linear axes. Yaw rate is rate of angular rotation around Z axis. Right hand notation is used to find positive yaw direction.

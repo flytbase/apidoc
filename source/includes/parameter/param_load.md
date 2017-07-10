@@ -92,7 +92,7 @@ rosservice call /flytpod/param/param_load "{}"
 ```
 
 ```cpp
-#include <cpp_API/param_bridge.h>
+#include <cpp_api/param_bridge.h>
 
 Param param;
 
