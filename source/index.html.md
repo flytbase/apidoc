@@ -13,6 +13,7 @@ language_tabs:
 
 includes:
   - namespace
+  - navigation/access_request
   - navigation/arm
   - navigation/disarm
   - navigation/takeoff

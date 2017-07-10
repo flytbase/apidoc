@@ -121,7 +121,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/waypoint_get "{}" 
+rosservice call /flytos/navigation/waypoint_get "{}" 
 ```
 
 ```cpp

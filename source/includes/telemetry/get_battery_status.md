@@ -203,7 +203,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/battery
+rostopic echo /flytos/mavros/battery
 ```
 
 ```cpp

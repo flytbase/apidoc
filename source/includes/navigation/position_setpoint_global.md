@@ -141,7 +141,7 @@ Response:
 
 ```shell
 
-rosservice call /flytpod/navigation/position_set_global "{ lat_x: 8.04303, long_y: 43.57437, rel_alt_z: 5.0, yaw: 0.12 ,tolerance: 0.0, async: false, yaw_valid: true}"
+rosservice call /flytos/navigation/position_set_global "{ lat_x: 8.04303, long_y: 43.57437, rel_alt_z: 5.0, yaw: 0.12 ,tolerance: 0.0, async: false, yaw_valid: true}"
 
 #sends (Lat,Lon,relAlt)=(8.04303, 43.57437,5.0)(m), yaw=0.12rad, async=false, yaw_valid=true
 #default value of tolerance=1.0m if left at 0    

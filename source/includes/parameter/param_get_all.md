@@ -106,7 +106,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/param/param_get_all "fresh_pull: false" 
+rosservice call /flytos/param/param_get_all "fresh_pull: false" 
 ```
 
 ```cpp

@@ -79,7 +79,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/rtl "{}" 
+rosservice call /flytos/navigation/rtl "{}" 
 ```
 
 ```cpp

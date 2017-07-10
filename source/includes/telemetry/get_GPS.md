@@ -193,7 +193,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/global_position/global  
+rostopic echo /flytos/mavros/global_position/global  
 ```
 
 ```cpp

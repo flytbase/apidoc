@@ -132,7 +132,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/distance_sensor/lidarlite_pub
+rostopic echo /flytos/mavros/distance_sensor/lidarlite_pub
 ```
 
 ```cpp

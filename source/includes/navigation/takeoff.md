@@ -102,7 +102,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/take_off "takeoff_alt: 3.0"
+rosservice call /flytos/navigation/take_off "takeoff_alt: 3.0"
 ```
 
 ```cpp

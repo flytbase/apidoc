@@ -101,7 +101,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/param/param_delete "param_id: ''" 
+rosservice call /flytos/param/param_delete "param_id: ''" 
 ```
 
 ```cpp

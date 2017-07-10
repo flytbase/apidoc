@@ -108,7 +108,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/param/param_set "param_info:
+rosservice call /flytos/param/param_set "param_info:
   param_id: ''
   param_value: ''" 
 

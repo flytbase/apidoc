@@ -151,7 +151,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/position_set "{x: 1.0, y: 3.5, z: -5.0, yaw: 0.12, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
+rosservice call /flytos/navigation/position_set "{x: 1.0, y: 3.5, z: -5.0, yaw: 0.12, tolerance: 0.0, async: false, relative: false, yaw_valid: true, body_frame: false}"
 
 #sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
 #default value of tolerance=1.0m if left at 0    

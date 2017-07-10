@@ -90,7 +90,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/waypoint_clear "{}"   
+rosservice call /flytos/navigation/waypoint_clear "{}"   
 ```
 
 ```cpp

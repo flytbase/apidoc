@@ -133,7 +133,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/mavros_msgs/vfr_hud
+rostopic echo /flytos/mavros/mavros_msgs/vfr_hud
 ```
 
 ```cpp

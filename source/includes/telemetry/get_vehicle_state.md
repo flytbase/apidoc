@@ -171,7 +171,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/flyt/state
+rostopic echo /flytos/flyt/state
 ```
 
 ```cpp

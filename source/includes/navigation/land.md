@@ -98,7 +98,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/land "async=true" 
+rosservice call /flytos/navigation/land "async=true" 
 ```
 
 ```cpp

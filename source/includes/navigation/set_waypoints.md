@@ -128,7 +128,7 @@ Response:
 > Example
 
 ```shell
-  rosservice call /flytpod/navigation/waypoint_set "waypoints:
+  rosservice call /flytos/navigation/waypoint_set "waypoints:
 - {frame: 0, command: 0, is_current: false, autocontinue: false, param1: 0.0, param2: 0.0,
   param3: 0.0, param4: 0.0, x_lat: 0.0, y_long: 0.0, z_alt: 0.0}" 
 

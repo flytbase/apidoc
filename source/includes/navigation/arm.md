@@ -1,5 +1,3 @@
-# Navigation APIs
-
 ## Arm
 
 
@@ -99,7 +97,7 @@ Response:
 > Example
 
 ```shell
-rosservice call /flytpod/navigation/arm "{}"    
+rosservice call /flytos/navigation/arm "{}"    
 ```
 
 ```cpp

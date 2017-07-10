@@ -119,7 +119,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/rc/in 
+rostopic echo /flytos/mavros/rc/in 
 ```
 
 ```cpp

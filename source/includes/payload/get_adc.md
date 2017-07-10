@@ -108,7 +108,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/payload_adc
+rostopic echo /flytos/mavros/payload_adc
 
 #sends (x,y,z)=(1.0,3.5,-5.0)(m), yaw=0.12rad, relative=false, async=false, yaw_valid=true, body_frame=false
 #default value of tolerance=1.0m if left at 0    

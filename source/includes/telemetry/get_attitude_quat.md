@@ -206,7 +206,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/imu/data
+rostopic echo /flytos/mavros/imu/data
 ```
 
 ```cpp

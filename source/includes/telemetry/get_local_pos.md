@@ -168,7 +168,7 @@ Response:
 > Example
 
 ```shell
-rostopic echo /flytpod/mavros/local_position/local
+rostopic echo /flytos/mavros/local_position/local
 ```
 
 ```cpp
