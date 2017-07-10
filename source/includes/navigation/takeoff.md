@@ -265,6 +265,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * JSON Response:
 {
     success: Boolean
+    message: String
 }
 
 
