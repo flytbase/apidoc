@@ -28,7 +28,7 @@ Function Definition: bool Param::param_set(std::string param_id, std::string par
 Arguments:
     param_id: ID of param to be set
     param_value: Value of param to be set
-Returns: returns 0 if the command is successfull
+Returns: returns 0 if the command is successful
 ```
 
 ```python

@@ -30,7 +30,7 @@ Arguments:
     param_list: Variable to store parameter list
 Returns:
     returns parameter info list in param_list 
-    returns 0 if the command is successfull
+    returns 0 if the command is successful
 ```
 
 ```python

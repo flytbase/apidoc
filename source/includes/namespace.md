@@ -12,7 +12,7 @@ ROS-Service Type: core_api/ParamGetGlobalNamespace, below is its description
 
 #Response : Paramter info
 core_api/ParamInfo param_info
-#Response : success=true if parameter get was successfull.
+#Response : success=true if parameter get was successful.
 bool success
 #Response : Returns error message/success message if any.
 string message

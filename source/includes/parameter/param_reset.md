@@ -23,7 +23,7 @@ string message
 Function Definition: bool Param::param_reset(void)
 
 Arguments: Null
-Returns: returns 0 if the command is successfull
+Returns: returns 0 if the command is successful
 ```
 
 ```python

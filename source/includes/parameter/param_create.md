@@ -26,7 +26,7 @@ Function Definition: bool Param::param_create(std::string param_id, std::string 
 Arguments:
     param_id: ID of param to be created
     param_value: Value of param to be created
-Returns: returns 0 if the command is successfull
+Returns: returns 0 if the command is successful
 ```
 
 ```python

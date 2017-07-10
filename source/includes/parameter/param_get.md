@@ -30,7 +30,7 @@ Arguments:
     param_value: Variable to store parameter value
 Returns:
     returns parameter value in param_value 
-    returns 0 if the command is successfull
+    returns 0 if the command is successful
 ```
 
 ```python
