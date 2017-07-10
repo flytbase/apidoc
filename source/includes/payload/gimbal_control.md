@@ -69,7 +69,8 @@ JSON Request:
     yaw: Float     }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 ```
 
 ```javascript--Websocket
@@ -88,7 +89,8 @@ Request:
     yaw: Float }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 ```
 
 > Example

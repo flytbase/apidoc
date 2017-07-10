@@ -64,7 +64,8 @@ JSON Request:
 {   wp_seq: Int }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -82,7 +83,8 @@ Request:
 {   wp_seq: Int }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

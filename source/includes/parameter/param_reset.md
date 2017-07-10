@@ -65,7 +65,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/param/param_reset'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -80,7 +81,8 @@ name: '/<namespace>/param/param_reset',
 serviceType: 'core_api/ParamReset'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

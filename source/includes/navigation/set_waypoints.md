@@ -86,7 +86,8 @@ JSON Request:
         },{},{}... ] }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -116,7 +117,8 @@ Request:
         },{},{}... ] }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

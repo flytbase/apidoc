@@ -70,7 +70,8 @@ JSON Request:
 {   param_id: String }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -88,7 +89,8 @@ Request:
 {   param_id: String }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

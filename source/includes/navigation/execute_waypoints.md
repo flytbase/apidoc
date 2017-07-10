@@ -59,7 +59,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_execute'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -74,7 +75,8 @@ name: '/<namespace>/navigation/waypoint_execute',
 serviceType: 'core_api/WaypointExecute'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

@@ -60,7 +60,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_pause'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -75,7 +76,8 @@ name: '/<namespace>/navigation/waypoint_pause',
 serviceType: 'core_api/WaypointPause'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

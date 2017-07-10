@@ -53,7 +53,8 @@ JSON Request:
 {   module_calibrate: Int }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -71,7 +72,8 @@ Request:
 {   module_calibrate: Int }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

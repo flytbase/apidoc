@@ -64,7 +64,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/param/param_load'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -79,7 +80,8 @@ name: '/<namespace>/param/param_load',
 serviceType: 'core_api/ParamLoad'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

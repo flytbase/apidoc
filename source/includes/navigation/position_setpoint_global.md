@@ -100,7 +100,8 @@ JSON Request:
     body_frame : Boolean }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -126,7 +127,8 @@ Request:
     yaw_valid : Boolean }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

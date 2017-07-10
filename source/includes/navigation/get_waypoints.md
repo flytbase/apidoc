@@ -67,7 +67,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_get'
 
 JSON Response:
-{   success: Boolean, 
+{   success: Boolean,
+    message: String, 
     wp_recieved: Int,
     waypoints: [{
         frame: Int 0/1/2/3/4,
@@ -96,7 +97,8 @@ name: '/<namespace>/navigation/waypoint_get',
 serviceType: 'core_api/WaypointGet'
 
 Response:
-{   success: Boolean, 
+{   success: Boolean,
+    message: String, 
     wp_recieved: Int,
     waypoints: [{
         frame: Int 0/1/2/3/4,
@@ -305,7 +307,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 * URL: ``GET http://<ip>/ros/<namespace>/navigation/waypoint_get``
 * JSON Response:
 {
-    success: Boolean, 
+    success: Boolean,
+    message: String, 
     wp_recieved: Int,
     waypoints: [{
         frame: Int 0/1/2/3/4,

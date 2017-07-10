@@ -59,7 +59,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_clear'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -74,7 +75,8 @@ name: '/<namespace>/navigation/waypoint_clear',
 serviceType: 'core_api/WaypointClear'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

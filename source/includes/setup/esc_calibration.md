@@ -51,7 +51,8 @@ JSON Request:
     calibration_state: Int }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -72,7 +73,8 @@ Request:
     calibration_state: Int }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

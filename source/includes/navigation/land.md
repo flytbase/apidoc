@@ -64,7 +64,8 @@ This is a REST call for the API to land. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/land'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -82,7 +83,8 @@ Request:
 {  }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

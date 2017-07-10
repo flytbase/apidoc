@@ -80,6 +80,7 @@ JSON Request:
 
 JSON Response:
 {   success: Boolean,
+    message: String,
     param_info:{ param_value: String } }
 
 ```
@@ -99,6 +100,7 @@ Request:
 
 Response:
 {   success: Boolean,
+    message: String,
     param_info:{ param_value: String } }
 
 

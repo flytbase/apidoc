@@ -75,7 +75,8 @@ JSON Request:
 }}
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -95,7 +96,8 @@ Request:
         param_value: String }}
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

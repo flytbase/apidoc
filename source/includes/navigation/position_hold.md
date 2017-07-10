@@ -61,7 +61,8 @@ current location. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/position_hold'
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -77,7 +78,8 @@ name: '/<namespace>/navigation/position_hold',
 serviceType: 'core_api/PositionHold'
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

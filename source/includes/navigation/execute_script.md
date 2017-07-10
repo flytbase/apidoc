@@ -63,7 +63,8 @@ JSON Request:
     arguments : String }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -82,7 +83,8 @@ Request:
     arguments : String }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

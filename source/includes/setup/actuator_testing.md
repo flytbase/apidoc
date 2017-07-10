@@ -45,7 +45,8 @@ JSON Request:
     time_s: Float }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -64,7 +65,8 @@ Request:
     time_s: Float }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

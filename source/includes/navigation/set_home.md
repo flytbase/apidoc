@@ -72,7 +72,8 @@ JSON Request:
     set_current : Boolean }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -93,7 +94,8 @@ Request:
     set_current : Boolean }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```

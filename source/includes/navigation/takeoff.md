@@ -68,7 +68,8 @@ JSON Request:
 {   takeoff_alt: Float }
 
 JSON Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 ```
 
@@ -86,7 +87,8 @@ Request:
 {   takeoff_alt: Float }
 
 Response:
-{   success: Boolean, }
+{   success: Boolean,
+    message: String, }
 
 
 ```
