@@ -157,6 +157,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/param/param_set",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

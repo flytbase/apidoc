@@ -130,6 +130,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/param/param_reset",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

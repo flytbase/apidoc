@@ -120,6 +120,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/setup/esc_calibration",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

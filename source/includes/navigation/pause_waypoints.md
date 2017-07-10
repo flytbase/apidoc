@@ -130,6 +130,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/waypoint_pause",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

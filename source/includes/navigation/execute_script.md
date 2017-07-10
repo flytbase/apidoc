@@ -159,6 +159,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/exec_script",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

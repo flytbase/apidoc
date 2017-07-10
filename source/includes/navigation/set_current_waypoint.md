@@ -141,6 +141,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/waypoint_set_current",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

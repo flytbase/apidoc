@@ -129,6 +129,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/waypoint_clear",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

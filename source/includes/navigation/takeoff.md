@@ -162,6 +162,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/take_off",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

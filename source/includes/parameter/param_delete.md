@@ -144,6 +144,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/param/param_delete",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

@@ -107,6 +107,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/setup/actuator_testing",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

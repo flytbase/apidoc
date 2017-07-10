@@ -156,6 +156,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/arm",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

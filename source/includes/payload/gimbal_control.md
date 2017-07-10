@@ -165,6 +165,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/payload/gimbal_set",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 ```

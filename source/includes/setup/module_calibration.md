@@ -117,6 +117,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/setup/module_calibration",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

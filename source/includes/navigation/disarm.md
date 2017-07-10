@@ -154,6 +154,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/disarm",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 

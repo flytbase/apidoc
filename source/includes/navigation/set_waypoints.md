@@ -265,6 +265,7 @@ $.ajax({
     url: "http://<ip>/ros/<namespace>/navigation/waypoint_set",  
     success: function(data){
            console.log(data.success);
+           console.log(data.message);
     }
 };
 
