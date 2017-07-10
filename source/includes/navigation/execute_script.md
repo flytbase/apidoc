@@ -116,6 +116,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
+import rospy
 from core_api.srv import *
 
 script_name = "sample_script.sh"

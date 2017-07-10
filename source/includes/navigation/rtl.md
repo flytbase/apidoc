@@ -98,6 +98,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
+import rospy
 from core_api.srv import *
 
 def rtl():

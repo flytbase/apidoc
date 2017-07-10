@@ -207,6 +207,7 @@ Not Implemented
 ```
 
 ```python--ros
+import rospy
 from sensor_msgs.msg import BatteryState
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.

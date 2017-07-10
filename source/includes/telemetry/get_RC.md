@@ -134,6 +134,7 @@ Not Implemented
 ```
 
 ```python--ros
+import rospy
 from mavros_msgs.msgs import RCIn
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
 topic_sub = rospy.Subscriber("/<namespace>/mavros/rc/in"), State, topic_callback)

@@ -135,6 +135,7 @@ Not Implemented
 ```
 
 ```python--ros
+import rospy
 from mavros_msgs.msgs import VFR_HUD
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.

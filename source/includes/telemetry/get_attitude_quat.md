@@ -255,6 +255,7 @@ ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/imu/data", 1, attCallbac
 ```
 
 ```python--ros
+import rospy
 from sensor_msgs.msg import Imu
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.

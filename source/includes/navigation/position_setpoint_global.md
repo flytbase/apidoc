@@ -175,6 +175,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
+import rospy
 from core_api.srv import * 
 
 def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):

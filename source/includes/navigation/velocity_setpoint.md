@@ -189,6 +189,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
+import rospy
 from core_api.srv import *
 
 def setpoint_velocity(vx, vy, vz, yaw_rate, tolerance= 1.0, async = False, relative= False, yaw_rate_valid= False, body_frame= False):

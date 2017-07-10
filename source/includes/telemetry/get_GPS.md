@@ -239,6 +239,7 @@ ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/global_position/global",
 ```
 
 ```python--ros
+import rospy
 from sensor_msgs.msg import NavSatFix
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.

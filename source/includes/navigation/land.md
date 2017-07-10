@@ -128,6 +128,7 @@ success = srv.response.success;
 ```
 
 ```python--ros
+import rospy
 from core_api.srv import *
 
 def land(async= False):

@@ -116,7 +116,6 @@ Response Type:
         float64 x
         float64 y
         float64 z
-
 ```
 
 ```javascript--REST
@@ -137,7 +136,6 @@ JSON Response:
         y: Float,
         z: Float}
 }}
-
 ```
 
 ```javascript--Websocket
@@ -233,6 +231,7 @@ int main(int argc, char **argv)
 ```
 
 ```python--ros
+import rospy
 from geometry_msgs.msg import TwistStamped
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.

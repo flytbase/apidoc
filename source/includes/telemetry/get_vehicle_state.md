@@ -189,6 +189,7 @@ print drone.get_vehicle_mode()
 ```
 
 ```python--ros
+import rospy
 from mavros_msgs.msgs import State
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
 topic_sub = rospy.Subscriber("/<namespace>/flyt/state"), State, topic_callback)

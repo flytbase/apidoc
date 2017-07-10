@@ -215,6 +215,7 @@ ros::Subscriber sub = nh.subscribe("/<namespace>/mavros/local_position/local", 1
 ```
 
 ```python--ros
+import rospy
 from geometry_msgs.msg import TwistStamped
 
 # setup a subscriber and associate a callback function which will be called every time topic is updated.
