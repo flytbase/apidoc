@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /fonts/
+Disallow: /images/
+Disallow: /includes/
+Disallow: /javascripts/
+Disallow: /layouts/
+Disallow: /stylesheets/
+Disallow: /CNAME
+Allow: /index.html.md
