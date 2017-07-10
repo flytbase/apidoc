@@ -71,7 +71,7 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytsim/navigation/waypoint_set_current <span class="s2">"wp_seq: 1"</span> 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api.navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">waypoint_no</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>

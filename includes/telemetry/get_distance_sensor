@@ -124,7 +124,8 @@ Response structure:
 <span class="c"># Print the data</span>
 <span class="k">print</span> <span class="n">dist</span><span class="o">.</span><span class="nb">range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">max_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">min_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">field_of_view</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">radiation_type</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
-</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">sensor_msgs.msgs</span> <span class="kn">import</span> <span class="n">Range</span>
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">sensor_msgs.msgs</span> <span class="kn">import</span> <span class="n">Range</span>
 
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
 <span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/distance_sensor/lidarlite_pub"</span><span class="p">),</span> <span class="n">Range</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>

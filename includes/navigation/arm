@@ -71,7 +71,7 @@ bool success
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rosservice call /flytpod/navigation/arm <span class="s2">"{}"</span>    
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api.navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nav</span><span class="p">.</span><span class="n">arm</span><span class="p">())</span>
@@ -92,7 +92,8 @@ bool success
 <span class="n">core_api</span><span class="o">::</span><span class="n">Arm</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 <span class="n">success</span> <span class="o">=</span> <span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">success</span><span class="p">;</span>
-</code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">core_api.srv</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">arm</span><span class="p">()</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'/&lt;namespace&gt;/navigation/arm'</span><span class="p">)</span>
@@ -206,7 +207,7 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <h3 id="api-usage-information">API usage information:</h3>
 
 <ul>
-<li>ARM API will only work when device is in OFFBOARD / API CTL mode.</li>
+<li>ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.</li>
 <li>All navigation setpoint API&rsquo;s except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.</li>
 <li>It is safer to use take_off command instead of arm command. </li>
 </ul>

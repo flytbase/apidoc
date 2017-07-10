@@ -100,7 +100,7 @@ Response structure:
 <p>Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>rostopic <span class="nb">echo</span> /flytpod/mavros/rc/in 
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api.navigation_bridge.h&gt;
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;cpp_api/navigation_bridge.h&gt;
 </span>
 <span class="n">Navigation</span> <span class="n">nav</span><span class="p">;</span>
 <span class="n">mavros_msgs</span><span class="o">::</span><span class="n">RCIn</span> <span class="n">rc_channel</span><span class="p">;</span>
@@ -124,7 +124,8 @@ Response structure:
 <span class="c"># Print the data</span>
 <span class="k">print</span> <span class="n">rc</span><span class="o">.</span><span class="n">rssi</span><span class="p">,</span> <span class="n">rc</span><span class="o">.</span><span class="n">channels</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">// Please refer to Roscpp documentation for sample subscriber nodes. http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
-</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">RCIn</span>
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">mavros_msgs.msgs</span> <span class="kn">import</span> <span class="n">RCIn</span>
 <span class="c"># setup a subscriber and associate a callback function which will be called every time topic is updated.</span>
 <span class="n">topic_sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"/&lt;namespace&gt;/mavros/rc/in"</span><span class="p">),</span> <span class="n">State</span><span class="p">,</span> <span class="n">topic_callback</span><span class="p">)</span>
 
