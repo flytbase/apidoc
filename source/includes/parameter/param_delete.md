@@ -31,7 +31,9 @@ Returns: returns 0 if the command is successfull
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
 
-Not Implemented
+Class: flyt_python.API.navigation
+
+Function: param_delete()
 ```
 
 ```cpp--ros
@@ -107,8 +109,14 @@ param.param_delete(param_id);
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
 
+#Get value of a specific parameter
+drone.param_delete()
 ```
 
 ```cpp--ros
@@ -168,7 +176,7 @@ success: true
 ```
 
 ```python
-Not Implemented
+Bool - True, if action successful
 ```
 
 ```cpp--ros

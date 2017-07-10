@@ -23,8 +23,9 @@ No CPP API is available for execution of onboard scripts.
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+Class: flyt_python.API.navigation
 
-Not Implemented
+Function: exec_script(app_name, arguments)
 ```
 
 ```cpp--ros
@@ -97,8 +98,14 @@ rosservice call /<namespace>/navigation/exec_script "{}"
 ```
 
 ```python
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
 
-Not Implemented
+# execute onboard script with name in app_name and arguments to be passed with it as arguments  
+drone.exec_script(‘script’, ‘args’)
 
 ```
 
@@ -180,7 +187,10 @@ success: true
 ```
 
 ```python
-Not Implemented
+{'message': '', 'success': True}
+
+message (string):  Contains the error message if it is unable to run the script.
+success (bool): true if action successful
 ```
 
 ```cpp--ros

@@ -26,8 +26,9 @@ No CPP API available.
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+Class: flyt_python.API.navigation
 
-Not Implemented
+Function: set_home(lat, lon, alt, set_current=False)
 ```
 
 ```cpp--ros
@@ -108,7 +109,17 @@ rosservice call /flytsim/navigation/set_home "{lat: 73.25564541, lon: 18.2165632
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+#set given location as home 
+drone.set_home(10.2, 10.2, 10.2)
+
+#set current location as home
+drone.set_home(0, 0, 0, True)
 ```
 
 ```cpp--ros
@@ -185,7 +196,10 @@ success: true
 ```
 
 ```python
-Not Implemented
+{'message': '[INFO] Home Position successfully sent to vehicle', 'success': True}
+
+message (string): Contains error message
+success (bool): true if action successful
 ```
 
 ```cpp--ros

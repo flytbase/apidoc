@@ -27,61 +27,19 @@ MsgStructure:
 ```
 
 ```cpp
-// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
-
-Not Implemented
+//Not Implemented
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
-
-Not Implemented
+#Not Implemented
 ```
 
 ```cpp--ros
-// ROS services and topics are accessible from onboard scripts only.
-
-Type: Ros Service
-Name: /<namespace>/setup/module_calibration
-MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP = 0
-    uint8 ACCELEROMETER = 1
-    uint8 GYROSCOPE = 2
-    uint8 MAGNETOMETER = 3
-    uint8 RC = 4
-    uint8 RC_TRIM = 5
-    uint8 RC_STOP = 6
-    uint8 LEVEL = 7
-    uint8 AIRSPEED = 8
-    
-    int8 module_calibrate
-    ---
-    bool success
-
+//Not Recommended
 ```
 
 ```python--ros
-# ROS services and topics are accessible from onboard scripts only.
-
-Type: Ros Service
-Name: /<namespace>/setup/module_calibration
-MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP = 0
-    uint8 ACCELEROMETER = 1
-    uint8 GYROSCOPE = 2
-    uint8 MAGNETOMETER = 3
-    uint8 RC = 4
-    uint8 RC_TRIM = 5
-    uint8 RC_STOP = 6
-    uint8 LEVEL = 7
-    uint8 AIRSPEED = 8
-    
-    int8 module_calibrate
-    ---
-    bool success
-
+#Not Recommended
 ```
 
 ```javascript--REST
@@ -128,21 +86,19 @@ Response:
 ```
 
 ```cpp
-Not Implemented
+//Not Implemented
 ```
 
 ```python
-Not Implemented
+#Not Implemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
-
+//Not Recommended
 ```
 
 ```python--ros
-
-# Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
+#Not Recommended
 ```
 
 ```javascript--REST
@@ -188,18 +144,19 @@ success: True
 ```
 
 ```cpp
-Not Implemented
+//Not Implemented
 ```
 
 ```python
-Not Implemented
+#Not Implemented
 ```
 
 ```cpp--ros
+//Not Recommended
 ```
 
 ```python--ros
-
+#Not Recommended
 ```
 
 ```javascript--REST

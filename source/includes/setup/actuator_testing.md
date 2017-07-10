@@ -18,41 +18,19 @@ ReqStructure:
 ```
 
 ```cpp
-// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
-
-Not Implemented
+//Not Implemented
 ```
 
 ```python
-# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
-
-Not Implemented
+#Not Implemented
 ```
 
 ```cpp--ros
-// ROS services and topics are accessible from onboard scripts only.
-
-ROS-Service Name: /<namespace>/setup/actuator_testing
-ROS-Service Type: core_api/ActuatorTesting, below is its description
-
-ReqStructure:
-    uint8 actuator_id
-    float32 time_s
-    ---
-    bool success
+//Not Recommended
 ```
 
 ```python--ros
-# ROS services and topics are accessible from onboard scripts only.
-
-ROS-Service Name: /<namespace>/setup/actuator_testing
-ROS-Service Type: core_api/ActuatorTesting, below is its description
-
-ReqStructure:
-    uint8 actuator_id
-    float32 time_s
-    ---
-    bool success
+#Not Recommended
 ```
 
 ```javascript--REST
@@ -99,19 +77,19 @@ Response:
 ```
 
 ```cpp
-Not Implemented
+//Not Implemented
 ```
 
 ```python
-Not Implemented
+#Not Implemented
 ```
 
 ```cpp--ros
-// Please refer to Roscpp documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(c%2B%2B)
+//Not Recommended
 ```
 
 ```python--ros
-# Please refer to Rospy documentation for sample service clients. http://wiki.ros.org/ROS/Tutorials/WritingServiceClient(python)
+#Not Recommended
 ```
 
 ```javascript--REST
@@ -159,19 +137,19 @@ success: true
 ```
 
 ```cpp
-Not Implemented
+//Not Implemented
 ```
 
 ```python
-Not Implemented
+#Not Implemented
 ```
 
 ```cpp--ros
-
+//Not Recommended
 ```
 
 ```python--ros
-
+#Not Recommended
 ```
 
 ```javascript--REST

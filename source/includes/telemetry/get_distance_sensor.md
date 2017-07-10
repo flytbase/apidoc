@@ -32,8 +32,20 @@ Not Implemented
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.
+Class: flyt_python.API.navigation
+Function: get_distance_sensor()
+Response: dist_sensor as described below.
+ class dist_sensor:
+    """
+    Holds distance sensor data
+    """
+    radiation_type = 0
+    field_of_view = 0.0
+    min_range = 0.0
+    max_range = 0.0
+    range = 0.0
 
-Not Implemented
+This API supports single poll mode only.
 ```
 
 ```cpp--ros
@@ -128,7 +140,17 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
+
+# Poll data
+dist = drone.get_distance_sensor()
+
+# Print the data
+print dist.range, dist.max_range, dist.min_range, dist.field_of_view, dist.radiation_type
 ```
 
 ```cpp--ros
@@ -189,7 +211,7 @@ Not Implemented
 ```
 
 ```python
-Not Implemented
+instance of class dist_sensor
 ```
 
 ```cpp--ros

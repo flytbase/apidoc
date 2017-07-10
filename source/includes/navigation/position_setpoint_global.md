@@ -9,7 +9,7 @@
 ROS-Service Name: /<namespace>/navigation/position_set_global
 ROS-Service Type: core_api/PositionSetGlobal, below is its description
 
-#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z which corresponds respectively to the desired Latitude, longitude and altitude 
+#Request : expects position setpoint via twist.twist.linear.x,linear.y,linear.z which corresponds respectively to the desired Latitude, longitude and altitude
 #Request : expects yaw setpoint via twist.twist.angular.z (send yaw_valid=true)
 geometry_msgs/TwistStamped twist
 float32 tolerance
@@ -71,7 +71,7 @@ call srv:
 ```
 
 ```javascript--REST
-This is a REST call for the API. Make sure to replace 
+This is a REST call for the API. Make sure to replace
     ip: ip of the FlytOS running device
     namespace: namespace used by the FlytOS device.
 
@@ -97,10 +97,10 @@ JSON Response:
 ```
 
 ```javascript--Websocket
-This is a Websocket call for the API. Make sure you 
-initialise the websocket using websocket initialising 
-API and replace namespace with the namespace of 
-the FlytOS running device before calling the API 
+This is a Websocket call for the API. Make sure you
+initialise the websocket using websocket initialising
+API and replace namespace with the namespace of
+the FlytOS running device before calling the API
 with websocket.
 
 name: '/<namespace>/navigation/position_set_global',
@@ -140,8 +140,8 @@ rosservice call /flytpod/navigation/position_set_global "{twist: {header: {seq: 
 #include <cpp_api.navigation_bridge.h>
 
 Navigation nav;
-nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, false, true, false);
-#sends (x,y,z)=(1.0,3.5,5.0)(m), yaw=0.12rad, tolerance=2.0m, relative=false, async=false, yaw_valid=true, body_frame=false
+nav.position_set_global(18.7342124, 73.4323233, 5.0, 0.12, 2.0, false, true);
+//sends (x,y,z)=(18.7342124, 73.4323233, 5.0)(m), yaw=0.12rad, tolerance=2.0m, async=false, yaw_valid=true
 ```
 
 ```python
@@ -176,13 +176,13 @@ success = srv.response.success;
 
 ```python--ros
 import rospy
-from core_api.srv import * 
+from core_api.srv import *
 
 def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, yaw_valid= False):
     rospy.wait_for_service('/<namespace>/navigation/position_set_global')
     try:
         handle = rospy.ServiceProxy('/<namespace>/navigation/position_set_global', PositionSetGlobal)
-        
+
         # build message structure
         header_msg = std_msgs.msg.Header(1,rospy.Time(0.0,0.0),'a')
         twist = geometry_msgs.msg.Twist(geometry_msgs.msg.Vector3(lat,lon,alt),geometry_msgs.msg.Vector3(0.0,0.0,yaw))
@@ -190,10 +190,9 @@ def setpoint_global_position(lat, lon, alt, yaw, tolerance= 0.0, async = False, 
         req_msg = PositionSetGlobalRequest(twiststamped_msg, tolerance, async, yaw_valid)
         resp = handle(req_msg)
         return resp
-    
+
     except rospy.ServiceException, e:
         rospy.logerr("global pos set service call failed %s", e)
-
 ```
 
 ```javascript--REST
@@ -294,34 +293,34 @@ Success: True
 
 ###Description:
 
-This API sets a desired position setpoint in global coordinate system (WGS84). Please check API usage section below before using API. 
+This API sets a desired position setpoint in global coordinate system (WGS84). Please check API usage section below before using API.
 
 ###Parameters:
-    
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
-    
+
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms.
+
     Arguments:
-    
+
     Argument | Type | Description
     -------------- | -------------- | --------------
     lat | float | Latitude
     lon | float | Longitude
     rel_ht | float | relative height from current location in meters
     yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
+    yaw_valid | bool | Must be set to true, if yaw
+    tolerance | float | Acceptance radius in meters, default value=1.0m
     async | bool | If true, asynchronous mode is set
-    
+
     Output:
-    
+
     Parameter | Type | Description
     ---------- | ---------- | ------------
     success | bool | true if action successful
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure.
 
-* Type: Ros Service</br> 
+* Type: Ros Service</br>
 * Name: /\<namespace\>/navigation/position_set_global</br>
 * Service Type: PositionSetGlobal
 
@@ -355,7 +354,7 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 
 
 ### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs)
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
 * name: '/\<namespace\>/navigation/position_set_global'</br>
@@ -369,11 +368,11 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
 * Right hand notation is used to find positive yaw direction.
 * rel_ht parameter is always positive.
-* rel_ht parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_ht should be 10+5=15. 
+* rel_ht parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_ht should be 10+5=15.
 * Effect of parameters:
   * Async:
      * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-     * False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over. 
+     * False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
 * For yaw setpoint to be effective the yaw_valid argument must be set to true.
 * This API overrides any previous mission / navigation API being carried out.
 * This API requires global position lock. So using a GPS receiver is must for this API to work.
@@ -381,4 +380,3 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
   * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.
-

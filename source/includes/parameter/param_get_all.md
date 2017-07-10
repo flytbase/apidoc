@@ -35,8 +35,9 @@ Returns:
 
 ```python
 # Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+Class: flyt_python.API.navigation
 
-Not Implemented
+Function: param_get_all()
 ```
 
 ```cpp--ros
@@ -118,8 +119,14 @@ std::cout << "Parameter list: " << param_list << std::endl;
 ```
 
 ```python
-Not Implemented
+# create flyt_python navigation class instance
+from flyt_python import API
+drone = API.navigation()
+# wait for interface to initialize
+time.sleep(3.0)
 
+#Get all parameter
+drone.param_get_all()
 ```
 
 ```cpp--ros
@@ -177,7 +184,11 @@ param_list is populated with all the received parameters
 ```
 
 ```python
-Not Implemented
+{'param_list': [{'param_value': '0.200000', 'param_id': 'ATT_VIBE_THRESH'}, {'param_value': '15.391030', 'param_id': 'BAT_A_PER_V'}], 'message': 'Received 2 parameters', 'success': True}
+
+param_list (list): list of dictionary, each dictionary consists of param_value and param_id
+message (String): Contains error/success message
+success (bool): true if action successful
 ```
 
 ```cpp--ros
