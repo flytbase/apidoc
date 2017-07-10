@@ -10,11 +10,12 @@
 ROS-Service Name: /<namespace>/setup/actuator_testing
 ROS-Service Type: core_api/ActuatorTesting, below is its description
 
-ReqStructure:
-    uint8 actuator_id
-    float32 time_s
-    ---
-    bool success
+#request
+uint8 actuator_id
+float32 time_s
+#response
+bool success
+string message
 ```
 
 ```cpp
@@ -215,8 +216,8 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
 
 
 ### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
-Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
+Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
+Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
 * name: '/\<namespace\>/setup/actuator_testing'</br>
 * serviceType: 'core_api/ActuatorTesting'

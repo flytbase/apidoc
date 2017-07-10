@@ -13,6 +13,7 @@ ROS-Service Type: core_api/PositionHold, below is its description
 
 #Response : return success=true if command sent successfully to autopilot
 bool success
+string message
 ```
 
 ```cpp

@@ -18,6 +18,7 @@ bool set_current
 
 #Response : success=true if service called successfully 
 bool success
+string message
 ```
 
 ```cpp

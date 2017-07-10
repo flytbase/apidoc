@@ -15,6 +15,7 @@ string arguments
 
 #Response : return success=true if script starts to get executed
 bool success
+string message
 ```
 
 ```cpp

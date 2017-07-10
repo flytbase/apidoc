@@ -13,6 +13,7 @@ ROS-Service Type: core_api/WaypointSetCurrent, below is its description
 uint16 wp_seq
 # Response: success if command sent successfully
 bool success
+string message
 ```
 
 ```cpp

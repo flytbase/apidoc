@@ -14,6 +14,7 @@ mavros_msgs/Waypoint[] waypoints
 
 # Returns: success status and transfered count
 bool success
+string message
 uint32 wp_transfered
 
 ```

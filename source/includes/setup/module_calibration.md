@@ -10,20 +10,23 @@
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
 MsgType: core_api/ModuleCalibration
-MsgStructure:
-    uint8 STOP = 0
-    uint8 ACCELEROMETER = 1
-    uint8 GYROSCOPE = 2
-    uint8 MAGNETOMETER = 3
-    uint8 RC = 4
-    uint8 RC_TRIM = 5
-    uint8 RC_STOP = 6
-    uint8 LEVEL = 7
-    uint8 AIRSPEED = 8
-    
-    int8 module_calibrate
-    ---
-    bool success
+
+#request
+uint8 STOP = 0
+uint8 ACCELEROMETER = 1
+uint8 GYROSCOPE = 2
+uint8 MAGNETOMETER = 3
+uint8 RC = 4
+uint8 RC_TRIM = 5
+uint8 RC_STOP = 6
+uint8 LEVEL = 7
+uint8 AIRSPEED = 8
+
+int8 module_calibrate
+
+#response
+bool success
+string message
 ```
 
 ```cpp

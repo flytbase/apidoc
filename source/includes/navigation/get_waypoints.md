@@ -13,6 +13,7 @@ ROS-Service Type: core_api/WaypointGet, below is its description
 
 # Returns success status and received count
 bool success
+string message
 uint32 wp_received
 mavros_msgs/Waypoint[] waypoints
 

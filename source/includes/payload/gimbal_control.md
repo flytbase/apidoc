@@ -16,6 +16,7 @@ float64 pitch
 float64 yaw
 ---
 bool success
+string message
 ```
 
 ```cpp

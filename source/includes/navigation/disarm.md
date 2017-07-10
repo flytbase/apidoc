@@ -14,6 +14,7 @@ ROS-Service Type: core_api/Disarm, below is its description
 
 #Response : return success=true if command is successful
 bool success
+string message
 ```
 
 ```cpp

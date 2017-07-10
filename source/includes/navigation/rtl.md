@@ -13,6 +13,7 @@ ROS-Service Type: core_api/RTL, below is its description
 
 #Response : returns success=true if RTL is activated
 bool success
+string message
 ```
 
 ```cpp

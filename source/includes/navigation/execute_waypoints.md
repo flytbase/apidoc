@@ -13,6 +13,7 @@ ROS-Service Type: core_api/waypointExecute, below is its description
 
 #Response : success = true if command sent successfully
 bool success
+string message
 ```
 
 ```cpp

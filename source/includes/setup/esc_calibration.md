@@ -8,17 +8,19 @@
 
 ROS-Service Name: /<namespace>/setup/esc_calibration
 ROS-Service Type: core_api/EscCalibration, below is its description
-ReqStructure: 
-    int8 CALIBRATION_STATE_SET_PWM_MAX = 1
-    int8 CALIBRATION_STATE_SET_PWM_MIN = 2
-    int8 CALIBRATION_STATE_CANCEL = 3
-    float32 pwm_min
-    float32 pwm_max
-    int8 num_of_actuators
-    int8 calibration_state
-    ---
-    bool success
 
+#request
+int8 CALIBRATION_STATE_SET_PWM_MAX = 1
+int8 CALIBRATION_STATE_SET_PWM_MIN = 2
+int8 CALIBRATION_STATE_CANCEL = 3
+float32 pwm_min
+float32 pwm_max
+int8 num_of_actuators
+int8 calibration_state
+    
+#response
+bool success
+string message
 ```
 
 ```cpp

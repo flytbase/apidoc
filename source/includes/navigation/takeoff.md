@@ -14,6 +14,7 @@ float32 takeoff_alt
 
 #Response : returns success=true if takeoff altitude is reached
 bool success
+string message
 ```
 
 ```cpp

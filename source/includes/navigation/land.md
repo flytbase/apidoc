@@ -14,6 +14,7 @@ bool async
 
 #Response : return success=true if Land command sent successfully to autopilot
 bool success
+string message
 ```
 
 ```cpp
