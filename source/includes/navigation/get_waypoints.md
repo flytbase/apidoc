@@ -22,9 +22,9 @@ mavros_msgs/Waypoint[] waypoints
 ```cpp
 // C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
 
-Function Definition: int Navigation::waypoint_get(void)
+Function Definition: int Navigation::waypoint_get(std::vector<mavros_msgs::Waypoint> &waypoints)
 
-Arguments:  None
+Arguments:  waypoints: list of waypoints will be made available in this variable
 
 Returns:    returns 0 if the command is successfully sent to the vehicle
 ```
@@ -128,7 +128,9 @@ rosservice call /flytos/navigation/waypoint_get "{}"
 #include <cpp_api/navigation_bridge.h>
 
 Navigation nav;
-nav.waypoint_get();
+std::vector<mavros_msgs::Waypoint> &waypoints
+nav.waypoint_get(waypoints);
+std::cout<<"Number of waypoints received\t"<<waypoints.size()<<"\n";
 ```
 
 ```python
