@@ -229,8 +229,9 @@ print gpos.lat, gpos.lon, gpos.alt
 
 void gposCallback(const sensor_msgs::NavSatFixConstPtr &gpos)
 {
-  gpos_data.twist.linear = gpos->twist.linear;
-  gpos_data.twist.angular = gpos->twist.angular;
+  gpos_data.latitude = gpos->latitude;
+  gpos_data.longitude = gpos->longitude;
+  gpos_data.altitude = gpos->altitude;
 }
 
 ros::NodeHandle nh;

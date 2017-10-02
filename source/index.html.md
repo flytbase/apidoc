@@ -33,8 +33,8 @@ includes:
   - navigation/rtl
   - telemetry/get_attitude_quat
   - telemetry/get_attitude_euler
-  - telemetry/get_local_pos
-  - telemetry/get_GPS
+  - telemetry/get_local_position
+  - telemetry/get_global_position
   - telemetry/get_battery_status
   - telemetry/get_hud
   - telemetry/get_RC
