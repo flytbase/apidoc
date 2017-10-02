@@ -198,8 +198,9 @@ Response structure:
 </span>
 <span class="kt">void</span> <span class="nf">gposCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">sensor_msgs</span><span class="o">::</span><span class="n">NavSatFixConstPtr</span> <span class="o">&amp;</span><span class="n">gpos</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">gpos_data</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">gpos</span><span class="o">-&gt;</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">;</span>
-  <span class="n">gpos_data</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span> <span class="o">=</span> <span class="n">gpos</span><span class="o">-&gt;</span><span class="n">twist</span><span class="p">.</span><span class="n">angular</span><span class="p">;</span>
+  <span class="n">gpos_data</span><span class="p">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">gpos</span><span class="o">-&gt;</span><span class="n">latitude</span><span class="p">;</span>
+  <span class="n">gpos_data</span><span class="p">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">gpos</span><span class="o">-&gt;</span><span class="n">longitude</span><span class="p">;</span>
+  <span class="n">gpos_data</span><span class="p">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">gpos</span><span class="o">-&gt;</span><span class="n">altitude</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span>
