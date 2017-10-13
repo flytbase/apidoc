@@ -123,7 +123,7 @@ string message
 <span class="nx">msgdata</span><span class="p">[</span><span class="s2">"enable_access"</span><span class="p">]</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
     <span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
     <span class="na">data</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">msgdata</span><span class="p">),</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/access_request"</span><span class="p">,</span>  
@@ -231,7 +231,7 @@ string message
 <p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
-<li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/access_request</code></li>
+<li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/access_request</code></li>
 <li>JSON Request:
 {
 enable_access: Boolean
