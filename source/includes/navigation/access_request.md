@@ -160,7 +160,7 @@ var  msgdata={};
 msgdata["enable_access"]=true;
 
 $.ajax({
-    type: "GET",
+    type: "POST",
     dataType: "json",
     data: JSON.stringify(msgdata),
     url: "http://<ip>/ros/<namespace>/navigation/access_request",  
@@ -264,7 +264,7 @@ Navigation APIs in FlytOS are derived from / wrapped around the core navigation 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/access_request``
+* URL: ``POST http://<ip>/ros/<namespace>/navigation/access_request``
 * JSON Request:
 {
     enable_access: Boolean
