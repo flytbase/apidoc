@@ -233,7 +233,7 @@ Success: True
 
 
 ###Description:
-This API enables API control over drone. Sending vehicle to GUIDED/OFFBOARD mode via RC automatically enables API control, and likewise sending vehicle to RC modes such as MANUAL/STABILIZE or any mode other than GUIDED/OFFBOARD disables API control. 
+This API enables API control over drone. Sending vehicle to GUIDED/OFFBOARD mode via RC automatically enables API control, and likewise sending vehicle to RC modes such as MANUAL/STABILIZE/ALTCTL/ALT_HOLD/POSCTL/POSHOLD/LOITER disables API control. 
 
 If this API is called with enable_access argument set to 'true', vehicle's mode is shifted to GUIDED/OFFBOARD mode internally.
 
