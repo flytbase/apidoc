@@ -171,7 +171,7 @@ string message
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API enables or disables API control over drone. Sending vehicle to GUIDED/OFFBOARD mode via RC or set_mode API automatically enables API control, and likewise sending vehicle to RC modes such as MANUAL/STABILIZE/ALTCTL/POSCTL disables API control.</p>
+<p>This API enables API control over drone. Sending vehicle to GUIDED/OFFBOARD mode via RC automatically enables API control, and likewise sending vehicle to RC modes such as MANUAL/STABILIZE or any mode other than GUIDED/OFFBOARD disables API control. </p>
 
 <p>If this API is called with enable_access argument set to &lsquo;true&rsquo;, vehicle&rsquo;s mode is shifted to GUIDED/OFFBOARD mode internally.</p>
 
@@ -191,7 +191,7 @@ string message
 <tr>
 <td>enable_access</td>
 <td>bool</td>
-<td>Set this to true to enable API access. API access is disabled if set to false</td>
+<td>Set this to true to enable API access. Setting this to false won&rsquo;t have any effect, this feature would be added later.</td>
 </tr>
 </tbody></table>
 
@@ -258,5 +258,5 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <ul>
 <li>access_request API MUST be called if you don&rsquo;t have any RC hooked with the vehicle.</li>
 <li>It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. </li>
-<li>All navigation API&rsquo;s except &lsquo;disarm&rsquo; requires that FlytOS&rsquo;s access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API.</li>
+<li>All navigation API&rsquo;s except &lsquo;disarm&rsquo; requires that FlytOS&rsquo;s access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.</li>
 </ul>
