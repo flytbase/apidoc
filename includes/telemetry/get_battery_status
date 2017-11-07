@@ -272,6 +272,12 @@ serial_number: <span class="s1">''</span>
 
 <p>This API subscribes/polls battery status.  Please check API usage section below before using API.</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides voltage, current, remaining battery information.</li>
+</ul>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -317,9 +323,9 @@ serial_number: <span class="s1">''</span>
 <p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
 
 <ul>
-<li>Type: Ros Topic</br> </li>
-<li>Name: /&lt;namespace&gt;/mavros/battery</br></li>
-<li>Response Type: sensor_msgs/BatteryState</li>
+<li>Type: <code class="prettyprint">Ros Topic</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/mavros/battery</code></li>
+<li>Response Type: <code class="prettyprint">sensor_msgs/BatteryState</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -329,25 +335,20 @@ serial_number: <span class="s1">''</span>
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/battery</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 voltage: Float,
 current: Float,
 remaining: Float
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/mavros/battery&rsquo;</br></li>
-<li>messageType: &lsquo;sensor_msgs/BatteryState&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides voltage, current, remaining battery information.</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/mavros/battery</code></li>
+<li>messageType: <code class="prettyprint">sensor_msgs/BatteryState</code></li>
 </ul>

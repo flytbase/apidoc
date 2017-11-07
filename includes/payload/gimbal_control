@@ -255,35 +255,37 @@ yaw:-0.2"</span>
 <p>Payload APIs in FlytOS are derived from / wrapped around the core services available in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/payload/gimbal_set</br></li>
-<li>Service Type: GimbalSet</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/payload/gimbal_set</code></li>
+<li>Service Type: <code class="prettyprint">GimbalSet</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/payload/gimbal_set</code></li>
 <li>JSON Request:
-{   roll: Float,
+<code class="prettyprint">{
+roll: Float,
 pitch: Float,
 yaw: Float
-}</li>
+}</code></li>
 <li>JSON Response:
-{
-success: Boolean
+<code class="prettyprint">{
+success: Boolean,
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library</a>.
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava</a>.</p>
+<p>Websocket APIs can be called from javascript using <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library</a>.</p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava</a>.</p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/payload/gimbal_set&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/GimbalSet&rsquo;</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/payload/gimbal_set</code></li>
+<li>serviceType: <code class="prettyprint">core_api/GimbalSet</code></li>
 </ul>

@@ -134,6 +134,12 @@ string message
 
 <p>This API resets all the parameter value to the last save parameter state.</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
+</aside>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -207,37 +213,34 @@ string message
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
+<p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure.</p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/param/param_reset</br></li>
-<li>Service Type: ParamReset</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/param/param_reset</code></li>
+<li>Service Type: <code class="prettyprint">ParamReset</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/param/param_reset</code></li>
 <li>JSON Response:
-{
-success: Boolean
+<code class="prettyprint">{
+success: Boolean,
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/param/param_reset&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ParamReset&rsquo;</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/param/param_reset</code></li>
+<li>serviceType: <code class="prettyprint">core_api/ParamReset</code></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.</p>

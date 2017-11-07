@@ -265,7 +265,15 @@ twist:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API subscribes/polls linear position, velocity data in NED frame.  Please check API usage section below before using API.</p>
+<p>This API subscribes/polls linear position, velocity data in NED frame.  Check API usage section below before using API.</p>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides linear position and linear velocity.</li>
+<li>Data returned is in NED frame.</li>
+<li>Be careful when using z data obtained into takeoff or position setpoint APIs. These API&rsquo;s may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.</li>
+</ul>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -317,9 +325,9 @@ twist:
 <p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
 
 <ul>
-<li>Type: Ros Topic</br> </li>
-<li>Name: /&lt;namespace&gt;/mavros/local_position/local</br></li>
-<li>Response Type: geometry_msgs/TwistStamped</li>
+<li>Type: <code class="prettyprint">Ros Topic</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/mavros/local_position/local</code></li>
+<li>Response Type: <code class="prettyprint">geometry_msgs/TwistStamped</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -329,33 +337,29 @@ twist:
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/local_position/local</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 twist:{
-linear:{
-    x: Float,
-    y: Float,
-    z: Float},
-angular:{
-    x: Float,
-    y: Float,
-    z: Float}
-}}</li>
+    linear:{
+        x: Float,
+        y: Float,
+        z: Float
+    },
+    angular:{
+        x: Float,
+        y: Float,
+        z: Float
+    }
+}
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/mavros/local_position/local&rsquo;</br></li>
-<li>messageType: &lsquo;geometry_msgs/TwistStamped&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides linear position and linear velocity.</li>
-<li>Data returned is in NED frame.</li>
-<li>Be careful when using z data obtained into takeoff or position setpoint APIs. These API&rsquo;s may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/mavros/local_position/local</code></li>
+<li>messageType: <code class="prettyprint">geometry_msgs/TwistStamped</code></li>
 </ul>

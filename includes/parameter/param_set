@@ -79,9 +79,10 @@ string message
         <span class="nx">param_value</span><span class="p">:</span> <span class="nb">String</span> <span class="p">}}</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
-    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
-
+<span class="p">{</span>
+    <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
 
 </code></pre>
 <blockquote>
@@ -165,6 +166,12 @@ string message
 
 <p>This API sets the value of a desired parameter</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure the parameter which you are trying to update, exists.
+</aside>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -216,41 +223,38 @@ string message
 <p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/param/param_set</br></li>
-<li>Service Type: ParamSet</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/param/param_set</code></li>
+<li>Service Type: <code class="prettyprint">ParamSet</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/param/param_set</code></li>
 <li>JSON Request:
-{
+<code class="prettyprint">{
 param_info:{
     param_id: [String],
     param_value: [String]
 }
-}</li>
+}</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/param/param_set&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ParamSet&rsquo;</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/param/param_set</code></li>
+<li>serviceType: <code class="prettyprint">core_api/ParamSet</code></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: Make sure the parameter exists, which you are trying to update.</p>

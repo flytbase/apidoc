@@ -176,7 +176,19 @@ Response structure:
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.</p>
+<p>This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Check usage information section below before using the API.</p>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO.
+</aside>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API works only on FlytPOD.<br></li>
+<li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
+<li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
+</ul>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -205,12 +217,12 @@ Response structure:
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
+<p>All the autopilot state/payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy/roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
 
 <ul>
-<li>Type: Ros Topic</br> </li>
-<li>Name: /&lt;namespace&gt;/mavros/payload_adc</br></li>
-<li>Response Type: mavros_msgs/PayloadADC</li>
+<li>Type: <code class="prettyprint">Ros Topic</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/mavros/payload_adc</code></li>
+<li>Response Type: <code class="prettyprint">mavros_msgs/PayloadADC</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -220,30 +232,19 @@ Response structure:
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/payload_adc</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 adc_voltage: Float[2],
 adc_updated: Int
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/mavros/payload_adc&rsquo;</br></li>
-<li>messageType: &lsquo;mavros_msgs/PayloadADC&rsquo;</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/mavros/payload_adc</code></li>
+<li>messageType: <code class="prettyprint">mavros_msgs/PayloadADC</code></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API works only on FlytPOD.<br></li>
-<li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
-<li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
-</ul>
-
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO.
-</aside>

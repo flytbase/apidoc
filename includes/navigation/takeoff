@@ -8,10 +8,10 @@
 ROS-Service Name: /&lt;namespace&gt;/navigation/takeoff
 ROS-Service Type: core_api/TakeOff, below is its description
 
-<span class="c">#Request : expects take off altitude in metres</span>
+<span class="c"># Request : expects take off altitude in metres</span>
 float32 takeoff_alt
 
-<span class="c">#Response : returns success=true if takeoff altitude is reached</span>
+<span class="c"># Response : returns success=true if takeoff altitude is reached</span>
 bool success
 string message
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// C++ API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from C++.
@@ -168,7 +168,21 @@ string message
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>Takeoff and reach to specified height from current location.</p>
+<p>Takeoff and reach specified height from current location.</p>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>Takeoff to specified height from current height at current location.</p>
+
+<ul>
+<li>takeoff_alt value should be positive. </li>
+<li>Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.</li>
+<li>Takeoff API will automatically arm the motors. </li>
+<li>Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.</li>
+<li>Minimum value of takeoff_alt argument is 1.5 meters.</li>
+<li>Takeoff API is always synchronous. </li>
+<li>It is recommended not to send any other navigation commands while takeoff is under way.</li>
+</ul>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -186,7 +200,7 @@ string message
 <tr>
 <td>takeoff_alt</td>
 <td>float32</td>
-<td>takeoff to given height at current location. (minimum 3 meters)</td>
+<td>takeoff to given height at current location. (minimum 1.5 meters)</td>
 </tr>
 </tbody></table>
 
@@ -216,26 +230,26 @@ string message
 <p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/navigation/takeoff</br></li>
-<li>Service Type: core_api/TakeOff</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/navigation/takeoff</code></li>
+<li>Service Type: <code class="prettyprint">core_api/TakeOff</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/take_off</code></li>
 <li>JSON Request:
-{
+<code class="prettyprint">{
 takeoff_alt: Float
-}</li>
+}</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
@@ -244,20 +258,6 @@ message: String
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/navigation/take_off&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/TakeOff&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Takeoff to specified height from current height at current location.</p>
-
-<ul>
-<li>takeoff_alt value should be positive. </li>
-<li>Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.</li>
-<li>Takeoff API will automatically arm the motors. </li>
-<li>Takeoff API will work only in OFFBOARD/API_CTL mode.</li>
-<li>Minimum value of takeoff_alt argument is 3.0 meters.</li>
-<li>Takeoff API is always synchronous. </li>
-<li>It is recommended not to send any other navigation commands while takeoff is under way.</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/navigation/take_off</code></li>
+<li>serviceType: <code class="prettyprint">core_api/TakeOff</code></li>
 </ul>

@@ -49,7 +49,8 @@ string message
 
 <span class="nl">Response</span><span class="p">:</span>
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
-    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
 
 
 </code></pre>
@@ -58,9 +59,9 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># Refer to rosservice command line API documentation for sample service calls. http://wiki.ros.org/rosservice</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//Not Implemented
-</span></code></pre><pre class="highlight python tab-python"><code><span class="c">#Not Implemented</span>
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Not Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">//Not Recommended
-</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="c">#Not Recommended</span>
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># Not Recommended</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="kd">var</span>  <span class="nx">msgdata</span><span class="o">=</span><span class="p">{};</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="s2">"actuator_id"</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
 <span class="nx">msgdata</span><span class="p">[</span><span class="s2">"time_s"</span><span class="p">]</span><span class="o">=</span><span class="mf">4.00</span><span class="p">;</span>
@@ -101,9 +102,9 @@ string message
 </blockquote>
 <pre class="highlight shell tab-shell"><code>success: <span class="nb">true</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//Not Implemented
-</span></code></pre><pre class="highlight python tab-python"><code><span class="c">#Not Implemented</span>
+</span></code></pre><pre class="highlight python tab-python"><code><span class="c"># Not Implemented</span>
 </code></pre><pre class="highlight cpp tab-cpp--ros"><code><span class="c1">//Not Recommended
-</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="c">#Not Recommended</span>
+</span></code></pre><pre class="highlight python tab-python--ros"><code><span class="c"># Not Recommended</span>
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="p">{</span>
     <span class="nl">success</span><span class="p">:</span><span class="nx">True</span>
 <span class="p">}</span>
@@ -114,6 +115,16 @@ string message
 <h3 id="description">Description:</h3>
 
 <p>This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.</p>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
+</aside>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
+</aside>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -166,9 +177,9 @@ string message
 <p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/setup/actuator_testing</br></li>
-<li>Service Type: ActuatorTesting</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/setup/actuator_testing</code></li>
+<li>Service Type: <code class="prettyprint">ActuatorTesting</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -178,31 +189,24 @@ string message
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/setup/actuator_testing</code></li>
 <li>JSON Request:
-{
+<code class="prettyprint">{
 actuator_id: Int,
 time_s: Float
-}</li>
+}</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library</a>.
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava</a>.</p>
+<p>Websocket APIs can be called from javascript using <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library</a>.</p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava</a>.</p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/setup/actuator_testing&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ActuatorTesting&rsquo;</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/setup/actuator_testing</code></li>
+<li>serviceType: <code class="prettyprint">core_api/ActuatorTesting</code></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.</p>
-
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running APM.
-</aside>

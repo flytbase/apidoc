@@ -131,6 +131,10 @@ string message
 
 <p>This API helps calibrate ESCs.</p>
 
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO.
+</aside>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -192,38 +196,39 @@ string message
 <p>APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/setup/esc_calibration</br></li>
-<li>Service Type: EscCalibration</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/setup/esc_calibration</code></li>
+<li>Service Type: <code class="prettyprint">EscCalibration</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/\&lt;namespace\&gt;/setup/esc_calibration</code></li>
 <li>JSON Request:
-{
+<code class="prettyprint">{
 pwm_min: Float,
 pwm_max: Float,
 num_of_actuators: Int,
 calibration_state: Int
-}</li>
+}</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/setup/esc_calibration&rsquo;</br></li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/setup/esc_calibration</code></li>
 <li>serviceType: &lsquo;core_api/EscCalibration&rsquo;</li>
 </ul>
 
@@ -234,7 +239,3 @@ Tip: Asynchronous mode - The API call would return as soon as the command has be
 
 Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
  -->
-
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO.
-</aside>

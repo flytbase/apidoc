@@ -256,7 +256,15 @@ mav_sys_status: 0
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API subscribes/polls the vehicle state data. Please see usage information section below before using the API.</p>
+<p>This API subscribes/polls the vehicle state data. Check usage information section below before using the API.</p>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides mode and arm status.</li>
+<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
+<li>This API only allows to read the mode and arm status. </li>
+</ul>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -285,22 +293,22 @@ mav_sys_status: 0
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
-<p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
+<p>All the autopilot state/payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
 
 <ul>
-<li>Type: Ros Topic</br> </li>
-<li>Name: /&lt;namespace&gt;/flyt/state</br></li>
-<li>Response Type: mavros_msgs/State</li>
+<li>Type: <code class="prettyprint">Ros Topic</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/flyt/state</code></li>
+<li>Response Type: <code class="prettyprint">mavros_msgs/State</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/flyt/state</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 connected: Boolean,
 armed: Boolean,
 guided: Boolean,
@@ -308,23 +316,16 @@ mode: String,
 mav_type: Int,
 mav_autopilot: Int,
 mav_sys_status: Int
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/flyt/state&rsquo;</br></li>
-<li>messageType: &lsquo;mavros_msgs/State&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides mode and arm status.</li>
-<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
-<li>This API only allows to read the mode and arm status. </li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/flyt/state</code></li>
+<li>messageType: <code class="prettyprint">mavros_msgs/State</code></li>
 </ul>

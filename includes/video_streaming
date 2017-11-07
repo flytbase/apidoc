@@ -77,6 +77,30 @@
 
 <p>This API allows to get the list of video streams avalibale and view the live stream.</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Keep an eye out, for this API needs a port at the end of the IP set to <strong>8080</strong>.
+</aside>
+
+<ul>
+<li><p>To view the video of a particular stream from the list of streams you need to create an <strong>img</strong> tag add the link to its source.</p>
+
+<p><code class="prettyprint">&lt;img src=&#39;http://&lt;ip&gt;/stream?topic=&lt;link to stream1&gt;&#39;&gt;</code></p></li>
+<li><p>Tip: You can add the following parameters as query string to the link for lighter or better resolution video quality.
+width, height, quality, rate:1/2/3</p>
+
+<p>1. <strong>1</strong> will send out every frame,</p>
+
+<p>2. <strong>2</strong> will send out every second frame,</p>
+
+<p>3. <strong>3</strong> every third and so on&hellip;</p></li>
+<li><p>Tip: To stop the video stream you need to delete the <strong>img</strong> tag completely.</p></li>
+<li><p>Tip: To take a snapshot of the stream replace the word stream with snapshot in the link.</p>
+
+<p><code class="prettyprint">&lt;img src=&#39;http://&lt;ip&gt;/snapshot?topic=&lt;link to stream1&gt;&#39;&gt;</code></p></li>
+</ul>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable in RESTful, Websocket. However the description of these parameters applies to all platforms. </p>
@@ -129,14 +153,16 @@
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/list_streams</code></li>
 <li><p>JSON Request:
-{   namespace: &lt;namespace of FlytOS&gt;}</p></li>
+<code class="prettyprint">{
+namespace: &lt;namespace of FlytOS&gt;
+}</code></p></li>
 <li><p>JSON Response:
-{
+<code class="prettyprint">{
 stream1: &lt;link to stream1&gt;,
 stream2: &lt;link to stream2&gt;,
 stream3: &lt;link to stream3&gt;,
@@ -144,25 +170,6 @@ stream4: &lt;link to stream4&gt;,
 stream5: &lt;link to stream5&gt;,
 .
 .
-.<br>
-}</p></li>
+.    
+}</code></p></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: To view the video of a particular stream from the list of streams you need to create an <strong>img</strong> tag add the link to its source.</p>
-
-<p><code class="prettyprint">&lt;img src=&#39;http://&lt;ip&gt;/stream?topic=&lt;link to stream1&gt;&#39; &gt;</code></p>
-
-<p>Tip: You can add the following parameters as query string to the link for lighter or better resolution video quality.
-width, height, quality, rate:1/2/3</p>
-
-<p>rate:1 will send out every frame, 2 will send out every second frame, 3 every third and so on..</p>
-
-<p>Tip: To stop the video stream you need to delete the <strong>img</strong> tag completely.</p>
-
-<p>Tip: To take a snapshot of the stream replace the word stream with snapshot in the link.</p>
-
-<p><code class="prettyprint">&lt;img src=&#39;http://&lt;ip&gt;/snapshot?topic=&lt;link to stream1&gt;&#39; &gt;</code></p>
-
-<p>Note: <strong>Keep an eye out, for this API needs a port at the end of the IP set to :8080.</strong></p>

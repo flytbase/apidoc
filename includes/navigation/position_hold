@@ -155,6 +155,17 @@ string message
 
 <p>Position hold / hover / loiter at current position.  </p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>This API can be used to stop the vehicle at current location. </p>
+
+<ul>
+<li>This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.</li>
+<li>Thia API will override current mission / navigation commmands. </li>
+<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
+<li>Vehicle may take few seconds to come to rest depending on current linear velocity.</li>
+</ul>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -187,41 +198,31 @@ string message
 <p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/navigation/position_hold</br></li>
-<li>Service Type: core_api/PositionHold</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/navigation/position_hold</code></li>
+<li>Service Type: <code class="prettyprint">core_api/PositionHold</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_hold</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/navigation/position_hold&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/PositionHold&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>This API can be used to stop the vehicle at current location. </p>
-
-<ul>
-<li>This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.</li>
-<li>Thia API will override current mission / navigation commmands. </li>
-<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
-<li>Vehicle may take few seconds to come to rest depending on current linear velocity.</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/navigation/position_hold</code></li>
+<li>serviceType: <code class="prettyprint">core_api/PositionHold</code></li>
 </ul>

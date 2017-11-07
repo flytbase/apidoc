@@ -163,9 +163,11 @@ Response structure:
 <span class="nx">messageType</span><span class="p">:</span> <span class="s1">'sensor_msgs/NavSatFix'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">latitude</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
+<span class="p">{</span>   
+    <span class="nl">latitude</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
     <span class="nx">longitude</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-    <span class="nx">altitude</span><span class="p">:</span> <span class="nx">Float</span><span class="p">}</span>
+    <span class="nx">altitude</span><span class="p">:</span> <span class="nx">Float</span>
+<span class="p">}</span>
 
 </code></pre>
 <blockquote>
@@ -266,6 +268,14 @@ Response structure:
 
 <p>This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides GPS coordinates and altitude at current location</li>
+<li>Altitude value returned is relative to MSL (mean sea level).</li>
+<li>Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API&rsquo;s expect z values in local frame.</li>
+</ul>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -301,9 +311,9 @@ Response structure:
 <p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
 
 <ul>
-<li>Type: Ros Topic</br> </li>
-<li>Name: /&lt;namespace&gt;/mavros/global_position/global</br></li>
-<li>Response Type: sensor_msgs/NavSatFix</li>
+<li>Type: <code class="prettyprint">Ros Topic</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/mavros/global_position/global</code></li>
+<li>Response Type: <code class="prettyprint">sensor_msgs/NavSatFix</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -313,27 +323,20 @@ Response structure:
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/global_position/global</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 latitude: Float,
 longitude: Float,
 altitude: Float
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a></p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/mavros/global_position/global&rsquo;</br></li>
-<li>messageType: &lsquo;sensor_msgs/NavSatFix&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides GPS coordinates and altitude at current location</li>
-<li>Altitude value returned is relative to MSL (mean sea level).</li>
-<li>Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API&rsquo;s expect z values in local frame.</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/mavros/global_position/global</code></li>
+<li>messageType: <code class="prettyprint">sensor_msgs/NavSatFix</code></li>
 </ul>

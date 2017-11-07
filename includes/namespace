@@ -144,28 +144,36 @@ message: FlytOS namespace is  flytpod
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API returns the global namespace under which FlytOS&rsquo;s instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a <strong>MUST</strong>, as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever <em>&lt;namespace&gt;</em> is mentioned in API call definition, it must be replaced by the output of this API call. Users writing their code in simple CPP and Python need not call this API.</p>
+<p>This API returns the global namespace under which FlytOS&rsquo;s instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a <strong>MUST</strong>, as the value of this namespace is required to call other APIs.</p>
+
+<p>In the subsequent documentation, wherever <em>&lt;namespace&gt;</em> is mentioned in API call definition, it must be replaced by the output of this API call.</p>
+
+<p>Users writing their code in simple CPP and Python need not call this API.</p>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Global namespace is required when calling onboard/remote APIs except cpp/python APIs.</li>
+<li>All the core nodes of FlytOS run inside this namespace.</li>
+<li>Make sure that your custom ROS packages are not launched inside this namespace.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /get_global_namespace</br></li>
-<li>Service Type: ParamGetGlobalNamespace</li>
+<li>Service Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/get_global_namespace</code></li>
+<li>Service Type: <code class="prettyprint">ParamGetGlobalNamespace</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
-<li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/get_global_namespace</code></li>
-<li>JSON Response:
-{
-success: Boolean,
-message: String,
-param_info:{param_value: String}
-}</li>
+<li>URL: <code class="prettyprint">http://&lt;ip&gt;/ros/get_global_namespace</code></li>
+<li>Request Method: <code class="prettyprint">GET</code></li>
+<li>JSON Response: <code class="prettyprint">{success: Boolean,message: String,param_info:{param_value: String}}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
@@ -174,14 +182,6 @@ param_info:{param_value: String}
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava</a>.</p>
 
 <ul>
-<li>name: &lsquo;/get_global_namespace&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/ParamGetGlobalNamespace&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Global namespace is required when calling onboard/remote APIs except cpp/python APIs.</li>
-<li>All the core nodes of FlytOS run inside this namespace.</li>
-<li>Make sure that your custom ROS packages are not launched inside this namespace.</li>
+<li>name: <code class="prettyprint">/get_global_namespace</code></li>
+<li>serviceType: <code class="prettyprint">core_api/ParamGetGlobalNamespace</code></li>
 </ul>

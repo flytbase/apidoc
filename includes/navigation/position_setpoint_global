@@ -114,7 +114,6 @@ string message
 <span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
     <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
 
-
 </code></pre>
 <blockquote>
 <p>Example</p>
@@ -236,6 +235,37 @@ rosservice call /flytos/navigation/position_set_global <span class="s2">"{ lat_x
 
 <p>This API sets a desired position setpoint in global coordinate system (WGS84). Please check API usage section below before using API.</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
+<li>Vehicle should be armed for this API to work.</li>
+<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
+<li>Right hand notation is used to find positive yaw direction.</li>
+<li>rel_alt_z parameter is always positive.</li>
+<li>rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.</li>
+<li>Effect of parameters:
+
+<ul>
+<li>Async:
+
+<ul>
+<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</li>
+<li>False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</li>
+</ul></li>
+</ul></li>
+<li>For yaw setpoint to be effective the yaw_valid argument must be set to true.</li>
+<li>This API overrides any previous mission / navigation API being carried out.</li>
+<li>This API requires global position lock. So using a GPS receiver is must for this API to work.</li>
+<li>Following parameters need to be manually configured according to vehicle frame.
+
+<ul>
+<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.</li>
+</ul></li>
+</ul>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms.</p>
@@ -312,9 +342,9 @@ rosservice call /flytos/navigation/position_set_global <span class="s2">"{ lat_x
 <p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure.</p>
 
 <ul>
-<li>Type: Ros Service</br></li>
-<li>Name: /&lt;namespace&gt;/navigation/position_set_global</br></li>
-<li>Service Type: PositionSetGlobal</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/navigation/position_set_global</code></li>
+<li>Service Type: <code class="prettyprint">PositionSetGlobal</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -324,7 +354,7 @@ rosservice call /flytos/navigation/position_set_global <span class="s2">"{ lat_x
 <ul>
 <li>URL: <code class="prettyprint">POST http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/position_set_global</code></li>
 <li>JSON Request:
-{
+<code class="prettyprint">{
 lat_x: Float,
 long_y: Float,
 rel_alt_z: Float,
@@ -333,12 +363,12 @@ tolerance: Float,
 async: Boolean,
 relative: Boolean,
 yaw_valid : Boolean
-}</li>
+}</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
@@ -349,35 +379,4 @@ Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava"
 <ul>
 <li>name: &lsquo;/&lt;namespace&gt;/navigation/position_set_global&rsquo;</br></li>
 <li>serviceType: &lsquo;core_api/PositionSetGlobal&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
-<li>Vehicle should be armed for this API to work.</li>
-<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
-<li>Right hand notation is used to find positive yaw direction.</li>
-<li>rel_alt_z parameter is always positive.</li>
-<li>rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.</li>
-<li>Effect of parameters:
-
-<ul>
-<li>Async:
-
-<ul>
-<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</li>
-<li>False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</li>
-</ul></li>
-</ul></li>
-<li>For yaw setpoint to be effective the yaw_valid argument must be set to true.</li>
-<li>This API overrides any previous mission / navigation API being carried out.</li>
-<li>This API requires global position lock. So using a GPS receiver is must for this API to work.</li>
-<li>Following parameters need to be manually configured according to vehicle frame.
-
-<ul>
-<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.</li>
-</ul></li>
 </ul>

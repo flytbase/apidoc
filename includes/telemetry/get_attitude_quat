@@ -10,7 +10,7 @@
 ROS-Topic Name: /&lt;namespace&gt;/mavros/imu/data
 ROS-Topic Type: sensor_msgs/Imu, below is its description
 
-<span class="c">#Subscriber response : Attitude Quaternion </span>
+<span class="c"># Subscriber response : Attitude Quaternion </span>
 Response structure:
     std_msgs/Header header
       uint32 seq
@@ -133,7 +133,6 @@ Response structure:
       <span class="n">float64</span> <span class="n">y</span>
       <span class="n">float64</span> <span class="n">z</span>
     <span class="n">float64</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">linear_acceleration_covariance</span>
-
 </code></pre><pre class="highlight javascript tab-javascript--REST"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">REST</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">to</span> <span class="nx">replace</span> 
     <span class="nx">ip</span><span class="p">:</span> <span class="nx">ip</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">running</span> <span class="nx">device</span>
     <span class="nl">namespace</span><span class="p">:</span> <span class="nx">namespace</span> <span class="nx">used</span> <span class="nx">by</span> <span class="nx">the</span> <span class="nx">FlytOS</span> <span class="nx">device</span><span class="p">.</span>
@@ -323,6 +322,12 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 
 <p>This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.</p>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides orientation in quaternion and angular velocity</li>
+</ul>
+
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -378,9 +383,9 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 <p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
 
 <ul>
-<li>Type: Ros Topic</br> </li>
-<li>Name: /&lt;namespace&gt;/mavros/imu/data</br></li>
-<li>Response Type: sensor_msgs/Imu</li>
+<li>Type: <code class="prettyprint">Ros Topic</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/mavros/imu/data</code></li>
+<li>Response Type: <code class="prettyprint">sensor_msgs/Imu</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
@@ -390,7 +395,7 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/imu/data</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 orientation:{
     x: Float,
     y: Float,
@@ -404,21 +409,16 @@ linear_acceleration:{
     x: Float,
     y: Float,
     z: Float}
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
 
-<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> 
-Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
+<p>Websocket APIs can be called from javascript using  <a href="https://github.com/RobotWebTools/roslibjs">roslibjs library.</a> </p>
+
+<p>Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/mavros/imu/data&rsquo;</br></li>
-<li>messageType: &lsquo;sensor_msgs/Imu&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides orientation in quaternion and angular velocity</li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/mavros/imu/data</code></li>
+<li>messageType: <code class="prettyprint">sensor_msgs/Imu</code></li>
 </ul>

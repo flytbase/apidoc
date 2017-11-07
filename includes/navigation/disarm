@@ -157,7 +157,27 @@ string message
 </code></pre>
 <h3 id="description">Description:</h3>
 
-<p>This API disarms the motors. Read API description below before you use it. Calling this API during flight will cause the motors to stall and may result in crash.</p>
+<p>This API disarms the motors. Read API description below before you use it.</p>
+
+<aside class="warning">
+    Calling this API during flight will cause the motors to stall and may result in crash.
+</aside>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API will work regardless of what flight mode vehicle is in.</li>
+<li>Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.</li>
+<li>To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 &ndash;&gt; ground,  2 &ndash;&gt; air/flying.<br></li>
+<li>If land API is used then the vehicle will automatically disarm after some time. </li>
+<li>Land API with auto diarm on landing feature is preferred over calling disarm API specifically.</li>
+<li>To configure auto disarm on landing set following parameters. 
+
+<ul>
+<li>COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. </li>
+<li>If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine.</li>
+</ul></li>
+</ul>
 
 <h3 id="parameters">Parameters:</h3>
 
@@ -191,22 +211,22 @@ string message
 <p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
 
 <ul>
-<li>Type: Ros Service</br> </li>
-<li>Name: /&lt;namespace&gt;/navigation/disarm</br></li>
-<li>Service Type: core_api/Disarm</li>
+<li>Type: <code class="prettyprint">Ros Service</code></li>
+<li>Name: <code class="prettyprint">/&lt;namespace&gt;/navigation/disarm</code></li>
+<li>Service Type: <code class="prettyprint">core_api/Disarm</code></li>
 </ul>
 
 <h3 id="restful-endpoint">RESTful endpoint:</h3>
 
-<p>FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.</p>
+<p>FlytOS hosts a RESTful server which listens on port <strong>80</strong>. RESTful APIs can be called from remote platform of your choice.</p>
 
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/disarm</code></li>
 <li>JSON Response:
-{
+<code class="prettyprint">{
 success: Boolean
 message: String
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
@@ -215,22 +235,6 @@ message: String
 Java websocket clients are supported using <a href="http://wiki.ros.org/rosjava">rosjava.</a></p>
 
 <ul>
-<li>name: &lsquo;/&lt;namespace&gt;/navigation/disarm&rsquo;</br></li>
-<li>serviceType: &lsquo;core_api/Disarm&rsquo;</li>
-</ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API will work regardless of what flight mode vehicle is in.</li>
-<li>Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.</li>
-<li>To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 &ndash;&gt; ground,  2 &ndash;&gt; air/flying.<br></li>
-<li>If land API is used then the vehicle will automatically disarm after some time. </li>
-<li>Land API with auto diarm on landing feature is preferred over calling disarm API specifically.</li>
-<li>To configure auto disarm on landing set following parameters. 
-
-<ul>
-<li>COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. </li>
-<li>If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. </li>
-</ul></li>
+<li>name: <code class="prettyprint">/&lt;namespace&gt;/navigation/disarm</code></li>
+<li>serviceType: <code class="prettyprint">core_api/Disarm</code></li>
 </ul>
