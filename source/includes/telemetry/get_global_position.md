@@ -1,7 +1,5 @@
 ## Get Global Position
 
-
-
 > Definition
 
 ```shell
@@ -183,9 +181,11 @@ name: '/<namespace>/mavros/global_position/global',
 messageType: 'sensor_msgs/NavSatFix'
 
 Response:
-{   latitude: Float,
+{   
+    latitude: Float,
     longitude: Float,
-    altitude: Float}
+    altitude: Float
+}
 
 ```
 
@@ -323,13 +323,17 @@ instance of sensor_msgs.msg.NavSatFix class
 
 ```
 
-
-
-###Description:
+### Description:
 
 This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.
 
-###Parameters:
+### API usage information:
+
+* This API provides GPS coordinates and altitude at current location
+* Altitude value returned is relative to MSL (mean sea level).
+* Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API's expect z values in local frame.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -342,35 +346,31 @@ This API subscribes/polls position data in global coordinate system.  Please che
     alt | float | altitude from MSL (mean sea level) in meters.
     
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/global_position/global</br>
-* Response Type: sensor_msgs/NavSatFix
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/global_position/global`
+* Response Type: `sensor_msgs/NavSatFix`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/global_position/global``
+* URL: `GET http://<ip>/ros/<namespace>/mavros/global_position/global`
 * JSON Response:
-{
+`{
     latitude: Float,
     longitude: Float,
     altitude: Float
-}
-
+}`
 
 ### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
+Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs)
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/global_position/global'</br>
-* messageType: 'sensor_msgs/NavSatFix'
-
-### API usage information:
-
-* This API provides GPS coordinates and altitude at current location
-* Altitude value returned is relative to MSL (mean sea level).
-* Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API's expect z values in local frame.
-
+* name: `/<namespace>/mavros/global_position/global`
+* messageType: `sensor_msgs/NavSatFix`
 

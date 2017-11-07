@@ -1,7 +1,5 @@
 ## Get Attitude Euler Data
 
-
-
 > Definition
 
 ```shell
@@ -391,11 +389,16 @@ std_msgs/Header header
 
 
 
-###Description:
+### Description:
 
 This API subscribes/polls attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
 
-###Parameters:
+### API usage information:
+
+* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
+* Data returned is in NED frame.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -411,38 +414,38 @@ This API subscribes/polls attitude data (angle and angular rate) in euler angles
     yawspeed | float | yaw rate in radians/sec, NED frame.
 
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/imu/data_euler</br>
-* Response Type: geometry_msgs/TwistStamped
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/imu/data_euler`
+* Response Type: `geometry_msgs/TwistStamped`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/imu/data_euler``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
+
+* URL: `GET http://<ip>/ros/<namespace>/mavros/imu/data_euler`
 * JSON Response:
-{
+`{
     twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: Float},
-    angular:{
-        x: Float,
-        y: Float,
-        z: Float}
+      linear:{
+          x: Float,
+          y: Float,
+          z: Float
+      },
+      angular:{
+          x: Float,
+          y: Float,
+          z: Float
+      }
 }
 
-
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/imu/data_euler'</br>
-* messageType: 'geometry_msgs/TwistStamped'
-
-### API usage information:
-
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
+* name: `/<namespace>/mavros/imu/data_euler`
+* messageType: `geometry_msgs/TwistStamped`

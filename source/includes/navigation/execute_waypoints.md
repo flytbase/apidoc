@@ -1,6 +1,5 @@
 ## Execute Waypoints
 
-
 > Definition
 
 ```shell
@@ -64,8 +63,10 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_execute'
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{   
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -85,7 +86,6 @@ Response:
 
 
 ```
-
 
 > Example
 
@@ -155,7 +155,6 @@ waypointExecute.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -193,15 +192,11 @@ success (bool): true if action successful
 
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 Exectute / resume current list of waypoints.
 
-###Parameters:
+### Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -212,31 +207,33 @@ Exectute / resume current list of waypoints.
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/waypoint_execute</br>
-* Service Type: WaypointExecute
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/waypoint_execute`
+* Service Type: `WaypointExecute`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/waypoint_execute``
+* URL: `GET http://<ip>/ros/<namespace>/navigation/waypoint_execute`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/waypoint_execute'</br>
-* serviceType: 'core_api/WaypointExecute'
-
+* name: `/<namespace>/navigation/waypoint_execute`
+* serviceType: `core_api/WaypointExecute`
 
 ### API usage information:
-Note: Make sure you have a list of waypoints already set using set_waypoints API before you give it execute_waypoint API call.
 
+Note: Make sure you have a list of waypoints already set using `set_waypoints` API before you give it execute_waypoint API call.

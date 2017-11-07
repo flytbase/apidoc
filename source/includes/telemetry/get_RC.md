@@ -115,7 +115,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -196,7 +195,6 @@ rcData.subscribe(function(message) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -236,13 +234,15 @@ success: True
 
 ```
 
-
-
-###Description:
+### Description:
 
 This API subscribes/polls the input rc channel data. Please see usage information section below before using the API.
 
-###Parameters:
+### API usage information:
+
+* Channel mapping of the data depends on RC calibration. 
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -255,30 +255,30 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
     
     
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/rc/in</br>
-* Response Type: mavros_msgs/RCIn
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/rc/in`
+* Response Type: `mavros_msgs/RCIn`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/rc/in``
+* URL: `GET http://<ip>/ros/<namespace>/mavros/rc/in`
 * JSON Response:
-{
+`{
     rssi: Int,
     channels: Int[]
-}
+}`
 
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/rc/in'</br>
-* messageType: 'mavros_msgs/RCIn'
-
-### API usage information:
-
-* Channel mapping of the data depends on RC calibration. 
+* name: `/<namespace>/mavros/rc/in`
+* messageType: `mavros_msgs/RCIn`

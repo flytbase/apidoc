@@ -6,7 +6,7 @@ language_tabs:
   - python: Python
   - javascript--REST: JS REST
   - javascript--Websocket: JS Websocket
-  - shell: ros-CLI
+  - shell: ros-cli
   - cpp--ros: roscpp
   - python--ros: rospy
 

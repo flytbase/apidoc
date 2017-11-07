@@ -1,6 +1,5 @@
 ## Clear Waypoints
 
-
 > Definition
 
 ```shell
@@ -86,7 +85,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -154,7 +152,6 @@ waypointClear.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -193,10 +190,6 @@ success (bool): true if action successful
 
 ```
 
-
-
-
-
 ###Description:
 
 Clear list of waypoints on autopilot.
@@ -210,29 +203,29 @@ Clear list of waypoints on autopilot.
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/waypoint_clear</br>
-* Service Type: WaypointClear
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/waypoint_clear`
+* Service Type: `WaypointClear`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/waypoint_clear``
+* URL: `POST http://<ip>/ros/<namespace>/navigation/waypoint_clear`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/waypoint_clear'</br>
-* serviceType: 'core_api/WaypointClear'
-
-
-
+* name: `/<namespace>/navigation/waypoint_clear`
+* serviceType: `core_api/WaypointClear`

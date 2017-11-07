@@ -2,8 +2,6 @@
 
 ## Get Attitude Quaternion
 
-
-
 > Definition
 
 ```shell
@@ -12,7 +10,7 @@
 ROS-Topic Name: /<namespace>/mavros/imu/data
 ROS-Topic Type: sensor_msgs/Imu, below is its description
 
-#Subscriber response : Attitude Quaternion 
+# Subscriber response : Attitude Quaternion 
 Response structure:
     std_msgs/Header header
       uint32 seq
@@ -147,7 +145,6 @@ Response Type: sensor_msgs/Imu
       float64 y
       float64 z
     float64[9] linear_acceleration_covariance
-
 ```
 
 ```javascript--REST
@@ -201,7 +198,6 @@ Response:
         z: Float}
 }
 ```
-
 
 > Example
 
@@ -297,8 +293,6 @@ imuData.subscribe( function(message) {
 });
 ```
 
-
-
 > Example response
 
 ```shell
@@ -381,12 +375,13 @@ instance of sensor_msgs.msg.Imu class
 
 ```
 
-
-
-
 ###Description:
 
 This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
+
+### API usage information:
+
+* This API provides orientation in quaternion and angular velocity
 
 ###Parameters:
     
@@ -405,19 +400,20 @@ This API subscribes/polls attitude data (angle and angular rate) in quaternion. 
     yawspeed | float | yaw rate in radians/sec, NED frame.
 
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/imu/data</br>
-* Response Type: sensor_msgs/Imu
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/imu/data`
+* Response Type: `sensor_msgs/Imu`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/imu/data``
+* URL: `GET http://<ip>/ros/<namespace>/mavros/imu/data`
 * JSON Response:
-{
+`{
     orientation:{
         x: Float,
         y: Float,
@@ -431,16 +427,13 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
         x: Float,
         y: Float,
         z: Float}
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/imu/data'</br>
-* messageType: 'sensor_msgs/Imu'
-
-### API usage information:
-
-* This API provides orientation in quaternion and angular velocity
+* name: `/<namespace>/mavros/imu/data`
+* messageType: `sensor_msgs/Imu`

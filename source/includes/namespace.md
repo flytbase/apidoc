@@ -213,28 +213,23 @@ This API returns the global namespace under which FlytOS's instance is running. 
 
 ### ROS endpoint:
 
-* Type: Ros Service</br> 
-* Name: /get_global_namespace</br>
-* Service Type: ParamGetGlobalNamespace
+* Service Type: `Ros Service`
+* Name: `/get_global_namespace`
+* Service Type: `ParamGetGlobalNamespace`
 
 ### RESTful endpoint:
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/get_global_namespace``
-* JSON Response:
-{
-    success: Boolean,
-    message: String,
-    param_info:{param_value: String}
-}
-
+* URL: `http://<ip>/ros/get_global_namespace`
+* Request Method: `GET`
+* JSON Response: `{success: Boolean,message: String,param_info:{param_value: String}}`
 
 ### Websocket endpoint:
 Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
-* name: '/get_global_namespace'</br>
-* serviceType: 'core_api/ParamGetGlobalNamespace'
+* name: `/get_global_namespace`
+* serviceType: `core_api/ParamGetGlobalNamespace`
 
 
 ### API usage information:

@@ -1,6 +1,5 @@
 ## Position Hold
 
-
 > Definition
 
 ```shell
@@ -89,7 +88,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -174,7 +172,6 @@ positionHold.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -211,13 +208,18 @@ Success: True
 
 ```
 
-
-
-
-
 ###Description:
 
 Position hold / hover / loiter at current position.  
+
+### API usage information:
+
+This API can be used to stop the vehicle at current location. 
+
+* This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.
+* Thia API will override current mission / navigation commmands. 
+* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
+* Vehicle may take few seconds to come to rest depending on current linear velocity.
 
 ###Parameters:
     
@@ -233,36 +235,30 @@ Position hold / hover / loiter at current position.
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/position_hold</br>
-* Service Type: core_api/PositionHold
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/position_hold`
+* Service Type: `core_api/PositionHold`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/position_hold``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `GET http://<ip>/ros/<namespace>/navigation/position_hold`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
+}`
 
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/position_hold'</br>
-* serviceType: 'core_api/PositionHold'
-
-
-### API usage information:
-
-This API can be used to stop the vehicle at current location. 
-
-* This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.
-* Thia API will override current mission / navigation commmands. 
-* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
-* Vehicle may take few seconds to come to rest depending on current linear velocity.
+* name: `/<namespace>/navigation/position_hold`
+* serviceType: `core_api/PositionHold`

@@ -1,6 +1,5 @@
 ## Set Waypoints
 
-
 > Definition
 
 ```shell
@@ -87,8 +86,10 @@ JSON Request:
         },{},{}... ] }
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{   
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -121,9 +122,7 @@ Response:
 {   success: Boolean,
     message: String, }
 
-
 ```
-
 
 > Example
 
@@ -345,15 +344,11 @@ success (bool): true if action successful
 
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 This API replaces current list of waypoints on autopilot with new list passed.
 
-###Parameters:
+### Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -381,18 +376,20 @@ This API replaces current list of waypoints on autopilot with new list passed.
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/waypoint_set</br>
-* Service Type: WaypointSet
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/waypoint_set`
+* Service Type: `WaypointSet`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/waypoint_set``
+* URL: `POST http://<ip>/ros/<namespace>/navigation/waypoint_set`
 * JSON Request:
-{
+`{
     waypoints:[{
         frame : [Int] 0/1/2/3/4,
         command : [Int] 16/17/18/19/20/21/22,
@@ -406,20 +403,18 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
         y_long : [Float],
         z_alt : [Float],
         },{},{}... ]
-}
+}`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/waypoint_set'</br>
-* serviceType: 'core_api/WaypointSet'
-
-
-
+* name: `/<namespace>/navigation/waypoint_set`
+* serviceType: `core_api/WaypointSet`

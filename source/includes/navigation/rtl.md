@@ -1,6 +1,5 @@
 ## RTL
 
-
 > Definition
 
 ```shell
@@ -74,7 +73,6 @@ Response:
 {   success: Boolean,
     message: String, }
 ```
-
 
 > Example
 
@@ -157,7 +155,6 @@ rtl.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -195,15 +192,23 @@ Success: True
 }
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 Trigger RTL mode transition of the vehicle. Check API usage section below before using this API.
 
-###Parameters:
+### API usage information:
+
+This API will transition the vehicle to RTL mode.
+
+* This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.
+* If any other navigation API is called when vehicle is in RTL mode, then RTL call be overridden by that API call.
+* Make sure to configure the following parameters, before triggering this mode.
+  * RTL_RETURN_ALT : Altitude to fly back in RTL in meters.
+  * RTL_DESCEND_ALT : RTL Loiter altitude. Vehicle stays at this altitude above home position and starts to land if autolanding is allowed.
+  * RTL_LAND_DELAY : Delay after descend before landing in RTL mode. If set to -1 the system will not land but loiter at RTL_DESCEND_ALT. 
+  * RTL_MIN_DIST : If the system is horizontally closer than this distance to home it will land straight on home instead of raising to the return altitude first. 
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -217,40 +222,29 @@ Trigger RTL mode transition of the vehicle. Check API usage section below before
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/rtl</br>
-* Service Type: core_api/RTL
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/rtl`
+* Service Type: `core_api/RTL`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/rtl``
+FlytOS hosts a RESTful server which listens on port *80*. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `GET http://<ip>/ros/<namespace>/navigation/rtl`
 * JSON Response:
-{
-    success: Boolean
+`{
+    success: Boolean,
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
 Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
+
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
-* name: '/\<namespace\>/navigation/rtl'</br>
-* serviceType: 'core_api/RTL'
-
-
-### API usage information:
-
-This API will transition the vehicle to RTL mode.
-
-* This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.
-* If any other navigation API is called when vehicle is in RTL mode, then RTL call be overridden by that API call.
-* Make sure to configure the following parameters, before triggering this mode.
-  * RTL_RETURN_ALT : Altitude to fly back in RTL in meters.
-	* RTL_DESCEND_ALT : RTL Loiter altitude. Vehicle stays at this altitude above home position and starts to land if autolanding is allowed.
-  * RTL_LAND_DELAY : Delay after descend before landing in RTL mode. If set to -1 the system will not land but loiter at RTL_DESCEND_ALT. 
-  * RTL_MIN_DIST : If the system is horizontally closer than this distance to home it will land straight on home instead of raising to the return altitude first. 
+* name: `/<namespace>/navigation/rtl`
+* serviceType: `core_api/RTL`
 

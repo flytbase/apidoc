@@ -2,8 +2,6 @@
 
 ## Access Request
 
-
-
 > Definition
 
 ```shell
@@ -230,18 +228,24 @@ Success: True
 
 ```
 
-
-
 ###Description:
+
 This API enables API control over drone. Sending vehicle to GUIDED/OFFBOARD mode via RC automatically enables API control, and likewise sending vehicle to RC modes such as MANUAL/STABILIZE/ALTCTL/ALT_HOLD/POSCTL/POSHOLD/LOITER disables API control. 
 
 If this API is called with enable_access argument set to 'true', vehicle's mode is shifted to GUIDED/OFFBOARD mode internally.
+
+
+### API usage information:
+
+* access_request API MUST be called if you don't have any RC hooked with the vehicle.
+* It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. 
+* All navigation API's except 'disarm' requires that FlytOS's access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.
 
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Arguments: None
+    Arguments:
     
     Argument | Type | Description
     -------------- | -------------- | --------------
@@ -283,9 +287,3 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 * name: '/\<namespace\>/navigation/access_request'</br>
 * serviceType: 'core_api/AccessRequest'
 
-
-### API usage information:
-
-* access_request API MUST be called if you don't have any RC hooked with the vehicle.
-* It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. 
-* All navigation API's except 'disarm' requires that FlytOS's access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.

@@ -3,7 +3,7 @@
 > Definition
 
 <aside class="warning">
-This API is not supported for Fixed Wing.
+    This API is not supported for Fixed Wing.
 </aside>
 
 
@@ -153,7 +153,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -278,7 +277,6 @@ velocitySet.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -315,74 +313,9 @@ Success: True
 
 ```
 
-
-
-
-
 ###Description:
 
 This API gives linear (vx,vy,vz) and angular (yaw_rate) velocity setpoint to vehicle. Please check API usage section below before using API.
-
-###Parameters:
-    
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
-    
-    Arguments:
-    
-    Argument | Type | Description
-    -------------- | -------------- | --------------
-    vx, vy, vz | float | Velocity Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw_rate | float | Yaw rate Setpoint in rad/sec
-    yaw_rate_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance range in m/s, default value=1.0 m/s 
-    relative | bool | If true, velocity setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, velocity setpoints are relative with respect to body frame
-    
-    Output:
-    
-    Parameter | Type | Description
-    ---------- | ---------- | ------------
-    success | bool | true if action successful
-    message | string | debug message
-
-### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
-
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/velocity_set</br>
-* Service Type: core_api/VelocitySet
-
-### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
-
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/velocity_set``
-* JSON Request:
-{
-    vx: Float,
-    vy: Float,
-    vz: Float,
-    yaw_rate: Float,
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_rate_valid : Boolean,
-    body_frame : Boolean
-}
-* JSON Response:
-{
-    success: Boolean
-    message: String
-}
-
-
-### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
-Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
-
-* name: '/\<namespace\>/navigation/velocity_set'</br>
-* serviceType: 'core_api/VelocitySet'
-
 
 ### API usage information:
 
@@ -414,4 +347,66 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
   * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * In any case vehicle will not exceed these velocity limits. So velocity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.
-  
+
+### Parameters:
+    
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    
+    Arguments:
+    
+    Argument | Type | Description
+    -------------- | -------------- | --------------
+    vx, vy, vz | float | Velocity Setpoint in NED-Frame (in body-frame if body_frame=true)
+    yaw_rate | float | Yaw rate Setpoint in rad/sec
+    yaw_rate_valid | bool | Must be set to true, if yaw 
+    tolerance | float | Acceptance range in m/s, default value=1.0 m/s 
+    relative | bool | If true, velocity setpoints relative to current position is sent
+    async | bool | If true, asynchronous mode is set
+    body_frame | bool | If true, velocity setpoints are relative with respect to body frame
+    
+    Output:
+    
+    Parameter | Type | Description
+    ---------- | ---------- | ------------
+    success | bool | true if action successful
+    message | string | debug message
+
+### ROS endpoint:
+
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
+
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/velocity_set`
+* Service Type: `core_api/VelocitySet`
+
+### RESTful endpoint:
+
+FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `POST http://<ip>/ros/<namespace>/navigation/velocity_set`
+* JSON Request:
+`{
+    vx: Float,
+    vy: Float,
+    vz: Float,
+    yaw_rate: Float,
+    tolerance: Float,
+    async: Boolean,
+    relative: Boolean,
+    yaw_rate_valid : Boolean,
+    body_frame : Boolean
+}`
+* JSON Response:
+`{
+    success: Boolean
+    message: String
+}`
+
+### Websocket endpoint:
+
+Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
+Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
+
+* name: `/<namespace>/navigation/velocity_set`
+* serviceType: `core_api/VelocitySet`

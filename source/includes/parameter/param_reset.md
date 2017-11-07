@@ -190,14 +190,17 @@ Bool - True, if action successful
 
 ```
 
+### Description:
 
-
-
-
-###Description:
 This API resets all the parameter value to the last save parameter state.
 
-###Parameters:
+### API usage information:
+
+<aside class="notice">
+    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
+</aside>
+
+### Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -221,31 +224,29 @@ This API resets all the parameter value to the last save parameter state.
     message | string | debug message
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/param/param_reset</br>
-* Service Type: ParamReset
+APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure.
+
+* Type: `Ros Service`
+* Name: `/<namespace>/param/param_reset`
+* Service Type: `ParamReset`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/param/param_reset``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `GET http://<ip>/ros/<namespace>/param/param_reset`
 * JSON Response:
-{
-    success: Boolean
+`{
+    success: Boolean,
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/param/param_reset'</br>
-* serviceType: 'core_api/ParamReset'
-
-
-### API usage information:
-Note: Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
-
+* name: `/<namespace>/param/param_reset`
+* serviceType: `core_api/ParamReset`
