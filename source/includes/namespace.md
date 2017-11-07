@@ -203,13 +203,19 @@ message: FlytOS namespace is  flytpod
 }
 ```
 
-
-
-
-
 ###Description:
 
-This API returns the global namespace under which FlytOS's instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a **MUST**, as the value of this namespace is required to call other APIs. In the subsequent documentation, wherever *\<namespace\>* is mentioned in API call definition, it must be replaced by the output of this API call. Users writing their code in simple CPP and Python need not call this API.
+This API returns the global namespace under which FlytOS's instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a **MUST**, as the value of this namespace is required to call other APIs.
+
+In the subsequent documentation, wherever *\<namespace\>* is mentioned in API call definition, it must be replaced by the output of this API call.
+
+Users writing their code in simple CPP and Python need not call this API.
+
+### API usage information:
+
+* Global namespace is required when calling onboard/remote APIs except cpp/python APIs.
+* All the core nodes of FlytOS run inside this namespace.
+* Make sure that your custom ROS packages are not launched inside this namespace.
 
 ### ROS endpoint:
 
@@ -218,7 +224,8 @@ This API returns the global namespace under which FlytOS's instance is running. 
 * Service Type: `ParamGetGlobalNamespace`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
+
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
 
 * URL: `http://<ip>/ros/get_global_namespace`
 * Request Method: `GET`
@@ -231,9 +238,3 @@ Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava
 * name: `/get_global_namespace`
 * serviceType: `core_api/ParamGetGlobalNamespace`
 
-
-### API usage information:
-
-* Global namespace is required when calling onboard/remote APIs except cpp/python APIs.
-* All the core nodes of FlytOS run inside this namespace.
-* Make sure that your custom ROS packages are not launched inside this namespace.

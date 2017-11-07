@@ -81,7 +81,8 @@ JSON Response:
         param4: Float,
         x_lat: Float,
         y_long: Float,
-        z_alt: Float},{},{}...]
+        z_alt: Float},{},{}...
+    ]
 }
 
 ```
@@ -111,7 +112,9 @@ Response:
         param4: Float,
         x_lat: Float,
         y_long: Float,
-        z_alt: Float},{},{}...] }
+        z_alt: Float},{},{}...
+    ]
+}
 
 
 ```
@@ -274,7 +277,7 @@ This API returns list of current waypoints on autopilot.
     Following parameters are applicable RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
     Arguments: None
-    
+
     Output:
     
     Parameter | Type | Description
