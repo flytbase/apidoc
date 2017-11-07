@@ -1,6 +1,5 @@
 ## Get Waypoints
 
-
 > Definition
 
 ```shell
@@ -82,7 +81,8 @@ JSON Response:
         param4: Float,
         x_lat: Float,
         y_long: Float,
-        z_alt: Float},{},{}...]
+        z_alt: Float},{},{}...
+    ]
 }
 
 ```
@@ -112,11 +112,12 @@ Response:
         param4: Float,
         x_lat: Float,
         y_long: Float,
-        z_alt: Float},{},{}...] }
+        z_alt: Float},{},{}...
+    ]
+}
 
 
 ```
-
 
 > Example
 
@@ -186,7 +187,6 @@ waypointGet.callService(request, function(result) {
       + result.message);
 });
 ```
-
 
 > Example response
 
@@ -268,10 +268,6 @@ waypoints (list): consists a list of dictionary, the dictionary consists of (fra
 
 ```
 
-
-
-
-
 ###Description:
 
 This API returns list of current waypoints on autopilot.
@@ -280,10 +276,14 @@ This API returns list of current waypoints on autopilot.
     
     Following parameters are applicable RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
-    Arguments:
+    Arguments: None
+
+    Output:
     
-    Argument | Type | Description
-    -------------- | -------------- | --------------
+    Parameter | Type | Description
+    ---------- | ---------- | ------------
+    success | bool | true if action successful
+    message | string | debug message
     frame | int | The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt
     yaw | float | Yaw Setpoint in radians
     yaw_valid | bool | Must be set to true, if yaw 
@@ -291,27 +291,26 @@ This API returns list of current waypoints on autopilot.
     relative | bool | If true, position setpoints relative to current position is sent
     async | bool | If true, asynchronous mode is set
     body_frame | bool | If true, position setpoints are relative with respect to body frame
-    
-    Output:
-    
-    Parameter | Type | Description
-    ---------- | ---------- | ------------
-    success | bool | true if action successful
-    message | string | debug message
+
+<aside class="notice">
+    See actual response body on the right.
+</aside>
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/waypoint_get</br>
-* Service Type: core_api/WaypointGet
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/waypoint_get`
+* Service Type: `core_api/WaypointGet`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/waypoint_get``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `GET http://<ip>/ros/<namespace>/navigation/waypoint_get`
 * JSON Response:
-{
+`{
     success: Boolean,
     message: String, 
     wp_recieved: Int,
@@ -327,21 +326,13 @@ FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be call
         x_lat: Float,
         y_long: Float,
         z_alt: Float},{},{}...] }
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/waypoint_get'</br>
-* serviceType: 'core_api/WaypointGet'
-
-<!-- 
-### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over. -->
-
+* name: `/<namespace>/navigation/waypoint_get`
+* serviceType: `core_api/WaypointGet`

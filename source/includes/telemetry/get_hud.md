@@ -1,7 +1,5 @@
 ## Get VFR HUD
 
-
-
 > Definition
 
 ```shell
@@ -259,11 +257,15 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 
 
-###Description:
+### Description:
 
-This API subscribes/polls VFR HUD data.  Please check API usage section below before using API.
+This API subscribes/polls VFR HUD data. Please check API usage section below before using API.
 
-###Parameters:
+### API usage information:
+
+* airspeed data is the data from airspeed sensor.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -279,34 +281,33 @@ This API subscribes/polls VFR HUD data.  Please check API usage section below be
     climb | float | climb
 
 ### ROS endpoint:
-All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/vfr_hud</br>
-* Response Type: mavros_msgs/VFR_HUD
+All the autopilot state/payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy/roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
+
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/vfr_hud`
+* Response Type: `mavros_msgs/VFR_HUD`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/vfr_hud``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
+
+* URL: `GET http://<ip>/ros/<namespace>/mavros/vfr_hud`
 * JSON Response:
-{
+`{
     airspeed:Float,
     groundspeed: Float,
     heading: Integer,
     throttle: Float,
     altitude: Float,
     climb: Float
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/vfr_hud'</br>
-* messageType: 'mavros_msgs/VFR_HUD'
-
-### API usage information:
-
-* airspeed data is the data from airspeed sensor.
+* name: `/<namespace>/mavros/vfr_hud`
+* messageType: `mavros_msgs/VFR_HUD`

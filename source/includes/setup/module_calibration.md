@@ -1,11 +1,9 @@
 ## Module Calibration
 
-
 > Definition
 
 ```shell
 # API call described below requires shell access, either login to the device by connecting a monitor or use ssh for remote login.
-
 
 Type: Ros Service
 Name: /<namespace>/setup/module_calibration
@@ -81,7 +79,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -144,7 +141,6 @@ moduleCalibration.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -179,13 +175,18 @@ success: True
 }
 ```
 
-
-
-
-
 ###Description:
 
-This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.
+This API helps calibrate *accelerometer, magnetometer, gyroscope, level and RC*.
+
+### API usage information:
+<aside class="notice">
+    Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
+</aside>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>
 
 ###Parameters:
     
@@ -205,39 +206,33 @@ This API helps calibrate accelerometer, magnetometer, gyroscope, level and RC.
     message | string | debug message
 
 ### ROS endpoint:
+
 APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/setup/module_calibration</br>
-* Service Type: ModuleCalibration
+* Type: `Ros Service`
+* Name: `/<namespace>/setup/module_calibration`
+* Service Type: `ModuleCalibration`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/setup/module_calibration``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `POST http://<ip>/ros/<namespace>/setup/module_calibration`
 * JSON Request:
-{
+`{
     module_calibrate: Int
-}
+}`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/setup/module_calibration'</br>
-* serviceType: 'core_api/ModuleCalibration'
-
-
-### API usage information:
-Note: Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
-
-
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running PX4.
-</aside>
+* name: `/<namespace>/setup/module_calibration`
+* serviceType: `core_api/ModuleCalibration`

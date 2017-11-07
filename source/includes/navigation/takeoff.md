@@ -9,10 +9,10 @@
 ROS-Service Name: /<namespace>/navigation/takeoff
 ROS-Service Type: core_api/TakeOff, below is its description
 
-#Request : expects take off altitude in metres
+# Request : expects take off altitude in metres
 float32 takeoff_alt
 
-#Response : returns success=true if takeoff altitude is reached
+# Response : returns success=true if takeoff altitude is reached
 bool success
 string message
 ```
@@ -97,7 +97,6 @@ Response:
 
 
 ```
-
 
 > Example
 
@@ -189,7 +188,6 @@ takeoff.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -226,59 +224,9 @@ Success: True
 
 ```
 
-
-
-
-
 ###Description:
 
-Takeoff and reach to specified height from current location.
-
-###Parameters:
-    
-    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
-    
-    Arguments:
-    
-    Argument | Type | Description
-    -------------- | -------------- | --------------
-    takeoff_alt | float32 | takeoff to given height at current location. (minimum 3 meters)
-    Output:
-    
-    Parameter | Type | Description
-    ---------- | ---------- | ------------
-    success | bool | true if action successful
-    message | string | debug message
-
-### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
-
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/takeoff</br>
-* Service Type: core_api/TakeOff
-
-### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
-
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/take_off``
-* JSON Request:
-{
-    takeoff_alt: Float
-}
-* JSON Response:
-{
-    success: Boolean
-    message: String
-}
-
-
-### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
-Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
-
-* name: '/\<namespace\>/navigation/take_off'</br>
-* serviceType: 'core_api/TakeOff'
-
+Takeoff and reach specified height from current location.
 
 ### API usage information:
 
@@ -287,7 +235,56 @@ Takeoff to specified height from current height at current location.
 * takeoff_alt value should be positive. 
 * Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.
 * Takeoff API will automatically arm the motors. 
-* Takeoff API will work only in OFFBOARD/API_CTL mode.
-* Minimum value of takeoff_alt argument is 3.0 meters.
+* Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.
+* Minimum value of takeoff_alt argument is 1.5 meters.
 * Takeoff API is always synchronous. 
 * It is recommended not to send any other navigation commands while takeoff is under way.
+
+### Parameters:
+    
+    Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    
+    Arguments:
+    
+    Argument | Type | Description
+    -------------- | -------------- | --------------
+    takeoff_alt | float32 | takeoff to given height at current location. (minimum 1.5 meters)
+
+    Output:
+    
+    Parameter | Type | Description
+    ---------- | ---------- | ------------
+    success | bool | true if action successful
+    message | string | debug message
+
+### ROS endpoint:
+
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
+
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/takeoff`
+* Service Type: `core_api/TakeOff`
+
+### RESTful endpoint:
+
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `POST http://<ip>/ros/<namespace>/navigation/take_off`
+* JSON Request:
+`{
+    takeoff_alt: Float
+}`
+* JSON Response:
+`{
+    success: Boolean
+    message: String
+}`
+
+
+### Websocket endpoint:
+
+Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
+
+* name: `/<namespace>/navigation/take_off`
+* serviceType: `core_api/TakeOff`

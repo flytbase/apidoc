@@ -1,7 +1,5 @@
 ## Arm
 
-
-
 > Definition
 
 ```shell
@@ -92,7 +90,6 @@ Response:
 
 
 ```
-
 
 > Example
 
@@ -216,10 +213,15 @@ Success: True
 
 ```
 
-
-
 ###Description:
+
 This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are uncalibrated sensors, misconfiguration.
+
+### API usage information:
+
+* ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.
+* All navigation setpoint API's except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.
+* It is safer to use take_off command instead of arm command. 
 
 ###Parameters:
     
@@ -235,33 +237,29 @@ This API arms the motors. If arm fails then check debug messages for arming erro
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/arm</br>
-* Service Type: core_api/Arm
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/arm`
+* Service Type: `core_api/Arm`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/arm``
+* URL: `GET http://<ip>/ros/<namespace>/navigation/arm`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/arm'</br>
-* serviceType: 'core_api/Arm'
+* name: `/<namespace>/navigation/arm`
+* serviceType: `core_api/Arm`
 
-
-### API usage information:
-
-* ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.
-* All navigation setpoint API's except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.
-* It is safer to use take_off command instead of arm command. 

@@ -1,6 +1,5 @@
 ## Pause Waypoints
 
-
 > Definition
 
 ```shell
@@ -193,14 +192,11 @@ success (bool): true if action successful
 
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 This API pauses ongoing waypoint mission.
-###Parameters:
+
+### Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -212,29 +208,29 @@ This API pauses ongoing waypoint mission.
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/waypoint_pause</br>
-* Service Type: WaypointPause
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/waypoint_pause`
+* Service Type: `WaypointPause`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
 * URL: ``GET http://<ip>/ros/<namespace>/navigation/waypoint_pause``
 * JSON Response:
-{
-    success: Boolean
+`{
+    success: Boolean,
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/waypoint_pause'</br>
-* serviceType: 'core_api/WaypointPause'
-
-
-
+* name: `/<namespace>/navigation/waypoint_pause`
+* serviceType: `core_api/WaypointPause`

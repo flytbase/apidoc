@@ -1,6 +1,5 @@
 ## Parameter Delete
 
-
 > Definition
 
 ```shell
@@ -210,10 +209,11 @@ Bool - True, if action successful
 
 
 
-###Description:
+### Description:
+
 This API deletes a parameter from FlytOS.
 
-###Parameters:
+### Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -231,40 +231,32 @@ This API deletes a parameter from FlytOS.
     message | string | debug message
 
 ### ROS endpoint:
+
 APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/param/param_delete</br>
-* Service Type: ParamDelete
+* Type: `Ros Service`
+* Name: `/<namespace>/param/param_delete`
+* Service Type: `ParamDelete`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/param/param_delete``
+* URL: `POST http://<ip>/ros/<namespace>/param/param_delete`
 * JSON Request:
-{
+`{
     param_id: String
-}
+}`
 * JSON Response:
-{
-    success: Boolean
+`{
+    success: Boolean,
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/param/param_delete'</br>
-* serviceType: 'core_api/ParamDelete'
-
-
-<!-- ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
-
- -->
+* name: `/<namespace>/param/param_delete`
+* serviceType: `core_api/ParamDelete`

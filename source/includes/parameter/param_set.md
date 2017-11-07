@@ -2,7 +2,6 @@
 
 ## Parameter Set
 
-
 > Definition
 
 ```shell
@@ -98,12 +97,12 @@ Request:
         param_value: String }}
 
 Response:
-{   success: Boolean,
-    message: String, }
-
+{
+    success: Boolean,
+    message: String
+}
 
 ```
-
 
 > Example
 
@@ -221,14 +220,17 @@ bool : true if action successful
 
 ```
 
+### Description:
 
-
-
-
-###Description:
 This API sets the value of a desired parameter
 
-###Parameters:
+### API usage information:
+
+<aside class="notice">
+    Make sure the parameter which you are trying to update, exists.
+</aside>
+
+### Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -247,40 +249,36 @@ This API sets the value of a desired parameter
     message | string | debug message
 
 ### ROS endpoint:
+
 APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/param/param_set</br>
-* Service Type: ParamSet
+* Type: `Ros Service`
+* Name: `/<namespace>/param/param_set`
+* Service Type: `ParamSet`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/param/param_set``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `POST http://<ip>/ros/<namespace>/param/param_set`
 * JSON Request:
-{
+`{
     param_info:{
         param_id: [String],
         param_value: [String]
     }
-}
+}`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/param/param_set'</br>
-* serviceType: 'core_api/ParamSet'
-
-
-### API usage information:
-Note: Make sure the parameter exists, which you are trying to update.
-
-
-
+* name: `/<namespace>/param/param_set`
+* serviceType: `core_api/ParamSet`

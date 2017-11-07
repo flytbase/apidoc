@@ -1,7 +1,5 @@
 ## Get Battery Status
 
-
-
 > Definition
 
 ```shell
@@ -199,7 +197,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -269,7 +266,6 @@ batteryData.subscribe(function(message) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -329,13 +325,15 @@ instance of sensor_msgs.msg.BatteryState class
 
 ```
 
-
-
-###Description:
+### Description:
 
 This API subscribes/polls battery status.  Please check API usage section below before using API.
 
-###Parameters:
+### API usage information:
+
+* This API provides voltage, current, remaining battery information.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -351,31 +349,30 @@ This API subscribes/polls battery status.  Please check API usage section below 
    
    
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/battery</br>
-* Response Type: sensor_msgs/BatteryState
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/battery`
+* Response Type: `sensor_msgs/BatteryState`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/battery``
+* URL: `GET http://<ip>/ros/<namespace>/mavros/battery`
 * JSON Response:
-{
+`{
     voltage: Float,
     current: Float,
     remaining: Float
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/battery'</br>
-* messageType: 'sensor_msgs/BatteryState'
-
-### API usage information:
-
-* This API provides voltage, current, remaining battery information.
+* name: `/<namespace>/mavros/battery`
+* messageType: `sensor_msgs/BatteryState`

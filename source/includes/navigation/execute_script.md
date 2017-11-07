@@ -1,6 +1,5 @@
 ## Execute Script
 
-
 > Definition
 
 ```shell
@@ -94,7 +93,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -187,7 +185,6 @@ execScript.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -226,15 +223,15 @@ Success: True
 
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 This API can run onboard executable scripts in python, shell, etc. 
 
-###Parameters:
+### API usage information:
+
+* Note that the executable should be present in `/flyt/userapps/onboard_user/install` directory.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -242,7 +239,7 @@ This API can run onboard executable scripts in python, shell, etc.
     
     Argument | Type | Description
     -------------- | -------------- | --------------
-    app_name | string | Name of the script. Script should be present in /flyt/flytapps/onboard/install directory.
+    app_name | string | Name of the script. Script should be present in /flyt/flytapps/onboard_user/install directory.
     arguments | string | arguments separated by space e.g. "arg1 arg2 arg3"
     
     Output:
@@ -253,36 +250,34 @@ This API can run onboard executable scripts in python, shell, etc.
     message | string | debug message
 
 ### ROS endpoint:
+
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/exec_script</br>
-* Service Type: ExecScript
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/exec_script`
+* Service Type: `ExecScript`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/exec_script``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `POST http://<ip>/ros/<namespace>/navigation/exec_script`
 * JSON Request:
-{
+`{
     app_name : String,
     arguments : String
-}
+}`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/exec_script'</br>
-* serviceType: 'core_api/ExecScript'
+* name: `/<namespace>/navigation/exec_script`
+* serviceType: `core_api/ExecScript`
 
-
-### API usage information:
-
-* Note that the executable should be present in /flyt/userapps/onboard_user/install directory.

@@ -1,6 +1,5 @@
 ## Land
 
-
 > Definition
 
 ```shell
@@ -183,7 +182,6 @@ land.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -220,13 +218,23 @@ Success: True
 
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 Land vehicle at current position. Check API usage section below before using this API.
+
+### API usage information:
+
+This API will land the vehicle at current location. 
+
+* This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.
+* If any other navigation API is called during landing, then land call be overridden by that API call. 
+* Automatic land flow can be configured with following parameters.
+  * LNDMC_Z_VEL_MAX : Maximum velocity in vertical direction when landing (ideal value 0.8 m/s to 1.5 m/s)
+  * LNDMC_XY_VEL_MAX: Maximum velocity in horizontal direction when landing (ideal value 1 m/s to 2 m/s)
+  * MPC_LAND_SPEED: Landing velocity (ideal value 0.8 m/s)
+* To disarm vehicle automatically after landing following parameter can be configured.
+  * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inclusive) : enabled with n seconds timeout before disarming after landed. 
+  * If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. 
 
 ###Parameters:
     
@@ -246,41 +254,32 @@ Land vehicle at current position. Check API usage section below before using thi
     message | string | debug message
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/land</br>
-* Service Type: core_api/Land
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs.
+Take a look at roscpp and rospy API definition for message structure. 
+
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/land`
+* Service Type: `core_api/Land`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/navigation/land``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `GET http://<ip>/ros/<namespace>/navigation/land`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
+}`
 
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/land'</br>
-* serviceType: 'core_api/Land'
+* name: `/<namespace>/navigation/land`
+* serviceType: `core_api/Land`
 
-
-### API usage information:
-
-This API will land the vehicle at current location. 
-
-* This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.
-* If any other navigation API is called during landing, then land call be overridden by that API call. 
-* Automatic land flow can be configured with following parameters.
-  * LNDMC_Z_VEL_MAX : Maximum velocity in vertical direction when landing (ideal value 0.8 m/s to 1.5 m/s)
-  * LNDMC_XY_VEL_MAX: Maximum velocity in horizontal direction when landing (ideal value 1 m/s to 2 m/s)
-  * MPC_LAND_SPEED: Landing velocity (ideal value 0.8 m/s)
-* To disarm vehicle automatically after landing following parameter can be configured.
-  * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inclusive) : enabled with n seconds timeout before disarming after landed. 
-  * If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. 

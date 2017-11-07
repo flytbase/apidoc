@@ -2,8 +2,6 @@
 
 ## Get ADC data
 
-
-
 > Definition
 
 ```shell
@@ -235,13 +233,21 @@ instance of mavros_msgs.msgs.PayloadADC object
 }
 ```
 
+### Description:
 
+This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Check usage information section below before using the API.
 
-###Description:
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO.
+</aside>
 
-This API subscribes/polls the ADC payload data. This API is limited to FlytPOD only. Please see usage information section below before using the API.
+### API usage information:
 
-###Parameters:
+* This API works only on FlytPOD.  
+* There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.
+* ADC channel operational input voltage range is 0 to 3.3 V.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -254,36 +260,29 @@ This API subscribes/polls the ADC payload data. This API is limited to FlytPOD o
     
     
 ### ROS endpoint:
-All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/payload_adc</br>
-* Response Type: mavros_msgs/PayloadADC
+All the autopilot state/payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy/roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
+
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/payload_adc`
+* Response Type: `mavros_msgs/PayloadADC`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/payload_adc``
+* URL: `GET http://<ip>/ros/<namespace>/mavros/payload_adc`
 * JSON Response:
-{
+`{
     adc_voltage: Float[2],
     adc_updated: Int
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/payload_adc'</br>
-* messageType: 'mavros_msgs/PayloadADC'
-
-### API usage information:
-
-* This API works only on FlytPOD.  
-* There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.
-* ADC channel operational input voltage range is 0 to 3.3 V.
-
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO.
-</aside>
+* name: `/<namespace>/mavros/payload_adc`
+* messageType: `mavros_msgs/PayloadADC`

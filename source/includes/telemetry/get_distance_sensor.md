@@ -1,7 +1,5 @@
 ## Get Distance Sensor
 
-
-
 > Definition
 
 ```shell
@@ -245,13 +243,18 @@ instance of sensor_msgs.msgs.Range object
 
 ```
 
+### Description:
 
+This API subscribes/polls distance sensor data. Check API usage section below before using API.
 
-###Description:
+### API usage information:
 
-This API subscribes/polls distance sensor data.  Please check API usage section below before using API.
+* This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.
+* This API will work on any px4 supported hardware.
+* If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.
+* If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.
 
-###Parameters:
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -260,39 +263,34 @@ This API subscribes/polls distance sensor data.  Please check API usage section 
     Parameter | Type | Description
     ---------- | ---------- | ------------
     range | float | distance to ground in meters
-    
-    
+
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/distance_sensor/lidarlite_pub</br>
-* Response Type: sensor_msgs/Range
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/distance_sensor/lidarlite_pub`
+* Response Type: `sensor_msgs/Range`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/distance_sensor/lidarlite_pub``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
+
+* URL: `GET http://<ip>/ros/<namespace>/mavros/distance_sensor/lidarlite_pub`
 * JSON Response:
-{
+`{
     radiation_type: Int,
     field_of_view: Float,
     min_range: Float,  
     max_range: Float,
     range: Float
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/distance_sensor/lidarlite_pub'</br>
-* messageType: 'sensor_msgs/Range'
-
-### API usage information:
-
-* This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.
-* This API will work on any px4 supported hardware.
-* If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.
-* If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.
+* name: `/<namespace>/mavros/distance_sensor/lidarlite_pub`
+* messageType: `sensor_msgs/Range`

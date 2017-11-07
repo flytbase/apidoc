@@ -1,6 +1,5 @@
 ## Get Local Position 
 
-
 > Definition
 
 ```shell
@@ -327,11 +326,17 @@ instance of gemometry_msgs.msg.TwistStamped class
 
 
 
-###Description:
+### Description:
 
-This API subscribes/polls linear position, velocity data in NED frame.  Please check API usage section below before using API.
+This API subscribes/polls linear position, velocity data in NED frame.  Check API usage section below before using API.
 
-###Parameters:
+### API usage information:
+
+* This API provides linear position and linear velocity.
+* Data returned is in NED frame.
+* Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -347,41 +352,39 @@ This API subscribes/polls linear position, velocity data in NED frame.  Please c
     vz | float | z velocity in local NED frame.
 
 ### ROS endpoint:
+
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 
 
-* Type: Ros Topic</br> 
-* Name: /\<namespace\>/mavros/local_position/local</br>
-* Response Type: geometry_msgs/TwistStamped
+* Type: `Ros Topic`
+* Name: `/<namespace>/mavros/local_position/local`
+* Response Type: `geometry_msgs/TwistStamped`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice. All RESTful APIs can poll the data. For telemetry mode (continuous data stream) use websocket APIs.
 
-
-* URL: ``GET http://<ip>/ros/<namespace>/mavros/local_position/local``
+* URL: `GET http://<ip>/ros/<namespace>/mavros/local_position/local`
 * JSON Response:
-{
+`{
     twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: Float},
-    angular:{
-        x: Float,
-        y: Float,
-        z: Float}
-}}
-
+        linear:{
+            x: Float,
+            y: Float,
+            z: Float
+        },
+        angular:{
+            x: Float,
+            y: Float,
+            z: Float
+        }
+    }
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/mavros/local_position/local'</br>
-* messageType: 'geometry_msgs/TwistStamped'
-
-### API usage information:
-
-* This API provides linear position and linear velocity.
-* Data returned is in NED frame.
-* Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
-
+* name: `/<namespace>/mavros/local_position/local`
+* messageType: `geometry_msgs/TwistStamped`

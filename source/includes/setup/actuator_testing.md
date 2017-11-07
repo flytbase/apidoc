@@ -1,7 +1,6 @@
 # Vehicle Setup APIs
 ## Actuator Testing
 
-
 > Definition
 
 ```shell
@@ -67,11 +66,11 @@ Request:
 
 Response:
 {   success: Boolean,
-    message: String, }
+    message: String
+}
 
 
 ```
-
 
 > Example
 
@@ -84,7 +83,7 @@ Response:
 ```
 
 ```python
-#Not Implemented
+# Not Implemented
 ```
 
 ```cpp--ros
@@ -92,7 +91,7 @@ Response:
 ```
 
 ```python--ros
-#Not Recommended
+# Not Recommended
 ```
 
 ```javascript--REST
@@ -135,7 +134,6 @@ actuatorTesting.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -147,7 +145,7 @@ success: true
 ```
 
 ```python
-#Not Implemented
+# Not Implemented
 ```
 
 ```cpp--ros
@@ -155,7 +153,7 @@ success: true
 ```
 
 ```python--ros
-#Not Recommended
+# Not Recommended
 ```
 
 ```javascript--REST
@@ -170,15 +168,21 @@ success: true
 }
 ```
 
-
-
-
-
-###Description:
+### Description:
 
 This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.
 
-###Parameters:
+### API usage information:
+
+<aside class="notice">
+    Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
+</aside>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
+</aside>
+
+### Parameters:
     
     Following parameters are applicable for RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -197,39 +201,34 @@ This API allows for testing an actuator by providing actuator ID and time to rot
     message | string | debug message
 
 ### ROS endpoint:
+
 APIs in FlytOS are derived from / wrapped around the core services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/setup/actuator_testing</br>
-* Service Type: ActuatorTesting
+* Type: `Ros Service`
+* Name: `/<namespace>/setup/actuator_testing`
+* Service Type: `ActuatorTesting`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/setup/actuator_testing``
+* URL: `POST http://<ip>/ros/<namespace>/setup/actuator_testing`
 * JSON Request:
-{
+`{
     actuator_id: Int,
     time_s: Float
-}
+}`
 * JSON Response:
-{
+`{
     success: Boolean
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
+
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 
-* name: '/\<namespace\>/setup/actuator_testing'</br>
-* serviceType: 'core_api/ActuatorTesting'
-
-
-### API usage information:
-Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
-
-<aside class="warning">
-This API will ONLY work with FlytPOD/PRO and Pixhawk running APM.
-</aside>
+* name: `/<namespace>/setup/actuator_testing`
+* serviceType: `core_api/ActuatorTesting`

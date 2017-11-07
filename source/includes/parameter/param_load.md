@@ -1,6 +1,5 @@
 ## Parameter Load
 
-
 > Definition
 
 ```shell
@@ -81,11 +80,10 @@ serviceType: 'core_api/ParamLoad'
 
 Response:
 {   success: Boolean,
-    message: String, }
-
+    message: String
+}
 
 ```
-
 
 > Example
 
@@ -155,7 +153,6 @@ paramLoad.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -190,11 +187,8 @@ Bool - True, if action successful
 
 ```
 
-
-
-
-
 ###Description:
+
 This API loads parameters from a file where parameters were saved before or a newly uploaded param file.
 
 ###Parameters:
@@ -209,35 +203,29 @@ This API loads parameters from a file where parameters were saved before or a ne
     message | string | debug message
 
 ### ROS endpoint:
-APIs in FlytOS are derived from / wrapped around the core  services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/param/param_load</br>
-* Service Type: ParamLoad
+APIs in FlytOS are derived from/wrapped around the core  services in ROS. Onboard service clients in rospy/roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
+
+* Type: `Ros Service
+* Name: `/<namespace>/param/param_load`
+* Service Type: `ParamLoad`
 
 ### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``GET http://<ip>/ros/<namespace>/param/param_load``
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `GET http://<ip>/ros/<namespace>/param/param_load`
 * JSON Response:
-{
-    success: Boolean
+`{
+    success: Boolean,
     message: String
-}
-
+}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/param/param_load'</br>
-* serviceType: 'core_api/ParamLoad'
-
-
-<!-- ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
- -->
+* name: `/<namespace>/param/param_load`
+* serviceType: `core_api/ParamLoad`

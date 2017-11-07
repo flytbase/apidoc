@@ -147,7 +147,6 @@ Response:
     message: String, }
 ```
 
-
 > Example
 
 ```shell
@@ -306,72 +305,9 @@ Success: True
 }
 ```
 
-
-
 ###Description:
 
 This API commands the vehicle to go to a specified location in local frame and hover.  Please check API usage section below before using API.
-
-###Parameters:
-    
-    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
-    
-    Arguments:
-    
-    Argument | Type | Description
-    -------------- | -------------- | --------------
-    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
-    
-    Output:
-    
-    Parameter | Type | Description
-    ---------- | ---------- | ------------
-    success | bool | true if action successful
-    message | string | debug message
-
-### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
-
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/position_set</br>
-* Service Type: core_api/PositionSet
-
-### RESTful endpoint:
-FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
-
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/position_set``
-* JSON Request:
-{
-    x: Float,
-    y: Float,
-    z: Float,
-    yaw: Float,
-    tolerance: Float,
-    async: Boolean,
-    relative: Boolean,
-    yaw_valid : Boolean,
-    body_frame : Boolean
-}
-* JSON Response:
-{
-    success: Boolean
-    message: String
-}
-
-
-### Websocket endpoint:
-Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
-Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
-
-* name: '/\<namespace\>/navigation/position_set'</br>
-* serviceType: 'core_api/PositionSet'
-
 
 ### API usage information:
 
@@ -402,3 +338,67 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
   * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
   * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.
+
+###Parameters:
+    
+    Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
+    
+    Arguments:
+    
+    Argument | Type | Description
+    -------------- | -------------- | --------------
+    x, y, z | float | Position Setpoint in NED-Frame (in body-frame if body_frame=true)
+    yaw | float | Yaw Setpoint in radians
+    yaw_valid | bool | Must be set to true, if yaw 
+    tolerance | float | Acceptance radius in meters, default value=1.0m 
+    relative | bool | If true, position setpoints relative to current position is sent
+    async | bool | If true, asynchronous mode is set
+    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    
+    Output:
+    
+    Parameter | Type | Description
+    ---------- | ---------- | ------------
+    success | bool | true if action successful
+    message | string | debug message
+
+### ROS endpoint:
+
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
+
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/position_set`
+* Service Type: `core_api/PositionSet`
+
+### RESTful endpoint:
+
+FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be called from remote platform of your choice.
+
+* URL: `POST http://<ip>/ros/<namespace>/navigation/position_set`
+* JSON Request:
+`{
+    x: Float,
+    y: Float,
+    z: Float,
+    yaw: Float,
+    tolerance: Float,
+    async: Boolean,
+    relative: Boolean,
+    yaw_valid : Boolean,
+    body_frame : Boolean
+}`
+* JSON Response:
+`{
+    success: Boolean
+    message: String
+}`
+
+
+### Websocket endpoint:
+
+Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
+Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
+
+* name: `/<namespace>/navigation/position_set`
+* serviceType: `core_api/PositionSet`

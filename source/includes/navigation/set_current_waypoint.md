@@ -94,7 +94,6 @@ Response:
 
 ```
 
-
 > Example
 
 ```shell
@@ -168,7 +167,6 @@ waypointSetCurrent.callService(request, function(result) {
 });
 ```
 
-
 > Example response
 
 ```shell
@@ -206,12 +204,17 @@ success (bool): true if action successful
 
 ```
 
+### Description:
 
-###Description:
 Sets the waypoint Id specified, as the current waypoint from the list of already set wayopints.
 
+### API usage information:
 
-###Parameters:
+<aside class="notice">
+    Make sure you already have a waypoint list set beforehand executing this API for it to work.
+</aside>
+
+### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     
@@ -229,34 +232,34 @@ Sets the waypoint Id specified, as the current waypoint from the list of already
     message | string | debug message
 
 ### ROS endpoint:
-Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
 
-* Type: Ros Service</br> 
-* Name: /\<namespace\>/navigation/waypoint_set_current</br>
-* Service Type: WaypointSetCurrent
+Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure.
+
+* Type: `Ros Service`
+* Name: `/<namespace>/navigation/waypoint_set_current`
+* Service Type: `WaypointSetCurrent`
 
 ### RESTful endpoint:
+
 FlytOS hosts a RESTful server which listens on port 80. RESTful APIs can be called from remote platform of your choice.
 
-* URL: ``POST http://<ip>/ros/<namespace>/navigation/waypoint_set_current``
+* URL: `POST http://<ip>/ros/<namespace>/navigation/waypoint_set_current`
 * JSON Request:
-{
+`{
     wp_seq: Int
-}
+}`
 * JSON Response:
-{
-    success: Boolean
+`{
+    success: Boolean,
     message: String
-}
+}`
 
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using  [roslibjs library.](https://github.com/RobotWebTools/roslibjs) 
+
 Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjava)
 
-* name: '/\<namespace\>/navigation/waypoint_set_current'</br>
-* serviceType: 'core_api/WaypointSetCurrent'
-
-
-### API usage information:
-Note: Make sure you already have a waypoint list set beforehand executing this API for it to work.
+* name: `/<namespace>/navigation/waypoint_set_current`
+* serviceType: `core_api/WaypointSetCurrent`
