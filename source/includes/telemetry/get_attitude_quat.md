@@ -379,10 +379,6 @@ instance of sensor_msgs.msg.Imu class
 
 This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.
 
-### API usage information:
-
-* This API provides orientation in quaternion and angular velocity
-
 ###Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -398,6 +394,10 @@ This API subscribes/polls attitude data (angle and angular rate) in quaternion. 
     rollspeed | float | roll rate in radians/sec, NED frame.
     pitchspeed | float | pitch rate in radians/sec, NED frame.
     yawspeed | float | yaw rate in radians/sec, NED frame.
+
+### API usage information:
+
+* This API provides orientation in quaternion and angular velocity
 
 ### ROS endpoint:
 

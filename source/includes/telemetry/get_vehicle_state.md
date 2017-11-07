@@ -317,12 +317,6 @@ True MANUAL
 
 This API subscribes/polls the vehicle state data. Check usage information section below before using the API.
 
-### API usage information:
-
-* This API provides mode and arm status.
-* All navigation API's work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.
-* This API only allows to read the mode and arm status. 
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -333,6 +327,12 @@ This API subscribes/polls the vehicle state data. Check usage information sectio
     ---------- | ---------- | ------------
     mode | string | autopilot flight mode e.g. MANUAL, APICTL
     armed | boolean | Vehicle arm status. Armed if True and disarmed if False.
+
+### API usage information:
+
+* This API provides mode and arm status.
+* All navigation API's work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.
+* This API only allows to read the mode and arm status. 
 
 ### ROS endpoint:
 

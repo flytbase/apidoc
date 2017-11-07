@@ -217,12 +217,6 @@ Success: True
 
 This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are uncalibrated sensors, misconfiguration.
 
-### API usage information:
-
-* ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.
-* All navigation setpoint API's except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.
-* It is safer to use take_off command instead of arm command. 
-
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -235,6 +229,12 @@ This API arms the motors. If arm fails then check debug messages for arming erro
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+* ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.
+* All navigation setpoint API's except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.
+* It is safer to use take_off command instead of arm command. 
 
 ### ROS endpoint:
 

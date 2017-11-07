@@ -247,13 +247,6 @@ instance of sensor_msgs.msgs.Range object
 
 This API subscribes/polls distance sensor data. Check API usage section below before using API.
 
-### API usage information:
-
-* This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.
-* This API will work on any px4 supported hardware.
-* If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.
-* If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -263,6 +256,13 @@ This API subscribes/polls distance sensor data. Check API usage section below be
     Parameter | Type | Description
     ---------- | ---------- | ------------
     range | float | distance to ground in meters
+
+### API usage information:
+
+* This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.
+* This API will work on any px4 supported hardware.
+* If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.
+* If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.
 
 ### ROS endpoint:
 

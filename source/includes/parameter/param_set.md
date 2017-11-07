@@ -224,12 +224,6 @@ bool : true if action successful
 
 This API sets the value of a desired parameter
 
-### API usage information:
-
-<aside class="notice">
-    Make sure the parameter which you are trying to update, exists.
-</aside>
-
 ### Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -247,6 +241,12 @@ This API sets the value of a desired parameter
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+<aside class="notice">
+    Make sure the parameter which you are trying to update, exists.
+</aside>
 
 ### ROS endpoint:
 

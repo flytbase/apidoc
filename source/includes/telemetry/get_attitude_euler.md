@@ -393,11 +393,6 @@ std_msgs/Header header
 
 This API subscribes/polls attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.
 
-### API usage information:
-
-* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
-* Data returned is in NED frame.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -412,6 +407,11 @@ This API subscribes/polls attitude data (angle and angular rate) in euler angles
     rollspeed | float | roll rate in radians/sec, NED frame.
     pitchspeed | float | pitch rate in radians/sec, NED frame.
     yawspeed | float | yaw rate in radians/sec, NED frame.
+
+### API usage information:
+
+* This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.
+* Data returned is in NED frame.
 
 ### ROS endpoint:
 

@@ -208,12 +208,6 @@ success (bool): true if action successful
 
 Sets the waypoint Id specified, as the current waypoint from the list of already set wayopints.
 
-### API usage information:
-
-<aside class="notice">
-    Make sure you already have a waypoint list set beforehand executing this API for it to work.
-</aside>
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -230,6 +224,12 @@ Sets the waypoint Id specified, as the current waypoint from the list of already
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+<aside class="notice">
+    Make sure you already have a waypoint list set beforehand executing this API for it to work.
+</aside>
 
 ### ROS endpoint:
 

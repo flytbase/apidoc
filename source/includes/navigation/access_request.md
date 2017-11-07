@@ -234,13 +234,6 @@ This API enables API control over drone. Sending vehicle to GUIDED/OFFBOARD mode
 
 If this API is called with enable_access argument set to 'true', vehicle's mode is shifted to GUIDED/OFFBOARD mode internally.
 
-
-### API usage information:
-
-* access_request API MUST be called if you don't have any RC hooked with the vehicle.
-* It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. 
-* All navigation API's except 'disarm' requires that FlytOS's access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.
-
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -257,6 +250,12 @@ If this API is called with enable_access argument set to 'true', vehicle's mode 
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+* access_request API MUST be called if you don't have any RC hooked with the vehicle.
+* It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. 
+* All navigation API's except 'disarm' requires that FlytOS's access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.
 
 ### ROS endpoint:
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 

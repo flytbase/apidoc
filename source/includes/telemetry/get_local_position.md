@@ -330,12 +330,6 @@ instance of gemometry_msgs.msg.TwistStamped class
 
 This API subscribes/polls linear position, velocity data in NED frame.  Check API usage section below before using API.
 
-### API usage information:
-
-* This API provides linear position and linear velocity.
-* Data returned is in NED frame.
-* Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -350,6 +344,12 @@ This API subscribes/polls linear position, velocity data in NED frame.  Check AP
     vx | float | x velocity in local NED frame.
     vy | float | y velocity in local NED frame.
     vz | float | z velocity in local NED frame.
+
+### API usage information:
+
+* This API provides linear position and linear velocity.
+* Data returned is in NED frame.
+* Be careful when using z data obtained into takeoff or position setpoint APIs. These API's may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.
 
 ### ROS endpoint:
 

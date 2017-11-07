@@ -329,10 +329,6 @@ instance of sensor_msgs.msg.BatteryState class
 
 This API subscribes/polls battery status.  Please check API usage section below before using API.
 
-### API usage information:
-
-* This API provides voltage, current, remaining battery information.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -346,8 +342,11 @@ This API subscribes/polls battery status.  Please check API usage section below 
     charge | float | Charge
     capacity | float | capacity
     percentage | float | percentage left
-   
-   
+
+### API usage information:
+
+* This API provides voltage, current, remaining battery information.
+
 ### ROS endpoint:
 
 All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. 

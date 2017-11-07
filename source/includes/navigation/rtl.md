@@ -196,18 +196,6 @@ Success: True
 
 Trigger RTL mode transition of the vehicle. Check API usage section below before using this API.
 
-### API usage information:
-
-This API will transition the vehicle to RTL mode.
-
-* This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.
-* If any other navigation API is called when vehicle is in RTL mode, then RTL call be overridden by that API call.
-* Make sure to configure the following parameters, before triggering this mode.
-  * RTL_RETURN_ALT : Altitude to fly back in RTL in meters.
-  * RTL_DESCEND_ALT : RTL Loiter altitude. Vehicle stays at this altitude above home position and starts to land if autolanding is allowed.
-  * RTL_LAND_DELAY : Delay after descend before landing in RTL mode. If set to -1 the system will not land but loiter at RTL_DESCEND_ALT. 
-  * RTL_MIN_DIST : If the system is horizontally closer than this distance to home it will land straight on home instead of raising to the return altitude first. 
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -220,6 +208,18 @@ This API will transition the vehicle to RTL mode.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+This API will transition the vehicle to RTL mode.
+
+* This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.
+* If any other navigation API is called when vehicle is in RTL mode, then RTL call be overridden by that API call.
+* Make sure to configure the following parameters, before triggering this mode.
+  * RTL_RETURN_ALT : Altitude to fly back in RTL in meters.
+  * RTL_DESCEND_ALT : RTL Loiter altitude. Vehicle stays at this altitude above home position and starts to land if autolanding is allowed.
+  * RTL_LAND_DELAY : Delay after descend before landing in RTL mode. If set to -1 the system will not land but loiter at RTL_DESCEND_ALT. 
+  * RTL_MIN_DIST : If the system is horizontally closer than this distance to home it will land straight on home instead of raising to the return altitude first. 
 
 ### ROS endpoint:
 

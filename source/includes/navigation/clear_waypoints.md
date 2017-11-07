@@ -193,6 +193,7 @@ success (bool): true if action successful
 ###Description:
 
 Clear list of waypoints on autopilot.
+
 ###Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
