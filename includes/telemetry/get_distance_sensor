@@ -188,15 +188,6 @@ Response structure:
 
 <p>This API subscribes/polls distance sensor data. Check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.</li>
-<li>This API will work on any px4 supported hardware.</li>
-<li>If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.</li>
-<li>If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -216,6 +207,15 @@ Response structure:
 <td>distance to ground in meters</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.</li>
+<li>This API will work on any px4 supported hardware.</li>
+<li>If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.</li>
+<li>If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

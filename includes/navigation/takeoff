@@ -170,20 +170,6 @@ string message
 
 <p>Takeoff and reach specified height from current location.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Takeoff to specified height from current height at current location.</p>
-
-<ul>
-<li>takeoff_alt value should be positive. </li>
-<li>Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.</li>
-<li>Takeoff API will automatically arm the motors. </li>
-<li>Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.</li>
-<li>Minimum value of takeoff_alt argument is 1.5 meters.</li>
-<li>Takeoff API is always synchronous. </li>
-<li>It is recommended not to send any other navigation commands while takeoff is under way.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -224,6 +210,20 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>Takeoff to specified height from current height at current location.</p>
+
+<ul>
+<li>takeoff_alt value should be positive. </li>
+<li>Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.</li>
+<li>Takeoff API will automatically arm the motors. </li>
+<li>Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.</li>
+<li>Minimum value of takeoff_alt argument is 1.5 meters.</li>
+<li>Takeoff API is always synchronous. </li>
+<li>It is recommended not to send any other navigation commands while takeoff is under way.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

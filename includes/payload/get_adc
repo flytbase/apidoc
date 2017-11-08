@@ -182,14 +182,6 @@ Response structure:
     This API will **ONLY** work with FlytPOD/PRO.
 </aside>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API works only on FlytPOD.<br></li>
-<li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
-<li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -214,6 +206,14 @@ Response structure:
 <td>Bitmask indicating updated channel. possible values: [0,1,2,3]</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API works only on FlytPOD.<br></li>
+<li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
+<li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

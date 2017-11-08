@@ -161,6 +161,10 @@ string message
 </tr>
 </tbody></table>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>Note: Make sure you have a list of waypoints already set using <code class="prettyprint">set_waypoints</code> API before you give it execute_waypoint API call.</p>
+
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
 <p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
@@ -194,7 +198,3 @@ message: String
 <li>name: <code class="prettyprint">/&lt;namespace&gt;/navigation/waypoint_execute</code></li>
 <li>serviceType: <code class="prettyprint">core_api/WaypointExecute</code></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: Make sure you have a list of waypoints already set using <code class="prettyprint">set_waypoints</code> API before you give it execute_waypoint API call.</p>

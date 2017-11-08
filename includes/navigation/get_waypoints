@@ -246,34 +246,54 @@ waypoints:
 <td>The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt</td>
 </tr>
 <tr>
-<td>yaw</td>
+<td>command</td>
+<td>int</td>
+<td>defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19: Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off</td>
+</tr>
+<tr>
+<td>is_current</td>
+<td>bool</td>
+<td>Set it as the first waypoint</td>
+</tr>
+<tr>
+<td>autocontinue</td>
+<td>bool</td>
+<td>continue to the next waypoint as soon as the current waypoint is achieved</td>
+</tr>
+<tr>
+<td>param1</td>
 <td>float</td>
-<td>Yaw Setpoint in radians</td>
+<td>Time to stay at the location in sec.</td>
 </tr>
 <tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
+<td>param2</td>
 <td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
+<td>radius around the waypoint within which the waypoint is marked as done</td>
 </tr>
 <tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
+<td>param3</td>
+<td>float</td>
+<td>Orbit radius in meters</td>
 </tr>
 <tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
+<td>param4</td>
+<td>float</td>
+<td>Yaw/direction in degrees</td>
 </tr>
 <tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>x_lat</td>
+<td>float</td>
+<td>Latitude</td>
+</tr>
+<tr>
+<td>y_long</td>
+<td>float</td>
+<td>Longitude</td>
+</tr>
+<tr>
+<td>z_alt</td>
+<td>float</td>
+<td>Relative altitude</td>
 </tr>
 </tbody></table>
 

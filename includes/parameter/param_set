@@ -166,12 +166,6 @@ string message
 
 <p>This API sets the value of a desired parameter</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure the parameter which you are trying to update, exists.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -217,6 +211,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure the parameter which you are trying to update, exists.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

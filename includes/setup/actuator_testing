@@ -116,16 +116,6 @@ string message
 
 <p>This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
-</aside>
-
-<aside class="warning">
-    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -171,6 +161,16 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.</li>
+</ul>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

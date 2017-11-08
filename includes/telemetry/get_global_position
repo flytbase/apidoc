@@ -268,14 +268,6 @@ Response structure:
 
 <p>This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides GPS coordinates and altitude at current location</li>
-<li>Altitude value returned is relative to MSL (mean sea level).</li>
-<li>Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API&rsquo;s expect z values in local frame.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -305,6 +297,14 @@ Response structure:
 <td>altitude from MSL (mean sea level) in meters.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides GPS coordinates and altitude at current location</li>
+<li>Altitude value returned is relative to MSL (mean sea level).</li>
+<li>Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API&rsquo;s expect z values in local frame.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

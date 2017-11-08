@@ -622,14 +622,6 @@ string message
 
 <p>If this API is called with enable_access argument set to &lsquo;true&rsquo;, vehicle&rsquo;s mode is shifted to GUIDED/OFFBOARD mode internally.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>access_request API MUST be called if you don&rsquo;t have any RC hooked with the vehicle.</li>
-<li>It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. </li>
-<li>All navigation API&rsquo;s except &lsquo;disarm&rsquo; requires that FlytOS&rsquo;s access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -670,6 +662,14 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>access_request API MUST be called if you don&rsquo;t have any RC hooked with the vehicle.</li>
+<li>It is safer to configure RC to communicate with the drone and send the vehicle to GUIDED/OFFBOARD mode instead of calling access_request command. </li>
+<li>All navigation API&rsquo;s except &lsquo;disarm&rsquo; requires that FlytOS&rsquo;s access to drone has been enabled. So before calling any setpoint / waypoint APIs, make sure to call this API, or send vehicle to GUIDED/OFFBOARD mode via RC.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -869,14 +869,6 @@ string message
 
 <p>This API arms the motors. If arm fails then check debug messages for arming errors. Likely reasons are uncalibrated sensors, misconfiguration.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.</li>
-<li>All navigation setpoint API&rsquo;s except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.</li>
-<li>It is safer to use take_off command instead of arm command. </li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -903,6 +895,14 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>ARM API will only work when device is in GUIDED or OFFBOARD or API|POSCTL mode.</li>
+<li>All navigation setpoint API&rsquo;s except take_off require that drone is armed. So before calling any setpoint / waypoint APIs, drone should be armed.</li>
+<li>It is safer to use take_off command instead of arm command. </li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -1102,22 +1102,6 @@ string message
     Calling this API during flight will cause the motors to stall and may result in crash.
 </aside>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API will work regardless of what flight mode vehicle is in.</li>
-<li>Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.</li>
-<li>To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 &ndash;&gt; ground,  2 &ndash;&gt; air/flying.<br></li>
-<li>If land API is used then the vehicle will automatically disarm after some time. </li>
-<li>Land API with auto diarm on landing feature is preferred over calling disarm API specifically.</li>
-<li>To configure auto disarm on landing set following parameters. 
-
-<ul>
-<li>COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. </li>
-<li>If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine.</li>
-</ul></li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -1144,6 +1128,22 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API will work regardless of what flight mode vehicle is in.</li>
+<li>Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.</li>
+<li>To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 &ndash;&gt; ground,  2 &ndash;&gt; air/flying.<br></li>
+<li>If land API is used then the vehicle will automatically disarm after some time. </li>
+<li>Land API with auto diarm on landing feature is preferred over calling disarm API specifically.</li>
+<li>To configure auto disarm on landing set following parameters. 
+
+<ul>
+<li>COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. </li>
+<li>If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine.</li>
+</ul></li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -1350,20 +1350,6 @@ string message
 
 <p>Takeoff and reach specified height from current location.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Takeoff to specified height from current height at current location.</p>
-
-<ul>
-<li>takeoff_alt value should be positive. </li>
-<li>Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.</li>
-<li>Takeoff API will automatically arm the motors. </li>
-<li>Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.</li>
-<li>Minimum value of takeoff_alt argument is 1.5 meters.</li>
-<li>Takeoff API is always synchronous. </li>
-<li>It is recommended not to send any other navigation commands while takeoff is under way.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -1404,6 +1390,20 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>Takeoff to specified height from current height at current location.</p>
+
+<ul>
+<li>takeoff_alt value should be positive. </li>
+<li>Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.</li>
+<li>Takeoff API will automatically arm the motors. </li>
+<li>Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.</li>
+<li>Minimum value of takeoff_alt argument is 1.5 meters.</li>
+<li>Takeoff API is always synchronous. </li>
+<li>It is recommended not to send any other navigation commands while takeoff is under way.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -1608,28 +1608,6 @@ string message
 
 <p>Land vehicle at current position. Check API usage section below before using this API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>This API will land the vehicle at current location. </p>
-
-<ul>
-<li>This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.</li>
-<li>If any other navigation API is called during landing, then land call be overridden by that API call. </li>
-<li>Automatic land flow can be configured with following parameters.
-
-<ul>
-<li>LNDMC_Z_VEL_MAX : Maximum velocity in vertical direction when landing (ideal value 0.8 m/s to 1.5 m/s)</li>
-<li>LNDMC_XY_VEL_MAX: Maximum velocity in horizontal direction when landing (ideal value 1 m/s to 2 m/s)</li>
-<li>MPC_LAND_SPEED: Landing velocity (ideal value 0.8 m/s)</li>
-</ul></li>
-<li>To disarm vehicle automatically after landing following parameter can be configured.
-
-<ul>
-<li>COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inclusive) : enabled with n seconds timeout before disarming after landed. </li>
-<li>If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. </li>
-</ul></li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -1670,6 +1648,28 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>This API will land the vehicle at current location. </p>
+
+<ul>
+<li>This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.</li>
+<li>If any other navigation API is called during landing, then land call be overridden by that API call. </li>
+<li>Automatic land flow can be configured with following parameters.
+
+<ul>
+<li>LNDMC_Z_VEL_MAX : Maximum velocity in vertical direction when landing (ideal value 0.8 m/s to 1.5 m/s)</li>
+<li>LNDMC_XY_VEL_MAX: Maximum velocity in horizontal direction when landing (ideal value 1 m/s to 2 m/s)</li>
+<li>MPC_LAND_SPEED: Landing velocity (ideal value 0.8 m/s)</li>
+</ul></li>
+<li>To disarm vehicle automatically after landing following parameter can be configured.
+
+<ul>
+<li>COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inclusive) : enabled with n seconds timeout before disarming after landed. </li>
+<li>If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine. </li>
+</ul></li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -1863,17 +1863,6 @@ string message
 
 <p>Position hold / hover / loiter at current position.  </p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>This API can be used to stop the vehicle at current location. </p>
-
-<ul>
-<li>This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.</li>
-<li>Thia API will override current mission / navigation commmands. </li>
-<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
-<li>Vehicle may take few seconds to come to rest depending on current linear velocity.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -1900,6 +1889,17 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>This API can be used to stop the vehicle at current location. </p>
+
+<ul>
+<li>This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.</li>
+<li>This API will override current mission / navigation commmands. </li>
+<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
+<li>Vehicle may take few seconds to come to rest depending on current linear velocity.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -2188,53 +2188,6 @@ string message
 
 <p>This API commands the vehicle to go to a specified location in local frame and hover.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
-<li>Vehicle should be armed for this API to work.</li>
-<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
-<li>X,Y,Z are position setpoints in 3 linear axes. Yaw is angular rotation around Z axis. Right hand notation is used to find positive yaw direction.</li>
-<li>Effect of parameters:
-
-<ul>
-<li>Async:
-
-<ul>
-<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</li>
-<li>False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</li>
-</ul></li>
-<li>Relative: 
-
-<ul>
-<li>True: Linear position setpoints (x,y,z) are calculated from current location. Home location is not relevant. Yaw is calculated from North.</li>
-<li>False: Linear position setpoints (x,y,z) are calculated from home location. Home location is reset every time vehicle arms. Yaw is calculated from North. </li>
-</ul></li>
-<li>Body_frame 
-
-<ul>
-<li>True: All the setpoints are converted to body frame. </li>
-<li>Front of vehicle : +x</li>
-<li>Right of vehicle : +y</li>
-<li>Down: +z</li>
-<li>Yaw is calculated from front of vehicle. </li>
-<li>False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. </li>
-</ul></li>
-</ul></li>
-<li>Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.</li>
-<li>For yaw setpoint to be effective the yaw_valid argument must be set to true.</li>
-<li>This API overrides any previous mission / navigation API being carried out.</li>
-<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
-<li>To provide only Yaw setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True</li>
-<li>Following parameters need to be manually configured according to vehicle frame.
-
-<ul>
-<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.</li>
-</ul></li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -2305,6 +2258,53 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
+<li>Vehicle should be armed for this API to work.</li>
+<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
+<li>X,Y,Z are position setpoints in 3 linear axes. Yaw is angular rotation around Z axis. Right hand notation is used to find positive yaw direction.</li>
+<li>Effect of parameters:
+
+<ul>
+<li>Async:
+
+<ul>
+<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</li>
+<li>False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</li>
+</ul></li>
+<li>Relative: 
+
+<ul>
+<li>True: Linear position setpoints (x,y,z) are calculated from current location. Home location is not relevant. Yaw is calculated from North.</li>
+<li>False: Linear position setpoints (x,y,z) are calculated from home location. Home location is reset every time vehicle arms. Yaw is calculated from North. </li>
+</ul></li>
+<li>Body_frame 
+
+<ul>
+<li>True: All the setpoints are converted to body frame. </li>
+<li>Front of vehicle : +x</li>
+<li>Right of vehicle : +y</li>
+<li>Down: +z</li>
+<li>Yaw is calculated from front of vehicle. </li>
+<li>False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. </li>
+</ul></li>
+</ul></li>
+<li>Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.</li>
+<li>For yaw setpoint to be effective the yaw_valid argument must be set to true.</li>
+<li>This API overrides any previous mission / navigation API being carried out.</li>
+<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
+<li>To provide only Yaw setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True</li>
+<li>Following parameters need to be manually configured according to vehicle frame.
+
+<ul>
+<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.</li>
+</ul></li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -2589,37 +2589,6 @@ rosservice call /flytos/navigation/position_set_global <span class="s2">"{ lat_x
 
 <p>This API sets a desired position setpoint in global coordinate system (WGS84). Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
-<li>Vehicle should be armed for this API to work.</li>
-<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
-<li>Right hand notation is used to find positive yaw direction.</li>
-<li>rel_alt_z parameter is always positive.</li>
-<li>rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.</li>
-<li>Effect of parameters:
-
-<ul>
-<li>Async:
-
-<ul>
-<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</li>
-<li>False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</li>
-</ul></li>
-</ul></li>
-<li>For yaw setpoint to be effective the yaw_valid argument must be set to true.</li>
-<li>This API overrides any previous mission / navigation API being carried out.</li>
-<li>This API requires global position lock. So using a GPS receiver is must for this API to work.</li>
-<li>Following parameters need to be manually configured according to vehicle frame.
-
-<ul>
-<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.</li>
-</ul></li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms.</p>
@@ -2690,6 +2659,37 @@ rosservice call /flytos/navigation/position_set_global <span class="s2">"{ lat_x
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
+<li>Vehicle should be armed for this API to work.</li>
+<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
+<li>Right hand notation is used to find positive yaw direction.</li>
+<li>rel_alt_z parameter is always positive.</li>
+<li>rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.</li>
+<li>Effect of parameters:
+
+<ul>
+<li>Async:
+
+<ul>
+<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.</li>
+<li>False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.</li>
+</ul></li>
+</ul></li>
+<li>For yaw setpoint to be effective the yaw_valid argument must be set to true.</li>
+<li>This API overrides any previous mission / navigation API being carried out.</li>
+<li>This API requires global position lock. So using a GPS receiver is must for this API to work.</li>
+<li>Following parameters need to be manually configured according to vehicle frame.
+
+<ul>
+<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.</li>
+</ul></li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -2996,54 +2996,6 @@ string message
 
 <p>This API gives linear (vx,vy,vz) and angular (yaw_rate) velocity setpoint to vehicle. Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
-<li>Vehicle should be armed for this API to work.</li>
-<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
-<li>vx,vy,vz are velocity setpoints in 3 linear axes. Yaw rate is rate of angular rotation around Z axis. Right hand notation is used to find positive yaw direction.</li>
-<li>Effect of parameters:
-
-<ul>
-<li>Async:
-
-<ul>
-<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has achieved the given velocity.</li>
-<li>False: The API call would wait for the function to return, which happens when either the velocity setpoint is reached or timeout=30secs is over.</li>
-</ul></li>
-<li>Relative: 
-
-<ul>
-<li>True: All setpoints (vx,vy,vz, yaw_rate) are calculated relative to current velocity. E.g. if vehicle is already flying in X direction with 1 m/s and a velocity call is placed for 2 m/s with relative= True then vehicle velocity target will change to 1+2 = 3 m/s.</li>
-<li>False: All setpoints (vx,vy,vz, yaw) are used as absolute velocity setpoints.<br></li>
-</ul></li>
-<li>Body_frame 
-
-<ul>
-<li>True: All the setpoints are converted to body frame. </li>
-<li>Front of vehicle : +vx</li>
-<li>Right of vehicle : +vy</li>
-<li>Down: +vz</li>
-<li>Yaw is calculated from front of vehicle. </li>
-<li>False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. </li>
-</ul></li>
-</ul></li>
-<li>Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.</li>
-<li>For yaw rate_ setpoint to be effective the yaw_rate_valid argument must be set to true.</li>
-<li>This API overrides any previous mission / navigation API being carried out.</li>
-<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
-<li>To provide only Yaw_rate setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True</li>
-<li>Vehicle will keep flying in the direction specified by API if async= True. If async is False vehicle will stop after achieving target velocities in all directions. Make sure that you are handling such cases where vehicle might keep flying infinitely.</li>
-<li>Following parameters need to be manually configured according to vehicle frame.
-
-<ul>
-<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
-<li>In any case vehicle will not exceed these velocity limits. So velocity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.</li>
-</ul></li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -3114,6 +3066,54 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.</li>
+<li>Vehicle should be armed for this API to work.</li>
+<li>Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.</li>
+<li>vx,vy,vz are velocity setpoints in 3 linear axes. Yaw rate is rate of angular rotation around Z axis. Right hand notation is used to find positive yaw direction.</li>
+<li>Effect of parameters:
+
+<ul>
+<li>Async:
+
+<ul>
+<li>True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has achieved the given velocity.</li>
+<li>False: The API call would wait for the function to return, which happens when either the velocity setpoint is reached or timeout=30secs is over.</li>
+</ul></li>
+<li>Relative: 
+
+<ul>
+<li>True: All setpoints (vx,vy,vz, yaw_rate) are calculated relative to current velocity. E.g. if vehicle is already flying in X direction with 1 m/s and a velocity call is placed for 2 m/s with relative= True then vehicle velocity target will change to 1+2 = 3 m/s.</li>
+<li>False: All setpoints (vx,vy,vz, yaw) are used as absolute velocity setpoints.<br></li>
+</ul></li>
+<li>Body_frame 
+
+<ul>
+<li>True: All the setpoints are converted to body frame. </li>
+<li>Front of vehicle : +vx</li>
+<li>Right of vehicle : +vy</li>
+<li>Down: +vz</li>
+<li>Yaw is calculated from front of vehicle. </li>
+<li>False: All the setpoints are converted to local NED (North, East, Down) frame. Yaw is calculated from North. </li>
+</ul></li>
+</ul></li>
+<li>Either body_frame or relative flag can be set to true at a time. If both are set then only body_frame is effective.</li>
+<li>For yaw rate_ setpoint to be effective the yaw_rate_valid argument must be set to true.</li>
+<li>This API overrides any previous mission / navigation API being carried out.</li>
+<li>This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.</li>
+<li>To provide only Yaw_rate setpoint use this API with x,y,z arguments set to 0, relative=True, yaw_valid=True</li>
+<li>Vehicle will keep flying in the direction specified by API if async= True. If async is False vehicle will stop after achieving target velocities in all directions. Make sure that you are handling such cases where vehicle might keep flying infinitely.</li>
+<li>Following parameters need to be manually configured according to vehicle frame.
+
+<ul>
+<li>MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.</li>
+<li>In any case vehicle will not exceed these velocity limits. So velocity_set call with target velocity beyond these limits will never be returned successful in synchronous mode.</li>
+</ul></li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -3333,12 +3333,6 @@ string message
 
 <p>This API can run onboard executable scripts in python, shell, etc. </p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Note that the executable should be present in <code class="prettyprint">/flyt/userapps/onboard_user/install</code> directory.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -3384,6 +3378,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Note that the executable should be present in <code class="prettyprint">/flyt/userapps/onboard_user/install</code> directory.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -3672,34 +3672,54 @@ waypoints:
 <td>The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt</td>
 </tr>
 <tr>
-<td>yaw</td>
+<td>command</td>
+<td>int</td>
+<td>defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19: Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off</td>
+</tr>
+<tr>
+<td>is_current</td>
+<td>bool</td>
+<td>Set it as the first waypoint</td>
+</tr>
+<tr>
+<td>autocontinue</td>
+<td>bool</td>
+<td>continue to the next waypoint as soon as the current waypoint is achieved</td>
+</tr>
+<tr>
+<td>param1</td>
 <td>float</td>
-<td>Yaw Setpoint in radians</td>
+<td>Time to stay at the location in sec.</td>
 </tr>
 <tr>
-<td>yaw_valid</td>
-<td>bool</td>
-<td>Must be set to true, if yaw</td>
-</tr>
-<tr>
-<td>tolerance</td>
+<td>param2</td>
 <td>float</td>
-<td>Acceptance radius in meters, default value=1.0m</td>
+<td>radius around the waypoint within which the waypoint is marked as done</td>
 </tr>
 <tr>
-<td>relative</td>
-<td>bool</td>
-<td>If true, position setpoints relative to current position is sent</td>
+<td>param3</td>
+<td>float</td>
+<td>Orbit radius in meters</td>
 </tr>
 <tr>
-<td>async</td>
-<td>bool</td>
-<td>If true, asynchronous mode is set</td>
+<td>param4</td>
+<td>float</td>
+<td>Yaw/direction in degrees</td>
 </tr>
 <tr>
-<td>body_frame</td>
-<td>bool</td>
-<td>If true, position setpoints are relative with respect to body frame</td>
+<td>x_lat</td>
+<td>float</td>
+<td>Latitude</td>
+</tr>
+<tr>
+<td>y_long</td>
+<td>float</td>
+<td>Longitude</td>
+</tr>
+<tr>
+<td>z_alt</td>
+<td>float</td>
+<td>Relative altitude</td>
 </tr>
 </tbody></table>
 
@@ -4350,6 +4370,10 @@ string message
 </tr>
 </tbody></table>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>Note: Make sure you have a list of waypoints already set using <code class="prettyprint">set_waypoints</code> API before you give it execute_waypoint API call.</p>
+
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
 <p>Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. </p>
@@ -4383,10 +4407,6 @@ message: String
 <li>name: <code class="prettyprint">/&lt;namespace&gt;/navigation/waypoint_execute</code></li>
 <li>serviceType: <code class="prettyprint">core_api/WaypointExecute</code></li>
 </ul>
-
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>Note: Make sure you have a list of waypoints already set using <code class="prettyprint">set_waypoints</code> API before you give it execute_waypoint API call.</p>
 
           <h2 id="clear-waypoints">Clear Waypoints</h2>
 
@@ -4934,12 +4954,6 @@ string message
 
 <p>Sets the waypoint Id specified, as the current waypoint from the list of already set wayopints.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure you already have a waypoint list set beforehand executing this API for it to work.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -4980,6 +4994,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure you already have a waypoint list set beforehand executing this API for it to work.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -5431,23 +5451,6 @@ string message
 
 <p>Trigger RTL mode transition of the vehicle. Check API usage section below before using this API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<p>This API will transition the vehicle to RTL mode.</p>
-
-<ul>
-<li>This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.</li>
-<li>If any other navigation API is called when vehicle is in RTL mode, then RTL call be overridden by that API call.</li>
-<li>Make sure to configure the following parameters, before triggering this mode.
-
-<ul>
-<li>RTL_RETURN_ALT : Altitude to fly back in RTL in meters.</li>
-<li>RTL_DESCEND_ALT : RTL Loiter altitude. Vehicle stays at this altitude above home position and starts to land if autolanding is allowed.</li>
-<li>RTL_LAND_DELAY : Delay after descend before landing in RTL mode. If set to -1 the system will not land but loiter at RTL_DESCEND_ALT. </li>
-<li>RTL_MIN_DIST : If the system is horizontally closer than this distance to home it will land straight on home instead of raising to the return altitude first. </li>
-</ul></li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -5474,6 +5477,23 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<p>This API will transition the vehicle to RTL mode.</p>
+
+<ul>
+<li>This API can be used only in GUIDED or OFFBOARD or API|POSCTL mode.</li>
+<li>If any other navigation API is called when vehicle is in RTL mode, then RTL call be overridden by that API call.</li>
+<li>Make sure to configure the following parameters, before triggering this mode.
+
+<ul>
+<li>RTL_RETURN_ALT : Altitude to fly back in RTL in meters.</li>
+<li>RTL_DESCEND_ALT : RTL Loiter altitude. Vehicle stays at this altitude above home position and starts to land if autolanding is allowed.</li>
+<li>RTL_LAND_DELAY : Delay after descend before landing in RTL mode. If set to -1 the system will not land but loiter at RTL_DESCEND_ALT. </li>
+<li>RTL_MIN_DIST : If the system is horizontally closer than this distance to home it will land straight on home instead of raising to the return altitude first. </li>
+</ul></li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -5833,12 +5853,6 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 
 <p>This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides orientation in quaternion and angular velocity</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -5888,6 +5902,12 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 <td>yaw rate in radians/sec, NED frame.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides orientation in quaternion and angular velocity</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -6268,13 +6288,6 @@ twist:
 
 <p>This API subscribes/polls attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.</li>
-<li>Data returned is in NED frame.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -6320,6 +6333,13 @@ twist:
 </tr>
 </tbody></table>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.</li>
+<li>Data returned is in NED frame.</li>
+</ul>
+
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
 <p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
@@ -6337,7 +6357,7 @@ twist:
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/imu/data_euler</code></li>
 <li>JSON Response:
-`{
+<code class="prettyprint">{
 twist:{
   linear:{
       x: Float,
@@ -6349,7 +6369,7 @@ twist:{
       y: Float,
       z: Float
   }
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
@@ -6632,14 +6652,6 @@ twist:
 
 <p>This API subscribes/polls linear position, velocity data in NED frame.  Check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides linear position and linear velocity.</li>
-<li>Data returned is in NED frame.</li>
-<li>Be careful when using z data obtained into takeoff or position setpoint APIs. These API&rsquo;s may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -6684,6 +6696,14 @@ twist:
 <td>z velocity in local NED frame.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides linear position and linear velocity.</li>
+<li>Data returned is in NED frame.</li>
+<li>Be careful when using z data obtained into takeoff or position setpoint APIs. These API&rsquo;s may expect z values relative to ground. But the current local position that you get has negative z values for position above ground.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -6999,14 +7019,6 @@ Response structure:
 
 <p>This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides GPS coordinates and altitude at current location</li>
-<li>Altitude value returned is relative to MSL (mean sea level).</li>
-<li>Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API&rsquo;s expect z values in local frame.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -7036,6 +7048,14 @@ Response structure:
 <td>altitude from MSL (mean sea level) in meters.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides GPS coordinates and altitude at current location</li>
+<li>Altitude value returned is relative to MSL (mean sea level).</li>
+<li>Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API&rsquo;s expect z values in local frame.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -7346,12 +7366,6 @@ serial_number: <span class="s1">''</span>
 
 <p>This API subscribes/polls battery status.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides voltage, current, remaining battery information.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -7391,6 +7405,12 @@ serial_number: <span class="s1">''</span>
 <td>percentage left</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides voltage, current, remaining battery information.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -7448,7 +7468,6 @@ Response structure:
     float32 throttle
     float32 altitude
     float32 climb
-
 
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
@@ -7629,12 +7648,6 @@ climb: -0.0
 
 <p>This API subscribes/polls VFR HUD data. Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>airspeed data is the data from airspeed sensor.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -7679,6 +7692,12 @@ climb: -0.0
 <td>climb</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>airspeed data is the data from airspeed sensor.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -7901,12 +7920,6 @@ Response structure:
 
 <p>This API subscribes/polls the input rc channel data. Please see usage information section below before using the API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Channel mapping of the data depends on RC calibration. </li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -7926,6 +7939,12 @@ Response structure:
 <td>Array of PWM data values for channels.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Channel mapping of the data depends on RC calibration. </li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -8151,15 +8170,6 @@ Response structure:
 
 <p>This API subscribes/polls distance sensor data. Check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.</li>
-<li>This API will work on any px4 supported hardware.</li>
-<li>If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.</li>
-<li>If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -8179,6 +8189,15 @@ Response structure:
 <td>distance to ground in meters</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This topic provides data from Lidarlite rangefinder, ultrasonic SONAR sensor, etc.</li>
+<li>This API will work on any px4 supported hardware.</li>
+<li>If you are using FlytPOD then check hardware and wiring sections in docs for wiring info.</li>
+<li>If you are using anything else than FlytPOD then refer to respective autopilot documentation for wiring info.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -8477,14 +8496,6 @@ mav_sys_status: 0
 
 <p>This API subscribes/polls the vehicle state data. Check usage information section below before using the API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides mode and arm status.</li>
-<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
-<li>This API only allows to read the mode and arm status. </li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -8509,6 +8520,14 @@ mav_sys_status: 0
 <td>Vehicle arm status. Armed if True and disarmed if False.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides mode and arm status.</li>
+<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
+<li>This API only allows to read the mode and arm status. </li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -8733,14 +8752,6 @@ Response structure:
     This API will **ONLY** work with FlytPOD/PRO.
 </aside>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API works only on FlytPOD.<br></li>
-<li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
-<li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -8765,6 +8776,14 @@ Response structure:
 <td>Bitmask indicating updated channel. possible values: [0,1,2,3]</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API works only on FlytPOD.<br></li>
+<li>There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.</li>
+<li>ADC channel operational input voltage range is 0 to 3.3 V.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -9210,16 +9229,6 @@ string message
 
 <p>This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
-</aside>
-
-<aside class="warning">
-    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -9265,6 +9274,16 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.</li>
+</ul>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -9539,14 +9558,6 @@ message: String
 <li>serviceType: &lsquo;core_api/EscCalibration&rsquo;</li>
 </ul>
 
-<!-- ### API usage information:
-Note: You can either set body_frame or relative flag. If both are set, body_frame takes precedence.
-
-Tip: Asynchronous mode - The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-
-Tip: Synchronous mode - The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
- -->
-
           <h2 id="module-calibration">Module Calibration</h2>
 
 <blockquote>
@@ -9671,16 +9682,6 @@ string message
 
 <p>This API helps calibrate <em>accelerometer, magnetometer, gyroscope, level and RC</em>.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
-</aside>
-
-<aside class="warning">
-    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running PX4.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -9721,6 +9722,16 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
+</aside>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -9928,12 +9939,6 @@ string message
 
 <p>This API sets the value of a desired parameter</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure the parameter which you are trying to update, exists.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -9979,6 +9984,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure the parameter which you are trying to update, exists.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
@@ -11517,12 +11528,6 @@ string message
 
 <p>This API resets all the parameter value to the last save parameter state.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -11593,6 +11598,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

@@ -134,12 +134,6 @@ string message
 
 <p>This API resets all the parameter value to the last save parameter state.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<aside class="notice">
-    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
-</aside>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -210,6 +204,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<aside class="notice">
+    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
+</aside>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

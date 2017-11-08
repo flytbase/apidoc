@@ -170,12 +170,6 @@ string message
 
 <p>This API can run onboard executable scripts in python, shell, etc. </p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>Note that the executable should be present in <code class="prettyprint">/flyt/userapps/onboard_user/install</code> directory.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -221,6 +215,12 @@ string message
 <td>debug message</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>Note that the executable should be present in <code class="prettyprint">/flyt/userapps/onboard_user/install</code> directory.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

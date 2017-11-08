@@ -20,7 +20,6 @@ Response structure:
     float32 altitude
     float32 climb
 
-
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Not</span> <span class="n">Implemented</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="c"># Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from python.</span>
 <span class="n">Class</span><span class="p">:</span> <span class="n">flyt_python</span><span class="o">.</span><span class="n">API</span><span class="o">.</span><span class="n">navigation</span>
@@ -200,12 +199,6 @@ climb: -0.0
 
 <p>This API subscribes/polls VFR HUD data. Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>airspeed data is the data from airspeed sensor.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -250,6 +243,12 @@ climb: -0.0
 <td>climb</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>airspeed data is the data from airspeed sensor.</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

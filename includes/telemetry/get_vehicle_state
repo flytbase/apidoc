@@ -258,14 +258,6 @@ mav_sys_status: 0
 
 <p>This API subscribes/polls the vehicle state data. Check usage information section below before using the API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides mode and arm status.</li>
-<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
-<li>This API only allows to read the mode and arm status. </li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -290,6 +282,14 @@ mav_sys_status: 0
 <td>Vehicle arm status. Armed if True and disarmed if False.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides mode and arm status.</li>
+<li>All navigation API&rsquo;s work only in Offboard / APICTL mode. So checking the mode before firing mission critical commands is advised.</li>
+<li>This API only allows to read the mode and arm status. </li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

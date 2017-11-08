@@ -322,12 +322,6 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 
 <p>This API subscribes/polls attitude data (angle and angular rate) in quaternion.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides orientation in quaternion and angular velocity</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -377,6 +371,12 @@ linear_acceleration_covariance: <span class="o">[</span>8.999999999999999e-08, 0
 <td>yaw rate in radians/sec, NED frame.</td>
 </tr>
 </tbody></table>
+
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides orientation in quaternion and angular velocity</li>
+</ul>
 
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 

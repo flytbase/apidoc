@@ -332,13 +332,6 @@ twist:
 
 <p>This API subscribes/polls attitude data (angle and angular rate) in euler angles.  Please check API usage section below before using API.</p>
 
-<h3 id="api-usage-information">API usage information:</h3>
-
-<ul>
-<li>This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.</li>
-<li>Data returned is in NED frame.</li>
-</ul>
-
 <h3 id="parameters">Parameters:</h3>
 
 <p>Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. </p>
@@ -384,6 +377,13 @@ twist:
 </tr>
 </tbody></table>
 
+<h3 id="api-usage-information">API usage information:</h3>
+
+<ul>
+<li>This API provides roll, pitch, yaw, rollspeed, pitchspeed, yawspeed information.</li>
+<li>Data returned is in NED frame.</li>
+</ul>
+
 <h3 id="ros-endpoint">ROS endpoint:</h3>
 
 <p>All the autopilot state / payload data in FlytOS is shared by ROS topics. Onboard topic subscribers in rospy / roscpp can subscribe to these topics. Take a look at roscpp and rospy API definition for response message structure. </p>
@@ -401,7 +401,7 @@ twist:
 <ul>
 <li>URL: <code class="prettyprint">GET http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/imu/data_euler</code></li>
 <li>JSON Response:
-`{
+<code class="prettyprint">{
 twist:{
   linear:{
       x: Float,
@@ -413,7 +413,7 @@ twist:{
       y: Float,
       z: Float
   }
-}</li>
+}</code></li>
 </ul>
 
 <h3 id="websocket-endpoint">Websocket endpoint:</h3>
