@@ -194,12 +194,6 @@ Bool - True, if action successful
 
 This API resets all the parameter value to the last save parameter state.
 
-### API usage information:
-
-<aside class="notice">
-    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
-</aside>
-
 ### Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -222,6 +216,12 @@ This API resets all the parameter value to the last save parameter state.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+<aside class="notice">
+    Make sure you have saved parameters before(using save parameter API), for the parameters to reset to a previous state.
+</aside>
 
 ### ROS endpoint:
 

@@ -288,31 +288,11 @@ Success: True
 }
 ```
 
-###Description:
+### Description:
 
 This API sets a desired position setpoint in global coordinate system (WGS84). Please check API usage section below before using API.
 
-### API usage information:
-
-* Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.
-* Vehicle should be armed for this API to work.
-* Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
-* Right hand notation is used to find positive yaw direction.
-* rel_alt_z parameter is always positive.
-* rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.
-* Effect of parameters:
-  * Async:
-     * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
-     * False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
-* For yaw setpoint to be effective the yaw_valid argument must be set to true.
-* This API overrides any previous mission / navigation API being carried out.
-* This API requires global position lock. So using a GPS receiver is must for this API to work.
-* Following parameters need to be manually configured according to vehicle frame.
-  * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
-  * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
-  * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.
-
-###Parameters:
+### Parameters:
 
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms.
 
@@ -334,6 +314,26 @@ This API sets a desired position setpoint in global coordinate system (WGS84). P
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+* Vehicle should be in GUIDED or OFFBOARD or API|POSCTL mode for this API to work.
+* Vehicle should be armed for this API to work.
+* Do not call this API when vehicle is grounded. Use take_off API first to get the vehicle in air.
+* Right hand notation is used to find positive yaw direction.
+* rel_alt_z parameter is always positive.
+* rel_alt_z parameter should be calculated relative to ground. E.g. If vehicle is at position A hovering above ground at 10 meters and is then commanded to reach to point B which is 5 meters higher than point A then rel_alt_z should be 10+5=15.
+* Effect of parameters:
+  * Async:
+     * True: The API call would return as soon as the command has been sent to the autopilot, irrespective of whether the vehicle has reached the given setpoint or not.
+     * False: The API call would wait for the function to return, which happens when either the position setpoint is reached or timeout=30secs is over.
+* For yaw setpoint to be effective the yaw_valid argument must be set to true.
+* This API overrides any previous mission / navigation API being carried out.
+* This API requires global position lock. So using a GPS receiver is must for this API to work.
+* Following parameters need to be manually configured according to vehicle frame.
+  * MPC_XY_VEL_MAX : Maximum horizontal velocity. For smaller and lighter this parameter could be set to value between 8 m/s to 15 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
+  * MPC_Z_VEL_MAX : Maximum vertical velocity. For smaller and lighter this parameter could be set to value between 3 m/s to 10 m/s. For larger and heavier systems it is safer to set this value below 8 m/s.
+  * Vehicle will try to go to the setpoint with maximum velocity. At no point the current velocity will exceed limit set by above parameters. So if you want the vehicle to reach a point slowly then reducen the value of above paramters.
 
 ### ROS endpoint:
 

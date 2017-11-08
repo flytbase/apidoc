@@ -241,12 +241,6 @@ This API subscribes/polls the ADC payload data. This API is limited to FlytPOD o
     This API will **ONLY** work with FlytPOD/PRO.
 </aside>
 
-### API usage information:
-
-* This API works only on FlytPOD.  
-* There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.
-* ADC channel operational input voltage range is 0 to 3.3 V.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -258,6 +252,12 @@ This API subscribes/polls the ADC payload data. This API is limited to FlytPOD o
     adc_voltage | array (2*1) of floats | array of adc voltage readings in volts.
     adc_updated | uint8 | Bitmask indicating updated channel. possible values: [0,1,2,3]
     
+
+### API usage information:
+
+* This API works only on FlytPOD.  
+* There are two ADC channels available on back IO panel of FlytPOD. Refer to hardware connections section in FlytPOD documentation for more info on wiring.
+* ADC channel operational input voltage range is 0 to 3.3 V.
     
 ### ROS endpoint:
 

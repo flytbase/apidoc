@@ -229,7 +229,7 @@ This API gets the value of a particular parameter specified.
     Argument | Type | Description
     -------------- | -------------- | --------------
     param_id | string | Name of the parameter
-
+    
     Output:
     
     Parameter | Type | Description

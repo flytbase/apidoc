@@ -172,16 +172,6 @@ success: true
 
 This API allows for testing an actuator by providing actuator ID and time to rotate as parameters. If the corresponding actuator rotates on execution of the API correctly for the defined time then the motors are correctly connected.
 
-### API usage information:
-
-<aside class="notice">
-    Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
-</aside>
-
-<aside class="warning">
-    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
-</aside>
-
 ### Parameters:
     
     Following parameters are applicable for RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -199,6 +189,14 @@ This API allows for testing an actuator by providing actuator ID and time to rot
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+* Note: Make sure to check the direction of rotation while you trigger this API for correct response from the particular actuator.
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running APM.
+</aside>
 
 ### ROS endpoint:
 

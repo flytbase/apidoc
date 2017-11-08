@@ -203,7 +203,7 @@ message: FlytOS namespace is  flytpod
 }
 ```
 
-###Description:
+### Description:
 
 This API returns the global namespace under which FlytOS's instance is running. For users using RESTful, Websocket or ROS APIs, calling this API is a **MUST**, as the value of this namespace is required to call other APIs.
 
@@ -232,6 +232,7 @@ FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be 
 * JSON Response: `{success: Boolean,message: String,param_info:{param_value: String}}`
 
 ### Websocket endpoint:
+
 Websocket APIs can be called from javascript using [roslibjs library](https://github.com/RobotWebTools/roslibjs).
 Java websocket clients are supported using [rosjava](http://wiki.ros.org/rosjava).
 

@@ -206,6 +206,10 @@ Exectute / resume current list of waypoints.
     success | bool | true if action successful
     message | string | debug message
 
+### API usage information:
+
+Note: Make sure you have a list of waypoints already set using `set_waypoints` API before you give it execute_waypoint API call.
+
 ### ROS endpoint:
 
 Navigation APIs in FlytOS are derived from / wrapped around the core navigation services in ROS. Onboard service clients in rospy / roscpp can call these APIs. Take a look at roscpp and rospy API definition for message structure. 
@@ -233,7 +237,3 @@ Java websocket clients are supported using [rosjava.](http://wiki.ros.org/rosjav
 
 * name: `/<namespace>/navigation/waypoint_execute`
 * serviceType: `core_api/WaypointExecute`
-
-### API usage information:
-
-Note: Make sure you have a list of waypoints already set using `set_waypoints` API before you give it execute_waypoint API call.

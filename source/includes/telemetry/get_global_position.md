@@ -327,12 +327,6 @@ instance of sensor_msgs.msg.NavSatFix class
 
 This API subscribes/polls position data in global coordinate system.  Please check API usage section below before using API.
 
-### API usage information:
-
-* This API provides GPS coordinates and altitude at current location
-* Altitude value returned is relative to MSL (mean sea level).
-* Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API's expect z values in local frame.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -344,6 +338,12 @@ This API subscribes/polls position data in global coordinate system.  Please che
     lat | float | latitude in global coordinate system WGS84
     lon | float | longitude in global coordinate system WGS84
     alt | float | altitude from MSL (mean sea level) in meters.
+
+### API usage information:
+
+* This API provides GPS coordinates and altitude at current location
+* Altitude value returned is relative to MSL (mean sea level).
+* Be careful when using altitude data obtained from this API into takeoff or position setpoint APIs. These API's expect z values in local frame.
     
 ### ROS endpoint:
 

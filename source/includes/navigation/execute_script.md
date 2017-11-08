@@ -227,10 +227,6 @@ Success: True
 
 This API can run onboard executable scripts in python, shell, etc. 
 
-### API usage information:
-
-* Note that the executable should be present in `/flyt/userapps/onboard_user/install` directory.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -248,6 +244,10 @@ This API can run onboard executable scripts in python, shell, etc.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+* Note that the executable should be present in `/flyt/userapps/onboard_user/install` directory.
 
 ### ROS endpoint:
 

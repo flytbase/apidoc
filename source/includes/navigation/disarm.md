@@ -224,17 +224,6 @@ This API disarms the motors. Read API description below before you use it.
     Calling this API during flight will cause the motors to stall and may result in crash.
 </aside>
 
-### API usage information:
-
-* This API will work regardless of what flight mode vehicle is in.
-* Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.
-* To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 --> ground,  2 --> air/flying.  
-* If land API is used then the vehicle will automatically disarm after some time. 
-* Land API with auto diarm on landing feature is preferred over calling disarm API specifically.
-* To configure auto disarm on landing set following parameters. 
-  * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. 
-  * If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine.
-
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -247,6 +236,17 @@ This API disarms the motors. Read API description below before you use it.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+* This API will work regardless of what flight mode vehicle is in.
+* Make sure that drone is on ground before disarming. If this API is called during flight, motors will stop instantly causing the drone to crash.
+* To confirm whether vehicle is grounded / landed subscribe to following topic. (/global_namespace/mavros/extended_state), parameter name :  landed_state, value: 1 --> ground,  2 --> air/flying.  
+* If land API is used then the vehicle will automatically disarm after some time. 
+* Land API with auto diarm on landing feature is preferred over calling disarm API specifically.
+* To configure auto disarm on landing set following parameters. 
+  * COM_DISARM_LAND:: 0 : disabled, n (integer between 1 to 20 inculsive) : enabled with n seconds timeout before disarming after landed. 
+  * If this feature is enabled motors will disarm automatically even in cases where vehicle was armed but not flown. So for most scenarios value 5 should be fine.
 
 ### ROS endpoint:
 

@@ -179,15 +179,6 @@ success: True
 
 This API helps calibrate *accelerometer, magnetometer, gyroscope, level and RC*.
 
-### API usage information:
-<aside class="notice">
-    Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
-</aside>
-
-<aside class="warning">
-    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running PX4.
-</aside>
-
 ###Parameters:
     
     Following parameters are applicable in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -204,6 +195,16 @@ This API helps calibrate *accelerometer, magnetometer, gyroscope, level and RC*.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+<aside class="notice">
+    Please take care that accel and mag calibration needs you to rotate the autopilot board in specific direction for the calibration to complete. Refer the calibration widget for the complete procedure.
+</aside>
+
+<aside class="warning">
+    This API will **ONLY** work with FlytPOD/PRO and Pixhawk running PX4.
+</aside>
 
 ### ROS endpoint:
 

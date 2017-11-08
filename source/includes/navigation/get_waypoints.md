@@ -285,12 +285,16 @@ This API returns list of current waypoints on autopilot.
     success | bool | true if action successful
     message | string | debug message
     frame | int | The Frame in which the waypoints are given<br>0: Global<br>1: Local NED<br>2: Mission<br>3: Global Rel Alt
-    yaw | float | Yaw Setpoint in radians
-    yaw_valid | bool | Must be set to true, if yaw 
-    tolerance | float | Acceptance radius in meters, default value=1.0m 
-    relative | bool | If true, position setpoints relative to current position is sent
-    async | bool | If true, asynchronous mode is set
-    body_frame | bool | If true, position setpoints are relative with respect to body frame
+    command | int | defines the function of the waypoint<br>16: Waypoints<br>17: Loiter<br>18: Loiter Turns<br>19: Loiter time<br>20: Return to Launch<br>21: Land<br>22: Take Off
+    is_current | bool | Set it as the first waypoint 
+    autocontinue | bool | continue to the next waypoint as soon as the current waypoint is achieved
+    param1 | float | Time to stay at the location in sec.
+    param2 | float | radius around the waypoint within which the waypoint is marked as done 
+    param3 | float | Orbit radius in meters
+    param4 | float | Yaw/direction in degrees
+    x_lat | float | Latitude
+    y_long | float | Longitude
+    z_alt | float | Relative altitude
 
 <aside class="notice">
     See actual response body on the right.

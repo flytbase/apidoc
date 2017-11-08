@@ -231,11 +231,11 @@ Success: True
 }
 ```
 
-###Description:
+### Description:
 
 This API sends gimbal attitude setpoint command to the autopilot via MAVLink and outputs pwm signals on gimbal-dedicated port of FlytPOD/Pixhawk. 
 
-###Pre-requisites:
+### Pre-requisites:
 For this API to work, autopilot must fulfill some pre-requisites first:
 
 For FlytPOD/PRO users:
@@ -252,7 +252,7 @@ For PX4 users using Pixhawk:
 For APM users using Pixhawk:
 * Refer [this guide by APM](http://ardupilot.org/copter/docs/common-camera-gimbal.html).
 
-###Parameters:
+### Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
     

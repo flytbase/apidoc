@@ -228,18 +228,6 @@ Success: True
 
 Takeoff and reach specified height from current location.
 
-### API usage information:
-
-Takeoff to specified height from current height at current location.
-
-* takeoff_alt value should be positive. 
-* Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.
-* Takeoff API will automatically arm the motors. 
-* Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.
-* Minimum value of takeoff_alt argument is 1.5 meters.
-* Takeoff API is always synchronous. 
-* It is recommended not to send any other navigation commands while takeoff is under way.
-
 ### Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -256,6 +244,18 @@ Takeoff to specified height from current height at current location.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+Takeoff to specified height from current height at current location.
+
+* takeoff_alt value should be positive. 
+* Irrespective of current altitude vechile will climb up by takeoff_alt meters from current location.
+* Takeoff API will automatically arm the motors. 
+* Takeoff API will work only in OFFBOARD/GUIDED/API|POSCTL mode.
+* Minimum value of takeoff_alt argument is 1.5 meters.
+* Takeoff API is always synchronous. 
+* It is recommended not to send any other navigation commands while takeoff is under way.
 
 ### ROS endpoint:
 
@@ -279,7 +279,6 @@ FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be 
     success: Boolean
     message: String
 }`
-
 
 ### Websocket endpoint:
 

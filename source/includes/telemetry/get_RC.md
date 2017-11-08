@@ -238,10 +238,6 @@ success: True
 
 This API subscribes/polls the input rc channel data. Please see usage information section below before using the API.
 
-### API usage information:
-
-* Channel mapping of the data depends on RC calibration. 
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -250,9 +246,11 @@ This API subscribes/polls the input rc channel data. Please see usage informatio
     
     Parameter | Type | Description
     ---------- | ---------- | ------------
-    channels | Array of unit16 | Array of PWM data values for channels.
-    
-    
+    channels | Array of unit16 | Array of PWM data values for channels.    
+
+### API usage information:
+
+* Channel mapping of the data depends on RC calibration. 
     
 ### ROS endpoint:
 

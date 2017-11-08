@@ -212,15 +212,6 @@ Success: True
 
 Position hold / hover / loiter at current position.  
 
-### API usage information:
-
-This API can be used to stop the vehicle at current location. 
-
-* This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.
-* Thia API will override current mission / navigation commmands. 
-* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
-* Vehicle may take few seconds to come to rest depending on current linear velocity.
-
 ###Parameters:
     
     Following parameters are applicable for onboard C++ and Python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -233,6 +224,15 @@ This API can be used to stop the vehicle at current location.
     ---------- | ---------- | ------------
     success | bool | true if action successful
     message | string | debug message
+
+### API usage information:
+
+This API can be used to stop the vehicle at current location. 
+
+* This API requires vehicle to be in GUIDED or OFFBOARD or API|POSCTL mode.
+* This API will override current mission / navigation commmands. 
+* This API requires position lock. GPS, Optical Flow, VICON system can provide position data to vehicle.
+* Vehicle may take few seconds to come to rest depending on current linear velocity.
 
 ### ROS endpoint:
 

@@ -20,7 +20,6 @@ Response structure:
     float32 altitude
     float32 climb
 
-
 ```
 
 ```cpp
@@ -261,10 +260,6 @@ instance of mavros_msgs.msgs.VFR_HUD class
 
 This API subscribes/polls VFR HUD data. Please check API usage section below before using API.
 
-### API usage information:
-
-* airspeed data is the data from airspeed sensor.
-
 ### Parameters:
     
     Following parameters are applicable for onboard cpp and python scripts. Scroll down for their counterparts in RESTful, Websocket, ROS. However the description of these parameters applies to all platforms. 
@@ -279,6 +274,10 @@ This API subscribes/polls VFR HUD data. Please check API usage section below bef
     throttle | float | throttle
     altitude | float | altitude
     climb | float | climb
+
+### API usage information:
+
+* airspeed data is the data from airspeed sensor.
 
 ### ROS endpoint:
 
