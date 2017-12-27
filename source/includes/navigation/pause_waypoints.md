@@ -64,8 +64,10 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_pause'
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -80,9 +82,10 @@ name: '/<namespace>/navigation/waypoint_pause',
 serviceType: 'core_api/WaypointPause'
 
 Response:
-{   success: Boolean,
-    message: String, }
-
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -131,7 +134,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

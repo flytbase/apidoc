@@ -46,14 +46,18 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/setup/esc_calibration'
 
 JSON Request:
-{   pwm_min: Float,
+{
+    pwm_min: Float,
     pwm_max: Float,
     num_of_actuators: Int,
-    calibration_state: Int }
+    calibration_state: Int
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -68,15 +72,18 @@ name: '/<namespace>/setup/esc_calibration',
 serviceType: 'core_api/EscCalibration'
 
 Request:
-{   pwm_min: Float,
+{
+    pwm_min: Float,
     pwm_max: Float,
     num_of_actuators: Int,
-    calibration_state: Int }
+    calibration_state: Int
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
-
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -121,7 +128,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

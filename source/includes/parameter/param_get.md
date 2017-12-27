@@ -156,7 +156,7 @@ $.ajax({
     success: function(data){
            console.log(data.param_info.param_value);
     }
-};
+});
 
 ```
 

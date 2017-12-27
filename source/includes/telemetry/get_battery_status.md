@@ -174,9 +174,11 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/mavros/battery'
 
 JSON Response:
-{  voltage: Float,
+{
+    voltage: Float,
     current: Float,
-    remaining: Float}
+    remaining: Float
+}
 
 ```
 
@@ -191,9 +193,11 @@ name: '/<namespace>/mavros/battery',
 messageType: 'sensor_msgs/BatteryState'
 
 Response:
-{   voltage: Float,
+{
+    voltage: Float,
     current: Float,
-    remaining: Float}
+    remaining: Float
+}
 
 ```
 
@@ -248,7 +252,7 @@ $.ajax({
     success: function(data){
            console.log(data);
     }
-};
+});
 
 
 ```

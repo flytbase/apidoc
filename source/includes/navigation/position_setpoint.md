@@ -113,11 +113,15 @@ JSON Request:
 	async: Boolean,
 	relative: Boolean,
 	yaw_valid : Boolean,
-	body_frame : Boolean }
+	body_frame : Boolean
+}
 
 JSON Response:
-{	success: Boolean,
-    message: String, }
+{	
+    success: Boolean,
+    message: String
+}
+
 ```
 
 ```javascript--Websocket
@@ -140,11 +144,14 @@ Request:
     async: Boolean,
     relative: Boolean,
     yaw_valid : Boolean,
-    body_frame : Boolean }
+    body_frame : Boolean
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{   
+    success: Boolean,
+    message: String
+}
 ```
 
 > Example
@@ -237,7 +244,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

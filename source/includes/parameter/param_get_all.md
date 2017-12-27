@@ -150,7 +150,7 @@ $.ajax({
     success: function(data){
            console.log(data.param_list);
     }
-};
+});
 
 ```
 

@@ -67,10 +67,12 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_get'
 
 JSON Response:
-{   success: Boolean,
+{
+    success: Boolean,
     message: String, 
     wp_recieved: Int,
-    waypoints: [{
+    waypoints: [
+    {
         frame: Int 0/1/2/3/4,
         command:Int 16/17/18/19/20/21/22,
         is_current: Boolean,
@@ -81,7 +83,10 @@ JSON Response:
         param4: Float,
         x_lat: Float,
         y_long: Float,
-        z_alt: Float},{},{}...
+        z_alt: Float
+    },
+    {},
+    {},...
     ]
 }
 
@@ -98,10 +103,12 @@ name: '/<namespace>/navigation/waypoint_get',
 serviceType: 'core_api/WaypointGet'
 
 Response:
-{   success: Boolean,
+{
+    success: Boolean,
     message: String, 
     wp_recieved: Int,
-    waypoints: [{
+    waypoints: [
+    {
         frame: Int 0/1/2/3/4,
         command:Int 16/17/18/19/20/21/22,
         is_current: Boolean,
@@ -112,10 +119,12 @@ Response:
         param4: Float,
         x_lat: Float,
         y_long: Float,
-        z_alt: Float},{},{}...
+        z_alt: Float
+    },
+    {},
+    {},...
     ]
 }
-
 
 ```
 
@@ -165,7 +174,7 @@ $.ajax({
     success: function(data){
            console.log(data.waypoints);
     }
-};
+});
 
 ```
 

@@ -52,8 +52,11 @@ This is a REST call for the API to transition the vehicle to RTL mode. Make sure
 URL: 'http://<ip>/ros/<namespace>/navigation/rtl'
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
+
 ```
 
 ```javascript--Websocket
@@ -70,8 +73,11 @@ Request:
 {  }
 
 Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
+
 ```
 
 > Example
@@ -133,7 +139,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 ```
 
 ```javascript--Websocket

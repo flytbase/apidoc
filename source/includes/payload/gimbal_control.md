@@ -69,13 +69,17 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/payload/gimbal_set'
 
 JSON Request:
-{   roll: Float,
+{
+    roll: Float,
     pitch: Float,
-    yaw: Float     }
+    yaw: Float
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 ```
 
 ```javascript--Websocket
@@ -89,13 +93,17 @@ name: '/<namespace>/payload/gimbal_set',
 serviceType: 'core_api/GimbalSet'
 
 Request:
-{   roll: Float,
+{
+    roll: Float,
     pitch: Float,
-    yaw: Float }
+    yaw: Float
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 ```
 
 > Example
@@ -167,7 +175,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 ```
 
 ```javascript--Websocket

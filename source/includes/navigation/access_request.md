@@ -74,8 +74,10 @@ JSON Request:
 }
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -90,12 +92,15 @@ name: '/<namespace>/navigation/access_request',
 serviceType: 'core_api/AccessRequest'
 
 Request:
-{   enable_access: Boolean}
+{
+    enable_access: Boolean
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
-
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -166,7 +171,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 
@@ -190,7 +195,6 @@ access_request.callService(request, function(result) {
       + result.message);
 });
 ```
-
 
 > Example response
 

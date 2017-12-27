@@ -130,7 +130,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

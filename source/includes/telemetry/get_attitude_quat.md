@@ -155,19 +155,23 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/mavros/imu/data'
 
 JSON Response:
-{   orientation:{
+{
+    orientation:{
         x: Float,
         y: Float,
         z: Float,
-        w: Float},
+        w: Float
+    },
     angular_velocity:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float
+    },
     linear_acceleration:{
         x: Float,
         y: Float,
-        z: Float}
+        z: Float
+    }
 }
 
 ```
@@ -183,20 +187,25 @@ name: '/<namespace>/mavros/imu/data',
 messageType: 'sensor_msgs/Imu'
 
 Response:
-{   orientation:{
+{
+    orientation:{
         x: Float,
         y: Float,
         z: Float,
-        w: Float},
+        w: Float
+    },
     angular_velocity:{
         x: Float,
         y: Float,
-        z: Float},
+        z: Float
+    },
     linear_acceleration:{
         x: Float,
         y: Float,
-        z: Float}
+        z: Float
+    }
 }
+
 ```
 
 > Example
@@ -275,7 +284,7 @@ $.ajax({
     success: function(data){
            console.log(data);
     }
-};
+});
 
 ```
 

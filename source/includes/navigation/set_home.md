@@ -70,14 +70,18 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/set_home'
 
 JSON Request:
-{   lat: Float,
+{
+    lat: Float,
     lon: Float,
     alt: Float,
-    set_current : Boolean }
+    set_current : Boolean
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -92,14 +96,18 @@ name: '/<namespace>/navigation/set_home',
 serviceType: 'core_api/SetHome'
 
 Request:
-{   lat: Float,
+{
+    lat: Float,
     lon: Float,
     alt: Float,
-    set_current : Boolean }
+    set_current : Boolean
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 
 ```
@@ -166,7 +174,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

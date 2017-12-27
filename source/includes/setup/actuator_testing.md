@@ -41,12 +41,16 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/setup/actuator_testing'
 
 JSON Request:
-{   actuator_id: Int,
-    time_s: Float }
+{
+    actuator_id: Int,
+    time_s: Float
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -61,11 +65,14 @@ name: '/<namespace>/setup/actuator_testing',
 serviceType: 'core_api/ActuatorTesting'
 
 Request:
-{   actuator_id: Int,
-    time_s: Float }
+{
+    actuator_id: Int,
+    time_s: Float
+}
 
 Response:
-{   success: Boolean,
+{
+    success: Boolean,
     message: String
 }
 
@@ -108,7 +115,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

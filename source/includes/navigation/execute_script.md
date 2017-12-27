@@ -63,12 +63,16 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/exec_script'
 
 JSON Request:
-{   app_name : String,
-    arguments : String }
+{   
+    app_name : String,
+    arguments : String
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -83,12 +87,16 @@ name: '/<namespace>/navigation/exec_script',
 serviceType: 'core_api/ExecScript'
 
 Request:
-{   app_name : String,
-    arguments : String }
+{
+    app_name : String,
+    arguments : String
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{   
+    success: Boolean,
+    message: String
+}
 
 
 ```
@@ -159,7 +167,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 
