@@ -124,16 +124,21 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/mavros/imu/data_euler'
 
 JSON Response:
-{  twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: Float},
-    angular:{
-        x: Float,
-        y: Float,
-        z: Float}
-}}
+{
+    twist:{
+        linear:{
+            x: Float,
+            y: Float,
+            z: Float
+        },
+        angular:{
+            x: Float,
+            y: Float,
+            z: Float
+        }
+    }
+}
+
 ```
 
 ```javascript--Websocket
@@ -147,16 +152,20 @@ name: '/<namespace>/mavros/imu/data_euler',
 messageType: 'geometry_msgs/TwistStamped'
 
 Response:
-{   twist:{
-    linear:{
-        x: Float,
-        y: Float,
-        z: Float},
-    angular:{
-        x: Float,
-        y: Float,
-        z: Float}
-}}
+{
+    twist:{
+        linear:{
+            x: Float,
+            y: Float,
+            z: Float
+        },
+        angular:{
+            x: Float,
+            y: Float,
+            z: Float
+        }
+    }
+}
 
 ```
 
@@ -250,7 +259,8 @@ $.ajax({
     success: function(data){
            console.log(data);
     }
-};
+});
+
 ```
 
 ```javascript--Websocket
@@ -263,8 +273,8 @@ var imuEulerData = new ROSLIB.Topic({
 imuEulerData.subscribe(function(message) {
     console.log(message.data);
 });
-```
 
+```
 
 > Example response
 

@@ -66,11 +66,15 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_set_current'
 
 JSON Request:
-{   wp_seq: Int }
+{
+    wp_seq: Int
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -85,11 +89,15 @@ name: '/<namespace>/navigation/waypoint_set_current',
 serviceType: 'core_api/WaypointSetCurrent'
 
 Request:
-{   wp_seq: Int }
+{
+    wp_seq: Int
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 
 ```
@@ -142,7 +150,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

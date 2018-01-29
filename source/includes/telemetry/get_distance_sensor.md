@@ -97,7 +97,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/mavros/distance_sensor/lidarlite_pub'
 
 JSON Response:
-{   radiation_type: Int,
+{
+    radiation_type: Int,
     field_of_view: Float,
     min_range: Float,  
     max_range: Float,
@@ -117,7 +118,8 @@ name: '/<namespace>/mavros/distance_sensor/lidarlite_pub',
 messageType: 'sensor_msgs/Range'
 
 Response:
-{   radiation_type: Int,
+{
+    radiation_type: Int,
     field_of_view: Float,
     min_range: Float,  
     max_range: Float,
@@ -179,7 +181,7 @@ $.ajax({
     success: function(data){
            console.log(data);
     }
-};
+});
 
 
 ```

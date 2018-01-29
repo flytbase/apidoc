@@ -71,7 +71,9 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/waypoint_set'
 
 JSON Request:
-{   waypoints:[{
+{
+    waypoints:[
+    {
         frame : [Int] 0/1/2/3/4,
         command : [Int] 16/17/18/19/20/21/22,
         is_current : [Boolean],
@@ -83,7 +85,11 @@ JSON Request:
         x_lat : [Float],
         y_long : [Float],
         z_alt : [Float],
-        },{},{}... ] }
+    },
+    {},
+    {},...
+    ]
+}
 
 JSON Response:
 {   
@@ -104,7 +110,9 @@ name: '/<namespace>/navigation/waypoint_set',
 serviceType: 'core_api/WaypointSet'
 
 Request:
-{   waypoints:[{
+{
+    waypoints:[
+    {
         frame : [Int] 0/1/2/3/4,
         command : [Int] 16/17/18/19/20/21/22,
         is_current : [Boolean],
@@ -116,11 +124,17 @@ Request:
         x_lat : [Float],
         y_long : [Float],
         z_alt : [Float],
-        },{},{}... ] }
+    },
+    {},
+    {},...
+    ]
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -266,7 +280,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

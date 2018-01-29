@@ -79,7 +79,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/mavros/payload_adc'
 
 JSON Response:
-{   adc_voltage: Float[2],
+{
+    adc_voltage: Float[2],
     adc_updated: Int
 }
 
@@ -96,7 +97,8 @@ name: '/<namespace>/mavros/payload_adc',
 messageType: 'mavros_msgs/PayloadADC'
 
 Response:
-{   adc_voltage: Float[2],
+{
+    adc_voltage: Float[2],
     adc_updated: Int
 }
 
@@ -176,7 +178,7 @@ $.ajax({
     success: function(data){
            console.log(data);
     }
-};
+});
 
 
 ```

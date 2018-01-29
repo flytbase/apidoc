@@ -92,7 +92,8 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/mavros/rc/in'
 
 JSON Response:
-{   rssi: Int,
+{
+    rssi: Int,
     channels: Int[]
 }
 
@@ -109,7 +110,8 @@ name: '/<namespace>/mavros/rc/in',
 messageType: 'mavros_msgs/RCIn'
 
 Response:
-{   rssi: Int,
+{
+    rssi: Int,
     channels: Int[]
 }
 
@@ -178,7 +180,7 @@ $.ajax({
     success: function(data){
            console.log(data);
     }
-};
+});
 
 
 ```

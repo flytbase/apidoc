@@ -99,11 +99,14 @@ JSON Request:
     async: Boolean,
     relative: Boolean,
     yaw_valid : Boolean,
-    body_frame : Boolean }
+    body_frame : Boolean
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -126,11 +129,14 @@ Request:
     tolerance: Float,
     async: Boolean,
     relative: Boolean,
-    yaw_valid : Boolean }
+    yaw_valid : Boolean
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -221,7 +227,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

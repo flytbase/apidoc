@@ -70,11 +70,15 @@ This is a REST call for the API to takeoff. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/take_off'
 
 JSON Request:
-{   takeoff_alt: Float }
+{   
+    takeoff_alt: Float
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{   
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -163,7 +167,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

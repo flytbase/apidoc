@@ -51,11 +51,15 @@ This is a REST call for the API. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/setup/module_calibration'
 
 JSON Request:
-{   module_calibrate: Int }
+{
+    module_calibrate: Int
+}
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -70,12 +74,15 @@ name: '/<namespace>/setup/module_calibration',
 serviceType: 'core_api/ModuleCalibration'
 
 Request:
-{   module_calibrate: Int }
+{
+    module_calibrate: Int
+}
 
 Response:
-{   success: Boolean,
-    message: String, }
-
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -116,7 +123,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

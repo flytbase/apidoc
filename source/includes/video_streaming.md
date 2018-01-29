@@ -83,7 +83,7 @@ $.ajax({
     success: function(data){
            console.log(data['stream1']+" "+data['stream2']);
     }
-};
+});
 
 ```
 

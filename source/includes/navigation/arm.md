@@ -65,8 +65,10 @@ FlytOS running device. Make sure to replace
 URL: 'http://<ip>/ros/<namespace>/navigation/arm'
 
 JSON Response:
-{   success: Boolean,
-    message: String, }
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -85,9 +87,10 @@ Request:
 {}
 
 Response:
-{   success: Boolean,
-    message: String, }
-
+{
+    success: Boolean,
+    message: String
+}
 
 ```
 
@@ -153,7 +156,7 @@ $.ajax({
            console.log(data.success);
            console.log(data.message);
     }
-};
+});
 
 ```
 

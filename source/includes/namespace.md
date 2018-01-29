@@ -54,13 +54,13 @@ This is a REST call for the API. Make sure to replace
 URL: ' <ip>/ros/get_global_namespace'
 
 JSON Response:
-	{
-		success: Boolean,
+{
+	success: Boolean,
     message: String,
-		param_info:{
-			param_value: String
-		}
+	param_info:{
+		param_value: String
 	}
+}
 ```
 
 ```javascript--Websocket
