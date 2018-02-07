@@ -48,12 +48,16 @@ string message
 <span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/exec_script'</span>
 
 <span class="nx">JSON</span> <span class="nx">Request</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">app_name</span> <span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
-    <span class="nx">arguments</span> <span class="p">:</span> <span class="nb">String</span> <span class="p">}</span>
+<span class="p">{</span>   
+    <span class="nl">app_name</span> <span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">arguments</span> <span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
-    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>
+    <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">Websocket</span> <span class="nx">call</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">API</span><span class="p">.</span> <span class="nx">Make</span> <span class="nx">sure</span> <span class="nx">you</span> 
 <span class="nx">initialise</span> <span class="nx">the</span> <span class="nx">websocket</span> <span class="nx">using</span> <span class="nx">websocket</span> <span class="nx">initialising</span> 
@@ -65,12 +69,16 @@ string message
 <span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/ExecScript'</span>
 
 <span class="nl">Request</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">app_name</span> <span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
-    <span class="nx">arguments</span> <span class="p">:</span> <span class="nb">String</span> <span class="p">}</span>
+<span class="p">{</span>
+    <span class="nl">app_name</span> <span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">arguments</span> <span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
-    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="p">}</span>
+<span class="p">{</span>   
+    <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
 
 
 </code></pre>
@@ -125,7 +133,7 @@ string message
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">);</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">};</span>
+<span class="p">});</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">execScript</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>

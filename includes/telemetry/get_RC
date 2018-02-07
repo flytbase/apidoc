@@ -77,7 +77,8 @@ Response structure:
 <span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/mavros/rc/in'</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">rssi</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
+<span class="p">{</span>
+    <span class="nl">rssi</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
     <span class="nx">channels</span><span class="p">:</span> <span class="nx">Int</span><span class="p">[]</span>
 <span class="p">}</span>
 
@@ -91,7 +92,8 @@ Response structure:
 <span class="nx">messageType</span><span class="p">:</span> <span class="s1">'mavros_msgs/RCIn'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">rssi</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
+<span class="p">{</span>
+    <span class="nl">rssi</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
     <span class="nx">channels</span><span class="p">:</span> <span class="nx">Int</span><span class="p">[]</span>
 <span class="p">}</span>
 
@@ -144,7 +146,7 @@ Response structure:
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">};</span>
+<span class="p">});</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">rcData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Topic</span><span class="p">({</span>

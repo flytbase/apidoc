@@ -52,10 +52,12 @@ mavros_msgs/Waypoint[] waypoints
 <span class="nl">URL</span><span class="p">:</span> <span class="s1">'http://&lt;ip&gt;/ros/&lt;namespace&gt;/navigation/waypoint_get'</span>
 
 <span class="nx">JSON</span> <span class="nx">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+<span class="p">{</span>
+    <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
     <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> 
     <span class="nx">wp_recieved</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
-    <span class="nx">waypoints</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="nx">waypoints</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
         <span class="na">frame</span><span class="p">:</span> <span class="nx">Int</span> <span class="mi">0</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span>
         <span class="na">command</span><span class="p">:</span><span class="nx">Int</span> <span class="mi">16</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">18</span><span class="o">/</span><span class="mi">19</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="mi">22</span><span class="p">,</span>
         <span class="na">is_current</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
@@ -66,7 +68,10 @@ mavros_msgs/Waypoint[] waypoints
         <span class="na">param4</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
         <span class="na">x_lat</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
         <span class="na">y_long</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="na">z_alt</span><span class="p">:</span> <span class="nx">Float</span><span class="p">},{},{}...</span>
+        <span class="na">z_alt</span><span class="p">:</span> <span class="nx">Float</span>
+    <span class="p">},</span>
+    <span class="p">{},</span>
+    <span class="p">{},...</span>
     <span class="p">]</span>
 <span class="p">}</span>
 
@@ -80,10 +85,12 @@ mavros_msgs/Waypoint[] waypoints
 <span class="nx">serviceType</span><span class="p">:</span> <span class="s1">'core_api/WaypointGet'</span>
 
 <span class="nl">Response</span><span class="p">:</span>
-<span class="p">{</span>   <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+<span class="p">{</span>
+    <span class="nl">success</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
     <span class="nx">message</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> 
     <span class="nx">wp_recieved</span><span class="p">:</span> <span class="nx">Int</span><span class="p">,</span>
-    <span class="nx">waypoints</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="nx">waypoints</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
         <span class="na">frame</span><span class="p">:</span> <span class="nx">Int</span> <span class="mi">0</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span>
         <span class="na">command</span><span class="p">:</span><span class="nx">Int</span> <span class="mi">16</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">18</span><span class="o">/</span><span class="mi">19</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="mi">22</span><span class="p">,</span>
         <span class="na">is_current</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
@@ -94,10 +101,12 @@ mavros_msgs/Waypoint[] waypoints
         <span class="na">param4</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
         <span class="na">x_lat</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
         <span class="na">y_long</span><span class="p">:</span> <span class="nx">Float</span><span class="p">,</span>
-        <span class="na">z_alt</span><span class="p">:</span> <span class="nx">Float</span><span class="p">},{},{}...</span>
+        <span class="na">z_alt</span><span class="p">:</span> <span class="nx">Float</span>
+    <span class="p">},</span>
+    <span class="p">{},</span>
+    <span class="p">{},...</span>
     <span class="p">]</span>
 <span class="p">}</span>
-
 
 </code></pre>
 <blockquote>
@@ -131,7 +140,7 @@ mavros_msgs/Waypoint[] waypoints
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">waypoints</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">};</span>
+<span class="p">});</span>
 
 </code></pre><pre class="highlight javascript tab-javascript--Websocket"><code><span class="kd">var</span> <span class="nx">waypointGet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ROSLIB</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
     <span class="na">ros</span> <span class="p">:</span> <span class="nx">ros</span><span class="p">,</span>
