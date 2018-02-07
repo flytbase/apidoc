@@ -164,7 +164,7 @@ waypoint.param4 = 0;
 waypoint.x_lat = 73.2154;
 waypoint.x_long = 18.5472;
 waypoint.z_alt = 5;
-waypoints_array.pushback(waypoint)
+waypoints_array.push_back(waypoint)
 nav.waypoint_set(waypoints_array);
 ```
 
