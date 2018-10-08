@@ -112,6 +112,16 @@ Response:
 
 ```
 
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: set_home(lat, lon, alt, set_current)
+
+```
+
 > Example
 
 ```shell
@@ -202,6 +212,19 @@ setHome.callService(request, function(result) {
 });
 ```
 
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.set_home(lat=73.12516255,lon= 18.2165632,alt= 2.00, set_current=False)
+drone.disconnect()
+```
+
 > Example response
 
 ```shell
@@ -239,7 +262,13 @@ Success: True
 }
 
 ```
+```python--flyt_python
+{
+    success: True, 
+    message: message
 
+}
+```
 ###Description:
 
 Manually store a location as new home.

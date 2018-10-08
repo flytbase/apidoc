@@ -86,7 +86,15 @@ Response:
 }
 
 ```
+```python--flyt_python
 
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: ESC_calibration(self, pwm_min,pwm_max,num_of_actuators,calibration_state)
+
+```
 
 > Example
 
@@ -156,6 +164,20 @@ escCalibration.callService(request, function(result) {
 });
 ```
 
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.ESC_calibration(pwm_min1000.00,pwm_max=2000.00,num_of_actuators=4,calibration_state=2)
+
+drone.disconnect()
+```
+
 
 > Example response
 
@@ -193,6 +215,12 @@ success: true
 
 ```
 
+```python--flyt_python
+{
+    success: True, 
+    message: message
+}
+```
 ### Description:
 
 This API helps calibrate ESCs.

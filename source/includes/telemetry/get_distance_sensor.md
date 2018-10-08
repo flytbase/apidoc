@@ -125,9 +125,16 @@ Response:
     max_range: Float,
     range: Float
 }
+```
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: get_distance_sensor()
 
 ```
-
 
 > Example
 
@@ -199,6 +206,19 @@ distanceData.subscribe(function(message) {
 });
 ```
 
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.get_distance_sensor()
+
+drone.disconnect()
+```
 
 > Example response
 
@@ -241,8 +261,15 @@ instance of sensor_msgs.msgs.Range object
     max_range: Float,
     range: Float
 }
-
-
+```
+```python--flyt_python
+{
+    radiation_type: Int,
+    field_of_view: Float,
+    min_range: Float,  
+    max_range: Float,
+    range: Float
+}
 ```
 
 ### Description:

@@ -127,7 +127,15 @@ Response:
 }
 
 ```
+```python--flyt_python
 
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: get_waypoints()
+
+```
 > Example
 
 ```shell
@@ -195,6 +203,18 @@ waypointGet.callService(request, function(result) {
       +': '
       + result.message);
 });
+```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.get_waypoints()
+drone.disconnect()
 ```
 
 > Example response
@@ -275,6 +295,25 @@ waypoints (list): consists a list of dictionary, the dictionary consists of (fra
         z_alt: 25},{}]
 }
 
+```
+
+```python--flyt_python
+{
+    success: True, 
+    message: message,
+    waypoints: [{
+        frame: 3,
+        command:Int 16,
+        is_current: true,
+        autocontinue: true,
+        param1: 6.0,
+        param2: 7.0,
+        param3: 0.0,
+        param4: 0.0,
+        x_lat: 65.425532,
+        y_long: 18.542422,
+        z_alt: 25},{}]
+}
 ```
 
 ###Description:

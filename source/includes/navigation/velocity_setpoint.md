@@ -156,6 +156,14 @@ Response:
     message: String
 }
 
+```
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: set_velocity(self, vx, vy, vz, yaw_rate, tolerance=1.0, async=False, relative=True, yaw_rate_valid=False,body_frame=False)
 
 ```
 
@@ -282,6 +290,19 @@ velocitySet.callService(request, function(result) {
       + result.message);
 });
 ```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.set_velocity(vx=0, vy=0, vz=0, yaw_rate=0, tolerance=1.0, async=False, relative=True, yaw_rate_valid=False,body_frame=False)
+
+drone.disconnect()
+```
 
 > Example response
 
@@ -318,7 +339,13 @@ Success: True
 }
 
 ```
+```python--flyt_python
+{
+    success: True, 
+    message: message
 
+}
+```
 ###Description:
 
 This API gives linear (vx,vy,vz) and angular (yaw_rate) velocity setpoint to vehicle. Please check API usage section below before using API.

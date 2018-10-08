@@ -9,6 +9,7 @@ language_tabs:
   - shell: ros-cli
   - cpp--ros: roscpp
   - python--ros: rospy
+  - python--flyt_python: flyt_python
 
 
 includes:

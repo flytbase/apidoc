@@ -189,6 +189,16 @@ Response:
 
 ```
 
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: get_global_position()
+
+```
+
 
 > Example
 
@@ -279,7 +289,19 @@ gpsData.subscribe(function(message) {
     console.log(message.data);
 });
 ```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
 
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.get_global_position()
+
+drone.disconnect()
+```
 
 > Example response
 
@@ -319,8 +341,14 @@ instance of sensor_msgs.msg.NavSatFix class
     longitude: Float,
     altitude: Float
 }
+```
 
-
+```python--flyt_python
+{
+    latitude: Float,
+    longitude: Float,
+    altitude: Float
+}
 ```
 
 ### Description:

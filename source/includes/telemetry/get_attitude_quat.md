@@ -207,6 +207,15 @@ Response:
 }
 
 ```
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: get_attitude_quaternion()
+
+```
 
 > Example
 
@@ -302,6 +311,20 @@ imuData.subscribe( function(message) {
 });
 ```
 
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.get_attitude_quaternion()
+
+drone.disconnect()
+```
+
 > Example response
 
 ```shell
@@ -382,6 +405,17 @@ instance of sensor_msgs.msg.Imu class
         z: Float}
 }
 
+```
+```python--flyt_python
+{
+        x: Float,
+        y: Float,
+        z: Float,
+        w: Float, 
+        rollspeed: Float,
+        pitchspeed: Float,
+        yawspeed: Float
+}
 ```
 
 ###Description:

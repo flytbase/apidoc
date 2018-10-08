@@ -92,6 +92,15 @@ Response:
 
 ```
 
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: hold_position()
+
+```
 > Example
 
 ```shell
@@ -175,6 +184,17 @@ positionHold.callService(request, function(result) {
       + result.message);
 });
 ```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.hold_position()
+```
 
 > Example response
 
@@ -210,6 +230,14 @@ Success: True
     success:True
 }
 
+```
+
+```python--flyt_python
+{
+    success: True, 
+    message: message
+
+}
 ```
 
 ###Description:
