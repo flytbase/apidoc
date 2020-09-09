@@ -42,6 +42,7 @@ includes:
   - telemetry/get_vehicle_state
   - payload/get_adc
   - payload/gimbal_control
+  - payload/obstacle_detection
   - setup/actuator_testing
   - setup/esc_calibration
   - setup/module_calibration
