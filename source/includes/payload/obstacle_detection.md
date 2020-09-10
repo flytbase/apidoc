@@ -18,6 +18,7 @@ Response structure:
     uint8[] front_warning_level
     uint8[] back_warning_level
     bool on_hold
+    bool is_enabled
 ```
 
 ```cpp
@@ -48,6 +49,7 @@ Response structure:
     uint8[] front_warning_level
     uint8[] back_warning_level
     bool on_hold
+    bool is_enabled
 ```
 
 ```python--ros
@@ -66,6 +68,7 @@ Response structure:
     uint8[] front_warning_level
     uint8[] back_warning_level
     bool on_hold
+    bool is_enabled
 ```
 
 ```javascript--REST
@@ -81,7 +84,8 @@ JSON Response:
     back: FloatArray,
     front_warning_level: IntArray,
     back_warning_level: IntArray,
-    on_hold: Bool
+    on_hold: Bool,
+    is_enabled: Bool
 }
 ```
 
@@ -101,7 +105,8 @@ Response:
     back: FloatArray,
     front_warning_level: IntArray,
     back_warning_level: IntArray,
-    on_hold: Bool
+    on_hold: Bool,
+    is_enabled: Bool
 }
 ```
 
@@ -184,6 +189,7 @@ back: [0.8700000047683716, 0.8700000047683716, 0.8700000047683716, 15.5699996948
 front_warning_level: [0, 0, 5, 5],
 back_warning_level: [5, 5, 5, 0],
 on_hold: False
+is_enabled: False
 ```
 
 ### Description:
@@ -207,9 +213,10 @@ For this API to work, autopilot must fulfill some pre-requisites first:
     -------------- | -------------- | --------------
     front | floatArray | array of detected obstacle distance (in m) for every quadrant of front sensor from left to right
     back | floatArray | array of detected obstacle distance (in m) for every quadrant of back sensor from left to right
-    front_warning_level | intArray | array of warning levels for every quadrant of front sensor from left to right. Values in range (0 - 6). 0 being farthest and 6 being closest.
+    front_warning_level | intArray | array of warning levels for every quadrant of front sensor from left to right. Values in range (0 - 5). 0 being farthest and 5 being closest.
     back_warning_level | intArray | array of detected obstacle distance (in m) for every quadrant of back sensor from left to right
     on_hold | bool | stores state if autopilot has engaged obstacle avoidance
+    is_enabled | bool | stores state if collision avoidance is enabled or not
     
 
 ### ROS endpoint:
