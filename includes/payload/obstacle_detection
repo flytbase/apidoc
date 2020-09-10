@@ -138,10 +138,6 @@ Response structure:
 
 <p>This API publishes detected obstacle data of a supported DJI drone.</p>
 
-<h3 id="pre-requisites">Pre-requisites:</h3>
-
-<p>For this API to work, autopilot must fulfill some pre-requisites first:</p>
-
 <aside class="warning">
     This API will **ONLY** work with FlytOS mobile app.
 </aside>
