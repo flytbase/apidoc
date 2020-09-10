@@ -196,9 +196,6 @@ is_enabled: False
 
 This API publishes detected obstacle data of a supported DJI drone.
 
-### Pre-requisites:
-For this API to work, autopilot must fulfill some pre-requisites first:
-
 <aside class="warning">
     This API will **ONLY** work with FlytOS mobile app.
 </aside>

@@ -43,6 +43,7 @@ includes:
   - payload/get_adc
   - payload/gimbal_control
   - payload/obstacle_detection
+  - payload/collision_avoidance
   - setup/actuator_testing
   - setup/esc_calibration
   - setup/module_calibration
