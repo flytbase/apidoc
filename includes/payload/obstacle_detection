@@ -168,7 +168,7 @@ Response structure:
 <tr>
 <td>front_warning_level</td>
 <td>intArray</td>
-<td>array of warning levels for every quadrant of front sensor from left to right. Values in range (0 - 5). 0 being farthest and 5 being closest.</td>
+<td>array of warning levels for every quadrant of front sensor from left to right. Values in range (0 - 5) or 15. 0 being farthest and 5 being closest. If the sensor data is invalid, this value will be 15.</td>
 </tr>
 <tr>
 <td>back_warning_level</td>
