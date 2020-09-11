@@ -210,7 +210,7 @@ This API publishes detected obstacle data of a supported DJI drone.
     -------------- | -------------- | --------------
     front | floatArray | array of detected obstacle distance (in m) for every quadrant of front sensor from left to right
     back | floatArray | array of detected obstacle distance (in m) for every quadrant of back sensor from left to right
-    front_warning_level | intArray | array of warning levels for every quadrant of front sensor from left to right. Values in range (0 - 5). 0 being farthest and 5 being closest.
+    front_warning_level | intArray | array of warning levels for every quadrant of front sensor from left to right. Values in range (0 - 5) or 15. 0 being farthest and 5 being closest. If the sensor data is invalid, this value will be 15.
     back_warning_level | intArray | array of detected obstacle distance (in m) for every quadrant of back sensor from left to right
     on_hold | bool | stores state if autopilot has engaged obstacle avoidance
     is_enabled | bool | stores state if collision avoidance is enabled or not
