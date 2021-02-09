@@ -103,7 +103,15 @@ Response:
 }
 
 ```
+```python--flyt_python
 
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: get_adc()
+
+```
 
 > Example
 
@@ -196,7 +204,19 @@ adcData.subscribe(request, function(result) {
     console.log(result.data);
 });
 ```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
 
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.get_adc()
+
+drone.disconnect()
+```
 
 > Example response
 
@@ -229,6 +249,12 @@ instance of mavros_msgs.msgs.PayloadADC object
 ```
 
 ```javascript--Websocket
+{
+    adc_voltage: Float[2],
+    adc_updated: Int
+}
+```
+```python--flyt_python
 {
     adc_voltage: Float[2],
     adc_updated: Int

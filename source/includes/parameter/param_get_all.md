@@ -100,7 +100,15 @@ Response:
 
 
 ```
+```python--flyt_python
 
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: get_all_params()
+
+```
 
 > Example
 
@@ -170,7 +178,19 @@ paramGetAll.callService(request, function(result) {
       + result.param_list);
 });
 ```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
 
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.get_all_params()
+
+drone.disconnect()
+```
 
 > Example response
 
@@ -212,6 +232,15 @@ success (bool): true if action successful
     param_list:[{},{},{},....]    
 }
 
+```
+
+```python--flyt_python
+{
+    success: True, 
+    message: message,
+    param_id: param_id,
+    param_info: param_info
+}
 ```
 
 ### Description:

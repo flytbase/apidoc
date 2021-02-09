@@ -82,6 +82,10 @@ Response:
 }
 ```
 
+```python--flyt_python
+# Namespace request is not required for any Python API
+```
+
 
 > Example
 
@@ -155,6 +159,9 @@ namespace.callService(request, function(result) {
 });
 ```
 
+```python--flyt_python
+# Namespace request is not required for any Python API
+```
 
 > Example response
 
@@ -201,6 +208,10 @@ message: FlytOS namespace is  flytpod
         param_value:'flytpod'
     }
 }
+```
+
+```python--flyt_python
+# Namespace request is not required for any Python API
 ```
 
 ### Description:

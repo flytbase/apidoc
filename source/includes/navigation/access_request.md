@@ -104,6 +104,9 @@ Response:
 
 ```
 
+```python--flyt_python
+# Access Request is not required for any Python API
+```
 
 > Example
 
@@ -196,6 +199,10 @@ access_request.callService(request, function(result) {
 });
 ```
 
+```python--flyt_python
+# Access Request is not required for any Python API
+```
+
 > Example response
 
 ```shell
@@ -230,6 +237,10 @@ Success: True
     success:True
 }
 
+```
+
+```python--flyt_python
+# Access Request is not required for any Python API
 ```
 
 ###Description:

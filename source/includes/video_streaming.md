@@ -47,6 +47,11 @@ NA
 
 ```
 
+```python--flyt_python
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Not Implemented
+```
 
 > Example
 
@@ -91,6 +96,11 @@ $.ajax({
 NA
 ```
 
+```python--flyt_python
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Not Implemented
+```
 
 > Example response
 
@@ -130,6 +140,12 @@ Not Implemented
 
 ```javascript--Websocket
 NA
+```
+
+```python--flyt_python
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Not Implemented
 ```
 
 ### Description:

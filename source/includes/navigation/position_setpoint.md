@@ -153,6 +153,15 @@ Response:
     message: String
 }
 ```
+```python--flyt_python
+
+# Python API described below can be used in onboard scripts only. For remote scripts you can use http client libraries to call FlytOS REST endpoints from Python.
+
+Class: flyt_python.flyt_python.DroneApiConnector
+
+Function: set_local_position(self,x, y, z, yaw=0.0, tolerance=1.0, async=False, relative=True, yaw_valid=False, body_frame=False)
+
+```
 
 > Example
 
@@ -276,6 +285,18 @@ positionSet.callService(request, function(result) {
       + result.message);
 });
 ```
+```python--flyt_python 
+from flyt_python.flyt_python import DroneApiConnector
+token = ''                      # Personal Access Token
+vehicle_id = ''                 # Vehicle ID
+
+#create an instance of class DroneApiConnector
+drone = DroneApiConnector(token,vehicle_id,ip_address='localhost' wait_for_drone_response =True)
+drone.connect()
+    
+drone.set_local_position(x=5, y=0, z=0, yaw=0.0, tolerance=1.0, async=False, relative=True, yaw_valid=False, body_frame=False)
+drone.disconnect()
+```
 
 
 > Example response
@@ -312,6 +333,13 @@ Success: True
 }
 ```
 
+```python--flyt_python
+{
+    success: True, 
+    message: message
+
+}
+```
 ###Description:
 
 This API commands the vehicle to go to a specified location in local frame and hover.  Please check API usage section below before using API.
