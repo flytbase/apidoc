@@ -229,7 +229,7 @@ FlytOS hosts a RESTful server which listens on port **80**. RESTful APIs can be 
 
 * URL: `http://<ip>/ros/get_global_namespace`
 * Request Method: `GET`
-* JSON Response: `{success: Boolean,message: String,param_info:{param_value: String}}`
+* JSON Response: `{success: Boolean, message: String, param_info: {param_value: String, param_id: "global_namespace"}}
 
 ### Websocket endpoint:
 
